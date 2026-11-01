@@ -1,0 +1,189 @@
+# Project Structure — Unity 환경·경로·자산 운영
+
+> 확인 기준: 2026-11-01. 환경 값은 실제 파일·설정 및 읽기 전용 Unity 조회에 근거한다. 최소 실행·입력·한글 표시와 폰트 입력·적용은 같은 날짜 사용자의 직접 테스트 통과 보고로 확인했다. P0는 통과이며 상세 현황은 `CurrentState.md`를 따른다. 2.2절 이후의 제품 구조는 **목표 구조**다.
+
+## 1. 초기 환경 선정과 기록
+
+- 엔진: 현재 프로젝트는 사용자가 준비한 Unity **6000.6.4f1**을 사용한다. 초기 LTS 우선 권고와 달리 6.6 환경으로 생성되어 있으며, 이 문서 갱신으로 엔진 변경을 지시하지 않는다. 이후 버전 변경은 6절의 환경 변경 프로토콜을 따른다.
+- 플랫폼: PC 우선, 모바일 입력은 이후 별도 연결. 초기 세계/인물/상품 기능은 `GameDesign.md`를 따른다.
+- 렌더링: 2D. **권장 기본 선택**은 Unity 2D URP 프로젝트. 실제 사용 여부·URP 버전·렌더러 설정은 최초 생성 후 기록한다.
+- UI: Unity Editor에서 제작하는 uGUI Canvas/Prefab + TextMeshPro를 기본안으로 삼는다. UI Toolkit 등 다른 방식으로 바꿀 때는 Editor 제작·입력·레이아웃·모달 생명주기 계약을 만족하는지 비교 후 승인한다.
+- 입력: Unity Input System을 기본안으로 삼아 PC 입력을 명령으로 변환한다. 모바일 장치는 같은 명령 계약에 연결하고 게임 규칙에 장치 조건을 넣지 않는다.
+- 테스트: EditMode 도메인/계약 테스트 + PlayMode 실제 Scene/입력·UI 테스트 + 사용자 Game View 수용. 성능은 적절한 단계부터 실제 Player 빌드의 Profiler로 관찰한다.
+- 소스 관리: 새 Git 저장소. `.meta` 보존, Unity Asset Serialization **Force Text**, Version Control **Visible Meta Files** 설정을 권장한다. 프로젝트 설정 파일은 실제 Unity 버전의 메뉴/지원 기능을 확인하고 기록한다.
+
+### 1.1 실제 환경과 검증 상태
+
+| 항목 | 실제 값/검증 상태 |
+|---|---|
+| Unity Editor 정확한 버전 | `6000.6.4f1`, revision `12bfff696524`. `ProjectSettings/ProjectVersion.txt` 기준 |
+| URP / Renderer / Color Space | URP `17.6.0` / `Assets/Settings/UniversalRP.asset` → `Renderer2D.asset`(기본 인덱스 0) / Linear. Quality Settings의 6개 품질 항목이 같은 URP 자산 참조 |
+| Input System 패키지 버전 / Active Input | `1.20.0` / Input System Package (New), `activeInputHandler: 1`. `Assets/Settings/InputSystem_Actions.inputactions` 존재. Scene의 EventSystem에 `InputSystemUIInputModule` 연결. 최소 실행·입력은 사용자 직접 테스트 통과(2026-11-01) |
+| TMP / uGUI | uGUI `2.6.0`에 TMP 포함. `Assets/TextMesh Pro/`에 Essential Resources 임포트됨. 별도 `com.unity.textmeshpro` 의존성 없음 |
+| 기본 한국어 폰트 | `TMP Settings.asset`의 기본 폰트는 `Galmuri11 SDF.asset`(GUID `11f430421abc0d84297aa673a343400e`). 원본 `Galmuri11.ttf` 참조, Dynamic Atlas. Bold·Condensed TTF/SDF도 존재. 전역 Fallback은 비어 있음. 한글 표시·폰트 입력·적용은 사용자 직접 테스트 통과(2026-11-01). 제품 UI의 해상도별 줄바꿈·클리핑은 이후 해당 화면에서 검증 |
+| 타깃 PC OS, 빌드 아키텍처 | 활성 빌드 대상 `StandaloneWindows64` / Standalone. 최종 지원 Windows 버전·최소 사양은 미정 |
+| 기준 해상도·화면비·Canvas 스케일 정책 | Player 기본 크기 `1920×1080`(16:9). 현재 SampleScene Canvas는 Screen Space - Overlay / Constant Pixel Size. 직렬화된 Reference Resolution은 `800×600`이나 Scale With Screen Size 정책으로 채택한 값이 아님. 제품 UI 정책 미정; 수용 검사 제안은 1280×720 / 1600×900 / 1920×1080 |
+| PPU / 세계 Cell Size / 피벗·스프라이트 기준점 | 미설정 — 디자인 및 실제 자산 검증 후 기록 |
+| 테스트 실행 명령/방법 | Test Framework `1.8.0` 설치. EditMode/PlayMode는 Unity Test Runner를 사용할 계획이며 제품용 테스트·실행 결과는 없음. CLI 자동 실행 절차와 Player 검증 절차는 아직 검증하지 않음 |
+| 물리 레이어·충돌 매트릭스 / 공간 질의 정책 | 기본 Layer(Default, TransparentFX, Ignore Raycast, Water, UI), Sorting Layer는 Default만 존재. Physics2D 충돌 매트릭스는 전체 허용 비트. 제품 역할별 정책은 P1 설계 후 구성 |
+| 물리 스텝 | Fixed Timestep `0.02초`, Maximum Allowed Timestep `0.33333334초`, Time Scale `1`. 엔진 기본 설정이며 게임의 하루 600초를 구현했다는 뜻은 아님 |
+| 플레이어·선원 이동/렌더 스텝·보간 정책 | 미설정 — 첫 이동 품질 테스트 전 결정 |
+| Play Mode 진입 설정 | `m_EnterPlayModeOptionsEnabled: 1`, `m_EnterPlayModeOptions: 1`: Domain Reload 생략, Scene Reload 유지. 정적 상태·이벤트 구독·세션 초기화의 반복 진입 안전성은 이후 구현 시 검증 |
+| 직렬화 / 메타 관리 | Force Text(`m_SerializationMode: 2`) / Visible Meta Files |
+| 기준 테스트 환경 / Profiler 계측 방법 | 현재 Development Build·Allow Debugging·Connect With Profiler 모두 꺼짐. 측정용 Player·하드웨어·계측 조건은 미확정 |
+| 초기 성능 기준선(장면, 유닛 수, Frame Time·GC) | 미측정 — 최초 대표 실행 후 기록 |
+| Unity CLI / Pipeline | CLI `1.0.0-beta.15`, `com.unity.pipeline` `0.9.1-exp.1`. CLI/MCP 연결 확인. 다의적인 MCP 명령은 실패할 수 있어 읽기 전용 빌드 조회는 CLI `command build get_settings`로 확인 |
+
+**원칙:** 위 `미설정`은 반드시 채워야 할 환경 정보이지 임의 기본값을 써 넣어도 되는 항목이 아니다. 미설정인 핵심 항목이 필요한 작업을 진행할 때는 그 작업의 게이트에서 차단한다.
+
+### 1.2 패키지와 확인 근거
+
+- 버전 원본: `Packages/manifest.json` 및 `Packages/packages-lock.json`. 아래 직접 의존성의 manifest·lock 버전 일치를 확인했다.
+- 2D Animation `16.0.1`, Aseprite `6.0.0`, PSD Importer `15.0.1`, Sprite `1.0.0`, SpriteShape `16.0.0`, Tilemap `1.0.0`, Tilemap Extras `9.0.1`, 2D Tooling `4.0.1`, Timeline `6.6.0`.
+- 렌더링: `ProjectSettings/QualitySettings.asset`, `Assets/Settings/UniversalRP.asset`, `Assets/Settings/Renderer2D.asset` 및 각 `.meta`의 GUID 연결을 확인했다.
+- 입력·UI·화면: `ProjectSettings/ProjectSettings.asset`, `EditorBuildSettings.asset`, `Assets/Scenes/SampleScene.unity`의 직렬화 설정을 확인했다. 자산·참조 존재와 실제 동작 검증을 구분한다.
+- 폰트: `Assets/TextMesh Pro/Resources/TMP Settings.asset` → `Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset` → `Galmuri11.ttf` 참조를 확인했다. 기본 폰트 설정은 기존 개별 TMP 컴포넌트의 명시적 폰트 선택을 일괄 교체하지 않는다.
+- LiberationSans 메타데이터 Importer 버전 경고는 사용자 지시로 수용한 비차단 항목이다. 이를 수정하거나 모든 경고를 무시하는 정책으로 확대하지 않는다.
+- P0 최소 실행·입력·한글 표시와 폰트 입력·적용은 사용자가 직접 테스트하고 통과를 보고했다(2026-11-01, 현재 대화). 에이전트의 재실행·자동 테스트·Player 빌드 검증으로 표현하지 않는다. 제품 기능·조작감·저장·성능 검증으로 확대하지 않는다.
+- P0 완료 후 main 푸시 예정이라는 사용자 방침을 따른다. 이번 환경 기록 작업은 테스트 실행·커밋·푸시 또는 P1 착수를 뜻하지 않는다.
+- 환경·폴더·자산·검증 상태가 바뀌면 해당 작업에서 이 문서와 `CurrentState.md`를 함께 현행화한다. 이미 해소된 미확인 항목을 유지하거나 과거 상태를 누적하지 않는다.
+
+## 2. 현재 구조와 목표 저장소 트리
+
+### 2.1 현재 실제 구조
+
+- 저장소·Unity 프로젝트 루트: `D:/Great_Voyage/Great_Voyage`. 다른 기기에서는 클론한 루트를 기준으로 상대 경로를 사용한다.
+- 원격 저장소: `https://github.com/K-Jung-H/Great-Voyage.git`.
+- 루트 `AGENTS.md`는 작업 진입 안내이며, 관리 문서 8개와 참고 자료는 `Agents/`에 있다. `Agents/References/`에 D01~D12·E01~E11·G01~G03 PNG 26장과 보관 기획서가 있다. 현행 `GameDesign.md`의 이미지 링크는 유효하다.
+- `Agents/`는 Git 공유 대상이며 `Assets/` 밖에 두어 Unity Project 창·AssetDatabase의 자동 임포트·게임 빌드 콘텐츠와 분리한다. 운영체제 파일 접근을 차단하는 보안 경계는 아니다.
+- `Assets/Scenes/SampleScene.unity`가 현재 유일한 활성 Build Settings Scene이다. Main Camera·Global Light 2D·Canvas·EventSystem이 존재한다. `Assets/Settings/Scenes/URP2DSceneTemplate.unity`는 템플릿 Scene이다.
+- `Assets/Settings/`에는 렌더러·입력 등 템플릿 설정, `Assets/Welcome/`에는 템플릿 안내 자산·스크립트, `Assets/TextMesh Pro/`에는 TMP 리소스·폰트가 있다.
+- 제품용 `Assets/Game/`, `Game.unity`, Prefab 및 게임 기능 코드는 아직 없다. 아래 목표 트리는 생성 지시나 구현 완료 목록이 아니다.
+
+### 2.2 목표 저장소 트리
+
+```text
+GreatVoyage/
+├─ AGENTS.md                     # Agents/AGENTS.md 진입 안내
+├─ Agents/                       # Git 공유 문서, Unity 임포트 제외
+│  ├─ AGENTS.md
+│  ├─ GameDesign.md
+│  ├─ VisualStandards.md
+│  ├─ Architecture.md
+│  ├─ ProjectStructure.md
+│  ├─ DevelopmentRules.md
+│  ├─ RoadMap.md
+│  ├─ CurrentState.md
+│  └─ References/                # D/E/G 원본 이미지와 보관 기획서
+├─ Assets/
+│  ├─ TextMesh Pro/              # 현재 TMP 공통 리소스·폰트
+│  └─ Game/
+│     ├─ Scenes/
+│     │  ├─ Game.unity             # 단일 정식 게임 진입점(초기 기본안)
+│     │  └─ Tests/                # 테스트 전용 Scene (제품 진입점 복제 금지)
+│     ├─ Runtime/
+│     │  ├─ Domain/
+│     │  │  ├─ Common/
+│     │  │  ├─ World/
+│     │  │  ├─ Ships/
+│     │  │  ├─ Characters/
+│     │  │  ├─ Work/
+│     │  │  ├─ Navigation/
+│     │  │  ├─ Economy/
+│     │  │  ├─ Journal/
+│     │  │  ├─ Events/
+│     │  │  └─ Combat/
+│     │  ├─ Application/
+│     │  │  ├─ Session/
+│     │  │  ├─ Flow/
+│     │  │  ├─ Commands/
+│     │  │  └─ Simulation/
+│     │  ├─ Infrastructure/
+│     │  │  ├─ Input/
+│     │  │  ├─ Persistence/
+│     │  │  ├─ Physics/
+│     │  │  └─ Loading/
+│     │  ├─ Presentation/
+│     │  │  ├─ World/
+│     │  │  ├─ Characters/
+│     │  │  ├─ UI/
+│     │  │  ├─ Camera/
+│     │  │  └─ Audio/
+│     │  └─ Composition/
+│     ├─ Content/
+│     │  ├─ Definitions/          # SO 등 읽기 전용 콘텐츠/밸런스 정의
+│     │  ├─ Prefabs/
+│     │  │  ├─ World/
+│     │  │  ├─ Characters/
+│     │  │  ├─ Facilities/
+│     │  │  └─ UI/
+│     │  └─ Art/
+│     │     ├─ Characters/
+│     │     ├─ Environment/
+│     │     ├─ Map/
+│     │     ├─ UI/
+│     │     └─ Animation/
+│     ├─ Editor/                  # 제품 Runtime이 참조하지 않는 Editor 코드
+│     └─ Tests/
+│        ├─ EditMode/
+│        ├─ PlayMode/
+│        └─ Performance/             # 대표 부하·성능 회귀 시험(필요 시)
+├─ Packages/
+├─ ProjectSettings/
+└─ .gitignore
+```
+
+- 이 트리는 **디렉터리 책임 표준**이지 모든 빈 디렉터리·스크립트·SO를 첫날 생성하라는 지시가 아니다. 첫 Slice에 필요한 폴더만 만들고 기능이 생길 때 확장한다.
+- `Assets/Game/Runtime/Domain`은 UI/Transform/Prefab/Scene/파일 IO에 의존하지 않는 순수 C# 게임 규칙을 우선한다.
+- `Application`은 도메인 간 사용 사례와 전환·원자적 명령을 담당한다. `Infrastructure`는 구체 기술 어댑터, `Presentation`은 보이는 것과 입력 피드백만 담당한다.
+- `Composition`에는 시작 시 참조 연결만 둔다. 기능별 호출을 모아 놓은 거대 Update 클래스를 만들지 않는다.
+- `Definitions`와 `Content/Prefabs`는 구분한다. SO 정의가 Runtime State 역할을 대신하지 않는다.
+- `References`는 **기획 참고용 원본**이며 Unity에 자동 임포트할 제품 Sprite가 아니다. 실제 게임 자산은 검수 후 `Content/Art`에 별도로 추가한다.
+
+## 3. Scene/Prefab/스크립트 책임
+
+| 자산 종류 | 소유·수명 | 규칙 |
+|---|---|---|
+| `Game.unity` | 정식 시작점 1개 | 동일 세션/입력/시간/저장 원본을 구성. 별도 게임용 Scene 중복 생성 금지 |
+| 월드 구역 Prefab | 각 지역 표현·Colliders·접근점 | 디자이너가 Editor에서 편집 가능. 구역 표시 제거가 게임 상태 삭제를 의미하지 않음 |
+| 캐릭터/시설 Prefab | 인스턴스 **표현** | 도메인 ID와 바인딩, 상태 소유·가격/계약 규칙 포함 금지 |
+| UI Screen/Item Prefab | 화면 기본 계층/반복 행 | 기본 화면은 Editor 제작, 동적 목록은 사전 제작 Item Prefab만 복제 |
+| ScriptableObject Definitions | 종류와 콘텐츠 기본값 | 플레이 중 변하지 않는 참조 데이터. 게임 저장 원본으로 이용 금지 |
+| 테스트 Scene/Fixture | 특수 조건·주입 데이터 | 정식 게임 구조를 호출하되 별도 도메인 로직 복제 금지 |
+
+- Domain·Application·Presentation의 경계는 가능하면 asmdef 단위로 분리한다. 최초 권고 의존성: `Domain` ← `Application` ← `Presentation/Infrastructure`, `Composition`이 최종 조립. 다만 무의미한 빈 assembly·인터페이스 생성은 금지한다.
+- 스크립트 배치는 클래스명보다 **실제 책임**을 기준으로 한다. UI에서 규칙을 계산한다면 UI 폴더에 있다는 이유로 허용되지 않는다.
+- Screen UI의 크기/앵커/폰트·World의 배치/Collider/피벗은 제작 에디터의 직렬화된 값으로 확인 가능해야 한다. 물리 컴포넌트는 엔티티 역할에 맞게 추가하고, 정적 장식·탐지·상호작용 대상의 충돌 정책을 혼동하지 않는다.
+
+## 4. 명명·식별·직렬화
+
+- 코드 타입: `PascalCase`, 메서드/프로퍼티: `PascalCase`, 매개변수·지역: `camelCase`, private 필드: `camelCase` 또는 `_camelCase` 중 프로젝트 최초 선택 후 일관 적용. SerializedField는 private 기본.
+- Prefab/Scene/SO: 의미가 분명한 명사 이름 (`CaptainCabin`, `JournalScreen`, `BedDefinition` 등). `Test`, `Temp`, `Prototype`을 제품 아트/씬 명칭으로 둔갑시키지 않는다.
+- 물리·화면 ID와 게임 내 고유 ID를 구분한다. 게임 내 정체성은 `UnityEngine.Object.GetInstanceID`, Hierarchy 경로, Prefab 이름으로 결정하지 않는다.
+- 파일 이동/리네임은 가능하면 Unity Editor를 통해 수행하며, 연관 `.meta`·직렬화 참조·GUID·Prefab 연결 손실 여부를 검사한다.
+- Unity 직렬화 대상의 변경은 저장 DTO와 별개다. 실제 저장 데이터 포맷 변경 시 `Architecture.md`의 버전/복원 경계를 검토한다.
+- 유닛의 Sprite·애니메이션·UI 아틀라스 규격과 import 설정은 첫 아트 적용 시 여기 실제 값으로 기록한다. 처음부터 임의 수치로 고정하지 않는다.
+
+## 5. Git 관리 범위
+
+**추적해야 할 것:** `Assets`(원본 에셋과 모든 `.meta`), `Packages/manifest.json` 및 잠금 파일(존재 시), `ProjectSettings`, 루트 진입 안내 `AGENTS.md`, `Agents/`의 8개 MD와 `Agents/References` 원본.
+
+**무시해야 할 것:** Unity가 재생성 가능한 `Library`, `Temp`, `Obj`, `Logs`, `UserSettings`(프로젝트 공유 대상이 아닌 로컬 설정), 빌드 산출물, IDE 사용자 캐시, 로컬 실제 저장 슬롯, 개인정보·비밀키. Unity 공식 템플릿 기반 `.gitignore`를 사용하고 팀의 실제 경로와 대조한다. 임의 `git clean`으로 원본 에셋을 삭제하지 않는다.
+
+- Scene·Prefab YAML의 대량 변경은 범위가 맞는지 diff로 확인한다.
+- 에이전트가 동시에 같은 Scene/Prefab/ScriptableObject YAML을 수정하지 않도록 **소유 범위 또는 브랜치**를 분리한다.
+- 다른 컴퓨터에서 Unity로 열 수 있도록 샘플 이미지·메타·버전·패키지 잠금을 함께 보존한다.
+
+## 6. 환경 변경 프로토콜
+
+새 패키지, Unity 버전, 렌더러, 입력 시스템, UI 기반, Sprite 규격, 핵심 폴더 구조 변경 전에 **목적·대안·영향 파일·마이그레이션·성능/저장 위험**을 제시한다. 사용자 승인 후 변경하며 `ProjectStructure.md`의 실제 값과 `CurrentState.md`의 진행 상태를 같은 작업에 갱신한다. 새 기술을 도입했다는 이유만으로 기획 규칙을 바꾸지 않는다.
+
+## 7. 물리·이동·성능 환경의 실제 관리
+
+프로젝트 생성 후 아래 내용은 **선택한 Unity 환경에서 확인한 값**만 기록한다. 이 문서는 역할·경로의 원본이고, 기능별 물리 정책의 이유와 책임은 `Architecture.md` 9절을 따른다.
+
+- **레이어/충돌 매트릭스:** 정적 장애물, 플레이어, 선원, 트리거/상호작용, 감지 대상, 시각 전용 등의 실제 Layer·Physics2D 충돌 허용표를 구성한다. 프로젝트에 없는 레이어를 기록하지 않는다. 동일 역할이라도 전부 Collider가 필요한 것은 아니다.
+- **이동/표현 동기화:** 선택한 Rigidbody2D 이동 방식·Fixed Timestep·위치 보간/카메라 갱신 방식과 예외(포털·층 전환)를 기록한다. 프로젝트 전체의 연속 이동 품질을 실험으로 확인하고 채택한다.
+- **대표 성능 환경:** 최초 실행 가능 Slice부터 테스트 Editor/Player 버전·해상도·환경, 대상 유닛 수/시설 수, 프레임 시간·물리 시간·GC 할당을 기록한다. **최종 수치 합격 목표가 미정인 것과 측정을 아예 하지 않는 것은 다르다.**
+- **프로파일링 산출물:** 로그·화면 캡처·Profiler 원본은 민감 정보나 용량을 고려해 추적 여부를 정한다. 미추적 실험 자료는 `CurrentState.md`에 재현 명령/절차와 증거 위치·결과 요약을 남기고, 다른 기기로 인계할 때는 재현 가능한 테스트로 보완한다.
+- **회귀 관리:** 선원 수·UI 항목·시설 수 증가 등 비용이 달라지는 구현에서는 이전 동일 조건과 비교한다. 성능 악화를 무조건 특정 최적화 기술로 해결하지 말고 우선 병목을 확인한다.
