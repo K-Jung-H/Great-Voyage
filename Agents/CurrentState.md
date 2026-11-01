@@ -1,14 +1,14 @@
 # Current State — 현재 개발 상태 / 에이전트 인수인계
 
-> 갱신 기준: 2026-11-01. 현재 유효한 환경·검증·미결정 사항만 기록한다. 환경의 기술 값과 경로는 `ProjectStructure.md`가 원본이다.
+> 갱신 기준: 2026-11-02. 현재 유효한 환경·검증·미결정 사항만 기록한다. 환경의 기술 값과 경로는 `ProjectStructure.md`가 원본이다.
 
 ## 1. 지금의 사실
 
 | 항목 | 현재 상태 |
 |---|---|
 | 대상 프로젝트 | Great Voyage 신규 Unity 프로젝트 생성됨. 루트 `D:/Great_Voyage/Great_Voyage` |
-| 실행 단계 | **P0 통과 / P1 착수 전** |
-| Git | `main`. P0 완료 기준 커밋은 이 문서와 함께 저장되는 `P0 Complete`; 정확한 HEAD는 `git log -1`로 조회한다. 이전 기준은 `aecdd1b` |
+| 실행 단계 | **P0 통과 / P1-04까지 설계 검토 완료 / P1-05 착수 전**. P1 전체 완료는 아님 |
+| Git | `main`. 이 문서를 포함한 설계 기준 커밋은 `P1-04 Complete`; 정확한 HEAD는 `git log -1`로 조회한다. 이전 기준은 `5de6019` (`P0 Complete`) |
 | 원격 저장소 | `https://github.com/K-Jung-H/Great-Voyage.git` |
 | P0 커밋 범위 | 루트 AGENTS, Agents 문서·참조 이미지, SampleScene의 Canvas/EventSystem, TMP 리소스·Galmuri 폰트·기본 설정과 모든 meta, 학습 시작창 설정 및 SceneTemplateSettings. 커밋 후 추가 변경 여부는 실제 Git 상태로 확인한다 |
 | Unity·도구 | Unity `6000.6.4f1`, CLI `1.0.0-beta.15`, Pipeline `0.9.1-exp.1`. 마지막 읽기 전용 조회에서 에디터 ready, 컴파일 실패 없음, 콘솔 오류 0건 |
@@ -16,8 +16,8 @@
 | TMP·폰트 | Essential Resources 임포트, 기본 폰트 Galmuri11 SDF 연결 확인. 일반·Bold·Condensed TTF/SDF 존재 |
 | 기획·자료 | 관리 문서 8개와 References를 Agents에 통합. 이미지 26장 전부 열람 완료, 현행 GameDesign 이미지 링크 29개 유효. 루트 AGENTS는 공통 지침 진입 안내 |
 | 제품 구현 | SampleScene·URP 템플릿 및 준비 자산만 존재. 제품용 Assets/Game·Game Scene·Prefab·게임 기능 코드 없음 |
-| 구조 설계 | Architecture 기본 설계안 존재. P1 상세 검토·사용자 설계 수용 전 |
-| Git 공유 방침 | 사용자가 `P0 Complete` 커밋과 main 푸시를 명시 승인했다. 원격 동기화 성공은 작업 결과 및 `git status`/원격 ref로 확인한다 |
+| 구조 설계 | P1-01 기본 방향 및 P1-02 시작·시간·중첩 정지·공간 전환·실패 처리 방향 사용자 수용(2026-11-01). 고정 게임 시드·판정별 파생 시드 방식 수용. 공통 모델은 인물·품목 등 전체 게임 데이터에 적용하며 필요한 스탯/기능 데이터를 조합. CrewData·ItemDefinition·ItemStack 예시 구조 방향 사용자 수용, 품목 Sprite의 Unity 자산 연결은 Architecture 3.2절 기술 제안으로 기록. 과도한 구조체 분할·Master 객체 금지. SaveEvent는 정상 종료·승선·하선·항해 중 하루 경과·수면, 로드는 기상 시작. 사건 저장 관계 등 후속 세부 경계는 확인 대기 |
+| Git 공유 방침 | 2026-11-02 사용자 지시로 P1-04까지의 Architecture·GameDesign·RoadMap·CurrentState를 `P1-04 Complete`로 main 커밋·푸시한다. 결과는 실제 원격 ref와 작업 결과로 확인한다 |
 
 ## 2. 현재 적용할 불변 조건
 
@@ -54,7 +54,7 @@
 
 ## 5. 다음 한 가지 작업
 
-**P1 — 게임 전체 도메인·객체 관계·상태 소유권·생명주기 설계 검토와 사용자 수용.** 현재 작업은 상태 문서 갱신이며 P1 설계·구현에는 착수하지 않았다. 사용자가 예정한 main 푸시 시 준비 자산과 두 문서의 최신 변경까지 포함해야 한다.
+**P1-04 기본 프레임워크 범위 설계 검토 완료 / 다음은 P1-05 거래·고용·정비·계약 정산 검토.** 정상 기상은 오전 8시(08:00) 고정으로 사용자 확정. 취침 후 도래하는 08:00를 목표로 계산하며 기존 입항 수면 중단은 별도 유지한다. 주요 항해·조타·일지 규칙은 사용자 수용·정정 반영 완료. 마지막 기록 후 추가 상호작용·취침 전 날짜 변경 없이 취침하면 마지막 기록~기상 경로를 기상 때 자동 기록. 미니게임/사건 참여·취침 전 날짜 변경 후 재기록 없이 취침하면 해당 전체 경로는 미기록. 기존 확정 기록과 기상 게임 저장은 유지. GameDesign 6.3·A22/A24, Architecture 10.2/10.3에 반영. 기타 행동 분류·사건 고유 규칙은 임의 확정하지 않는다. P1 전체 완료는 아니다.
 
 ## 6. 갱신 규칙
 
