@@ -8,7 +8,7 @@
 - 플랫폼: PC 우선, 모바일 입력은 이후 별도 연결. 초기 세계/인물/상품 기능은 `GameDesign.md`를 따른다.
 - 렌더링: 2D. **권장 기본 선택**은 Unity 2D URP 프로젝트. 실제 사용 여부·URP 버전·렌더러 설정은 최초 생성 후 기록한다.
 - UI: Unity Editor에서 제작하는 uGUI Canvas/Prefab + TextMeshPro를 기본안으로 삼는다. UI Toolkit 등 다른 방식으로 바꿀 때는 Editor 제작·입력·레이아웃·모달 생명주기 계약을 만족하는지 비교 후 승인한다.
-- 입력: Unity Input System을 기본안으로 삼아 PC 입력을 명령으로 변환한다. 모바일 장치는 같은 명령 계약에 연결하고 게임 규칙에 장치 조건을 넣지 않는다.
+- 입력: Unity Input System으로 PC 입력을 공통 행동 명령으로 변환한다. 모바일은 같은 인터페이스·소스 활성/제어권 경계로 연결하고 중복 입력/충돌을 방지한다. 2026-11-02 사용자 결정에 따라 구체 모바일 동작·UI/UX는 기본 프레임워크 완성 및 테스트 통과 후 설계·구현한다. 게임 규칙에 장치 조건을 넣지 않는다.
 - 테스트: EditMode 도메인/계약 테스트 + PlayMode 실제 Scene/입력·UI 테스트 + 사용자 Game View 수용. 성능은 적절한 단계부터 실제 Player 빌드의 Profiler로 관찰한다.
 - 소스 관리: 새 Git 저장소. `.meta` 보존, Unity Asset Serialization **Force Text**, Version Control **Visible Meta Files** 설정을 권장한다. 프로젝트 설정 파일은 실제 Unity 버전의 메뉴/지원 기능을 확인하고 기록한다.
 
@@ -56,6 +56,7 @@
 - 원격 저장소: `https://github.com/K-Jung-H/Great-Voyage.git`.
 - 루트 `AGENTS.md`는 작업 진입 안내이며, 관리 문서 8개와 참고 자료는 `Agents/`에 있다. `Agents/References/`에 D01~D12·E01~E11·G01~G03 PNG 26장과 보관 기획서가 있다. 현행 `GameDesign.md`의 이미지 링크는 유효하다.
 - `Agents/`는 Git 공유 대상이며 `Assets/` 밖에 두어 Unity Project 창·AssetDatabase의 자동 임포트·게임 빌드 콘텐츠와 분리한다. 운영체제 파일 접근을 차단하는 보안 경계는 아니다.
+- `Agents/References/ArtStyle_2026-11-02/`에 사용자 제공 화풍 자료를 원본 이름·내용으로 보존했다: `Samples/` PNG 2개, `Sheets/` PNG 9개, `SourceDocuments/` MD 3개. 복사 후 원본과 SHA-256 일치를 확인했다. 하위 `Agent.md`는 참고용 프롬프트이며 관리 지침이 아니다. Git 공유 대상 파일을 준비했지만 아직 커밋·푸시하지 않았다. 제품 Sprite는 검수 후 `Assets/Game/` 목표 자산 경로에 별도로 제작·임포트한다. 원본 기술 확인은 `VisualStandards.md` 1.2절을 따른다.
 - `Assets/Scenes/SampleScene.unity`가 현재 유일한 활성 Build Settings Scene이다. Main Camera·Global Light 2D·Canvas·EventSystem이 존재한다. `Assets/Settings/Scenes/URP2DSceneTemplate.unity`는 템플릿 Scene이다.
 - `Assets/Settings/`에는 렌더러·입력 등 템플릿 설정, `Assets/Welcome/`에는 템플릿 안내 자산·스크립트, `Assets/TextMesh Pro/`에는 TMP 리소스·폰트가 있다.
 - 제품용 `Assets/Game/`, `Game.unity`, Prefab 및 게임 기능 코드는 아직 없다. 아래 목표 트리는 생성 지시나 구현 완료 목록이 아니다.
