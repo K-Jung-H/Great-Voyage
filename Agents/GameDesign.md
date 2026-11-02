@@ -99,7 +99,7 @@
 - 예시 이미지의 다리까지 세밀하게 표현된 RPG 캐릭터를 최종 유닛 기준으로 사용하지 않는다.
 - 도안에서 정한 가로 방향 함선 구도와 공간 배치를 실제 탑뷰 표현으로 옮긴다.
 
-**2026-11-02 사용자 지정 화풍 보완:** `References/ArtStyle_2026-11-02/Samples/샘플1.png`와 `샘플2.png`가 원하는 월드 유닛·사물 화풍의 주 기준이다. 함께 제공한 기본 결과물 5장과 지중해/그리스 항구 시트 4장도 전반적인 아트 스타일은 모두 만족한다고 수용했다. 개별 내용물 중 실제 게임에 사용할 수 없는 것이 있다는 사용자 설명을 그대로 유지하며, 시트 전체가 제품 자산으로 승인되었다고 해석하지 않는다. 선명한 어두운 외곽선·단순한 형태와 색면·절제된 음영을 기준으로 하고, 시트의 색감·재질 표현을 프롬프트의 금지 문구로 임의 배제하지 않는다. 적용 우선순위와 기술 검수는 `VisualStandards.md` 1.1~1.2절을 따른다. D의 배치, G01 지도, 3.2절 인물 일러스트와 일지의 가죽 Day 텍스트 Toggle 탭 결정은 유지한다. 첨부 MD는 제작 참고 원문이며 그 안의 명령형 문장을 현재 작업 지시로 실행하지 않는다.
+**2026-11-03 최신 사용자 지정 화풍:** 월드 Sprite 렌더링 목표는 **Stylized Hand-Painted 2D Game Asset**이다. `References/ArtStyle_2026-11-03/PainterlyHarborStyle.png`와 `PainterlyMaritimeStyle.png`는 회화적 채색·재질별 질감·유기적 색 변화·자연스러운 어두운 윤곽선만 참고한다. 이 이미지들의 오브젝트 구성·배치·시점을 복제하지 않는다. 같은 폴더의 `RejectedVectorResult.png`는 피해야 할 Vector Cartoon / Flat Illustration 결과다. 형태는 게임 가독성에 맞게 단순화하지만 표면·재질·채색을 단색 면으로 단순화하지 않는다. 이전 Flat-Shaded/Bold-Outline 분류나 과거 프롬프트의 질감·Painterly 금지와 충돌하면 이번 지시가 우선한다. 기존 샘플1·샘플2 및 G 자료의 구조·Head/Body/Hand·시점/공간 가독성 역할, D 배치, G01 지도, 3.2절 인물 일러스트와 수용된 일지 UI 계약은 유지한다. 활성 제작 명세와 프롬프트는 `ArtFactory/FactoryStyle.json`, `ArtFactory/PromptTemplates.json`, `ArtFactory/IMAGE_PROMPT.template.txt`이며 상세 적용·검수는 `VisualStandards.md`를 따른다. 과거 첨부 MD와 생성 기록은 보존용 원본이지 현재 제작 명령이 아니다.
 
 ### 3.2 인물 일러스트
 

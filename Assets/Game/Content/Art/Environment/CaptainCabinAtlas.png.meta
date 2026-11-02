@@ -243,7 +243,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 128
@@ -313,10 +313,10 @@ TextureImporter:
       name: NavigationDesk
       rect:
         serializedVersion: 2
-        x: 40
-        y: 588
-        width: 496
-        height: 330
+        x: 44
+        y: 552
+        width: 540
+        height: 382
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -335,10 +335,10 @@ TextureImporter:
       name: SingleBed
       rect:
         serializedVersion: 2
-        x: 622
-        y: 528
-        width: 302
-        height: 476
+        x: 632
+        y: 502
+        width: 340
+        height: 497
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,10 +357,10 @@ TextureImporter:
       name: SeaChest
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 622
-        width: 400
-        height: 264
+        x: 1048
+        y: 580
+        width: 448
+        height: 304
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -379,10 +379,10 @@ TextureImporter:
       name: CabinFloorPanel
       rect:
         serializedVersion: 2
-        x: 50
-        y: 40
-        width: 462
-        height: 448
+        x: 44
+        y: 56
+        width: 464
+        height: 452
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -401,10 +401,10 @@ TextureImporter:
       name: PartitionWall
       rect:
         serializedVersion: 2
-        x: 542
-        y: 196
-        width: 458
-        height: 148
+        x: 558
+        y: 197
+        width: 516
+        height: 132
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -423,10 +423,10 @@ TextureImporter:
       name: CaptainChair
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 112
-        width: 254
-        height: 306
+        x: 1138
+        y: 117
+        width: 321
+        height: 337
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

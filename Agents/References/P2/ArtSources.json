@@ -46,5 +46,10 @@
         "reason": "Repeat between horizontal plank seams, avoiding the unseamed outer image edges."
       }
     }
-  ]
+  ],
+  "status": "historical_generation_provenance_not_active_prompt",
+  "active_style_specification": "../../ArtFactory/FactoryStyle.json",
+  "active_prompt_templates": "../../ArtFactory/PromptTemplates.json",
+  "asset_paths_at_commit": "3f0ed0d10ac5518657947cf00d827c9698c2f226",
+  "current_world_art_provenance": "PainterlyArtSources.json"
 }

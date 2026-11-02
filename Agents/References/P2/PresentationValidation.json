@@ -28,5 +28,18 @@
     "bookHeight": 928,
     "sceneWasDirty": true,
     "sceneSaved": false
+  },
+  "modularPartitions": {
+    "scope": "Editor geometry only; not character collision or painterly art validation",
+    "segmentCount": 70,
+    "colliderCount": 5,
+    "nonUnitTransforms": 0,
+    "childColliders": 0,
+    "maximumJoinError": 0,
+    "maximumColliderLengthError": 0,
+    "segmentWidth": 0.5,
+    "segmentHeight": 0.278571427,
+    "missingSprites": 0,
+    "sceneSaved": false
   }
 }

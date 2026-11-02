@@ -1,6 +1,6 @@
 # Current State — 현재 개발 상태 / 에이전트 인수인계
 
-> 갱신 기준: 2026-11-02. 현재 유효한 환경·검증·미결정 사항만 기록한다. 환경의 기술 값과 경로는 `ProjectStructure.md`가 원본이다.
+> 갱신 기준: 2026-11-03. 현재 유효한 환경·검증·미결정 사항만 기록한다. 환경의 기술 값과 경로는 `ProjectStructure.md`가 원본이다.
 
 ## 1. 지금의 사실
 
@@ -8,20 +8,20 @@
 |---|---|
 | 대상 프로젝트 | Great Voyage 신규 Unity 프로젝트 생성됨. 루트 `D:/Great_Voyage/Great_Voyage` |
 | 실행 단계 | **P0 통과 / P1 Complete 공유 완료 / P2 UI 사용자 수용·마일스톤 `P2 - UI Complete`**. 점선 선택 영역·Skeleton 보정 포함. 전체 P2 월드 표현의 최종 수용·P3 게임 기능 착수로 확대하지 않음 |
-| Git | `main`. 사용자 지정 공유 마일스톤 `P2 - UI Complete`. 정확한 HEAD·원격 동기화·후속 미커밋 변경 여부는 실제 Git 상태로 확인 |
+| Git | `main`. 사용자 지정 공유 마일스톤 `P2 - Fixing Chracter  & Prop Art Style`: Factory 명세·참조·회화풍 PNG·Prefab/메타·파티션·검증 자료. 정확한 HEAD·원격 동기화는 실제 Git 확인. 별도 Galmuri11 SDF 아틀라스 초기화 변경은 이번 범위에서 제외하여 작업 트리에 보존 |
 | 원격 저장소 | `https://github.com/K-Jung-H/Great-Voyage.git` |
 | P0 커밋 범위 | 루트 AGENTS, Agents 문서·참조 이미지, SampleScene의 Canvas/EventSystem, TMP 리소스·Galmuri 폰트·기본 설정과 모든 meta, 학습 시작창 설정 및 SceneTemplateSettings. 커밋 후 추가 변경 여부는 실제 Git 상태로 확인한다 |
 | Unity·도구 | Unity `6000.6.4f1`, CLI `1.0.0-beta.15` 최신 여부 확인, Pipeline `0.9.1-exp.1`. 프로젝트 지정 CLI로 Editor 7800 연결·제작·Play 검증. 최종 조회 컴파일 실패 없음, 콘솔 오류·경고 0건 |
 | 실행·입력·한글 | **사용자 직접 테스트 통과**. 최소 실행·입력·한글 표시 및 폰트 입력·적용을 확인했다고 2026-11-01 현재 대화에서 보고함. 에이전트 재실행·영상·자동 테스트 결과로 간주하지 않음 |
 | TMP·폰트 | Essential Resources 임포트, 기본 폰트 Galmuri11 SDF 연결 확인. 일반·Bold·Condensed TTF/SDF 존재 |
-| 기획·자료 | 관리 문서 8개와 References를 Agents에 통합. 기존 D/E/G 이미지 26장과 보관 기획서 유지. 신규 ArtStyle_2026-11-02에 이미지 11개·제작 참고 MD 3개 원본 보존, 복사 SHA-256 일치 확인. 샘플1·샘플2 주 화풍 기준, 제작 시트 9장 전반 화풍 사용자 수용. 개별 제품 자산 적합성은 미확인. 루트 AGENTS는 공통 지침 진입 안내 |
-| 제품 구현 | Game Scene·4 Prefab·PNG 4개/17 Sprite·Editor 제작/미리보기 도구 존재. 선장실·분리 유닛·일지 Frame 배치. Game만 활성 빌드 진입, SampleScene 파일 보존/목록 비활성. 게임 기능 Runtime 코드 없음 |
+| 기획·자료 | 관리 문서 8개와 References를 Agents에 통합. 기존 D/E/G 이미지 26장과 보관 기획서 유지. 신규 ArtStyle_2026-11-02에 이미지 11개·제작 참고 MD 3개 원본 보존, 복사 SHA-256 일치 확인. 2026-11-03 새 참조 3장 보존·해시 확인. 최신 렌더링 목표는 Stylized Hand-Painted; 샘플1·샘플2는 구조/파트 참고이며 기존 제작 시트의 제품 적합성은 미확인. 루트 AGENTS는 공통 지침 진입 안내 |
+| 제품 구현 | Game Scene·4 Prefab·PNG 4개/내부 Sprite 17개+파티션 Sprite 자산 1개·Editor 제작/미리보기 도구 존재. 파티션 조각 70개는 단위 배율, 구간 Collider는 5개. 선장실·분리 유닛·일지 Frame 배치. Game만 활성 빌드 진입, SampleScene 파일 보존/목록 비활성. 게임 기능 Runtime 코드 없음 |
 | 구조 설계 | 기본 프레임워크 P1-01~07 사용자 수용 완료. 공통 데이터 조합·소유권·파생 시드·가변 시설·업무·항해·거래·Event 정책 교체·저장/복원·UI 경계는 Architecture가 원본. SaveEvent는 정상 종료·승선·하선·항해 중 하루 경과·수면 결과. 일반 로드는 저장 시점 복원, 수면 로드는 계산·저장된 기상 상태 복원. 사건 상세·모바일 상세는 기본 프레임워크 검증 후 |
-| Git 공유 방침 | 사용자 지시로 현재 P2 Scene·Prefab·아트·UI 보정·검증 근거·관리 문서를 `P2 - UI Complete`로 main에 커밋·푸시. 후속 변경의 자동 공유 허가는 아님 |
+| Git 공유 방침 | 사용자 지시로 회화풍 아트·Factory·파티션 보정과 관련 검증/관리 문서를 `P2 - Fixing Chracter  & Prop Art Style`로 main에 커밋·푸시. 원래 Scene의 미저장 변경은 저장하지 않으며 별도 폰트 아틀라스 초기화도 포함하지 않음. 후속 변경의 자동 공유 허가는 아님 |
 
 ## 2. 현재 적용할 불변 조건
 
-- 게임 규칙은 GameDesign, 배치·연결은 D, 월드의 구체 화풍은 최신 샘플1·샘플2와 사용자 수용 시트, 지도·공간 가독성·유닛 구성은 G, 분위기 참고는 E를 따른다. 제작 참고 MD는 저장소 작업 지침이 아니다.
+- 게임 규칙은 GameDesign, 배치·연결은 D, 월드 렌더링은 최신 PainterlyHarborStyle·PainterlyMaritimeStyle과 ArtFactory 명세, 샘플1·샘플2는 기존 구조/파트 참고, 지도·공간 가독성·유닛 구성은 G, 분위기 참고는 E를 따른다. 제작 참고 MD는 저장소 작업 지침이 아니다.
 - 설계 승인 전 기능 코드를 작성하지 않는다. P1에서 객체 관계·단일 상태 소유권·의존 방향·생명주기·저장 경계를 검토한다.
 - 첫 제품 Slice는 선장실·플레이어·책상·일지 Frame·상호작용·중첩 정지·기본 저장/복원이다.
 - 비활성 Frame은 미구현으로 기록한다. 도형 화면·컴파일 성공·환경 준비만으로 제품 기능 완료를 선언하지 않는다.
@@ -54,20 +54,15 @@ P2 정적 표현·Prefab 참조·해상도별 캡처는 확인했다. 조작감�
 
 ## 5. 다음 한 가지 작업
 
-**다음은 사용자의 후속 P2 개선·개발 지시를 받는 작업.** 사용자가 UI 비율과 점선·Skeleton 보정 결과를 `P2 - UI Complete` 공유 마일스톤으로 수용했다. Day N 점선 선택 영역 5개와 우측 이미지 블록·설명 4줄의 정적 Skeleton을 일지 Prefab에 반영했다. 게임 선택·기록·로딩 기능은 추가하지 않았다. `Agents/References/P2/Journal_해상도.png` 3종은 보정의 Editor Game 카메라 캡처이며 기존 선장실·바닥·Play 검사 근거는 유지한다. 커밋·푸시 작업에서는 새 Play/실입력·성능 검증을 실행하지 않는다.
+**다음은 적용된 회화풍 월드 아트의 사용자 시각 검토와 필요한 보정.** 사용자가 2026-11-03에 렌더링 목표를 Stylized Hand-Painted 2D Game Asset으로 명시했다. 형태는 단순화하되 표면·재질·채색까지 단색 면으로 단순화하지 않는다. 유기적 색 변화·재질별 질감·회화적 음영·자연스럽게 변하는 어두운 윤곽선을 유지한다. 벡터/Flat Illustration·균일한 검은 굵은 선·플라스틱 음영·매끄러운 디지털 그라데이션·스티커 렌더링은 피한다. 제공 2·3번은 스타일만 참조하며 구성/배치/시점을 복제하지 않는다.
 
-현재 Scene은 작업 시작 시부터 미저장 변경이 있었으며 이를 저장하거나 폐기하지 않았다. 일지 Prefab만 수정하고 캡처 후 원래 일지 표시 여부를 복원한다. 편집기 확인은 `Great Voyage > Preview` 메뉴를 사용한다. UI 비율 수용을 전체 화풍·모든 후속 개선의 최종 수용으로 확대하지 않는다.
-
-| P2 검증 | 판정·실제 근거 |
-|---|---|
-| 구조·참조 | 통과(표현 범위) — Play 검사 Missing Script 0, Missing Sprite 0, SpriteRenderer 19개(비활성 앞/뒤 파츠 포함), 개별 편집 가능한 4 Prefab. Runtime 상태/규칙 복제 없음 |
-| 정적 시각·가독성 | 기술 확인 — 3종 해상도 캡처 열람, TMP 10개 전부 Galmuri11 SDF, 잘린 문자열 0. 최종 미적 수용은 사용자 대기 |
-| 반복 자산 | 3×3 실렌더 검수 — 바닥 줄눈에 맞춘 Sprite Rect와 3 unit 반복 적용, 이미지의 노이즈를 줄여 재생성. 픽셀 단위 완전 동일 경계나 모든 배치 조합의 보증으로 확대하지 않음 |
-| 비활성 Frame | 구조 확인 — Day Toggle 5개·나가기 버튼 모두 비활성, 사건/기록/저장 바인딩 없음. 지도와 Day 문구는 배치용 Frame 표면이며 실제 플레이 데이터가 아님. 실제 사용자 입력 검증은 아직 없음 |
-| 실행 안정성 | 확인 — Play 재진입, 프레임 1→204 및 최종 19737 진행, 콘솔 오류·경고 0. 단순 Play 진입/정지 화면을 이동·입력 기능 검증으로 해석하지 않음 |
-| 물리·기능·저장·성능 | 해당 P2 동작 없음 / 후속 미확인 — Collider·Rigidbody·Animator·게임 Runtime 기능·저장·Player Profiler 검증 미구현/미실행. 조작감·전체 게임 품질 통과 아님 |
-
-별도 이미지 생성 스킬 설치·패키지/엔진 변경은 없다. 내장 imagegen으로 제작했으며 프롬프트와 자산 경로는 `ArtSources.json`에 보존했다. Galmuri11 Dynamic 아틀라스의 사용 문자열 추가와 Build Settings 진입점 변경은 실제 P2 변경에 포함된다. P2 게이트는 사용자 시각 수용 전이므로 완료로 선언하지 않고 P3를 시작하지 않는다.
+- 활성 자료: `ArtFactory/FactoryStyle.json`, `PromptTemplates.json`, `IMAGE_PROMPT.template.txt`, 조립된 선장실 예시 `CaptainCabin.prompt.txt`. 별도 Factory 실행 엔진은 없다. 관리 문서의 충돌하는 스타일 표현도 갱신했다.
+- 원본: `References/ArtStyle_2026-11-03/`의 3장, 복사 해시 일치 확인. 기존 SourceDocuments/ArtSources 생성 프롬프트는 보존 기록이며 새 제작 명령이 아니다. 과거 실제 생성 프롬프트를 새 명세로 바꿔 쓰지 않았다.
+- 사용자 지시로 선장실 사물·캐릭터 파츠·반복 바닥 PNG 3개를 내장 imagegen으로 생성해 기존 경로/GUID에 적용했다. 사물·파트 구성과 이름/ID를 유지했고 실제 외곽에 Sprite Rect를 지정했다. 앞몸통 좌우 잘림을 수정해 최종 12개 Rect의 불투명 경계 접촉 0을 확인했다. 이전 벡터 후보는 적용하지 않았다. 승인된 일지 UI는 유지한다. 새 스타일의 최종 사용자 시각 수용은 대기다.
+- 파티션 요청 반영: 기존 아트의 가운데 구간을 Sprite 메타데이터로 잘라 native 0.5×약 0.2788 unit(PPU 330)로 정의. Scale 1 조각 70개, 부모 Scale 1, 직선 구간별 BoxCollider2D 5개, 조각별 Collider 없음. `P2PresentationAuthoring.World.cs`와 `PartitionWallSegment.asset`, CaptainCabin Prefab에 반영했다. 실제 플레이어 접촉·물리 비용·게임 기능은 미검증이다.
+- 기존 UI 비율·점선·Skeleton 사용자 수용과 `P2 - UI Complete` 마일스톤은 유지. UI를 재설계하지 않았다. P3 기능·저장/로드·새 사건/모바일 설계는 착수하지 않았다.
+- 최신 근거: `References/P2/PainterlyArtSources.json`에 실제 프롬프트·참조 역할·PNG 해시, `PainterlyArtValidation.json`에 실제 자산 구조·Rect 경계 검사. Missing Script/Sprite 0, SpriteRenderer 81, 파티션 70/Collider 5/비단위 배율 0. `CaptainCabin_Painterly_1280x720/1600x900/1920x1080.png`와 `FloorRepeat_Painterly_3x3.png`를 검토했다. 실제 카메라에서 목재 결·마모, 천의 주름·색 변화, 금속 표현을 확인했다. 픽셀 단위 완전 Seamless나 사용자 시각 수용을 자동 판정하지 않는다. 기존 PresentationValidation의 Play/UI 근거는 당시 범위로 보존하며 이번에는 새 Play·실입력·물리 접촉·저장·Player 성능 검증을 실행하지 않았다.
+- Scene은 작업 시작부터 미저장 변경 상태였다. 이를 저장하거나 폐기하지 않고 Prefab만 갱신했으며 카메라 검토 후 일지 표시 상태를 복원했다. 이번 공유는 사용자 지정 아트 보정 마일스톤에 한정한다. 기존 Galmuri11 SDF의 아틀라스 1×1/글리프 비움 변경이 별도로 발견됐으며 이번 아트 변경으로 간주하지 않고 미커밋 상태로 보존한다.
 
 ## 6. 갱신 규칙
 

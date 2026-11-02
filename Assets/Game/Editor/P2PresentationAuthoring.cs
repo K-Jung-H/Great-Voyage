@@ -16,7 +16,7 @@ using GreatVoyage.Presentation.UI;
 
 namespace GreatVoyage.Editor
 {
-    public static class P2PresentationAuthoring
+    public static partial class P2PresentationAuthoring
     {
         private const string Root = "Assets/Game/";
         private const string Art = Root + "Content/Art/";
@@ -60,6 +60,7 @@ namespace GreatVoyage.Editor
             ImportCharacter();
             ImportJournal();
             ImportFloor();
+            ConfigureNativePartitionSprite();
             font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset");
             if (font == null) throw new InvalidOperationException("Galmuri11 SDF is required.");
             spriteMaterial = AssetDatabase.LoadAssetAtPath<Material>("Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Unlit-Default.mat");
@@ -108,12 +109,12 @@ namespace GreatVoyage.Editor
             var path = Art + "Environment/CaptainCabinAtlas.png";
             Import(path, new[]
             {
-                Slice("NavigationDesk", 40, 106, 496, 330, 1024),
-                Slice("SingleBed", 622, 20, 302, 476, 1024),
-                Slice("SeaChest", 1080, 138, 400, 264, 1024),
-                Slice("CabinFloorPanel", 50, 536, 462, 448, 1024),
-                Slice("PartitionWall", 542, 680, 458, 148, 1024),
-                Slice("CaptainChair", 1152, 606, 254, 306, 1024)
+                Slice("NavigationDesk", 44, 90, 540, 382, 1024),
+                Slice("SingleBed", 632, 25, 340, 497, 1024),
+                Slice("SeaChest", 1048, 140, 448, 304, 1024),
+                Slice("CabinFloorPanel", 44, 516, 464, 452, 1024),
+                Slice("PartitionWall", 558, 695, 516, 132, 1024),
+                Slice("CaptainChair", 1138, 570, 321, 337, 1024)
             });
         }
 
@@ -122,12 +123,12 @@ namespace GreatVoyage.Editor
             var path = Art + "Characters/CaptainPartsAtlas.png";
             Import(path, new[]
             {
-                Cell("HeadFront", 0, 0, 3, 2, path),
-                Cell("HeadBack", 1, 0, 3, 2, path),
-                Cell("BodyFront", 2, 0, 3, 2, path),
-                Cell("BodyBack", 0, 1, 3, 2, path),
-                Cell("HandLeft", 1, 1, 3, 2, path),
-                Cell("HandRight", 2, 1, 3, 2, path)
+                Slice("HeadFront", 30, 72, 504, 395, 1024),
+                Slice("HeadBack", 543, 72, 478, 399, 1024),
+                Slice("BodyFront", 1047, 108, 432, 445, 1024),
+                Slice("BodyBack", 29, 522, 483, 454, 1024),
+                Slice("HandLeft", 686, 680, 188, 216, 1024),
+                Slice("HandRight", 1180, 682, 191, 215, 1024)
             });
         }
 
@@ -180,7 +181,7 @@ namespace GreatVoyage.Editor
         private static void ImportFloor()
         {
             var path = Art + "Environment/CabinPlanks.png";
-            Import(path, new[] { Slice("CabinPlanks", 0, 157, 1254, 942, 1254) });
+            Import(path, new[] { FloorSlice(path) });
         }
 
         public static void ApplyJournalPlaceholders()
@@ -350,16 +351,7 @@ namespace GreatVoyage.Editor
             SetFloor(floor.GetComponent<SpriteRenderer>());
             var walls = new GameObject("Partitions");
             walls.transform.SetParent(cabin.transform, false);
-            for (var i = 0; i < 4; i++)
-                Visual("NorthPartition_" + i, S("PartitionWall"), walls.transform, new Vector2(-4.5f + 3 * i, 3.25f), new Vector2(3.15f, 0.45f), 0);
-            foreach (var x in new[] { -5.9f, 5.9f })
-            {
-                var wall = Visual(x < 0 ? "WestPartition" : "EastPartition", S("PartitionWall"), walls.transform,
-                    new Vector2(x, 0), new Vector2(6.7f, 0.45f), 0);
-                wall.transform.localRotation = Quaternion.Euler(0, 0, 90);
-            }
-            Visual("SouthPartitionLeft", S("PartitionWall"), walls.transform, new Vector2(-3.4f, -3.25f), new Vector2(5.1f, 0.45f), 0);
-            Visual("SouthPartitionRight", S("PartitionWall"), walls.transform, new Vector2(3.4f, -3.25f), new Vector2(5.1f, 0.45f), 0);
+            PopulatePartitions(walls.transform);
             var doorway = new GameObject("Doorway_FrameDisabled");
             doorway.transform.SetParent(cabin.transform, false);
             doorway.transform.localPosition = new Vector3(0, -3.25f, 0);

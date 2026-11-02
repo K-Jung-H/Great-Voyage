@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "revision": "2026-11-03-painterly",
+  "status": "active_production_specification_not_visual_acceptance",
+  "scope": "Great Voyage world sprite rendering; preserve existing content and technical structure; approved journal UI is not redesigned",
+  "reference_images": [
+    {
+      "path": "../References/ArtStyle_2026-11-03/RejectedVectorResult.png",
+      "role": "negative_rendering_reference",
+      "instruction": "Avoid its smooth vector/sticker treatment. Its object selection and layout are not a new generation brief."
+    },
+    {
+      "path": "../References/ArtStyle_2026-11-03/PainterlyHarborStyle.png",
+      "role": "positive_rendering_style_only",
+      "instruction": "Transfer painting, material treatment, organic color and contour handling only. Do not copy its buildings, object list, arrangement, viewpoint or alpha artifacts."
+    },
+    {
+      "path": "../References/ArtStyle_2026-11-03/PainterlyMaritimeStyle.png",
+      "role": "positive_rendering_style_only",
+      "instruction": "Transfer painting and readable material-specific detail only. Do not reproduce its boats, weapons, flags, furniture list, sheet composition or alpha artifacts."
+    }
+  ],
+  "target_style": [
+    "Hand-Painted 2D Game Art",
+    "Stylized Painterly Illustration",
+    "Textured Shading",
+    "Organic Color Variation",
+    "Material-Specific Surface Details"
+  ],
+  "shape_vs_surface": {
+    "shape": "Simplify silhouette, proportions and major construction for small-game readability. Preserve requested topology, gameplay meaning, view, footprint and part boundaries. Shape simplification does not mean reducing every object to an icon.",
+    "surface": "Retain material-specific painted texture, local hue/value variation, wear and textured shading within the readable shape. Do not convert materials into solid color panels or reduce all shading to a single flat band.",
+    "density": "Prioritize silhouette and material recognition at the requested actual in-game size. Use selective meaningful detail; avoid a uniform noise overlay, oversharpening or indistinguishable microtexture."
+  },
+  "rendering": {
+    "color": "Use localized, organic warm/cool and light/dark paint variation across a material. Allow subtle unevenness and layered painted tones, not featureless uniform fill.",
+    "shading": "Use textured, brush-informed shading that describes form and material. Natural painterly tonal transitions are allowed; mathematically smooth airbrushed/radial gradients and plastic volume rendering are not.",
+    "outline": "Dark, readable material-aware contours with natural variation in thickness, intensity and hue. Preserve clean silhouette separation and legibility. Do not apply a uniform thick black stroke to every edge. Fine painted contour variation must not become ragged alpha or random jagged pixels.",
+    "lighting": "Preserve the requested or already approved lighting direction and value range consistently across the set and across views. Do not change view angle or rotate lighting independently for each part.",
+    "materials": {
+      "wood": "Directional grain and plank joins following construction; subtle hue changes, worn edges and occasional restrained knots. Painted timber, not a flat brown rectangle or glossy molded plastic.",
+      "metal": "Material-specific cool/warm tones, irregular painted reflections, restrained scratches, tarnish or patina; bright accents localized to edges and fittings, not a smooth plastic gradient.",
+      "cloth": "Soft painted folds, fiber suggestion and uneven dye tones at a readable scale; retain fabric weight and construction without plush/chibi inflation or glossy highlights.",
+      "stone": "Irregular mineral tones, selective pores, chips and mortar joints; broad painted planes with material detail, not uniformly filled geometric blocks.",
+      "leather": "Subtle grain, wear, seam/stitch accents and muted uneven tones where requested; avoid rubbery smooth shading.",
+      "paper": "Restrained fibers, organic discoloration and painted edges when applicable; no unwanted writing, map content or labels."
+    }
+  },
+  "avoid": [
+    "Clean Vector Art",
+    "Flat Vector Illustration",
+    "Uniform Thick Black Outlines",
+    "Smooth Digital Gradients",
+    "Plastic-Like Shading",
+    "Minimalist Icon Art",
+    "Excessively Simplified Geometry",
+    "Sticker-Like Cartoon Rendering"
+  ],
+  "replace_legacy_rules": [
+    {
+      "old": "flat opaque fills / flat well-defined color areas / ONE solid base color",
+      "replacement": "Opaque material interiors where appropriate, with organic painted color variation and material-specific textured shading. Opacity is an alpha requirement, not a uniform-color requirement."
+    },
+    {
+      "old": "thick smooth outlines / consistent outline thickness / pure black uniform stroke",
+      "replacement": "Readable dark hand-painted contours with controlled variation in thickness and intensity; consistent visual language, not identical stroke width."
+    },
+    {
+      "old": "minimalist / minimal interior texture / no wood grain / avoid Painterly rendering",
+      "replacement": "Simplified functional shapes with retained painted material detail; control visual density for the real display size."
+    },
+    {
+      "old": "only one hard-edged shadow patch / NO gradients of any kind",
+      "replacement": "Textured painterly modelling and organic tonal transitions; exclude smooth digital airbrush gradients and plastic shading, not painting."
+    }
+  ],
+  "preserved_structure": {
+    "sprite_sheet": "Separate requested sprites only; preserve requested canvas, grid/cell order, object count, generous transparent padding, non-overlap, stable names/IDs and consistent relative scale. No added labels, watermark, display board or environment.",
+    "alpha": "Isolated sprites and parts require genuine transparent surroundings, clean alpha and no baked checkerboard, colored halo or backdrop. Opaque repeating surface tiles remain opaque where the existing technical brief requires them.",
+    "parts": "Preserve existing detached parts, attachment pivots and assembly relationships. Characters keep Head / Body / Hand and the approved legless topology; do not add limbs, merge parts or invent equipment.",
+    "views": "Preserve the specified top-down/near-orthographic view and existing direction order, anchors, registration, scale and alignment. A stylistic reference does not authorize importing its perspective.",
+    "tiles": "Preserve connection endpoints, dimensions, edge/corner/transition coverage and repeat boundaries. Test seamless surfaces in a 3x3 repeat and modular pieces in valid adjacency combinations.",
+    "partition_wall": "Keep each native segment at Transform scale (1,1,1), repeat N connected segments and use one collision shape per straight connected wall run. Native size is determined by source proportions and explicit PPU; never compensate with nonuniform Transform scaling."
+  },
+  "validation": {
+    "style": [
+      "Does the silhouette remain readable at the requested in-game size?",
+      "Can wood, metal, cloth and stone be distinguished without relying on labels?",
+      "Does the surface retain painted local color variation and textured shading?",
+      "Are contours dark and clear with natural controlled variation?",
+      "Is the result free of vector/sticker rendering, uniform black strokes, airbrush gradients and plastic shading?"
+    ],
+    "technical": [
+      "Requested sprite count, sheet order and separated parts preserved",
+      "Actual alpha and bright/dark background composites checked",
+      "View, relative scale, pivots and directional registration preserved",
+      "Tile/modular connection cases checked where applicable",
+      "Positive references used for rendering only; no copied content/layout"
+    ],
+    "acceptance": "Specification and prompt validation do not prove generated-art quality. Inspect actual outputs and Unity presentation; record unchecked items as unverified. User visual acceptance remains required."
+  },
+  "legacy_policy": "Archived SourceDocuments and P2/ArtSources.json describe original inputs and existing generated assets. Preserve their historical truth; do not use them as current rendering instructions. This specification supersedes conflicting flat/vector or anti-painterly wording for new world asset production.",
+  "execution": "This JSON is production source data for prompt assembly, not a running Factory engine or automatic Unity importer."
+}

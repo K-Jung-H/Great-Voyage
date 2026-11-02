@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in edit",
+  "active_specification": "../../ArtFactory/FactoryStyle.json",
+  "visual_acceptance": "pending_user_review",
+  "scope": "World art replacement only; approved journal UI unchanged",
+  "baseline_commit": "3f0ed0d10ac5518657947cf00d827c9698c2f226",
+  "input_role_policy": "Each original P2 asset defines content, topology and view; two painterly references define rendering only. Original baseline inputs are available in the baseline Git commit.",
+  "positive_style_references": [
+    "../ArtStyle_2026-11-03/PainterlyHarborStyle.png",
+    "../ArtStyle_2026-11-03/PainterlyMaritimeStyle.png"
+  ],
+  "assets": [
+    {
+      "file": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Production edit for Great Voyage. Image1 is EDIT TARGET for six-object structure and top-down perspective only. Image2 and Image3 are POSITIVE RENDERING STYLE REFERENCES ONLY: hand-painted maritime game assets. Their object lists, architecture, flags, sheet layout, perspective and alpha artifacts must NOT be copied. Repaint Image1 into Stylized Hand-Painted 2D Game Art matching Image2/3. Preserve the six separate objects in the same3-column2-row atlas layout at1536x1024: navigation desk, single bed, sea chest / cabin floor panel, straight partition beam, chair. Keep all silhouettes readable, exact categories, no additional objects. IMPORTANT: simplify shapes but DO NOT simplify surfaces. Bring back painterly material detail: construction-aligned timber grain, subtle uneven warm/cool wood colors, worn edges and selective knots; tarnished brass/iron fittings with small irregular painted reflections; navy fabric with brush-textured folds and organic dye variation; parchment with restrained fibers. Dark readable hand-drawn contour lines with natural thickness/intensity variation, never a uniform thick black vector stroke. Painted layered tones and textured shading, not smooth airbrush/radial gradients or glossy plastic. Material detail should remain visible at small in-game sizes. No clean vector illustration, flat opaque color panels, minimalist icons, sticker rendering, plush chibi geometry or photorealism. Keep the original orthographic top-down view and consistent lighting, no new diagonal perspective. Repeatable wall beam in row2middle must be straight, square flush ends, no terminal posts; hand-painted timber surface. Each sprite completely contained inside its512x512cell with32px transparent margin; preserve relative object category sizes and alignment. Genuine transparent background, clean alpha, no colored halo, checkerboard, surrounding cast shadow, artificial backdrop, cell dividers, labels or watermark. Output the production atlas alone, not a mockup.",
+      "native_output": [
+        1536,
+        1024
+      ],
+      "structure": "Six original asset categories in original row order. Explicit Sprite Rects follow actual silhouettes rather than assuming512px cell clipping.",
+      "sha256": "8C559EA5C7720D761CAAF851C23D62E7C1D133D7B010585CE191A6FF16451B33"
+    },
+    {
+      "file": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Image1 is EDIT TARGET defining the exact six detached character parts and their3x2sheet order. Image2 and Image3 are POSITIVE HAND-PAINTED RENDERING REFERENCES ONLY, not object, layout or perspective references. Repaint the captain parts of Image1 as Stylized Hand-Painted 2D Game Assets with textured shading and organic color variation matching the material treatment of Image2/3. Preserve six separate parts at1536x1024: row1 front head, back head, front torso; row2 back torso, left hand, right hand. Keep simple readable round head, oval torso and detached hands, existing navy coat/ivory shirt/brown hair/brass-trimmed tricorne identity, existing proportions and front/back registration. NO legs, feet, extra limbs, merged parts or new equipment. SHAPE SIMPLIFICATION DOES NOT MEAN SURFACE SIMPLIFICATION: painted cloth fiber and restrained folds, worn tricorne fabric, subtle organic skin tones, uneven brown hair strokes, tiny localized tarnished-metal accents. Make surfaces materially distinct at small game scale. Use hand-painted dark contours with naturally varying thickness and strength, not identical bold black vector strokes. Painterly brush-textured tonal transitions, not smooth digital gradients or plastic highlights. Avoid clean vector illustration, flat featureless fills, minimalist icons, sticker/chibi/plush rendering, uniform noise overlays and photorealism. Maintain each part entirely inside its512x512 cell with48px transparent padding; hands remain much smaller than torso. The ONLY content comes from Image1. Keep the original view and lighting coherent across front/back. GENUINELY transparent surroundings, no glow, colored alpha halo, checkerboard, shadow or decorative background, no labels/watermark.",
+      "native_output": [
+        1536,
+        1024
+      ],
+      "structure": "Six detached front/back head/torso and left/right hand pieces; explicit Sprite Rects preserve painted edges.",
+      "sha256": "6439B6CCABAD833CAD0A9A610B387E0AA26739F4B845C83C418E1F3D045BA949"
+    },
+    {
+      "file": "Assets/Game/Content/Art/Environment/CabinPlanks.png",
+      "transparent_background": false,
+      "prompt": "Use case: stylized-concept. Image1 is EDIT TARGET: existing square wooden cabin floor tile. Images2 and3 are POSITIVE PAINTERLY MATERIAL STYLE REFERENCES ONLY. Repaint Image1 as a Stylized Hand-Painted 2D Game Asset while preserving its exact overhead view, eight horizontal plank-row arrangement, staggered joins and repeatable texture structure. Output ONE opaque square texture, same1254x1254 canvas if possible, no atlas or background. IMPORTANT: shapes stay simple but surfaces become materially rich: hand-painted directional wood grain, organic restrained warm/cool brown color variation, selective knots, small worn edges and painted textured shading. Match the timber treatment of the maritime reference without copying any boat, pier, furniture or sheet arrangement. This floor sits below tiny characters and furniture: clear broad planks, selective readable grain, no dense high-frequency scribble/noise and no photorealistic texture. NO vector illustration, featureless single-color panels, uniform thick black outlines, smooth digital gradients, plastic-like sheen or sticker style. Uniform coherent ambient lighting across the tile, no directional vignette or edge darkening. Opposite edges must align in color, horizontal seam height and material treatment for a seamless3x3 repetition; include a consistent plank seam at both top and bottom wrap boundary, do not create a double-height board across the wrap. No outer frame, isolated platform, rounded corners, gaps, text, objects, decorative scene, transparency or cast shadow. Keep top-down geometry and produce only the final production tile, not a repeated preview.",
+      "native_output": [
+        1254,
+        1254
+      ],
+      "structure": "Opaque timber surface; Sprite region chosen between horizontal seams around the first/eighth and seventh/eighth of the source height; separate3x3Unity rendering verification.",
+      "sha256": "616C532EF43EE384D6033F56DF1BBC269AAAE6A9193CBACAF05A0FB3304E4D65"
+    }
+  ],
+  "application": "Original PNG asset paths and metadata GUIDs preserved. Existing Sprite names/IDs retained when updating SpriteEditor rectangles. Existing furniture/character display sizes and part registration retained. Unit-scale wall runs and one collider per run retained.",
+  "verification_scope": "Texture alpha, Sprite rectangle clipping, Prefab references, camera captures at three resolutions, floor repeat and wall geometry. No new gameplay, saved-state or Player performance acceptance."
+}

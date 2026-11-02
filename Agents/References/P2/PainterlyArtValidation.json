@@ -1,0 +1,172 @@
+{
+  "scope": "Painterly world replacement; Editor Game-camera inspection only; no new Play/input/physics/Player performance validation",
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "wallSegments": 70,
+  "wallColliders": 5,
+  "nonUnitWallTransforms": 0,
+  "wallPpu": 330,
+  "wallRectX": 734,
+  "wallRectY": 220,
+  "wallRectWidth": 165,
+  "wallRectHeight": 92,
+  "wallNativeWidth": 0.5,
+  "wallNativeHeight": 0.278787881,
+  "floorRectY": 155,
+  "floorRectHeight": 942,
+  "floorWidth": 11.6,
+  "floorHeight": 6.49999952,
+  "interactiveJournalControls": 0,
+  "spriteRects": [
+    {
+      "asset": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "name": "CabinFloorPanel",
+      "x": 44,
+      "y": 56,
+      "width": 464,
+      "height": 452
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "name": "CaptainChair",
+      "x": 1138,
+      "y": 117,
+      "width": 321,
+      "height": 337
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "name": "NavigationDesk",
+      "x": 44,
+      "y": 552,
+      "width": 540,
+      "height": 382
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "name": "PartitionWall",
+      "x": 558,
+      "y": 197,
+      "width": 516,
+      "height": 132
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "name": "SeaChest",
+      "x": 1048,
+      "y": 580,
+      "width": 448,
+      "height": 304
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "name": "SingleBed",
+      "x": 632,
+      "y": 502,
+      "width": 340,
+      "height": 497
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "name": "HandRight",
+      "x": 1180,
+      "y": 127,
+      "width": 191,
+      "height": 215
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "name": "HeadBack",
+      "x": 543,
+      "y": 553,
+      "width": 478,
+      "height": 399
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "name": "HeadFront",
+      "x": 30,
+      "y": 557,
+      "width": 504,
+      "height": 395
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "name": "BodyBack",
+      "x": 29,
+      "y": 48,
+      "width": 483,
+      "height": 454
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "name": "BodyFront",
+      "x": 1047,
+      "y": 471,
+      "width": 432,
+      "height": 445
+    },
+    {
+      "asset": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "name": "HandLeft",
+      "x": 686,
+      "y": 128,
+      "width": 188,
+      "height": 216
+    }
+  ],
+  "userVisualAcceptance": "pending",
+  "importedRectBoundaryAlphaChecks": [
+    {
+      "sprite": "HandRight",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "HeadBack",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "HeadFront",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "BodyBack",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "BodyFront",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "HandLeft",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "CabinFloorPanel",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "CaptainChair",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "NavigationDesk",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "PartitionWall",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "SeaChest",
+      "opaqueBoundaryPixels": 0
+    },
+    {
+      "sprite": "SingleBed",
+      "opaqueBoundaryPixels": 0
+    }
+  ],
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "sceneSaved": false
+}

@@ -96,7 +96,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 128
@@ -166,10 +166,10 @@ TextureImporter:
       name: HeadFront
       rect:
         serializedVersion: 2
-        x: 61
-        y: 580
-        width: 446
-        height: 353
+        x: 30
+        y: 557
+        width: 504
+        height: 395
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +188,10 @@ TextureImporter:
       name: HeadBack
       rect:
         serializedVersion: 2
-        x: 571
-        y: 580
-        width: 393
-        height: 359
+        x: 543
+        y: 553
+        width: 478
+        height: 399
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,10 +210,10 @@ TextureImporter:
       name: BodyFront
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 537
-        width: 341
-        height: 370
+        x: 1047
+        y: 471
+        width: 432
+        height: 445
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,10 +232,10 @@ TextureImporter:
       name: BodyBack
       rect:
         serializedVersion: 2
-        x: 100
-        y: 84
-        width: 359
-        height: 378
+        x: 29
+        y: 48
+        width: 483
+        height: 454
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -254,10 +254,10 @@ TextureImporter:
       name: HandLeft
       rect:
         serializedVersion: 2
-        x: 696
-        y: 182
-        width: 142
-        height: 167
+        x: 686
+        y: 128
+        width: 188
+        height: 216
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: HandRight
       rect:
         serializedVersion: 2
-        x: 1183
-        y: 182
-        width: 145
-        height: 167
+        x: 1180
+        y: 127
+        width: 191
+        height: 215
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
