@@ -1,0 +1,468 @@
+fileFormatVersion: 2
+guid: 3cdf06d71ad853940b0054d12b3d294a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -485347282072631672
+    second: CaptainCabinAtlas_0
+  - first:
+      213: -4370769040187586930
+    second: CaptainCabinAtlas_1
+  - first:
+      213: -282102454957909357
+    second: CaptainCabinAtlas_2
+  - first:
+      213: -5881899682201355317
+    second: CaptainCabinAtlas_3
+  - first:
+      213: 7472189215977804014
+    second: CaptainCabinAtlas_4
+  - first:
+      213: 5707949260339958272
+    second: CaptainCabinAtlas_5
+  - first:
+      213: 8540098433805797889
+    second: CaptainCabinAtlas_6
+  - first:
+      213: -104975277283030163
+    second: CaptainCabinAtlas_7
+  - first:
+      213: -4350776365802756378
+    second: CaptainCabinAtlas_8
+  - first:
+      213: 8088952533068436652
+    second: CaptainCabinAtlas_9
+  - first:
+      213: 9110426075107021139
+    second: CaptainCabinAtlas_10
+  - first:
+      213: 4333663468759981999
+    second: CaptainCabinAtlas_11
+  - first:
+      213: 4394569884428505422
+    second: CaptainCabinAtlas_12
+  - first:
+      213: -4015770073503440351
+    second: CaptainCabinAtlas_13
+  - first:
+      213: -4833403700673994524
+    second: CaptainCabinAtlas_14
+  - first:
+      213: 830513047380481000
+    second: CaptainCabinAtlas_15
+  - first:
+      213: -5497159742506877627
+    second: CaptainCabinAtlas_16
+  - first:
+      213: -4930342787037058730
+    second: CaptainCabinAtlas_17
+  - first:
+      213: -1968011611677329629
+    second: CaptainCabinAtlas_18
+  - first:
+      213: -3489455241212193263
+    second: CaptainCabinAtlas_19
+  - first:
+      213: -1944296841668728117
+    second: CaptainCabinAtlas_20
+  - first:
+      213: 1293954977795305965
+    second: CaptainCabinAtlas_21
+  - first:
+      213: -8502784049453873165
+    second: CaptainCabinAtlas_22
+  - first:
+      213: 5378082398176280540
+    second: CaptainCabinAtlas_23
+  - first:
+      213: 4225649401665873172
+    second: CaptainCabinAtlas_24
+  - first:
+      213: 8450801780497160706
+    second: CaptainCabinAtlas_25
+  - first:
+      213: 6593778439713343989
+    second: CaptainCabinAtlas_26
+  - first:
+      213: -7064308463932186068
+    second: CaptainCabinAtlas_27
+  - first:
+      213: -2771480705414700163
+    second: CaptainCabinAtlas_28
+  - first:
+      213: 1539753428822988355
+    second: CaptainCabinAtlas_29
+  - first:
+      213: -3090057803166371971
+    second: CaptainCabinAtlas_30
+  - first:
+      213: 4125466322427007196
+    second: CaptainCabinAtlas_31
+  - first:
+      213: -8724906040369615929
+    second: CaptainCabinAtlas_32
+  - first:
+      213: 7981767113385170986
+    second: CaptainCabinAtlas_33
+  - first:
+      213: 2479465699886522315
+    second: CaptainCabinAtlas_34
+  - first:
+      213: -4488520899017794294
+    second: CaptainCabinAtlas_35
+  - first:
+      213: -5597707621702621734
+    second: CaptainCabinAtlas_36
+  - first:
+      213: -757486469444305370
+    second: CaptainCabinAtlas_37
+  - first:
+      213: 4370221381790734756
+    second: CaptainCabinAtlas_38
+  - first:
+      213: -6696172151610279411
+    second: CaptainCabinAtlas_39
+  - first:
+      213: 5869834777222105668
+    second: CaptainCabinAtlas_40
+  - first:
+      213: 3503508884222201326
+    second: CaptainCabinAtlas_41
+  - first:
+      213: 7681727581866858510
+    second: CaptainCabinAtlas_42
+  - first:
+      213: 884380293889270526
+    second: CaptainCabinAtlas_43
+  - first:
+      213: 2432188135116955040
+    second: CaptainCabinAtlas_44
+  - first:
+      213: -994522500956982736
+    second: CaptainCabinAtlas_45
+  - first:
+      213: -7864585171215335546
+    second: CaptainCabinAtlas_46
+  - first:
+      213: -4550263718645303867
+    second: CaptainCabinAtlas_47
+  - first:
+      213: -7828884085493825043
+    second: CaptainCabinAtlas_48
+  - first:
+      213: -3190507303500014929
+    second: CaptainCabinAtlas_49
+  - first:
+      213: -4511425470554059626
+    second: CaptainCabinAtlas_50
+  - first:
+      213: 8282780349957149593
+    second: CaptainCabinAtlas_51
+  - first:
+      213: 1494052373499352590
+    second: CaptainCabinAtlas_52
+  - first:
+      213: -335950538727392518
+    second: CaptainCabinAtlas_53
+  - first:
+      213: 3815151159898492384
+    second: CaptainCabinAtlas_54
+  - first:
+      213: 2434475934387018703
+    second: CaptainCabinAtlas_55
+  - first:
+      213: -3477415959206880357
+    second: CaptainCabinAtlas_56
+  - first:
+      213: 2317273697306942663
+    second: CaptainCabinAtlas_57
+  - first:
+      213: -737189445829295626
+    second: CaptainCabinAtlas_58
+  - first:
+      213: -6089226494106161675
+    second: CaptainCabinAtlas_59
+  - first:
+      213: -2566760583560635635
+    second: CaptainCabinAtlas_60
+  - first:
+      213: 2439108034344918668
+    second: CaptainCabinAtlas_61
+  - first:
+      213: 8797162240566477885
+    second: CaptainCabinAtlas_62
+  - first:
+      213: -5898746151900065686
+    second: CaptainCabinAtlas_63
+  - first:
+      213: -7859493086674664765
+    second: CaptainCabinAtlas_64
+  - first:
+      213: 8015540792612612829
+    second: CaptainCabinAtlas_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NavigationDesk
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 588
+        width: 496
+        height: 330
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7e7ed2b0b5ff4646800d900a7e7314c
+      internalID: -394242026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SingleBed
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 528
+        width: 302
+        height: 476
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2f1f2d6fbf779945a0c8243c284aac8
+      internalID: 1750139443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeaChest
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 622
+        width: 400
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f467f9c4b37b4dd4aa82e6b589ed4773
+      internalID: 42926546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CabinFloorPanel
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 40
+        width: 462
+        height: 448
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df588be8d17593941810247d48b49440
+      internalID: -933733771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PartitionWall
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 196
+        width: 458
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3f0b2e632e51e44eb52bdf2d1204b3e
+      internalID: 479361498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainChair
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 112
+        width: 254
+        height: 306
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5896bf6624f7e2440848abefe528d67f
+      internalID: -1488199131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 00e33e20acd800f4b913fc9668c4a844
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CabinFloorPanel: -933733771
+      CaptainChair: -1488199131
+      NavigationDesk: -394242026
+      PartitionWall: 479361498
+      SeaChest: 42926546
+      SingleBed: 1750139443
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

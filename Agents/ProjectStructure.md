@@ -1,6 +1,6 @@
 # Project Structure — Unity 환경·경로·자산 운영
 
-> 확인 기준: 2026-11-01. 환경 값은 실제 파일·설정 및 읽기 전용 Unity 조회에 근거한다. 최소 실행·입력·한글 표시와 폰트 입력·적용은 같은 날짜 사용자의 직접 테스트 통과 보고로 확인했다. P0는 통과이며 상세 현황은 `CurrentState.md`를 따른다. 2.2절 이후의 제품 구조는 **목표 구조**다.
+> 초기 환경 확인: 2026-11-01. P2 실제 자산·Scene·표현 규격 갱신: 2026-11-02. 최소 실행·입력·한글 표시와 폰트 입력·적용은 2026-11-01 사용자의 직접 테스트 통과 보고로 확인했다. P0는 통과이며 상세 현황은 `CurrentState.md`를 따른다. 2.2절은 목표 구조, 2.3절은 현재 제작된 표현 자산이다.
 
 ## 1. 초기 환경 선정과 기록
 
@@ -22,8 +22,8 @@
 | TMP / uGUI | uGUI `2.6.0`에 TMP 포함. `Assets/TextMesh Pro/`에 Essential Resources 임포트됨. 별도 `com.unity.textmeshpro` 의존성 없음 |
 | 기본 한국어 폰트 | `TMP Settings.asset`의 기본 폰트는 `Galmuri11 SDF.asset`(GUID `11f430421abc0d84297aa673a343400e`). 원본 `Galmuri11.ttf` 참조, Dynamic Atlas. Bold·Condensed TTF/SDF도 존재. 전역 Fallback은 비어 있음. 한글 표시·폰트 입력·적용은 사용자 직접 테스트 통과(2026-11-01). 제품 UI의 해상도별 줄바꿈·클리핑은 이후 해당 화면에서 검증 |
 | 타깃 PC OS, 빌드 아키텍처 | 활성 빌드 대상 `StandaloneWindows64` / Standalone. 최종 지원 Windows 버전·최소 사양은 미정 |
-| 기준 해상도·화면비·Canvas 스케일 정책 | Player 기본 크기 `1920×1080`(16:9). 현재 SampleScene Canvas는 Screen Space - Overlay / Constant Pixel Size. 직렬화된 Reference Resolution은 `800×600`이나 Scale With Screen Size 정책으로 채택한 값이 아님. 제품 UI 정책 미정; 수용 검사 제안은 1280×720 / 1600×900 / 1920×1080 |
-| PPU / 세계 Cell Size / 피벗·스프라이트 기준점 | 미설정 — 디자인 및 실제 자산 검증 후 기록 |
+| 기준 해상도·화면비·Canvas 스케일 정책 | Player 기본 크기 `1920×1080`(16:9). P2 Game Canvas는 Screen Space - Camera, Reference `1920×1080`, Scale With Screen Size / Match Width Or Height `0.5`. 1280×720 / 1600×900 / 1920×1080 실제 카메라 캡처 확인. 최종 지원 화면비·모바일 규격 확정은 아님. SampleScene의 기존 Overlay/Constant Pixel Size는 유지 |
+| PPU / 세계 Cell Size / 피벗·스프라이트 기준점 | P2 Sprite PPU `128`, 피벗 중앙 `(0.5, 0.5)`, Full Rect. Grid/Tilemap 셀은 아직 구성하지 않음. 바닥은 가로 3 Unity unit 단위 반복, 별도 점유·충돌 셀 규격은 아님. 2.3절 참조 |
 | 테스트 실행 명령/방법 | Test Framework `1.8.0` 설치. EditMode/PlayMode는 Unity Test Runner를 사용할 계획이며 제품용 테스트·실행 결과는 없음. CLI 자동 실행 절차와 Player 검증 절차는 아직 검증하지 않음 |
 | 물리 레이어·충돌 매트릭스 / 공간 질의 정책 | 기본 Layer(Default, TransparentFX, Ignore Raycast, Water, UI), Sorting Layer는 Default만 존재. Physics2D 충돌 매트릭스는 전체 허용 비트. 제품 역할별 정책은 P1 설계 후 구성 |
 | 물리 스텝 | Fixed Timestep `0.02초`, Maximum Allowed Timestep `0.33333334초`, Time Scale `1`. 엔진 기본 설정이며 게임의 하루 600초를 구현했다는 뜻은 아님 |
@@ -56,10 +56,10 @@
 - 원격 저장소: `https://github.com/K-Jung-H/Great-Voyage.git`.
 - 루트 `AGENTS.md`는 작업 진입 안내이며, 관리 문서 8개와 참고 자료는 `Agents/`에 있다. `Agents/References/`에 D01~D12·E01~E11·G01~G03 PNG 26장과 보관 기획서가 있다. 현행 `GameDesign.md`의 이미지 링크는 유효하다.
 - `Agents/`는 Git 공유 대상이며 `Assets/` 밖에 두어 Unity Project 창·AssetDatabase의 자동 임포트·게임 빌드 콘텐츠와 분리한다. 운영체제 파일 접근을 차단하는 보안 경계는 아니다.
-- `Agents/References/ArtStyle_2026-11-02/`에 사용자 제공 화풍 자료를 원본 이름·내용으로 보존했다: `Samples/` PNG 2개, `Sheets/` PNG 9개, `SourceDocuments/` MD 3개. 복사 후 원본과 SHA-256 일치를 확인했다. 하위 `Agent.md`는 참고용 프롬프트이며 관리 지침이 아니다. Git 공유 대상 파일을 준비했지만 아직 커밋·푸시하지 않았다. 제품 Sprite는 검수 후 `Assets/Game/` 목표 자산 경로에 별도로 제작·임포트한다. 원본 기술 확인은 `VisualStandards.md` 1.2절을 따른다.
-- `Assets/Scenes/SampleScene.unity`가 현재 유일한 활성 Build Settings Scene이다. Main Camera·Global Light 2D·Canvas·EventSystem이 존재한다. `Assets/Settings/Scenes/URP2DSceneTemplate.unity`는 템플릿 Scene이다.
+- `Agents/References/ArtStyle_2026-11-02/`에 사용자 제공 화풍 자료를 원본 이름·내용으로 보존했다: `Samples/` PNG 2개, `Sheets/` PNG 9개, `SourceDocuments/` MD 3개. 복사 후 원본과 SHA-256 일치를 확인했고 `P1 Complete` 커밋으로 main에 공유했다. 하위 `Agent.md`는 참고용 프롬프트이며 관리 지침이 아니다. 제품 Sprite는 `Assets/Game/Content/Art/`에 별도로 제작·임포트한다. 원본 기술 확인은 `VisualStandards.md` 1.2절을 따른다.
+- `Assets/Game/Scenes/Game.unity`가 현재 유일한 활성 Build Settings Scene이다. 기존 `Assets/Scenes/SampleScene.unity`는 파일을 유지하고 빌드 목록에서 비활성화했다. `Assets/Settings/Scenes/URP2DSceneTemplate.unity`는 템플릿 Scene이다.
 - `Assets/Settings/`에는 렌더러·입력 등 템플릿 설정, `Assets/Welcome/`에는 템플릿 안내 자산·스크립트, `Assets/TextMesh Pro/`에는 TMP 리소스·폰트가 있다.
-- 제품용 `Assets/Game/`, `Game.unity`, Prefab 및 게임 기능 코드는 아직 없다. 아래 목표 트리는 생성 지시나 구현 완료 목록이 아니다.
+- 제품용 `Assets/Game/`의 P2 표현 Scene·Prefab·아트 및 Editor 제작 도구가 존재한다(2.3절). Domain/Application·이동·상호작용·저장 등 게임 기능 코드는 아직 없다. 아래 목표 트리는 전체 구현 완료 목록이 아니다.
 
 ### 2.2 목표 저장소 트리
 
@@ -140,6 +140,28 @@ GreatVoyage/
 - `Composition`에는 시작 시 참조 연결만 둔다. 기능별 호출을 모아 놓은 거대 Update 클래스를 만들지 않는다.
 - `Definitions`와 `Content/Prefabs`는 구분한다. SO 정의가 Runtime State 역할을 대신하지 않는다.
 - `References`는 **기획 참고용 원본**이며 Unity에 자동 임포트할 제품 Sprite가 아니다. 실제 게임 자산은 검수 후 `Content/Art`에 별도로 추가한다.
+
+### 2.3 P2 실제 표현 자산과 검증 규격
+
+| 종류 | 실제 파일·구성 |
+|---|---|
+| 제품 진입 | `Assets/Game/Scenes/Game.unity`: Main Camera / WorldContent / ScreenCanvas / EventSystem |
+| 월드 | `Assets/Game/Content/Prefabs/World/CaptainCabin.prefab`: 11.6×6.5 unit 바닥, 목재 파티션, 아래쪽 출입 틈, 침대·상자·의자와 중첩 책상 Prefab. 최종 시작 함선 모델·플레이어 최초 위치를 확정한 데이터가 아닌 첫 표현 구역 |
+| 책상 | `Assets/Game/Content/Prefabs/Facilities/NavigationDeskView.prefab`: Artwork와 아래쪽 ApproachPoint. 실제 일지 열기·감지·점유·차폐는 미구현 |
+| 캐릭터 | `Assets/Game/Content/Prefabs/Characters/PlayerView.prefab`: Head / Body / LeftHand / RightHand, SortingGroup. BackFacingParts는 비활성 보관. 다리 없음, 인물 데이터·이동 로직 없음 |
+| UI | `Assets/Game/Content/Prefabs/UI/JournalScreen.prefab`: 가죽 제본·일체형 가죽 인덱스·Day 텍스트 Toggle 5개·중앙 지도 표면·우측 빈 이미지/설명 영역·펜 도구/나가기 Frame. 기본 Game Scene에서는 비활성 |
+| 실제 아트 | `Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png` 6 Sprite, `Characters/CaptainPartsAtlas.png` 6 Sprite, `UI/JournalMaterialsAtlas.png` 4 Sprite: 각각 1536×1024. `Environment/CabinPlanks.png`는 1254×1254 원본에서 줄눈 경계가 맞는 1254×942 구간을 1 Sprite로 슬라이스. 합계 17 Sprite |
+| 제작 도구 | `Assets/Game/Editor/P2PresentationAuthoring.cs`: Unity Editor에서 Sprite importer·편집 가능한 Prefab·Scene을 작성. 기존 Game Scene이 있으면 전체 재생성을 거부. 제품 Runtime에 포함되지 않음. 일지 검토는 `Great Voyage > Preview > Show Journal Frame / Show Captain Cabin` 사용 |
+| 제작 원본·검증 근거 | `Agents/References/P2/ArtSources.json`의 내장 이미지 생성 프롬프트·입력 역할, `PresentationValidation.json`의 실제 Play 중 참조 검사. 선장실/일지 해상도 3종 캡처와 `FloorRepeat_3x3.png` 보존 |
+
+- 임포트는 PPU 128 / Bilinear / Mipmap Off / Uncompressed / Max Size 2048 / Full Rect다. 투명 PNG의 알파를 유지하며 Sprite Rect와 이름/ID를 보존한다. UI의 큰 가죽·종이 패널은 36px border의 9-slice, 지도와 작은 장식은 Simple Image를 사용한다.
+- 카메라는 Orthographic Size 5.5, 위치 `(0, 0, -10)`, HDR Off. Canvas는 같은 카메라에 planeDistance 5, sortingOrder 100이다. World Sprite는 URP Sprite-Unlit-Default를 사용해 자산 자체의 색을 검토한다. 조명·주야간 표현 완료를 뜻하지 않는다.
+- Sorting Layer는 Default를 유지한다. 바닥 -100 / 파티션 0 / 가구 10 / 플레이어 SortingGroup 20, 유닛 내부 Body 0 / Hand 1 / Head 2. 현재 정적 배치의 순서이며 이동 중 Y 정렬·차폐는 P3에서 역할별로 검증한다.
+- 모든 제품 TMP 10개가 Galmuri11 SDF를 명시 참조한다. 실제 사용 문자열로 Dynamic 폰트의 글리프/아틀라스가 추가되어 기존 `Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset`도 변경됐다. 폰트 종류·기본 설정을 변경한 것은 아니다.
+- P2의 Day 1~5와 지도는 배치 검토용 Frame 표면이며 실제 항해 기록/세계 데이터가 아니다. Toggle 5개와 나가기 버튼은 interactable=false, 이벤트 바인딩 없음. 가짜 항해·기록·저장 상태는 생성하지 않는다.
+- 애니메이션 준비 범위는 앞/뒤 머리·몸과 분리 손의 자산/계층이다. P3의 Idle / Moving / Interacting 표시가 기존 인물 행동 상태를 읽도록 연결한다. 손 움직임·방향 전환·정지/재개 전환과 Animator는 아직 미구현이며 애니메이션 품질 통과가 아니다.
+- Collider/Rigidbody와 이동·입력·저장·세션 코드는 아직 없다. P2는 정적 표현 검증이며 역할별 충돌·조작감·저장/복원·Player 성능을 통과로 확대하지 않는다. UI 비율은 사용자 수용, 전체 P2 최종 시각 수용은 추가 개선 검토 중이다.
+- 사용자 검토에서 UI 비율 전체를 수용했다. 최신 일지 Prefab은 Day Toggle마다 `DashedSelectionArea`, 우측 `SelectionIllustration_FrameDisabled`의 Skeleton과 `DescriptionSkeleton_FrameDisabled`의 4개 줄을 포함한다. 점선은 `Assets/Game/Runtime/Presentation/UI/DashedBorderGraphic.cs`의 MaskableGraphic이 단일 메시로 그리며 매 프레임 Update·게임 상태·저장 필드를 갖지 않는다. 블록/줄은 직렬화된 비입력 Image다. 기존 EmptySelection 문구는 비활성으로 보존했다. 영역/비율을 바꾸지 않았고 사용자 Scene의 기존 미저장 변경을 저장하거나 폐기하지 않았다.
 
 ## 3. Scene/Prefab/스크립트 책임
 

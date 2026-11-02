@@ -1,0 +1,32 @@
+{
+  "scope": "P2 static presentation only; no human gameplay input or Player performance validation",
+  "scene": "Assets/Game/Scenes/Game.unity",
+  "playing": true,
+  "frame": 19737,
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "spriteRenderers": 19,
+  "interactiveSelectables": 0,
+  "dayToggles": 5,
+  "textCount": 10,
+  "wrongFont": 0,
+  "truncatedText": [],
+  "floorWidth": 11.6,
+  "floorHeight": 6.49999952,
+  "physicalColliders": 0,
+  "animatorControllers": 0,
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "journalUiRevision": {
+    "scope": "Editor Game camera only; UI ratio accepted by user; no new Play/input/performance test",
+    "borderCount": 5,
+    "interactiveSelectables": 0,
+    "skeletonTextLines": 4,
+    "missingScripts": 0,
+    "truncated": [],
+    "bookWidth": 1740,
+    "bookHeight": 928,
+    "sceneWasDirty": true,
+    "sceneSaved": false
+  }
+}

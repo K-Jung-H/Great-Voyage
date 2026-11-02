@@ -1,0 +1,362 @@
+fileFormatVersion: 2
+guid: 88b94c4c2c2cf2d48927efdbd74d97bd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 807005997015457927
+    second: JournalMaterialsAtlas_0
+  - first:
+      213: -3324520961972617317
+    second: JournalMaterialsAtlas_1
+  - first:
+      213: -7619645233135121331
+    second: JournalMaterialsAtlas_2
+  - first:
+      213: 562861891729014793
+    second: JournalMaterialsAtlas_3
+  - first:
+      213: 3006414449229795359
+    second: JournalMaterialsAtlas_4
+  - first:
+      213: 4668572054169970001
+    second: JournalMaterialsAtlas_5
+  - first:
+      213: 3458711981235781511
+    second: JournalMaterialsAtlas_6
+  - first:
+      213: -4131061544987297915
+    second: JournalMaterialsAtlas_7
+  - first:
+      213: -8769879620003446020
+    second: JournalMaterialsAtlas_8
+  - first:
+      213: -6775485325613644120
+    second: JournalMaterialsAtlas_9
+  - first:
+      213: 4082359237185792086
+    second: JournalMaterialsAtlas_10
+  - first:
+      213: -1210414800027774122
+    second: JournalMaterialsAtlas_11
+  - first:
+      213: 8524090586583475136
+    second: JournalMaterialsAtlas_12
+  - first:
+      213: -6130803335543511559
+    second: JournalMaterialsAtlas_13
+  - first:
+      213: 3666567611714790415
+    second: JournalMaterialsAtlas_14
+  - first:
+      213: 4491912732184634896
+    second: JournalMaterialsAtlas_15
+  - first:
+      213: -2917335107906626813
+    second: JournalMaterialsAtlas_16
+  - first:
+      213: -4523408459835313530
+    second: JournalMaterialsAtlas_17
+  - first:
+      213: -3532191504260808800
+    second: JournalMaterialsAtlas_18
+  - first:
+      213: -6494904856003907001
+    second: JournalMaterialsAtlas_19
+  - first:
+      213: 6617240434076241063
+    second: JournalMaterialsAtlas_20
+  - first:
+      213: -5211450566221983264
+    second: JournalMaterialsAtlas_21
+  - first:
+      213: -1388687712520684883
+    second: JournalMaterialsAtlas_22
+  - first:
+      213: 567054183374803232
+    second: JournalMaterialsAtlas_23
+  - first:
+      213: -6715328168365146406
+    second: JournalMaterialsAtlas_24
+  - first:
+      213: 5410355539746788355
+    second: JournalMaterialsAtlas_25
+  - first:
+      213: -1656961218494104815
+    second: JournalMaterialsAtlas_26
+  - first:
+      213: 6855797005250372300
+    second: JournalMaterialsAtlas_27
+  - first:
+      213: -9195503007359175020
+    second: JournalMaterialsAtlas_28
+  - first:
+      213: -7260859652585995116
+    second: JournalMaterialsAtlas_29
+  - first:
+      213: 2904887388072059834
+    second: JournalMaterialsAtlas_30
+  - first:
+      213: -3973008869048257497
+    second: JournalMaterialsAtlas_31
+  - first:
+      213: 6841416990727871570
+    second: JournalMaterialsAtlas_32
+  - first:
+      213: -8072422345625829280
+    second: JournalMaterialsAtlas_33
+  - first:
+      213: -5347610504464073814
+    second: JournalMaterialsAtlas_34
+  - first:
+      213: -4733241336095018698
+    second: JournalMaterialsAtlas_35
+  - first:
+      213: -7116383693850603055
+    second: JournalMaterialsAtlas_36
+  - first:
+      213: 4077266530508319545
+    second: JournalMaterialsAtlas_37
+  - first:
+      213: -7027386889367053674
+    second: JournalMaterialsAtlas_38
+  - first:
+      213: 3696971030762984443
+    second: JournalMaterialsAtlas_39
+  - first:
+      213: -672557776814316427
+    second: JournalMaterialsAtlas_40
+  - first:
+      213: -4609117333034765657
+    second: JournalMaterialsAtlas_41
+  - first:
+      213: -8811345628201384266
+    second: JournalMaterialsAtlas_42
+  - first:
+      213: -1771034888994745081
+    second: JournalMaterialsAtlas_43
+  - first:
+      213: 3520330486156932483
+    second: JournalMaterialsAtlas_44
+  - first:
+      213: -965964673328095442
+    second: JournalMaterialsAtlas_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LeatherPanel
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 543
+        width: 699
+        height: 408
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cbb5ba398471574193a8dcdda728b09
+      internalID: 667609106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ParchmentPanel
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 548
+        width: 679
+        height: 402
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b23f4bafc53d97e46907588e58db2a5b
+      internalID: -299230392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherTab
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 188
+        width: 617
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 646e26d2b509d2c47ad1b74e621933a0
+      internalID: 1403161432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChartSurface
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 68
+        width: 705
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b134d0d8e925184eb6ae0f8ee0fb1bd
+      internalID: -1982761704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 41618d316f00ede44868e65e6059f3c7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChartSurface: -1982761704
+      LeatherPanel: 667609106
+      LeatherTab: 1403161432
+      ParchmentPanel: -299230392
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,50 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "purpose": "P2 production candidate atlases; acceptance pending",
+  "references": [
+    "../ArtStyle_2026-11-02/Samples/샘플1.png",
+    "../ArtStyle_2026-11-02/Samples/샘플2.png",
+    "../D02.png",
+    "../D03.png",
+    "../G01.png",
+    "../G03.png"
+  ],
+  "assets": [
+    {
+      "file": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas for Great Voyage, a 2D top-down Age of Sail management game. Create ONE landscape 1536x1024 transparent PNG sprite atlas, EXACTLY six isolated objects in a strict 3-column 2-row equal-cell grid (each cell512x512), each object centered inside its cell with at least40px transparent margin. No labels, text, checkerboard or background. Match Prison Architect furniture visual language: crisp continuous dark brown outlines, simple readable shapes, flat clear warm color areas, restrained 2-tone shading, almost no grain. Orthographic top-down furniture with only a small front lip, NOT isometric or side-view illustration. At a modest game scale objects must read cleanly. Row1 left: captain's rectangular navigation desk seen from above, warm walnut, ivory blank chart lying flat, tiny compass and quill in corner, no chair attached. Row1 middle: single wooden bed seen from above, cream pillow at top and muted navy blanket, four dark wooden corner posts, simple. Row1 right: closed wooden sea chest seen from above with brass bands and latch. Row2 left: simple empty warm timber plank floor rectangle nearly filling its cell, no outer border, only subtle evenly spaced joints, intended as a continuous cabin floor panel. Row2 middle: short straight horizontal thick wood cabin partition wall viewed from directly above, rectangular flat top rail with dark clean edges, no floor or cast shadow. Row2 right: small wooden captain's chair seen from directly above with navy seat and backrest at top. Keep each sprite entirely separate and transparent surrounding, consistent brown outline thickness and consistent lighting, no baked surrounding shadow, no perspective vanishing lines, no additional decorations or objects."
+    },
+    {
+      "file": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: detached CHARACTER PARTS sprite atlas for a 2D top-down Age of Sail management game. Single landscape1536x1024 PNG, fully transparent background. EXACTLY 6 separate sprite parts in 3 columns and 2 rows with equal512px cells, generous transparent margins. Use Prison Architect character style: small round head, extremely simple oval torso, detached little round hands, NO LEGS, NO FEET, clean dark continuous outlines, flat navy and cream color areas, minimal two-tone shading. NOT a realistic human illustration, NOT a full-body RPG character. The captain wears a plain navy tricorne with narrow brass trim, navy simple coat and ivory shirt. Front head is a round tan face with tiny eyes and small nose under tricorne. Cell row1col1 FRONT HEAD ONLY with hat, no neck shoulders body; row1col2 BACK HEAD ONLY with hat and brown back-of-head, no body; row1col3 FRONT TORSO ONLY, oval lower silhouette, navy coat ivory shirt and tiny brass buttons, no head no arms no legs. Row2col1 BACK TORSO ONLY same oval silhouette navy coat plain back no head no arms no legs; row2col2 one small round tan LEFT PALM ONLY with navy cuff; row2col3 one small round tan RIGHT PALM ONLY with navy cuff. Head and torso parts need similar apparent widths, hands much smaller than head, centered in their cells. Keep smooth 6px dark outlines, clear flat shading, no texture noise, no cast shadows, no background, no text, no cell dividers. These are modular pieces that a game will assemble into one tiny legless unit."
+    },
+    {
+      "file": "Assets/Game/Content/Art/UI/JournalMaterialsAtlas.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: reusable UI MATERIAL sprite atlas for Great Voyage nautical journal. ONE1536x1024 transparent PNG with EXACTLY4 isolated sprites, strict2-column2-row equal768x512 cells. Each sprite centered in its own cell with40px margin, no overlaps, no text or letters, no labels, no buttons, no icons. Clean hand-drawn game art: dark brown controlled outlines, flat warm leather and ivory parchment, restrained shading, smooth shapes, extremely light material variation. Row1left: front-facing horizontal rectangular warm chestnut LEATHER BOOK COVER panel with rounded small corners, a single inset stitched border, brass corner tips very small, EMPTY plain center. This is a flat UI surface not a perspective book, no spine, no open pages, no clasp. Row1right: front-facing horizontal rectangular warm IVORY PARCHMENT page with subtle aged edges and clean blank center, small corner rounding, no curls no words. Row2left: one front-facing horizontal TAN LEATHER INDEX TAB, short wide rectangular with rounded right corners and understated stitched border, blank center for readable text supplied by game. Row2right: front-facing rectangular FICTIONAL NAUTICAL MAP on parchment, muted dusty blue water and two simple sandy islands separated by broad water passage, fine dark coastline and very sparse contour details, clean flat design, no labels, no symbols, no route lines, no compass, no boats, no grid, no recognizable real-world shape. Keep broad map center open. All4sprites same visual language, no surrounding background gradients or cast shadows. They will become separate editable Unity UI Images; do not draw an entire screenshot or finished journal interface. Genuine transparent surrounding background."
+    },
+    {
+      "file": "Assets/Game/Content/Art/Environment/CabinPlanks.png",
+      "transparent_background": false,
+      "prompt": "Use case: stylized-concept. Asset type: seamless wooden cabin FLOOR TILE for a 2D top-down Age of Sail management game. ONE square1024x1024 OPAQUE texture, no transparency. Fill every pixel edge to edge with a flat orthographic walnut plank floor. Clean Prison Architect-like outlined game art, warm muted medium brown, minimal smooth tonal variation, restrained wood grain. Exactly EIGHT equally spaced horizontal rows of long timber boards. Thin dark brown horizontal seams at regular128pixel intervals, subtle staggered vertical joins. The boards continue beyond all four edges. This is a single flat repeating material tile, NOT a sprite atlas or isolated wooden platform. No border or frame on any edge, no rounded corners, no drop shadow, no perspective, no lighting gradient, no object, no symbols, no text. All left/right and top/bottom edges must wrap seamlessly in both position and color so a3x3 repetition reads as one continuous wood floor, without visible square boundaries. Uniform lighting throughout, low visual noise so furniture and characters remain readable. Match simple clean furniture game sprites rather than detailed painterly realism.",
+      "refinement": {
+        "input_role": "Edit target: initially generated CabinPlanks tile, preserved palette and plank layout",
+        "prompt": "Edit this wooden floor texture into a clean production tile for a Prison Architect style 2D game. Preserve the warm medium-brown palette, directly overhead view, eight horizontal plank rows and thin dark brown seams. Change only surface rendering and repeat boundaries: REMOVE the dense wood grain scribbles and knots, use nearly FLAT simple color areas with extremely restrained two-tone shading. Keep the entire image opaque and fully filled to all four edges. Make the top and bottom edge meet as a continuous horizontal plank seam when repeated: the seam at the top edge and bottom edge must be consistent, with no double-width board across the wrap. Make left and right edges match in color and plank-row height, with no visible vertical tile cut or harsh lighting change when tiled side by side. Vertical plank end joins must remain sparse and staggered, not aligned as a grid. No outer border, no rounded platform, no shadow, no text, no objects. This must read as a subtle unobtrusive game floor under furniture, not an illustration of wood grain. Deliver only the single clean repeatable square tile, not a preview grid."
+      },
+      "imported_sprite_rect": {
+        "x": 0,
+        "y": 155,
+        "width": 1254,
+        "height": 942,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "reason": "Repeat between horizontal plank seams, avoiding the unseamed outer image edges."
+      }
+    }
+  ]
+}
