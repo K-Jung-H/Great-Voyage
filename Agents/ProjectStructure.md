@@ -1,6 +1,6 @@
 # Project Structure — Unity 환경·경로·자산 운영
 
-> 초기 환경 확인: 2026-11-01. P2 실제 자산·Scene·표현 규격 갱신: 2026-11-02. 최소 실행·입력·한글 표시와 폰트 입력·적용은 2026-11-01 사용자의 직접 테스트 통과 보고로 확인했다. P0는 통과이며 상세 현황은 `CurrentState.md`를 따른다. 2.2절은 목표 구조, 2.3절은 현재 제작된 표현 자산이다.
+> 초기 환경 확인: 2026-11-01. P3 실제 실행 구조 갱신: 2026-11-04. 최소 실행·입력·한글 표시는 P0 사용자 테스트 통과, P2 정적 아트/Scene은 사용자 수용 완료다. P3 자동/Editor 검증과 사용자 실조작 수용은 구분한다. 상세 현황은 CurrentState.md, 2.2절은 목표 구조, 2.3~2.4절은 현재 자산·실행 구조다.
 
 ## 1. 초기 환경 선정과 기록
 
@@ -24,14 +24,14 @@
 | 타깃 PC OS, 빌드 아키텍처 | 활성 빌드 대상 `StandaloneWindows64` / Standalone. 최종 지원 Windows 버전·최소 사양은 미정 |
 | 기준 해상도·화면비·Canvas 스케일 정책 | Player 기본 크기 `1920×1080`(16:9). P2 Game Canvas는 Screen Space - Camera, Reference `1920×1080`, Scale With Screen Size / Match Width Or Height `0.5`. 1280×720 / 1600×900 / 1920×1080 실제 카메라 캡처 확인. 최종 지원 화면비·모바일 규격 확정은 아님. SampleScene의 기존 Overlay/Constant Pixel Size는 유지 |
 | PPU / 세계 Cell Size / 피벗·스프라이트 기준점 | 기본 P2 Sprite PPU `128`, 피벗 중앙 `(0.5, 0.5)`, Full Rect. 새 파티션 전용 Sprite는 원본 165×92 구간/PPU 330으로 native 0.5×약 0.2788 unit, Transform 배율 1. Grid/Tilemap 셀은 아직 구성하지 않음. 바닥은 가로 3 Unity unit 단위 반복, 별도 점유·충돌 셀 규격은 아님. 2.3절 참조 |
-| 테스트 실행 명령/방법 | Test Framework `1.8.0` 설치. EditMode/PlayMode는 Unity Test Runner를 사용할 계획이며 제품용 테스트·실행 결과는 없음. CLI 자동 실행 절차와 Player 검증 절차는 아직 검증하지 않음 |
-| 물리 레이어·충돌 매트릭스 / 공간 질의 정책 | 기본 Layer(Default, TransparentFX, Ignore Raycast, Water, UI), Sorting Layer는 Default만 존재. Physics2D 충돌 매트릭스는 전체 허용 비트. 제품 역할별 정책은 P1 설계 후 구성 |
+| 테스트 실행 명령/방법 | Test Framework 1.8.0. CLI command test run --mode editor --filter CabinDomainTests / --mode playmode --filter CabinPlayTests --async_tests true. Temp/pipeline_test_status.json에서 completed/summary 확인. EditMode 8/8·실제 Game Scene PlayMode 1/1 통과. Player 빌드 검증은 미확인 |
+| 물리 레이어·충돌 매트릭스 / 공간 질의 정책 | 기본 Layer와 WorldSolid(8), CharacterBody(9). 글로벌 매트릭스는 기본값 유지, Collider excludeLayers로 Actor↔Solid/Actor만 허용. 정적 가구/벽에는 Rigidbody 없음. 책상 거리·Linecast 및 로드 OverlapCircle은 WorldSolid만 질의 |
 | 물리 스텝 | Fixed Timestep `0.02초`, Maximum Allowed Timestep `0.33333334초`, Time Scale `1`. 엔진 기본 설정이며 게임의 하루 600초를 구현했다는 뜻은 아님 |
-| 플레이어·선원 이동/렌더 스텝·보간 정책 | 미설정 — 첫 이동 품질 테스트 전 결정 |
-| Play Mode 진입 설정 | `m_EnterPlayModeOptionsEnabled: 1`, `m_EnterPlayModeOptions: 1`: Domain Reload 생략, Scene Reload 유지. 정적 상태·이벤트 구독·세션 초기화의 반복 진입 안전성은 이후 구현 시 검증 |
+| 플레이어·선원 이동/렌더 스텝·보간 정책 | 플레이어 Dynamic Rigidbody2D, gravity0/회전 고정/Continuous/Interpolate. FixedUpdate 가감속, LateUpdate 해소 위치→단일 CharacterState. CharacterView/카메라 LateUpdate. 선원은 미구현 |
+| Play Mode 진입 설정 | m_EnterPlayModeOptionsEnabled:1 / m_EnterPlayModeOptions:1: Domain Reload 생략, Scene Reload 유지. P3 세션·입력·정지 토큰·저장 슬롯의 반복 Scene/Play 진입을 검증했다. Test Runner 종료의 Editor 내부 assertion 1건은 CurrentState의 미해결 관찰을 따른다 |
 | 직렬화 / 메타 관리 | Force Text(`m_SerializationMode: 2`) / Visible Meta Files |
 | 기준 테스트 환경 / Profiler 계측 방법 | 현재 Development Build·Allow Debugging·Connect With Profiler 모두 꺼짐. 측정용 Player·하드웨어·계측 조건은 미확정 |
-| 초기 성능 기준선(장면, 유닛 수, Frame Time·GC) | 미측정 — 최초 대표 실행 후 기록 |
+| 초기 성능 기준선(장면, 유닛 수, Frame Time·GC) | P3 단일 플레이어 선장실 Editor ProfilerRecorder 측정, References/P3/Editor*Profile.json. Idle/접촉 정지/일지 각600프레임. Editor·CLI·캡처 비용 포함. Player·다수 유닛은 미확인, 최종 FPS/메모리 합격 수치는 미정 |
 | Unity CLI / Pipeline | CLI `1.0.0-beta.15`, `com.unity.pipeline` `0.9.1-exp.1`. CLI/MCP 연결 확인. 다의적인 MCP 명령은 실패할 수 있어 읽기 전용 빌드 조회는 CLI `command build get_settings`로 확인 |
 
 **원칙:** 위 `미설정`은 반드시 채워야 할 환경 정보이지 임의 기본값을 써 넣어도 되는 항목이 아니다. 미설정인 핵심 항목이 필요한 작업을 진행할 때는 그 작업의 게이트에서 차단한다.
@@ -59,7 +59,7 @@
 - `Agents/References/ArtStyle_2026-11-02/`에 사용자 제공 화풍 자료를 원본 이름·내용으로 보존했다: `Samples/` PNG 2개, `Sheets/` PNG 9개, `SourceDocuments/` MD 3개. 복사 후 원본과 SHA-256 일치를 확인했고 `P1 Complete` 커밋으로 main에 공유했다. 하위 `Agent.md`는 참고용 프롬프트이며 관리 지침이 아니다. 제품 Sprite는 `Assets/Game/Content/Art/`에 별도로 제작·임포트한다. 원본 기술 확인은 `VisualStandards.md` 1.2절을 따른다.
 - `Assets/Game/Scenes/Game.unity`가 현재 유일한 활성 Build Settings Scene이다. 기존 `Assets/Scenes/SampleScene.unity`는 파일을 유지하고 빌드 목록에서 비활성화했다. `Assets/Settings/Scenes/URP2DSceneTemplate.unity`는 템플릿 Scene이다.
 - `Assets/Settings/`에는 렌더러·입력 등 템플릿 설정, `Assets/Welcome/`에는 템플릿 안내 자산·스크립트, `Assets/TextMesh Pro/`에는 TMP 리소스·폰트가 있다.
-- 제품용 `Assets/Game/`의 P2 표현 Scene·Prefab·아트 및 Editor 제작 도구가 존재한다(2.3절). Domain/Application·이동·상호작용·저장 등 게임 기능 코드는 아직 없다. 아래 목표 트리는 전체 구현 완료 목록이 아니다.
+- 제품용 Assets/Game/에 P2 표현 자산과 P3 Domain/Application/Infrastructure/Presentation/Composition 실행 코드·EditMode/PlayMode 테스트가 존재한다(2.3~2.4절). 아래 목표 트리는 전체 구현 완료 목록이 아니다.
 
 ### 2.2 목표 저장소 트리
 
@@ -163,11 +163,26 @@ GreatVoyage/
 - 인물 전 파츠의 동일 uniform scale은 약0.2518033이다. 몸통 표시 크기 약0.6×0.4485, 모자 포함 머리 약0.598×0.4957, 손 약0.183~0.185×0.185 unit. 승인된 손/몸통 원본 비율을 유지하며 손만 축소하지 않았다. Body 중심 (0,-0.12), Head 중심 (0,0.27), 손 (±0.4,-0.14). 후면·사선·눈 감기 표시도 같은 배율/기준 위치다.
 - 애니메이션 준비: 정면/후면/약한 사선 머리·몸통과 눈 감은 머리를 같은 배율·조립 기준으로 준비하고 Editor 정적 표시를 확인했다. P3의 Idle / Moving / Interacting 표현은 기존 인물 행동 상태를 읽어 연결하며 실제 방향 전환·손 움직임·정지/재개 피드백과 재생 품질은 P3에서 검증한다. 이번 단계에서 Runtime 애니메이션을 구현한 것은 아니다.
 - 가구는 기존 배치와 최대 표시 범위 안에서 종횡비를 보존하는 uniform scale을 적용했다. 책상 최대2.9×1.93, 침대1.45×2.3, 상자1.7×1.12, 의자0.95×1.14 unit. 기존 비균등 늘리기 대신 원본 비율을 유지한다.
-- 카메라는 Orthographic Size5.5, (0,0,-10). Canvas는 동일 카메라/planeDistance5/sortingOrder100, 기준1920×1080/Match0.5. 바닥 sortingOrder-100, 파티션0, 가구10, 플레이어 SortingGroup20, 내부 Body0/Hand1/Head2. 이동 중 Y정렬/차폐·추적은 P3 검증 범위다.
+- 카메라는 Orthographic Size5.5, (0,0,-10). Canvas는 동일 카메라/planeDistance5/**sortingOrder1000**, 기준1920×1080/Match0.5. P3에서 Canvas를 월드 깊이 정렬보다 높였다. 바닥 sortingOrder-100, 벽/가구는 발 기준 고정 Y정렬, 플레이어 SortingGroup은 매 프레임 발 Y정렬(100-round((y-0.2)*20)), 내부 Body0/Hand1/Head2다. 좁은 화면의 카메라는 방 경계 내 추적, 현재16:9에서는 방 전체가 보여 중앙에 머문다.
 - 제품 TMP10개는 Galmuri11 SDF를 명시 참조하며 이번 카메라에서 한글 표시를 확인했다. 작업 전 폰트 아틀라스 초기화 변경이 있었고, Editor의 한글 UI 표시/자산 저장 과정에서 Dynamic 글리프·아틀라스 캐시가 다시 채워져 미커밋 차이도 변했다. 이를 원래 상태와 바이트 동일하게 보존했다고 주장하지 않는다. 원본 TTF·기본 폰트 설정은 변경하지 않았으며 공유하지 않았다.
 - 검증 근거: ApprovedArtValidation.json, CaptainCabin_Approved_1280x720·1600x900·1920x1080.png, Journal_Approved_동일3해상도.png, Human_Approved_Front·Back·ThreeQuarter·ClosedEyes.png, FloorRepeat_Approved_3x3.png. SpriteRenderer84(비활성 파츠 포함), Missing Script/Sprite0, 활성 Frame 조작0, 파티션70/Collider5/비단위 배율0, 모든 Human 파츠 동일 배율.
 - 현재 독립 Repeat 바닥은 CaptainCabin_RepeatFloor_3해상도와 FloorStyleReview/SceneApplication.json에서 검증했다. 대응 경계 색 차이 좌우약2.84/상하약6.05(RGB0~255)는 남아 있어 대응 경계 픽셀 완전 동일성과 사용자 시각 수용을 구분한다. Scene의 바닥 표현은 사용자 수용됐다. 사용자가 Repeat 바닥까지 반영한 조립 Scene 표현을 수용하여 P2 정적 첫 화면 게이트를 통과했다. 이 수용이 경계 픽셀 완전 동일성이나 실제 행동 수용을 뜻하지 않는다. Editor 카메라 확인이며 실제 입력·연속 이동·충돌·애니메이션·저장·Player 성능 통과를 뜻하지 않는다.
 - 고정 제작 자료는 ArtFactory/FactoryStyle.json·StyleB.locked.prompt.txt(소품), HumanStyle.json·HumanParts.locked.prompt.txt(인물). 기존 생성물은 새 생성의 입력/수정/긍정·부정 참조로 금지한다. 이번에는 새 이미지 생성·후처리·스킬 설치 없이 승인된 PNG를 적용했다. 추가18종은 References의 검토 자료로 보존하며 선장실에 전부 배치하지 않았다.
+
+### 2.4 P3 실제 실행 구조
+
+- Runtime/Domain: GameSessionState, CharacterState, WorldPosition, GameClock, PauseReasons. Runtime/Application: GameSession, Action/Interaction/Store 계약과 SaveCoordinator. 두 asmdef는 noEngineReferences=true다.
+- Runtime/Infrastructure: JsonFileSessionStore. 기존 Newtonsoft 패키지의 Unity.Newtonsoft.Json 어셈블리를 참조한다. Runtime/Presentation: PcInputSource, PlayerMotor, CharacterView, JournalDesk, CabinCamera, CabinHud 및 기존 DashedBorderGraphic. Runtime/Composition: CabinSessionRoot가 단일 세션·입력·뷰·저장 어댑터의 수명을 연결한다. Domain에는 Unity/파일 IO/UI 의존성이 없다.
+- Scene의 GameSession은 기존 PlayerView/NavigationDeskView/JournalScreen/ScreenCanvas를 직렬화 참조한다. 실행 중 임시 UI/월드 객체를 생성하지 않는다. PlayerView의 기존 9파트를 identity Visuals 부모 아래 묶었으며 원본 파츠 배율/스프라이트는 유지했다. 물리 루트는 좌우 반전하지 않는다.
+- Content/Input/GameControls.inputactions: World/Move(WASD·방향키), World/Interact(E), UI/Back(Esc). 런타임 입력 자산은 세션별 clone이며 종료 시 Disable/구독 해제/Destroy한다. UI 포인터/선택은 기존 InputSystemUIInputModule을 사용한다. 모바일 구현 없음.
+- 플레이어 CircleCollider2D offset(0,-0.2), radius0.22; 속도2.4 unit/s, 가속18/감속26 unit/s². Content/Physics/CabinContact.asset은 friction0/bounce0이다. 벽5개 직선 Collider/가구 footprint/미구현 문 경계가 WorldSolid다. 바닥·장식·손/머리 각각에 Collider/Rigidbody를 추가하지 않는다.
+- JournalDesk는 approach point 거리0.8 및 장애물 Linecast로 접근을 판별한다. 로드는 선장실 범위와 WorldSolid OverlapCircle(radius0.209)로 실제 접촉 위치를 검증한다. 정상 접촉 오차를 고려한 로드 여유이며 일반 이동 충돌 반경을 줄이지 않는다.
+- Scene의 CabinHud/SessionMenu/메뉴 버튼은 Editor에서 작성됐다. 메뉴의 계속하기·저장 후 종료, 일지 CloseJournal만 활성 기능이다. 일지 5개 Day Toggle·경로/기록/메모는 비활성이다. 일지 닫기는 raycastTarget=true 및 ColorTint 피드백을 사용한다.
+- CabinSessionRoot의 제품 슬롯은 P3Cabin, 첫 Slice 설정은 현재 선장실 배치·Day1 08:00/rootSeed1717이다. 전체 게임의 초기 항구/재산을 의미하지 않는다. 정상 종료만 저장하고 다른 SaveEvent는 해당 시스템 개발 시 연결한다.
+- 저장은 Application.persistentDataPath/Saves/P3Cabin/session.json, 버전1 JSON envelope·payload SHA-256, tmp flush 후 원자 교체와 .bak 복구다. 손상/버전 불일치/잘못된 배치가 모두 복구 불가능하면 초기화하지 않고 오류를 표시한다. 무결성은 보안 기능이 아니다.
+- Tests/Editor/CabinDomainTests와 Tests/PlayMode/CabinPlayTests는 각각 격리 Temp Guid 저장소를 사용한다. PlayMode는 테스트용 InputSettings clone과 Keyboard/Mouse를 쓰고 종료 시 복원한다. 실제 사용자 저장을 삭제하지 않는다. FPS 제한 테스트도 targetFrameRate/vSyncCount를 원복한다.
+- Editor/P3SceneAuthoring은 최초 연결용으로 기존 연결 Scene 재실행을 금지한다. Editor/P3Validation은 격리 슬롯 설정/복원·상태 증거·ProfilerRecorder 측정용이며 제품 빌드에 포함되지 않는다. P2 도구에는 이전 계층/비활성 UI 가정이 있어 P3 Scene에 재실행하지 않는다.
+- 검증 증거는 Agents/References/P3에 둔다. 모든 제품 Assets에는 .meta를 유지한다. 새 패키지나 전역 Physics/Input 설정 변경은 없다. P3 사용자 수용·Player 성능은 별도 검증 대기다.
 
 ## 3. Scene/Prefab/스크립트 책임
 

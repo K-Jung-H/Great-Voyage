@@ -1,0 +1,30 @@
+{
+  "context": "Unity Editor Play Mode; one actor, cabin, HUD; includes Editor/tool overhead; not Player benchmark",
+  "samples": 600,
+  "mainThreadAvailable": true,
+  "physicsAvailable": true,
+  "gcAvailable": true,
+  "frameMs": {
+    "median": 3.7901997566223145,
+    "p95": 7.5812996365129948,
+    "max": 285.77509522438049
+  },
+  "mainThreadMs": {
+    "median": 3.8062,
+    "p95": 7.3766,
+    "max": 290.20709999999997
+  },
+  "physics2DMs": {
+    "median": 0.0,
+    "p95": 0.0101,
+    "max": 0.065599999999999992
+  },
+  "gcBytes": {
+    "median": 8513.0,
+    "p95": 9095.0,
+    "max": 16374587.0
+  },
+  "unity": "6000.6.4f1",
+  "cpuModel": "Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz",
+  "gpu": "NVIDIA GeForce MX150"
+}

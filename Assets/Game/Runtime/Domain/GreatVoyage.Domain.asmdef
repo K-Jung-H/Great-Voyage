@@ -1,0 +1,5 @@
+{
+  "name": "GreatVoyage.Domain",
+  "rootNamespace": "GreatVoyage.Domain",
+  "noEngineReferences": true
+}

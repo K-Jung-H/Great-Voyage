@@ -1,0 +1,15 @@
+{
+  "name": "GreatVoyage.Tests.Editor",
+  "rootNamespace": "GreatVoyage.Tests",
+  "references": [
+    "GreatVoyage.Domain",
+    "GreatVoyage.Application",
+    "GreatVoyage.Infrastructure"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}

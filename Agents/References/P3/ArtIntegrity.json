@@ -1,0 +1,20 @@
+[
+  {
+    "Asset": "Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png",
+    "Approved": "Agents/References/P2/PropStyleReview/StyleB_OriginalSamplesOnly_01.png",
+    "Sha256": "BA98898FEACDB39499F2DF8EDA304F191DACFD22EB9BCC63AC94E7002950373C",
+    "MatchesApproved": true
+  },
+  {
+    "Asset": "Assets/Game/Content/Art/Characters/CaptainPartsAtlas.png",
+    "Approved": "Agents/References/P2/HumanStyleReview/Captain_Parts_FinalCandidate01.png",
+    "Sha256": "941CB00FC08A8E8DF1288B6509172A2B69A4E819DC999B586569A1089DE15B3D",
+    "MatchesApproved": true
+  },
+  {
+    "Asset": "Assets/Game/Content/Art/Environment/CabinPlanksTileable.png",
+    "Approved": "Agents/References/P2/FloorStyleReview/CabinPlanks_Tileable02.png",
+    "Sha256": "92E233E84002BF1BA8B4B9EA76782F2B5F3AC9DD667114420FF49B3806BF4259",
+    "MatchesApproved": true
+  }
+]

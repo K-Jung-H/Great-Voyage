@@ -1,0 +1,18 @@
+{
+  "playMode": true,
+  "PlayId": "a293ad2b8872433eaec7912a7f55afaf",
+  "RootSeed": 1717,
+  "time": 45962.420661661774,
+  "position": {
+    "AreaId": "captain-cabin",
+    "X": 5.49973631,
+    "Y": -0.900000036
+  },
+  "facing": "Right",
+  "JournalOpen": false,
+  "MenuOpen": true,
+  "pauseCount": 1,
+  "ExitPrepared": false,
+  "SavePath": "C:\\Users\\KJH\\AppData\\LocalLow\\DefaultCompany\\Great_Voyage\\Saves\\Validation\\P3_553f866230964587b7f887701300fcb0\\session.json",
+  "Error": "저장하지 못했습니다. 기존 저장은 보존됩니다. 다시 시도해 주세요."
+}

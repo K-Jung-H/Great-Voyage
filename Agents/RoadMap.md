@@ -75,6 +75,8 @@
 
 ### P3. 첫 Production-Ready Slice — 이동·책상·일지·정지·기본 복원
 
+현재 상태(2026-11-04): **구현 및 Editor 통합 검증 진행, 사용자 실조작 수용 대기**. 실제 Game Scene의 이동·접촉·책상·일지/메뉴 중첩 정지·정상 종료 저장/복원을 연결했다. EditMode 8/8·실제 입력 PlayMode 1/1·프레임 제한별 이동·Editor Profiler 기준선과 캡처는 References/P3에 있다. 사용자 동작/조작감 수용 및 Player 성능은 미확인으로, P3 Complete 또는 P4 진입으로 승격하지 않는다. 현행 인계는 CurrentState.md를 따른다.
+
 **대표 활성 동작:** 선장실 이동 → 책상 상호작용 → 일지 열기·닫기 → 세계 입력/시간 복귀.
 
 - `GameSession`, 시간·중첩 정지, Action 입력, Interaction, World/Character View, Journal Screen의 최소 실행 경로를 구현한다.

@@ -1,0 +1,10 @@
+{
+  "name": "GreatVoyage.Infrastructure",
+  "rootNamespace": "GreatVoyage.Infrastructure",
+  "references": [
+    "GreatVoyage.Domain",
+    "GreatVoyage.Application",
+    "Unity.Newtonsoft.Json"
+  ],
+  "noEngineReferences": true
+}

@@ -1,0 +1,11 @@
+{
+  "name": "GreatVoyage.Presentation",
+  "rootNamespace": "GreatVoyage.Presentation",
+  "references": [
+    "GreatVoyage.Domain",
+    "GreatVoyage.Application",
+    "Unity.InputSystem",
+    "Unity.TextMeshPro",
+    "Unity.ugui"
+  ]
+}

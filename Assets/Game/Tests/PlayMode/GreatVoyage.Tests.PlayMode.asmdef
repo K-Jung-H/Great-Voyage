@@ -1,0 +1,5 @@
+{
+  "name": "GreatVoyage.Tests.PlayMode",
+  "references": ["GreatVoyage.Domain", "GreatVoyage.Application", "GreatVoyage.Composition", "GreatVoyage.Presentation", "Unity.InputSystem", "Unity.ugui"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

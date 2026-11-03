@@ -1,0 +1,50 @@
+{
+  "scene": "Assets/Game/Scenes/Game.unity",
+  "dirty": false,
+  "playing": false,
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "rigidbodyCount": 1,
+  "colliders": [
+    {
+      "layer": "WorldSolid",
+      "count": 10
+    },
+    {
+      "layer": "CharacterBody",
+      "count": 1
+    }
+  ],
+  "missingSessionReferences": [],
+  "saveSlot": "P3Cabin",
+  "canvases": [
+    {
+      "name": "ScreenCanvas",
+      "sortingOrder": 1000
+    }
+  ],
+  "buttons": [
+    {
+      "name": "CloseJournal",
+      "interactable": true,
+      "raycast": true
+    },
+    {
+      "name": "OpenSessionMenu",
+      "interactable": true,
+      "raycast": true
+    },
+    {
+      "name": "Resume",
+      "interactable": true,
+      "raycast": true
+    },
+    {
+      "name": "SaveAndExit",
+      "interactable": true,
+      "raycast": true
+    }
+  ],
+  "dayTogglesDisabled": true,
+  "sprites": 84
+}

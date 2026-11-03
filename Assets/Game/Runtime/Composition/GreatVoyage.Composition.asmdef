@@ -1,0 +1,11 @@
+{
+  "name": "GreatVoyage.Composition",
+  "rootNamespace": "GreatVoyage.Composition",
+  "references": [
+    "GreatVoyage.Domain",
+    "GreatVoyage.Application",
+    "GreatVoyage.Infrastructure",
+    "GreatVoyage.Presentation",
+    "Unity.InputSystem"
+  ]
+}

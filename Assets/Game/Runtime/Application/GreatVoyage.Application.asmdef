@@ -1,0 +1,8 @@
+{
+  "name": "GreatVoyage.Application",
+  "rootNamespace": "GreatVoyage.Application",
+  "references": [
+    "GreatVoyage.Domain"
+  ],
+  "noEngineReferences": true
+}

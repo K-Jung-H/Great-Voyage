@@ -1,0 +1,9 @@
+{
+  "Context": "After successful PlayMode Test Runner completion",
+  "Message": "Assertion failed",
+  "Stack": "UnityEditor.EditorApplication:Internal_PlayModeStateChanged (UnityEditor.PlayModeStateChange)",
+  "ProductTestResult": "1 passed, 0 failed",
+  "Cause": "Unconfirmed; no product stack provided",
+  "Severity": "Unresolved Editor/Test Runner stability observation",
+  "ManualPlayCycle": "Not reproduced in additional isolated normal Play start/stop; final console errors/warnings 0. Root cause remains unconfirmed."
+}

@@ -1,78 +1,59 @@
 # Current State — 현재 개발 상태 / 에이전트 인수인계
 
-> 갱신 기준: 2026-11-03. 현재 유효한 환경·검증·미결정 사항만 기록한다. 환경의 기술 값과 경로는 `ProjectStructure.md`가 원본이다.
+> 갱신: 2026-11-04. 현재 사실·승인·검증·미결정만 유지한다. 기술 경로·설정의 원본은 ProjectStructure.md다.
 
-## 1. 지금의 사실
+## 1. 단계·Git·환경
 
-| 항목 | 현재 상태 |
+- **P0 통과 / P1 Complete / P2 Complete. P3 구현·검증 진행, 사용자 실조작 수용 대기.** 사용자 “P3 진행” 지시로 첫 선장실 Slice를 구현했다. P4 이후는 시작하지 않았다.
+- 저장소 D:/Great_Voyage/Great_Voyage, 원격 https://github.com/K-Jung-H/Great-Voyage.git, main. 사용자 지정 공유 마일스톤은 **P3 - Analyzing Test Results**다. 현재 P3 구현·검증 자료·관리 문서를 커밋·푸시하는 지시이며 P3 Complete 승인이 아니다. 정확한 HEAD/원격 일치는 실제 Git으로 확인한다.
+- 기존 Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset 변경은 별도 사용자 작업으로 보존한다. 실행 중 Dynamic 캐시가 추가 갱신될 수 있다. 원본 TTF·기본 폰트 설정은 변경하지 않았다.
+- Unity 6000.6.4f1 / Input System 1.20.0 / URP 17.6.0 / Test Framework 1.8.0 / CLI 1.0.0-beta.15 / Pipeline 0.9.1-exp.1. 새 패키지·스킬·모델·생성 파이프라인 추가 없음.
+
+## 2. 구현된 첫 Slice
+
+- 실제 진입점은 Assets/Game/Scenes/Game.unity다. 기존 선장실/책상/플레이어/일지 Prefab과 승인된 B안 소품·Human 9파트·Repeat 바닥을 사용한다. 아트 PNG·고정 스타일 규칙·Human 손 크기를 바꾸지 않았다.
+- WASD/방향키 가감속 이동, 벽·침대·상자·의자·책상 충돌, 방향별 파츠 전환·걷기 흔들림·정지 눈 감기, 발 기준 깊이 정렬, 제한된 카메라 추적을 연결했다. 현재 16:9는 방 전체가 보여 카메라가 중앙에 머문다.
+- 책상 접근 범위·가림 검사를 통과하면 E로 일지를 연다. 세계 입력·물리·게임 시간·캐릭터 동작이 정지한다. 실제 닫기 버튼/Esc로 닫고 복귀한다.
+- 메뉴 버튼/Esc의 정지 메뉴를 일지 위에 중첩할 수 있다. 메뉴만 닫으면 일지의 정지 사유가 유지된다. UI 포커스와 월드 입력을 분리했다.
+- GameClock의 하루는 실제 600초다. UI는 원본 시계만 읽고 정지 중 경과시간을 복귀 후 보충하지 않는다.
+- 첫 실행 배치와 Day 1 08:00은 선장실 Slice 설정이다. 전체 새 게임의 초기 항구·재산·시각·게임 오버 규칙을 구현/확정한 것이 아니다.
+
+## 3. 상태·의존성·저장
+
+- Domain/Application은 Unity 미참조 asmdef다. GameSessionState가 플레이 ID·root seed·플레이어·시간 원본을 소유한다. 화면·모터·저장에 별도 인물 상태 복사본을 두지 않는다.
+- Dynamic Rigidbody2D가 FixedUpdate에서 접촉을 해소하고 위치를 CharacterState에 반영한다. 로드는 명시적 위치 전환으로 Transform/물리 위치를 함께 초기화한다. 일반 이동은 좌표 점프로 대체하지 않는다.
+- 현재 SaveEvent는 **정상 종료만 구현**했다. 메뉴의 저장 후 종료 및 애플리케이션 정상 종료에 연결한다. 프레임 저장·F5 저장·일지 열기 저장 없음. 승선·하선·항해 중 하루 경과·수면은 해당 시스템과 함께 후속 구현한다.
+- 저장 경로는 Application.persistentDataPath/Saves/P3Cabin/session.json. 버전 1 JSON envelope·SHA-256 손상 검사·임시 파일 flush 후 교체·직전 정상 .bak을 사용한다. 보안/치트 방지 기능은 아니다.
+- 본 파일 손상 시 정상 백업을 복구한다. 둘 다 유효하지 않으면 파일을 보존하고 오류 메뉴를 연다. 저장 실패 시 종료하지 않고 재시도할 수 있다. 강제 종료·전원 차단을 정상 종료 SaveEvent로 보장하지 않는다.
+- 검증은 Guid 격리 슬롯만 사용했다. NextLoadSaveDirectory는 일회성 검증 override이며 Play 진입 시 초기화한다. Editor 검증은 Saves/Validation/P3_<Guid> 사용. 최종 제품 Scene 슬롯은 P3Cabin이어야 한다.
+
+## 4. 검증·게이트
+
+| 항목 | 현재 판정·근거 |
 |---|---|
-| 대상 프로젝트 | Great Voyage 신규 Unity 프로젝트 생성됨. 루트 `D:/Great_Voyage/Great_Voyage` |
-| 실행 단계 | **P0 통과 / P1 Complete 공유 완료 / P2 Complete**. 소품 B안·Human 9파트·Repeat 바닥·기존 일지 UI를 포함한 첫 Scene 표현을 사용자가 수용함. P2 최종 공유 마일스톤은 사용자 지정 `P2 Complete`이며 P3 게임 기능은 미착수 |
-| Git | `main`. 이번 사용자 지정 공유 마일스톤은 `P2 Complete`: 확정 소품/Human 생성 명세·원본 참조 규정·적용 아트/Prefab·Repeat 바닥·Editor 도구·검증 자료·관리 문서. 정확한 HEAD/원격 일치는 실제 Git 확인. 별도 Galmuri11 SDF 캐시 변경은 제외하여 작업 트리에 보존 |
-| 원격 저장소 | `https://github.com/K-Jung-H/Great-Voyage.git` |
-| P0 커밋 범위 | 루트 AGENTS, Agents 문서·참조 이미지, SampleScene의 Canvas/EventSystem, TMP 리소스·Galmuri 폰트·기본 설정과 모든 meta, 학습 시작창 설정 및 SceneTemplateSettings. 커밋 후 추가 변경 여부는 실제 Git 상태로 확인한다 |
-| Unity·도구 | Unity `6000.6.4f1`, CLI `1.0.0-beta.15` 최신 여부 확인, Pipeline `0.9.1-exp.1`. 프로젝트 지정 CLI로 Editor 7800 연결·제작·Play 검증. 최종 조회 컴파일 실패 없음, 콘솔 오류·경고 0건 |
-| 실행·입력·한글 | **사용자 직접 테스트 통과**. 최소 실행·입력·한글 표시 및 폰트 입력·적용을 확인했다고 2026-11-01 현재 대화에서 보고함. 에이전트 재실행·영상·자동 테스트 결과로 간주하지 않음 |
-| TMP·폰트 | Essential Resources 임포트, 기본 폰트 Galmuri11 SDF 연결 확인. 일반·Bold·Condensed TTF/SDF 존재 |
-| 기획·자료 | 관리 문서 8개와 References를 Agents에 통합. 기존 D/E/G 이미지 26장과 보관 기획서 유지. 신규 ArtStyle_2026-11-02에 이미지 11개·제작 참고 MD 3개 원본 보존, 복사 SHA-256 일치 확인. 2026-11-03 새 참조 3장 보존·해시 확인. 최신 고정 스타일은 사용자 합격 B안(원본 샘플 조형 언어·내부 미세 질감); 샘플1·샘플2는 구조/파트 참고이며 기존 제작 시트의 제품 적합성은 미확인. 루트 AGENTS는 공통 지침 진입 안내 |
-| 제품 구현 | Game Scene·4 Prefab·제품 아틀라스 내부 Sprite19개+바닥/파티션 Sprite 자산2개(기존 바닥 PNG 별도 보존)·Editor 제작/미리보기 도구 존재. 파티션 조각 70개는 단위 배율, 구간 Collider는 5개. 선장실·분리 유닛·일지 Frame 배치. Game만 활성 빌드 진입, SampleScene 파일 보존/목록 비활성. 게임 기능 Runtime 코드 없음 |
-| 구조 설계 | 기본 프레임워크 P1-01~07 사용자 수용 완료. 공통 데이터 조합·소유권·파생 시드·가변 시설·업무·항해·거래·Event 정책 교체·저장/복원·UI 경계는 Architecture가 원본. SaveEvent는 정상 종료·승선·하선·항해 중 하루 경과·수면 결과. 일반 로드는 저장 시점 복원, 수면 로드는 계산·저장된 기상 상태 복원. 사건 상세·모바일 상세는 기본 프레임워크 검증 후 |
-| Git 공유 방침 | 사용자가 P2 내용을 `P2 Complete`로 main 커밋·푸시하도록 명시했다. Agents와 Assets/Game의 P2 변경을 공유하고 별도 Galmuri11 SDF 캐시는 포함하지 않는다. 이후 작업의 자동 커밋/푸시 또는 P3 착수 허가는 아님 |
+| G0/G1 범위·설계 | 통과 — GameDesign A02/A03/A27의 첫 Slice 범위, Architecture의 단일 상태·중첩 정지·저장 경계 적용. 전체 A항목 통과가 아님 |
+| G2 시각 | 기존 아트 P2 사용자 수용 유지. P3 HUD·메뉴·동작은 신규 사용자 수용 대기 |
+| G3 기능 | 실제 Scene/Prefab 직렬화 연결. Runtime UI/월드 임시 생성 없음 |
+| 도메인·파일 저장 | EditMode 8/8 통과: 하루 600초, 중첩 토큰, 거부·중복 요청, 정상 종료만 저장, JSON 왕복, 손상 백업·실패 파일 보존. References/P3/EditModeTests.json |
+| 실제 입력 통합 | 최종 PlayMode 1/1 통과(18.06초): 실제 Input System 키/포인터 이벤트로 벽·가구→책상→일지→중첩 메뉴→닫기→재이동→저장/Scene 재진입. 문 경계 접촉 저장/복원 포함. PlayModeTests.json |
+| 프레임 변화 | 최종 요청 FPS 제한 30/60/120에서 약 2.412/2.452/2.428 unit/s. 요청 제한값이며 실측 FPS 고정 보장이 아님. MovementRates.json |
+| 종료·반복 Play | 실제 종료 버튼으로 쓰기 실패→오류 유지→재시도 종료→Play 재시작 확인. 동일 PlayId/root seed/벽 접촉 위치, UI 닫힘·토큰 0 복원. BeforeFailedExit/FailedExit/AfterNormalExitReentry.json |
+| 성능 | Editor ProfilerRecorder 600프레임 2조건: Idle frame median 3.22ms/p95 7.08ms, 벽 접촉 정지 3.45ms/p95 7.08ms, Physics2D p95 0.0105/0.0156ms. Editor·CLI·캡처 overhead 포함. GC와 최대 spike는 JSON 그대로 기록. Player·다수 유닛·최소 사양은 미확인 |
+| G4/G5 | 자동/Editor 통합 근거 확보. 사용자 Game View·이동·손 크기·조작감 수용 및 Player 성능은 미확인. **P3 Complete로 판정하지 않음** |
 
-## 2. 현재 적용할 불변 조건
+최종 구조 근거 StructureValidation.json: Scene clean/Play 종료, Missing Script/Sprite/세션 참조0, Rigidbody1, 정적 Collider10/캐릭터 Collider1, Canvas order1000, 4개 버튼 클릭 감지·Day Toggle 비활성 확인. 제품 저장 슬롯은 P3Cabin으로 원복했다. ArtIntegrity.json의 소품/Human/바닥 SHA-256은 사용자 합격 원본과 모두 일치한다. Journal_Play 3해상도·Journal_Menu·SaveFailure 캡처를 보존했다. 일지 정지 시각은 JournalOpened/JournalStillPaused에서 동일하다.
 
-- 게임 규칙은 GameDesign, 배치·연결은 D, 소품·환경 렌더링은 사용자 합격 B안과 ArtFactory/StyleB.locked.prompt.txt, 샘플1·샘플2는 기존 구조/파트 참고, 지도·공간 가독성·유닛 구성은 G, 분위기 참고는 E를 따른다. 제작 참고 MD는 저장소 작업 지침이 아니다.
-- 설계 승인 전 기능 코드를 작성하지 않는다. P1에서 객체 관계·단일 상태 소유권·의존 방향·생명주기·저장 경계를 검토한다.
-- 첫 제품 Slice는 선장실·플레이어·책상·일지 Frame·상호작용·중첩 정지·기본 저장/복원이다.
-- 비활성 Frame은 미구현으로 기록한다. 도형 화면·컴파일 성공·환경 준비만으로 제품 기능 완료를 선언하지 않는다.
-- 기존 코드·Scene·저장 데이터·과거 운영 문서를 자동 이식하지 않는다. Git 사용자 변경을 덮어쓰지 않는다.
+입력 증거는 에이전트의 자동 Input System 이벤트다. 사용자 물리 키보드 실조작 평가·최종 게임 품질 승인을 대신하지 않는다. P0의 사용자 최소 입력·한글 통과도 P3 수용으로 확대하지 않는다.
 
-## 3. P0 판정 및 수용 게이트
+## 5. 미구현·위험·다음 작업
 
-**P0 통과.** 실제 환경 확인, 문서·이미지 설치와 Git 추적 등록, 사용자 직접 실행·입력·한글 테스트 결과를 근거로 한다. 커밋·푸시는 사용자가 정한 후속 공유 절차다.
+- 일지의 Day 선택·계획·지도 조작·항적·기록·메모·항구/사건 내용, 침대 수면·상자 보관·층/항구 이동은 비활성 Frame이다. 출입구는 통과하지 못하게 경계와 안내만 연결했다. 사건·전투·미니게임·모바일 상세는 연기된 범위다.
+- 선원 간 동적 접촉·경로 탐색·비표시 층 시뮬레이션은 미구현이다. 단일 플레이어 검증을 다수 선원 품질로 확대하지 않는다.
+- P3 수용은 움직임만의 검토가 아니다. 현재 선장실의 인물·가구·문 크기 비율, 배치·접근점·통행 폭, 보이는 빈 공간과 충돌 영역의 일치, 앞뒤 이동 시 Sort/차폐도 같은 단계의 통과 기준이다. P2 정적 수용 후 실제 이동에서 드러난 문제는 P3에서 수정한다. 현재 Collider 크기·발 기준 Y-sort는 첫 구현값이며 최종 수용값이 아니다. 다른 층·항구 연결, 가변 시설 배치 시스템·다수 선원 이동은 후속 확장 범위다.
+- Editor GC 기준선을 제품 코드 할당량으로 단정하지 않는다. Player 빌드 Profiler와 최종 지원 사양은 후속 확인이 필요하다.
+- 최종 PlayMode 테스트는 통과했으나 Test Runner 종료 시 UnityEditor.EditorApplication.Internal_PlayModeStateChanged의 “Assertion failed” 1건이 관찰됐다. 원인·제품 영향은 미확인, EditorAssertion.json에 원문 보존. Test Runner 밖의 추가 격리 Play 시작/종료에서는 재현되지 않았고 최종 콘솔 오류/경고0·컴파일 실패false다(FinalConsole.json). 미해결 관찰을 테스트 실패나 해결 완료로 바꾸지 않는다.
+- P2 Editor 도구에는 P2 계층/모든 UI 비활성 가정이 남는다. P3의 Visuals·활성 닫기·Canvas 순서를 가진 Scene에 P2 제작 도구를 재실행하지 않는다. 최초 연결용 P3SceneAuthoring도 연결된 Scene에 다시 실행하지 않는다.
+- Galmuri 배포 라이선스 동봉·정확한 NudeBase SVG 경로 재사용/눈 외 픽셀 불변은 미확인이다. 현재 아트 수용 범위를 확대하지 않는다.
+- **다음 작업:** 사용자 Game Scene 실조작에서 이동·접촉·방향/손 표현·일지/메뉴 중첩·저장 재진입을 평가하고 같은 P3에서 필요한 결함을 수정한다. 수용 전 P4로 진행하지 않는다.
 
-| 항목 | 판정·근거 |
-|---|---|
-| 프로젝트·실행 환경 | 통과 — 실제 프로젝트·패키지·렌더러·입력·메타 설정 확인, ProjectStructure 기록 완료 |
-| 기획·원본 | 통과 — 통합 명세·A01~A28·확정 보완 검토, 이미지 26장 열람 및 현행 링크 확인 |
-| 최소 실행·입력·한국어 | 통과 — 2026-11-01 사용자 직접 테스트 보고 |
-| 경고 | LiberationSans 메타데이터 Importer 버전 경고는 사용자 수용으로 비차단. 마지막 콘솔 조회의 2건은 같은 경고 반복 |
-| G0 요구·범위 | 통과 — P0 환경 준비 범위에 한함 |
-| G1 객체 모델·경계 | 통과 — 기본 프레임워크 범위 P1-01~07 설계 계약·사용자 수용 완료. 실제 코드 의존성 검사는 구현 후 수행 |
-| G2 제품 시각 자산·화면 | P2 범위 통과 — 소품/Human 생성 규격·선장실/Repeat 바닥·일지 UI를 사용자 수용. 실제 자산 연결과 3해상도 캡처/정적 구조 근거 확보. 기능·실조작 수용은 포함하지 않음 |
-| G3~G5 제품 구현·통합·수용 | 해당 없음 — P0는 게임 기능 구현 단계가 아님. 이후 활성 Slice에서 검증 |
-
-P2 정적 표현·Prefab 참조·해상도별 캡처는 확인했다. 조작감·연속 이동·역할별 충돌·동작 애니메이션·카메라 추적·저장/복원·Player 성능은 아직 **미확인**이다. P0의 입력·폰트 테스트 통과를 제품 품질 통과로 확대하지 않는다. 실제 완료 게임 기능은 없고 일지·문·가구의 장래 기능은 비활성 Frame이다.
-
-## 4. 남은 결정과 주의 사항
-
-- P1-01~07 수용·정정 반영 완료. A01~A28 대응표·본문 추가 요구·설계 게이트 판정은 Architecture 13절에 기록했다. 사건·모바일 상세는 기본 프레임워크 완성 및 테스트 통과 후 범위다.
-- P2 Complete: 첫 Scene의 정적 표현·자산/기술 규격·사용자 시각 수용 완료. 아트·PPU·피벗·Canvas·카메라 실제 규격은 ProjectStructure 2.3절에 기록. 역할별 Layer/충돌·연속 이동·실제 플레이 및 저장·성능 기준선은 P3 이후 해당 범위에서 확보.
-- Domain Reload 생략 환경에서 정적 상태·이벤트 구독·세션 초기화의 반복 진입 안전성을 향후 구현 시 검증한다.
-- 보관 기획서 References/최종기획서.md의 과거 상대 링크는 끊겨 있다. 현행 GameDesign 링크는 정상이며 보관 원문 링크를 P0 필수 참조로 사용하지 않는다.
-- Galmuri 라이선스 파일의 프로젝트 내 동봉은 미확인이다. 배포 자산 정리 시 확인한다.
-
-## 5. 다음 한 가지 작업
-
-바닥 후속 요청: 사용자가 Repeat용 독립 Seamless Tileable 목재 텍스처 생성을 요청했다. 확정 소품 B안/원본 샘플1·2만을 입력해 후보2개를 생성하고 References/P2/FloorStyleReview/에 원본1254×1254와 Repeat 3×3 검토본을 보관했다. 두 번째 CabinPlanks_Tileable02.png를 검토 후보로 제시한다. 모두 완전 불투명이며 Unity 임시 Texture2D.wrapMode=Repeat/UV3배로 검토했다. 원본 PNG 픽셀은 편집하지 않았다. 후보2의 대응 가장자리 평균 RGB 차이는 좌우약2.84/255, 상하약6.05/255로 픽셀 완전 일치가 아니다. 반복본의 큰 타일 색조 경계는 줄었지만 반복 바닥의 Scene 표현은 사용자 수용됐다. 대응 경계 픽셀 값의 완전 동일성을 통과로 바꾸지는 않는다. Generation.json에 실제프롬프트/입력/검증한계를 기록했다. 후속 사용자 적용 지시로 Assets/Game/Content/Art/Environment/CabinPlanksTileable.png에 후보2를 바이트 그대로 복사하고 선장실 바닥을 교체했다. Wrap=Repeat/NPOT=None/Bilinear/Uncompressed/MipmapOff, 원본1254×1254 유지, 전체 Rect/PPU156.75/native8×8 unit/Scale1/Tiled 영역11.6×6.5다. 16행 판자 폭은 약0.5unit이다. 실제 적용 검증은 SceneApplication.json, 화면은 CaptainCabin_RepeatFloor_3해상도.png에 보관한다. 가구·Human·UI·파티션을 변경하지 않았으며 새 이미지 생성·편집·커밋/푸시를 하지 않았다.
-
-
-**P2 Complete — 사용자가 Repeat 바닥까지 반영한 Scene의 모습을 수용했다. 다음 구현 단계는 P3이며 아직 시작하지 않았다.** 현재 생성 방식·고정 스타일 문구·원본 사용자 샘플 전용 참조 규정은 유지한다. P2 잔여 필수 제작/검증 항목은 없으며 사용자 후속 지시로 이번 결과를 `P2 Complete` 마일스톤으로 main에 공유한다. 새 생성·후처리·스킬/모델 추가 없이 합격 PNG 두 개를 기존 제품 아트 경로/GUID에 복사하고 Sprite 분할·Prefab 연결·바닥/파티션 메타데이터를 갱신했다.
-
-- Game Scene은 기존 Prefab 연결로 새 아트를 표시한다. 이번 Editor 실행 후 최초 Scene이 clean인 것을 확인했으며, 모든 임시 검토 상태를 복원한 뒤 저장했다(최종 dirty=false, Scene YAML 차이 없음). 이전 대화의 미저장 Scene 상태를 이번 실행의 사실로 간주하지 않는다.
-- 플레이어는 9파트 준비: 정면/후면/사선 머리·몸통, 눈 감은 정면 머리, 좌우 손. 정면/몸통/손이 기본 표시, 다른 방향/눈 감기는 비활성 보관. 전부 같은 uniform scale로 원본 손 비율을 유지한다. 손은 별도로 축소하지 않았으며 실제 조작 테스트 후 사용자 판단 방침을 유지한다.
-- 파티션70개/직선 Collider5개/모든 부모와 조각 Scale1. 현재 바닥은 새 독립 Repeat 텍스처를 전체 Rect로 참조하고 Tiled로 배치한다. 이전 아틀라스 잘라내기 바닥은 교체됐다. 새 후보의 완전 무이음 수용은 대응 가장자리 차이 측정과 사용자 평가를 구분한다. 원본 PNG는 리샘플/페인팅하지 않았다.
-- 구조 검사: Missing Script/Sprite0, SpriteRenderer84(비활성 포함), Human 동일 배율, 제품 TMP10개 Galmuri11 연결, 활성 Frame 조작0, 15개 소품/인물 Rect의 불투명 외곽 경계 접촉0, 적용 PNG와 승인 원본 바이트 동일. ApprovedArtValidation.json에 실제 값 기록.
-- 카메라 근거: CaptainCabin_Approved_3해상도·Journal_Approved_3해상도, Human_Approved_Front/Back/ThreeQuarter/ClosedEyes, FloorRepeat_Approved_3x3. 선장실1280×720/1600×900/1920×1080, 인물4표시, 기존 점선/Skeleton·한글 표시를 확인했다. UI Prefab/PNG는 수정하지 않았다.
-- 교체 과정에 옛 Sprite Rect가 새 PNG 크기를 벗어나는 임포트 경고4건이 일시 기록됐다. 새15개 Rect를 지정한 뒤 참조·외곽 검사는 정상이며 최종 콘솔 groundTruth 오류/경고0·컴파일 실패false를 확인했다. 과거 경고를 최종 미해결 결함으로 세거나 기록에서 지우지 않는다.
-- P3 Runtime 게임 기능·입력·이동·실제 충돌·애니메이션/프레임 전환·저장/복원·Player 성능은 미구현/미검증이다. 이번 결과를 기능 수용으로 확대하지 않는다. 추가18종은 검토 자료로 보존하며 이번 선장실에 모두 배치하지 않았다.
-- 외부 Character 문서는 원본 참고 자료다. 활성 Human 프롬프트는 사용자 합격한 9파트 방식이며 원래 문서의 손 금지/4컷 완성체 출력 대신 후속 사용자 결정을 따른다. 정확한 NudeBase SVG 경로 재사용과 눈 외 픽셀 불변은 여전히 미확인이다.
-- 기존 Galmuri11 SDF 초기화 변경이 있었고, 이번 Editor 한글 UI 검토/자산 저장 과정에서 Dynamic 글리프·아틀라스 캐시가 다시 채워져 파일 차이도 변했다. 기존 캐시와 바이트 동일 보존을 주장하지 않으며 원본 TTF/기본 폰트 설정은 변경하지 않았다. 이번 작업에서 Git 커밋·푸시는 하지 않았다. P2 정적 첫 화면 수용은 완료됐다. 실제 이동·충돌·상호작용·애니메이션·저장/복원·성능 검증은 P3의 별도 완료 조건이다.
-
-## 6. 갱신 규칙
-
-- 환경·구조·자산·진행·검증 상태가 변하면 해당 작업에서 ProjectStructure와 CurrentState의 담당 항목을 함께 갱신한다. 별도 사용자 요청이 있어야만 갱신하는 문서가 아니다.
-- CurrentState는 현재 사실·승인·판정·위험·다음 작업만 유지한다. 과거 상태·대화 원문·과정 로그를 누적하지 않는다.
-- 에이전트 확인, 사용자 직접 검증, 미실행·미확인을 구분한다. 사용자 통과 보고는 해당 범위의 유효한 근거로 반영한다.
-- Gate는 통과/미통과/미확인, 영향 없는 항목은 사유를 붙인 해당 없음으로 기록한다. 기능 구현 상태와 혼동하지 않는다.
-- 사용자 승인 없는 커밋·푸시·병합은 수행하지 않는다.
+CurrentState/ProjectStructure는 상태가 바뀐 작업에서 함께 갱신한다. 별도 과정 로그 MD는 생성하지 않는다. 승인 없는 Git 변경·사용자 저장 초기화는 수행하지 않는다.
