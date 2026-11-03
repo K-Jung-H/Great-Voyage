@@ -1,0 +1,10 @@
+{
+  "width": 1254,
+  "height": 1254,
+  "wrap": "Repeat",
+  "opaque": true,
+  "leftRightMeanAbsRGB": 2.8439659755449274,
+  "topBottomMeanAbsRGB": 6.0465178096756977,
+  "differentEdgePixelsLR": 1247,
+  "differentEdgePixelsTB": 1254
+}

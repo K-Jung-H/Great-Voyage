@@ -313,10 +313,10 @@ TextureImporter:
       name: NavigationDesk
       rect:
         serializedVersion: 2
-        x: 44
-        y: 552
-        width: 540
-        height: 382
+        x: 80
+        y: 597
+        width: 357
+        height: 261
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -335,10 +335,10 @@ TextureImporter:
       name: SingleBed
       rect:
         serializedVersion: 2
-        x: 632
-        y: 502
-        width: 340
-        height: 497
+        x: 664
+        y: 564
+        width: 208
+        height: 368
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,10 +357,10 @@ TextureImporter:
       name: SeaChest
       rect:
         serializedVersion: 2
-        x: 1048
-        y: 580
-        width: 448
-        height: 304
+        x: 1108
+        y: 606
+        width: 310
+        height: 234
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -379,10 +379,10 @@ TextureImporter:
       name: CabinFloorPanel
       rect:
         serializedVersion: 2
-        x: 44
-        y: 56
-        width: 464
-        height: 452
+        x: 85
+        y: 85
+        width: 342
+        height: 336
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -401,10 +401,10 @@ TextureImporter:
       name: PartitionWall
       rect:
         serializedVersion: 2
-        x: 558
-        y: 197
-        width: 516
-        height: 132
+        x: 579
+        y: 114
+        width: 378
+        height: 273
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -423,10 +423,10 @@ TextureImporter:
       name: CaptainChair
       rect:
         serializedVersion: 2
-        x: 1138
-        y: 117
-        width: 321
-        height: 337
+        x: 1178
+        y: 93
+        width: 177
+        height: 318
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

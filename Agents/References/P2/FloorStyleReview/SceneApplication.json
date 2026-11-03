@@ -1,0 +1,31 @@
+{
+  "texture": "Assets/Game/Content/Art/Environment/CabinPlanksTileable.png",
+  "width": 1254,
+  "height": 1254,
+  "wrap": "Repeat",
+  "npot": "None",
+  "filter": "Bilinear",
+  "uncompressed": true,
+  "sourceBytesIdentical": true,
+  "spriteRect": [
+    0.0,
+    0.0,
+    1254.0,
+    1254.0
+  ],
+  "nativeTileSize": [
+    8.0,
+    8.0
+  ],
+  "worldArea": [
+    11.6,
+    6.5
+  ],
+  "scale": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "ppu": 156.75,
+  "scene": "Assets/Game/Scenes/Game.unity"
+}

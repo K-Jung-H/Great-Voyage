@@ -65,9 +65,9 @@
 
 **목표:** 도형 프로토타입을 제품 화면으로 받아들이는 실수를 원천 차단.
 
-현재 상태: 실제 Game Scene·아트·Prefab과 해상도별 캡처/참조 검사를 마련했다. UI 비율 및 Day 점선·이미지/설명 Skeleton 보정은 사용자 수용으로 **P2 - UI Complete 하위 마일스톤**에 해당한다. 전체 P2 월드 표현의 최종 수용으로 확대하지 않으며 P3 활성 기능에는 착수하지 않는다. 실제 값·자산은 ProjectStructure 2.3절, 현재 근거·미확인은 CurrentState를 따른다.
+현재 상태: **P2 Complete.** 사용자 합격 소품 B안·Human 9파트·독립 Repeat 바닥을 실제 Game Scene의 Prefab에 적용하고 기존 일지 UI와 함께 3종 해상도에서 확인했다. 사용자가 최종 Scene의 모습을 수용했다. PPU/피벗/정렬/Canvas/파티션·파츠 참조와 정적 구조 검증은 ProjectStructure 2.3절 및 ApprovedArtValidation/SceneApplication 근거를 따른다. 방향별 파츠와 눈 감기 표시가 준비되어 있으며 실제 행동·입력·충돌·애니메이션 재생·저장·성능 수용은 P3다. 단계 완료는 Git 공유나 P3 자동 착수 허가가 아니다.
 
-- 최신 2026-11-03 Stylized Hand-Painted 제작 명세와 스타일 전용 참조(`VisualStandards.md` 1.3절·`ArtFactory/`), G02/G03의 공간·유닛 구성 및 D02/D03를 기준으로 선장실 바닥·벽·책상·플레이어·일지 UI Frame의 **실제 사용 가능한 자산**을 준비한다. 형태 단순화와 재질 표면 단순화를 구분하고, 명세 변경과 실제 새 아트/게임 화면 수용도 구분한다. 수용된 일지 UI는 유지한다.
+- 최신 사용자 합격 B안 고정 명세와 원본 샘플 전용 참조(`VisualStandards.md` 1.3절·`ArtFactory/StyleB.locked.prompt.txt`), G02/G03의 공간·유닛 구성 및 D02/D03를 기준으로 선장실 바닥·벽·책상·플레이어·일지 UI Frame의 **실제 사용 가능한 자산**을 준비한다. 사용자가 최종 채택한 현재 생성 방식과 스타일 문구를 유지하고 별도 스킬·모델·후처리를 임의로 추가하지 않는다. 스타일/생성 방식 수용과 실제 개별 자산/게임 화면 수용을 구분한다. Human은 별도로 수용된 HumanParts.locked.prompt.txt·HumanStyle.json의 9파트 계약을 따르고 소품 화풍을 전파하지 않는다. 수용된 일지 UI는 유지한다.
 - PPU/셀·충돌/피벗/정렬/카메라/텍스트/Canvas 규격을 실제 자산으로 검증하고 `ProjectStructure.md`에 기록한다.
 - 정식 `Game.unity`와 편집 가능한 월드·캐릭터·UI Prefab을 구성한다. 테스트용 도형 실험은 별도 Fixture로 격리한다.
 - Game View를 목표 해상도 3종에서 캡처하고 D/G 참조와 비교하여 사용자 시각 승인. 움직임·입력 피드백에 필요한 애니메이션 상태/표현 규격도 확보한다(실제 행동 수용은 P3).

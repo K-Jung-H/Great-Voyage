@@ -109,12 +109,12 @@ namespace GreatVoyage.Editor
             var path = Art + "Environment/CaptainCabinAtlas.png";
             Import(path, new[]
             {
-                Slice("NavigationDesk", 44, 90, 540, 382, 1024),
-                Slice("SingleBed", 632, 25, 340, 497, 1024),
-                Slice("SeaChest", 1048, 140, 448, 304, 1024),
-                Slice("CabinFloorPanel", 44, 516, 464, 452, 1024),
-                Slice("PartitionWall", 558, 695, 516, 132, 1024),
-                Slice("CaptainChair", 1138, 570, 321, 337, 1024)
+                ApprovedCell("NavigationDesk", 0, 0, 3, 2, path),
+                ApprovedCell("SingleBed", 1, 0, 3, 2, path),
+                ApprovedCell("SeaChest", 2, 0, 3, 2, path),
+                ApprovedCell("CabinFloorPanel", 0, 1, 3, 2, path),
+                ApprovedCell("PartitionWall", 1, 1, 3, 2, path),
+                ApprovedCell("CaptainChair", 2, 1, 3, 2, path)
             });
         }
 
@@ -123,12 +123,15 @@ namespace GreatVoyage.Editor
             var path = Art + "Characters/CaptainPartsAtlas.png";
             Import(path, new[]
             {
-                Slice("HeadFront", 30, 72, 504, 395, 1024),
-                Slice("HeadBack", 543, 72, 478, 399, 1024),
-                Slice("BodyFront", 1047, 108, 432, 445, 1024),
-                Slice("BodyBack", 29, 522, 483, 454, 1024),
-                Slice("HandLeft", 686, 680, 188, 216, 1024),
-                Slice("HandRight", 1180, 682, 191, 215, 1024)
+                ApprovedCell("HeadFront", 0, 0, 3, 3, path),
+                ApprovedCell("HeadBack", 1, 0, 3, 3, path),
+                ApprovedCell("HeadThreeQuarter", 2, 0, 3, 3, path),
+                ApprovedCell("BodyFront", 0, 1, 3, 3, path),
+                ApprovedCell("BodyBack", 1, 1, 3, 3, path),
+                ApprovedCell("BodyThreeQuarter", 2, 1, 3, 3, path),
+                ApprovedCell("HeadFrontClosed", 0, 2, 3, 3, path),
+                ApprovedCell("HandLeft", 1, 2, 3, 3, path),
+                ApprovedCell("HandRight", 2, 2, 3, 3, path)
             });
         }
 

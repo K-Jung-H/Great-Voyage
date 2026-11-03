@@ -1,79 +1,27 @@
 {
-  "schema_version": 1,
-  "revision": "2026-11-03-painterly",
-  "status": "active_production_specification_not_visual_acceptance",
-  "scope": "Great Voyage world sprite rendering; preserve existing content and technical structure; approved journal UI is not redesigned",
+  "schema_version": 2,
+  "revision": "2026-11-03-style-B-locked",
+  "status": "user_accepted_style_new_batches_require_consistency_review",
+  "scope": "Props/environment only. Human parts and approved UI excluded.",
+  "acceptance": {
+    "accepted_art": "References/P2/PropStyleReview/StyleB_OriginalSamplesOnly_01.png",
+    "accepted_recipe": "References/P2/PropStyleReview/OriginalSamplesOnly01.json",
+    "rule": "Acceptance is style approval only; new batches and Unity product suitability require review. Accepted PNG may be viewed for evaluation but never used as generation input."
+  },
+  "reference_policy": "Only original user-provided style reference/sample images. ALL previous generation results prohibited as positive/negative references, edit targets or supporting inputs. No num_last_images_to_include.",
   "reference_images": [
     {
-      "path": "../References/ArtStyle_2026-11-03/RejectedVectorResult.png",
-      "role": "negative_rendering_reference",
-      "instruction": "Avoid its smooth vector/sticker treatment. Its object selection and layout are not a new generation brief."
+      "path": "../References/ArtStyle_2026-11-02/Samples/샘플1.png",
+      "role": "original_user_style_reference"
     },
     {
-      "path": "../References/ArtStyle_2026-11-03/PainterlyHarborStyle.png",
-      "role": "positive_rendering_style_only",
-      "instruction": "Transfer painting, material treatment, organic color and contour handling only. Do not copy its buildings, object list, arrangement, viewpoint or alpha artifacts."
-    },
-    {
-      "path": "../References/ArtStyle_2026-11-03/PainterlyMaritimeStyle.png",
-      "role": "positive_rendering_style_only",
-      "instruction": "Transfer painting and readable material-specific detail only. Do not reproduce its boats, weapons, flags, furniture list, sheet composition or alpha artifacts."
+      "path": "../References/ArtStyle_2026-11-02/Samples/샘플2.png",
+      "role": "original_user_style_reference"
     }
   ],
-  "target_style": [
-    "Hand-Painted 2D Game Art",
-    "Stylized Painterly Illustration",
-    "Textured Shading",
-    "Organic Color Variation",
-    "Material-Specific Surface Details"
-  ],
-  "shape_vs_surface": {
-    "shape": "Simplify silhouette, proportions and major construction for small-game readability. Preserve requested topology, gameplay meaning, view, footprint and part boundaries. Shape simplification does not mean reducing every object to an icon.",
-    "surface": "Retain material-specific painted texture, local hue/value variation, wear and textured shading within the readable shape. Do not convert materials into solid color panels or reduce all shading to a single flat band.",
-    "density": "Prioritize silhouette and material recognition at the requested actual in-game size. Use selective meaningful detail; avoid a uniform noise overlay, oversharpening or indistinguishable microtexture."
-  },
-  "rendering": {
-    "color": "Use localized, organic warm/cool and light/dark paint variation across a material. Allow subtle unevenness and layered painted tones, not featureless uniform fill.",
-    "shading": "Use textured, brush-informed shading that describes form and material. Natural painterly tonal transitions are allowed; mathematically smooth airbrushed/radial gradients and plastic volume rendering are not.",
-    "outline": "Dark, readable material-aware contours with natural variation in thickness, intensity and hue. Preserve clean silhouette separation and legibility. Do not apply a uniform thick black stroke to every edge. Fine painted contour variation must not become ragged alpha or random jagged pixels.",
-    "lighting": "Preserve the requested or already approved lighting direction and value range consistently across the set and across views. Do not change view angle or rotate lighting independently for each part.",
-    "materials": {
-      "wood": "Directional grain and plank joins following construction; subtle hue changes, worn edges and occasional restrained knots. Painted timber, not a flat brown rectangle or glossy molded plastic.",
-      "metal": "Material-specific cool/warm tones, irregular painted reflections, restrained scratches, tarnish or patina; bright accents localized to edges and fittings, not a smooth plastic gradient.",
-      "cloth": "Soft painted folds, fiber suggestion and uneven dye tones at a readable scale; retain fabric weight and construction without plush/chibi inflation or glossy highlights.",
-      "stone": "Irregular mineral tones, selective pores, chips and mortar joints; broad painted planes with material detail, not uniformly filled geometric blocks.",
-      "leather": "Subtle grain, wear, seam/stitch accents and muted uneven tones where requested; avoid rubbery smooth shading.",
-      "paper": "Restrained fibers, organic discoloration and painted edges when applicable; no unwanted writing, map content or labels."
-    }
-  },
-  "avoid": [
-    "Clean Vector Art",
-    "Flat Vector Illustration",
-    "Uniform Thick Black Outlines",
-    "Smooth Digital Gradients",
-    "Plastic-Like Shading",
-    "Minimalist Icon Art",
-    "Excessively Simplified Geometry",
-    "Sticker-Like Cartoon Rendering"
-  ],
-  "replace_legacy_rules": [
-    {
-      "old": "flat opaque fills / flat well-defined color areas / ONE solid base color",
-      "replacement": "Opaque material interiors where appropriate, with organic painted color variation and material-specific textured shading. Opacity is an alpha requirement, not a uniform-color requirement."
-    },
-    {
-      "old": "thick smooth outlines / consistent outline thickness / pure black uniform stroke",
-      "replacement": "Readable dark hand-painted contours with controlled variation in thickness and intensity; consistent visual language, not identical stroke width."
-    },
-    {
-      "old": "minimalist / minimal interior texture / no wood grain / avoid Painterly rendering",
-      "replacement": "Simplified functional shapes with retained painted material detail; control visual density for the real display size."
-    },
-    {
-      "old": "only one hard-edged shadow patch / NO gradients of any kind",
-      "replacement": "Textured painterly modelling and organic tonal transitions; exclude smooth digital airbrush gradients and plastic shading, not painting."
-    }
-  ],
+  "locked_prompt": "StyleB.locked.prompt.txt",
+  "style_contract_verbatim": "AUTHORITATIVE STYLE: match the two supplied ORIGINAL references' overall visual identity: shape, proportions, projection, outline, palette restraint, shading structure, and detail density together. The images show compact low-resolution orthographic 2D raster furniture with concise rectangular forms, screen-axis aligned horizontal/vertical lines, thin consistent dark gray/black contours and restrained planar shading. Create objects that belong naturally alongside those actual sample assets. Do not merely borrow a color or texture. Do not reproduce sample object lists, modern equipment, people, icons, sheet layout or opaque checkerboard.\nSHAPE: simple geometry, straight lines and simple curves, slim frames and corners, no bulges, bulky bedposts, decorative projections or unnecessary depth. Clearly separate functional parts, but prioritize recognition at small game size. No extra structural detail to showcase texture.\nPROJECTION: the samples' orthographic top-down/front hybrid. Use the functional face for each object: tabletop/bed/chest upper plane readable, upright pieces with minimal necessary front-plane cues. Horizontal and vertical axes parallel to screen. Keep side thickness to minimum. No perspective convergence, isometric skew, diagonal staging, photorealistic furniture showcase or 3D-render volume. Maintain the reference's view logic across objects.\nLINES: thin uniform SINGLE dark gray/black outline. External and internal structural lines nearly equal width. No irregular thick corner rims, doubled black outlines, exterior drop shadows, colored bleed, ragged brush-painted edges. Texture/shading stays strictly INSIDE boundaries, never distorts contour.\nSURFACE: preserve reference-level color/material separation. Stable large base-color regions with only subtle internal fine texture: soft woodgrain and tiny color differences, restrained metal highlight/tonal variation, soft cloth folds and fine fiber suggestion. No dense scratch/grain noise, photoreal microdetail or dominant painterly brushwork. Material refinement must not change shape or overall style.\nCOLOR/LIGHT: restrained saturation and reference-level contrast, diffuse lighting with NO strong direction. Only construction joints and shallow steps may have relatively darker shadows. Avoid deep shadows, strong volumetric contrast and glossy/plastic gradients. Highlights only enough for material identity.\nRASTER: reference-like low-resolution 2D raster expression, mild antialiasing, compact readable details. Not razor-sharp vector illustration, hard stair-step pixel art, sticker/chibi cartoon or a highly detailed painted illustration.\nLAYOUT: six isolated sprites, one per conceptual 512x512 cell, full silhouettes inside canvas, at least32px clear margin and generous empty separation. TRUE transparent background, no baked checkerboard, backdrop, ambient color clouds, cast-shadow clouds, labels, caption, watermark or frame. Do not fill empty canvas with anything. This is review-only, not an in-game screenshot.",
+  "variation_policy": "Reuse the accepted style clauses verbatim; change requested object list only for current 6-cell expansion batches. Do not introduce a new style adjective, decorative era or lighting direction. Future format changes must preserve the style contract and be recorded explicitly.",
   "preserved_structure": {
     "sprite_sheet": "Separate requested sprites only; preserve requested canvas, grid/cell order, object count, generous transparent padding, non-overlap, stable names/IDs and consistent relative scale. No added labels, watermark, display board or environment.",
     "alpha": "Isolated sprites and parts require genuine transparent surroundings, clean alpha and no baked checkerboard, colored halo or backdrop. Opaque repeating surface tiles remain opaque where the existing technical brief requires them.",
@@ -83,22 +31,10 @@
     "partition_wall": "Keep each native segment at Transform scale (1,1,1), repeat N connected segments and use one collision shape per straight connected wall run. Native size is determined by source proportions and explicit PPU; never compensate with nonuniform Transform scaling."
   },
   "validation": {
-    "style": [
-      "Does the silhouette remain readable at the requested in-game size?",
-      "Can wood, metal, cloth and stone be distinguished without relying on labels?",
-      "Does the surface retain painted local color variation and textured shading?",
-      "Are contours dark and clear with natural controlled variation?",
-      "Is the result free of vector/sticker rendering, uniform black strokes, airbrush gradients and plastic shading?"
-    ],
-    "technical": [
-      "Requested sprite count, sheet order and separated parts preserved",
-      "Actual alpha and bright/dark background composites checked",
-      "View, relative scale, pivots and directional registration preserved",
-      "Tile/modular connection cases checked where applicable",
-      "Positive references used for rendering only; no copied content/layout"
-    ],
-    "acceptance": "Specification and prompt validation do not prove generated-art quality. Inspect actual outputs and Unity presentation; record unchecked items as unverified. User visual acceptance remains required."
+    "style": "Compare actual output with user original samples and accepted result for evaluation only: silhouettes, proportions, orthographic hybrid view, thin single contour, restrained palette/contrast, subtle interior texture, diffuse light and raster detail density. No stylistic acceptance from prompt text alone.",
+    "technical": "Check actual dimensions, item count, nonoverlap, alpha/background composites, sprite boundaries and relevant seams/module adjacencies before product use. Grid cells are review arrangement, not defined world sizes.",
+    "acceptance": "New candidate outputs require user consistency review; no automatic P2 completion."
   },
-  "legacy_policy": "Archived SourceDocuments and P2/ArtSources.json describe original inputs and existing generated assets. Preserve their historical truth; do not use them as current rendering instructions. This specification supersedes conflicting flat/vector or anti-painterly wording for new world asset production.",
-  "execution": "This JSON is production source data for prompt assembly, not a running Factory engine or automatic Unity importer."
+  "legacy_policy": "Historical prompts/results retained unchanged as provenance, never active generation references. This B contract supersedes earlier Painterly style emphasis, generated EDIT_TARGET and negative-image instructions.",
+  "execution": "Prompt source data only, not an executing generation/import engine."
 }

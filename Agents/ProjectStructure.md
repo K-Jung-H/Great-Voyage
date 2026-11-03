@@ -143,29 +143,31 @@ GreatVoyage/
 
 ### 2.3 P2 실제 표현 자산과 검증 규격
 
-| 종류 | 실제 파일·구성 |
+| 종류 | 현재 실제 파일·구성 |
 |---|---|
-| 제품 진입 | `Assets/Game/Scenes/Game.unity`: Main Camera / WorldContent / ScreenCanvas / EventSystem |
-| 월드 | `Assets/Game/Content/Prefabs/World/CaptainCabin.prefab`: 11.6×6.5 unit 바닥, 목재 파티션, 아래쪽 출입 틈, 침대·상자·의자와 중첩 책상 Prefab. 최종 시작 함선 모델·플레이어 최초 위치를 확정한 데이터가 아닌 첫 표현 구역 |
-| 책상 | `Assets/Game/Content/Prefabs/Facilities/NavigationDeskView.prefab`: Artwork와 아래쪽 ApproachPoint. 실제 일지 열기·감지·점유·차폐는 미구현 |
-| 캐릭터 | `Assets/Game/Content/Prefabs/Characters/PlayerView.prefab`: Head / Body / LeftHand / RightHand, SortingGroup. BackFacingParts는 비활성 보관. 다리 없음, 인물 데이터·이동 로직 없음 |
-| UI | `Assets/Game/Content/Prefabs/UI/JournalScreen.prefab`: 가죽 제본·일체형 가죽 인덱스·Day 텍스트 Toggle 5개·중앙 지도 표면·우측 빈 이미지/설명 영역·펜 도구/나가기 Frame. 기본 Game Scene에서는 비활성 |
-| 실제 아트 | `Assets/Game/Content/Art/Environment/CaptainCabinAtlas.png` 6 Sprite, `Characters/CaptainPartsAtlas.png` 6 Sprite, `UI/JournalMaterialsAtlas.png` 4 Sprite: 각각 1536×1024. `Environment/CabinPlanks.png`는 1254×1254 원본에서 줄눈 경계가 맞는 1254×942 구간을 1 Sprite로 슬라이스. 합계 17 Sprite |
-| 제작 도구 | `Assets/Game/Editor/P2PresentationAuthoring.cs`와 `.World.cs`: Unity Editor에서 Sprite importer·편집 가능한 Prefab·Scene/파티션 연결 구간을 작성. 기존 Game Scene이 있으면 전체 재생성을 거부. 제품 Runtime에 포함되지 않음. 일지 검토는 `Great Voyage > Preview > Show Journal Frame / Show Captain Cabin` 사용 |
-| 제작 원본·검증 근거 | `Agents/References/P2/ArtSources.json`의 내장 이미지 생성 프롬프트·입력 역할, `PresentationValidation.json`의 실제 Play 중 참조 검사. 선장실/일지 해상도 3종 캡처와 `FloorRepeat_3x3.png` 보존 |
+| 제품 진입 | Assets/Game/Scenes/Game.unity: Main Camera / WorldContent / ScreenCanvas / EventSystem. 기존 Prefab 인스턴스 연결로 새 아트를 반영했다. 검토 상태를 복원한 뒤 저장했고 Scene 파일 자체에는 Git 차이가 없다 |
+| 월드 | Content/Prefabs/World/CaptainCabin.prefab: 11.6×6.5 unit 바닥, 파티션, 아래 출입 틈, 침대·상자·의자 및 중첩 책상 |
+| 책상 | Content/Prefabs/Facilities/NavigationDeskView.prefab: Artwork·ApproachPoint. 실제 상호작용 미구현 |
+| 캐릭터 | Content/Prefabs/Characters/PlayerView.prefab: Head / Body / LeftHand / RightHand, SortingGroup. BackFacingParts·ThreeQuarterFacingParts·ClosedEyesParts는 비활성 표시 파츠 보관 |
+| UI | Content/Prefabs/UI/JournalScreen.prefab: 기존 수용된 가죽 Day 텍스트 탭·점선·Skeleton 유지. 기본 Scene에서는 비활성, Toggle/나가기 interactable=false |
+| 적용된 소품 | Content/Art/Environment/CaptainCabinAtlas.png: 합격 StyleB_OriginalSamplesOnly_01.png와 바이트 동일, 1536×1024·6 Sprite |
+| 적용된 인물 | Content/Art/Characters/CaptainPartsAtlas.png: 합격 Captain_Parts_FinalCandidate01.png와 바이트 동일, 1254×1254·9 Sprite |
+| UI 아트 | Content/Art/UI/JournalMaterialsAtlas.png: 기존 1536×1024·4 Sprite, 이번 변경 없음 |
+| 파티션 | Content/Art/Environment/PartitionWallSegment.asset: 새 소품 아틀라스 구간을 참조하는 독립 Sprite. native 0.5×약0.350529 unit. 70개 연결, 부모/조각 Scale (1,1,1), 직선 구간별 BoxCollider2D 5개 |
+| 바닥 | Content/Art/Environment/CabinFloorSegment.asset: 독립 CabinPlanksTileable.png 전체 Rect (0,0,1254,1254)를 참조. native8×8 unit/PPU156.75, Tiled로11.6×6.5 영역, Scale1. Texture Wrap=Repeat/NPOT=None/Bilinear/Uncompressed/MipmapOff. 원본 후보2와 바이트 동일, 리샘플/페인팅 없음 |
+| 기존 바닥 PNG | Content/Art/Environment/CabinPlanks.png는 보존하지만 현재 선장실의 바닥 렌더러가 참조하지 않음 |
+| Editor 도구 | Editor/P2PresentationAuthoring.cs·.World.cs·.ApprovedArt.cs. ApplyApprovedArt로 승인 아트 분할/Prefab 연결, ValidateApprovedArt로 구조 확인. 기존 Build는 Scene 존재 시 재생성 거부. 제품 Runtime 기능 추가 없음 |
 
-- 임포트는 PPU 128 / Bilinear / Mipmap Off / Uncompressed / Max Size 2048 / Full Rect다. 투명 PNG의 알파를 유지하며 Sprite Rect와 이름/ID를 보존한다. UI의 큰 가죽·종이 패널은 36px border의 9-slice, 지도와 작은 장식은 Simple Image를 사용한다.
-- 카메라는 Orthographic Size 5.5, 위치 `(0, 0, -10)`, HDR Off. Canvas는 같은 카메라에 planeDistance 5, sortingOrder 100이다. World Sprite는 URP Sprite-Unlit-Default를 사용해 자산 자체의 색을 검토한다. 조명·주야간 표현 완료를 뜻하지 않는다.
-- Sorting Layer는 Default를 유지한다. 바닥 -100 / 파티션 0 / 가구 10 / 플레이어 SortingGroup 20, 유닛 내부 Body 0 / Hand 1 / Head 2. 현재 정적 배치의 순서이며 이동 중 Y 정렬·차폐는 P3에서 역할별로 검증한다.
-- 모든 제품 TMP 10개가 Galmuri11 SDF를 명시 참조한다. 실제 사용 문자열로 Dynamic 폰트의 글리프/아틀라스가 추가되어 기존 `Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset`도 변경됐다. 폰트 종류·기본 설정을 변경한 것은 아니다.
-- P2의 Day 1~5와 지도는 배치 검토용 Frame 표면이며 실제 항해 기록/세계 데이터가 아니다. Toggle 5개와 나가기 버튼은 interactable=false, 이벤트 바인딩 없음. 가짜 항해·기록·저장 상태는 생성하지 않는다.
-- 애니메이션 준비 범위는 앞/뒤 머리·몸과 분리 손의 자산/계층이다. P3의 Idle / Moving / Interacting 표시가 기존 인물 행동 상태를 읽도록 연결한다. 손 움직임·방향 전환·정지/재개 전환과 Animator는 아직 미구현이며 애니메이션 품질 통과가 아니다.
-- 파티션 직선 구간별 BoxCollider2D 5개가 있다. Rigidbody·캐릭터 충돌/이동·입력·저장·세션 코드는 아직 없다. P2는 정적 표현/구간 경계 검증이며 실제 접촉·조작감·저장/복원·Player 성능을 통과로 확대하지 않는다. UI 범위는 사용자 수용, 전체 P2 최종 시각 수용은 추가 개선 검토 중이다.
-- 사용자 검토에서 UI 비율 전체를 수용했다. 최신 일지 Prefab은 Day Toggle마다 `DashedSelectionArea`, 우측 `SelectionIllustration_FrameDisabled`의 Skeleton과 `DescriptionSkeleton_FrameDisabled`의 4개 줄을 포함한다. 점선은 `Assets/Game/Runtime/Presentation/UI/DashedBorderGraphic.cs`의 MaskableGraphic이 단일 메시로 그리며 매 프레임 Update·게임 상태·저장 필드를 갖지 않는다. 블록/줄은 직렬화된 비입력 Image다. 기존 EmptySelection 문구는 비활성으로 보존했다. 영역/비율을 바꾸지 않았고 사용자 Scene의 기존 미저장 변경을 저장하거나 폐기하지 않았다.
-- 2026-11-03 파티션 보정: `Environment/PartitionWallSegment.asset`은 회화풍 아틀라스의 반복 가능한 가운데 구간을 참조하는 Sprite 메타데이터다. PNG를 리샘플하거나 늘리지 않는다. 현재 원본 Rect `(734,220,165,92)` / PPU 330 / pivot 중앙 / Full Rect로 native 폭 0.5 unit을 정의한다. `ConfigureNativePartitionSprite`가 Sprite Rect의 중심 알파 구간에서 모듈을 추출하고 원본 비율을 유지한다. 북쪽 24개, 서·동쪽 각 13개, 남쪽 좌·우 각 10개로 총 70개를 연결하며 부모·조각 모두 Scale `(1,1,1)`이다. 직선 구간마다 BoxCollider2D 하나, 조각에는 Collider 없음. 별도 Sprite 1개가 추가되어 PNG 내부 17개와 합계 18 Sprite다. Collider는 12/6.5/6.5/5/5 unit 길이와 같은 두께로 구간을 덮는다. 실제 이동/접촉은 미검증이다.
-- 활성 아트 제작 자료는 `Agents/ArtFactory/FactoryStyle.json`, `PromptTemplates.json`, `IMAGE_PROMPT.template.txt`, 완성 예시 `CaptainCabin.prompt.txt`다. 별도 실행 Factory 엔진은 없으며 JSON/텍스트가 새 생성용 명세·프롬프트 원본이다. 스타일 참조 3장은 `Agents/References/ArtStyle_2026-11-03/`에 있고 Unity 임포트 대상 밖이다. 기존 SourceDocuments 및 `P2/ArtSources.json`의 생성 프롬프트는 과거 자산의 원본 기록으로 보존한다.
-- 사용자 지시로 선장실 사물·캐릭터 파츠·바닥 PNG 3개를 회화풍으로 재생성해 **기존 자산 경로와 GUID를 유지**하며 교체했다. 실제 생성 프롬프트·참조 역할·파일 해시는 `References/P2/PainterlyArtSources.json`에 있다. 기존 6개 사물과 6개 파츠의 이름/ID·구성·배치 역할을 유지하고, 캔버스 셀 가정 대신 실제 외곽별 Sprite Rect를 명시했다. 앞몸통 경계 잘림을 수정했으며 최종 12개 Rect의 불투명 외곽 잘림은 0이다. 새 바닥은 1254×942 줄눈 구간으로 슬라이스하며 3 unit 반복 크기를 유지한다.
-- `ApplyPainterlyWorldArt`는 사물/캐릭터 Rect 재임포트 후 기존 Prefab의 표시 크기·파트 등록을 다시 연결한다. 승인된 UI 자산·비율·점선·Skeleton은 교체하지 않았다. 새 카메라 검토본은 `CaptainCabin_Painterly_1280x720/1600x900/1920x1080.png`, 반복 검토는 `FloorRepeat_Painterly_3x3.png`, 구조/알파 경계 근거는 `PainterlyArtValidation.json`이다. 이번 검증은 Editor 카메라·자산 구조 범위이며 새로운 Play/물리 접촉/입력/Player 성능 합격이나 사용자 최종 시각 수용을 뜻하지 않는다.
+- 위 Content/Editor 경로는 Assets/Game/ 기준이다. 새 원본 PNG 두 개는 승인본을 그대로 복사했으며 기존 경로·GUID와 기존 Sprite 이름/ID를 유지했다. Human의 사선 머리·몸통과 눈 감은 머리 3개만 추가했다. 적용 아틀라스 내부 19 Sprite와 독립 바닥/파티션 2개가 제품 표현에 준비되어 있다. 별도 보존된 기존 바닥 Sprite 1개는 현 Scene에서 사용하지 않는다.
+- PNG importer는 PPU128 / Bilinear / Mipmap Off / Uncompressed / Max2048 / Full Rect. 실제 알파 경계 기준으로 각 사물을 분할하고 4px 여백을 둔다. 15개 소품/인물 Sprite Rect의 alpha>=128 경계 접촉은 모두 0이다. 실제 Rect는 References/P2/ApprovedArtValidation.json을 따른다.
+- 인물 전 파츠의 동일 uniform scale은 약0.2518033이다. 몸통 표시 크기 약0.6×0.4485, 모자 포함 머리 약0.598×0.4957, 손 약0.183~0.185×0.185 unit. 승인된 손/몸통 원본 비율을 유지하며 손만 축소하지 않았다. Body 중심 (0,-0.12), Head 중심 (0,0.27), 손 (±0.4,-0.14). 후면·사선·눈 감기 표시도 같은 배율/기준 위치다.
+- 애니메이션 준비: 정면/후면/약한 사선 머리·몸통과 눈 감은 머리를 같은 배율·조립 기준으로 준비하고 Editor 정적 표시를 확인했다. P3의 Idle / Moving / Interacting 표현은 기존 인물 행동 상태를 읽어 연결하며 실제 방향 전환·손 움직임·정지/재개 피드백과 재생 품질은 P3에서 검증한다. 이번 단계에서 Runtime 애니메이션을 구현한 것은 아니다.
+- 가구는 기존 배치와 최대 표시 범위 안에서 종횡비를 보존하는 uniform scale을 적용했다. 책상 최대2.9×1.93, 침대1.45×2.3, 상자1.7×1.12, 의자0.95×1.14 unit. 기존 비균등 늘리기 대신 원본 비율을 유지한다.
+- 카메라는 Orthographic Size5.5, (0,0,-10). Canvas는 동일 카메라/planeDistance5/sortingOrder100, 기준1920×1080/Match0.5. 바닥 sortingOrder-100, 파티션0, 가구10, 플레이어 SortingGroup20, 내부 Body0/Hand1/Head2. 이동 중 Y정렬/차폐·추적은 P3 검증 범위다.
+- 제품 TMP10개는 Galmuri11 SDF를 명시 참조하며 이번 카메라에서 한글 표시를 확인했다. 작업 전 폰트 아틀라스 초기화 변경이 있었고, Editor의 한글 UI 표시/자산 저장 과정에서 Dynamic 글리프·아틀라스 캐시가 다시 채워져 미커밋 차이도 변했다. 이를 원래 상태와 바이트 동일하게 보존했다고 주장하지 않는다. 원본 TTF·기본 폰트 설정은 변경하지 않았으며 공유하지 않았다.
+- 검증 근거: ApprovedArtValidation.json, CaptainCabin_Approved_1280x720·1600x900·1920x1080.png, Journal_Approved_동일3해상도.png, Human_Approved_Front·Back·ThreeQuarter·ClosedEyes.png, FloorRepeat_Approved_3x3.png. SpriteRenderer84(비활성 파츠 포함), Missing Script/Sprite0, 활성 Frame 조작0, 파티션70/Collider5/비단위 배율0, 모든 Human 파츠 동일 배율.
+- 현재 독립 Repeat 바닥은 CaptainCabin_RepeatFloor_3해상도와 FloorStyleReview/SceneApplication.json에서 검증했다. 대응 경계 색 차이 좌우약2.84/상하약6.05(RGB0~255)는 남아 있어 대응 경계 픽셀 완전 동일성과 사용자 시각 수용을 구분한다. Scene의 바닥 표현은 사용자 수용됐다. 사용자가 Repeat 바닥까지 반영한 조립 Scene 표현을 수용하여 P2 정적 첫 화면 게이트를 통과했다. 이 수용이 경계 픽셀 완전 동일성이나 실제 행동 수용을 뜻하지 않는다. Editor 카메라 확인이며 실제 입력·연속 이동·충돌·애니메이션·저장·Player 성능 통과를 뜻하지 않는다.
+- 고정 제작 자료는 ArtFactory/FactoryStyle.json·StyleB.locked.prompt.txt(소품), HumanStyle.json·HumanParts.locked.prompt.txt(인물). 기존 생성물은 새 생성의 입력/수정/긍정·부정 참조로 금지한다. 이번에는 새 이미지 생성·후처리·스킬 설치 없이 승인된 PNG를 적용했다. 추가18종은 References의 검토 자료로 보존하며 선장실에 전부 배치하지 않았다.
 
 ## 3. Scene/Prefab/스크립트 책임
 
@@ -214,3 +216,5 @@ GreatVoyage/
 - **대표 성능 환경:** 최초 실행 가능 Slice부터 테스트 Editor/Player 버전·해상도·환경, 대상 유닛 수/시설 수, 프레임 시간·물리 시간·GC 할당을 기록한다. **최종 수치 합격 목표가 미정인 것과 측정을 아예 하지 않는 것은 다르다.**
 - **프로파일링 산출물:** 로그·화면 캡처·Profiler 원본은 민감 정보나 용량을 고려해 추적 여부를 정한다. 미추적 실험 자료는 `CurrentState.md`에 재현 명령/절차와 증거 위치·결과 요약을 남기고, 다른 기기로 인계할 때는 재현 가능한 테스트로 보완한다.
 - **회귀 관리:** 선원 수·UI 항목·시설 수 증가 등 비용이 달라지는 구현에서는 이전 동일 조건과 비교한다. 성능 악화를 무조건 특정 최적화 기술로 해결하지 말고 우선 병목을 확인한다.
+
+- 바닥 Repeat 후속 검토 자료: Agents/References/P2/FloorStyleReview/CabinPlanks_Tileable01.png·CabinPlanks_Tileable02.png와 각각의 Repeat3x3.png/EdgeValidation.json. 내장 imagegen 원본은1254×1254/완전 불투명이다. 후속 사용자 지시로 후보2를 제품 CabinPlanksTileable.png에 적용했다. 적용 결과는 같은 폴더 SceneApplication.json, 생성 당시 기록과 기술적 한계는 Generation.json을 따른다.

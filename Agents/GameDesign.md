@@ -99,7 +99,9 @@
 - 예시 이미지의 다리까지 세밀하게 표현된 RPG 캐릭터를 최종 유닛 기준으로 사용하지 않는다.
 - 도안에서 정한 가로 방향 함선 구도와 공간 배치를 실제 탑뷰 표현으로 옮긴다.
 
-**2026-11-03 최신 사용자 지정 화풍:** 월드 Sprite 렌더링 목표는 **Stylized Hand-Painted 2D Game Asset**이다. `References/ArtStyle_2026-11-03/PainterlyHarborStyle.png`와 `PainterlyMaritimeStyle.png`는 회화적 채색·재질별 질감·유기적 색 변화·자연스러운 어두운 윤곽선만 참고한다. 이 이미지들의 오브젝트 구성·배치·시점을 복제하지 않는다. 같은 폴더의 `RejectedVectorResult.png`는 피해야 할 Vector Cartoon / Flat Illustration 결과다. 형태는 게임 가독성에 맞게 단순화하지만 표면·재질·채색을 단색 면으로 단순화하지 않는다. 이전 Flat-Shaded/Bold-Outline 분류나 과거 프롬프트의 질감·Painterly 금지와 충돌하면 이번 지시가 우선한다. 기존 샘플1·샘플2 및 G 자료의 구조·Head/Body/Hand·시점/공간 가독성 역할, D 배치, G01 지도, 3.2절 인물 일러스트와 수용된 일지 UI 계약은 유지한다. 활성 제작 명세와 프롬프트는 `ArtFactory/FactoryStyle.json`, `ArtFactory/PromptTemplates.json`, `ArtFactory/IMAGE_PROMPT.template.txt`이며 상세 적용·검수는 `VisualStandards.md`를 따른다. 과거 첨부 MD와 생성 기록은 보존용 원본이지 현재 제작 명령이 아니다.
+**2026-11-03 최신 사용자 수용 화풍 — B안 고정:** 원본 샘플1·샘플2만으로 생성한 StyleB_OriginalSamplesOnly_01.png를 사용자가 합격으로 판정하고 해당 생성 스타일을 고정했다. 간결한 기하 형태·비율, 화면 축 정렬의 직교식 탑다운/정면 혼합 시점, 얇고 일정한 단일 윤곽선, 절제된 기본색·채도·명암·디테일 밀도와 약한 안티앨리어싱의 2D 래스터 표현을 따른다. 확산광을 사용하고 미세 질감·색 변화는 내부 표면에만 적용하며 실루엣·선 두께·입체감은 증가시키지 않는다. 과도한 회화적 붓질·사실적 질감·장식·프레임·깊은 그림자는 금지한다. 이전 Painterly 분류보다 이번 B 계약이 우선한다. 생성 입력은 사용자 제공 원본 레퍼런스·샘플만 허용하며 지금까지 생성한 모든 결과물은 긍정/부정 참조·수정 대상 등으로 사용 금지다. 수용된 이미지도 생성 입력으로 사용하지 않는다. Human 관련 파츠·인물 일러스트·지도·수용된 일지 UI 계약은 이번 범위에서 변경하지 않는다. 고정 제작 원본은 ArtFactory/StyleB.locked.prompt.txt와 FactoryStyle.json이다. 새 사물의 일관성·제품 사용성은 개별 검토한다.
+
+**Human 후속 확정(2026-11-03):** 사용자가 머리·몸통·독립 손을 분리한 Captain_Parts_FinalCandidate01.png와 현행 생성 방식을 수용했다. 소품 B안과 독립된 Pawn 스타일이며 정면/후면/약한 사선 머리·몸통, 눈 감은 정면 머리, 좌우 손의 9파트를 사용한다. 고정 프롬프트는 ArtFactory/HumanParts.locked.prompt.txt, 상세 수용/제약은 HumanStyle.json 및 VisualStandards 1.4절을 따른다. 손 크기는 현 결과를 유지하고 실제 게임 테스트 후 사용자가 판단한다. 팔·다리 없는 기존 구조는 유지한다. 수용된 이미지도 생성 입력으로 재사용하지 않는다. 인물 초상 일러스트 기준은 별도다.
 
 ### 3.2 인물 일러스트
 

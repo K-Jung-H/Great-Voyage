@@ -1,0 +1,45 @@
+{
+  "status": "final_parts_candidate_user_evaluation_pending_not_applied",
+  "style_status": "Human style accepted by user; part proportions and hands newly generated",
+  "tool": "built-in image_gen",
+  "output": "Captain_Parts_FinalCandidate01.png",
+  "actual_dimensions": [
+    1254,
+    1254
+  ],
+  "requested_dimensions": [
+    1536,
+    1536
+  ],
+  "layout": {
+    "columns": 3,
+    "rows": 3,
+    "actual_cell": [
+      418,
+      418
+    ],
+    "order": [
+      "HeadFront",
+      "HeadBack",
+      "HeadThreeQuarter",
+      "BodyFront",
+      "BodyBack",
+      "BodyThreeQuarter",
+      "HeadFrontClosed",
+      "HandLeft",
+      "HandRight"
+    ]
+  },
+  "prompt": "NEW GENERATION: final-candidate SEPARATED PARTS sprite sheet for a fictional Great Voyage captain. ONLY the supplied ORIGINAL user sample atlas is a visual reference. NO previously generated results may be used as a visual input, reference, edit target or negative reference. Derive appearance from this written spec and original user Pawn Avatar Factory v6 style rules. Do not copy sample modern objects, characters' identities or checkerboard.\nKeep the user-accepted HUMAN visual style: clean minimalist pawn-like 2D game sprite, circular head, simple dome torso, smooth consistent near-black #111111 outlines, flat opaque fills, dot eyes, tiny mouth, crisp antialiasing, readable small-scale forms. NOT the prop material rendering. NO grain, painterly brush texture, glossy chibi shading, digital gradients, realistic anatomy, 3D or ornate detailing.\nIDENTITY: average-build fictional captain, plain navy tricorne with narrow muted ochre trim, short compact brown hair with coherent rear nape mass, warm skin #E5B58C, navy #24364C coat with ivory #E9DFCA shirt, simple lapels, brown belt and small brass #B59A52 square buckle. No badge, beard, weapon, jewelry, cape or extra accessories.\nOUTPUT: one transparent 1536x1536 square PNG, EXACTLY NINE ISOLATED detachable SPRITES in a 3x3 conceptual grid. Do NOT draw assembled characters anywhere. No text, part labels, panel lines, alignment guides, body template, background or shadows.\nEXACT ORDER:\nROW 1: (1) HeadFront eyes open including hat, face, hair ONLY; (2) HeadBack including rear hat and brown nape hair ONLY, no face; (3) HeadThreeQuarter modest 15-25 degree turn toward screen right including hat/hair/face ONLY.\nROW 2: (4) BodyFront coat/shirt/belt ONLY, NO head/hat/hair/neck/skin/limbs; (5) BodyBack navy coat rear and center seam ONLY, NO front shirt or front buckle, NO head/hair; (6) BodyThreeQuarter navy coat/ivory opening/lapels/belt buckle all coherently turned toward screen right, NO head or limbs.\nROW 3: (7) HeadFrontClosed: visually identical HeadFront hat/hair/face with only eyes replaced by short closed-eye strokes; (8) HandLeft: ONE tiny isolated stylized skin-color mitten/palm shape, subtle thumb bump, NO fingers/forearm/arm/sleeve; (9) HandRight: matching mirrored skin-color mitten/palm shape, NO fingers/forearm/arm/sleeve.\nThe original avatar source prohibited limbs; this request explicitly adds SEPARATE GAME HAND SPRITES ONLY. Arms, legs, feet, extended sleeves and hands attached to torso remain forbidden.\nPROPORTION CORRECTION — smaller circular face relative to torso, not huge chibi head: use NudeBase B02_Dome proportions as visual intent. Canonical local geometry: head circle center(80,57),radius31 (diameter62); torso M18,168 C18,115 44,79 80,73 C116,79 142,115 142,168 Z (width124,height95). Facial circle is HALF the torso width and about 65% torso height. Hat may bring whole head width to approximately torso width but NEVER make facial circle as wide as torso. Do not enlarge hat/face to create an oversized head. No shoulder or sleeve protrusions; torso is the smooth simple dome with straight bottom. Part boundaries clean and closed.\nSHARED SCALE across grid: use approximately 2x canonical geometry: facial circle diameter124 pixels, torso width248,height190 pixels; full head including hat roughly230-250 wide and180-205 high; each tiny hand about42x48 pixels. These are intentional relative sizes. Do NOT enlarge hands or shrink bodies to fill their cells! Each cell is512x512; center sprite horizontally and vertically leaving generous transparent margin. All head variants same scale and anchor, all body variants same scale and anchor. Arms/hands are separate so torso must have no arm bulges or sleeve ends. Head and body intended to overlap slightly when assembled later, but remain visibly disconnected in this sheet.\nVIEW LOCK: rear hat/hair/outfit same identity. Three-quarter must consistently turn hat brim/crown, face, hair overlap, collar, shirt opening, lapels and buckle toward screen-right, not face-only. Core face circular and torso dome silhouette remain consistent. No front details on rear torso.\nTRANSPARENCY: true RGBA transparent empty canvas and sprite gaps, clean edges. No opaque/colored backdrop, checkerboard, atmospheric cloud or cast shadow. Flat OPAQUE interiors. All nine fully inside cells with no overlap. This is a final-candidate PARTS atlas, not a posed character sheet and not a Unity screenshot.",
+  "actual_image_inputs": [
+    "D:/Great_Voyage/Great_Voyage/Agents/References/ArtStyle_2026-11-02/Samples/샘플1.png"
+  ],
+  "validation": {
+    "parts": "Nine separate intended parts visible. Coarse alpha>=128 scan every2px found nonempty sprites with margins in all nine cells; exact SpriteRects/pivots not authored.",
+    "scale": "Approx head-with-hat width293px, torso295px, each hand85px. Requested pixel sizes not strictly followed. Hand/body width ratio about0.29 rather than intended0.17; hand display size must be reviewed during assembly. Raw atlas is not world-scale specification.",
+    "alpha": "Corner and grid-gap samples alpha0; full halo/composite certification not performed.",
+    "geometry": "NudeBase shape described as intent only; exact source path not deterministically reused.",
+    "blink": "FrontClosed generated freely, not an exact copied eye-only edit. Outside-eye identity not certified.",
+    "application": "No Unity import, prefab edits, skin weights, animation or gameplay verification; saved PNG unchanged."
+  }
+}

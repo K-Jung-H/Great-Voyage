@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "revision": "2026-11-03-human-parts-accepted",
+  "status": "user_accepted_style_and_parts_prompt_locked_game_test_pending",
+  "scope": "World Human head/body/detached hands only; independent from prop B and portrait illustration styles.",
+  "canonical_prompt": "HumanParts.locked.prompt.txt",
+  "prompt_policy": "Preserve the accepted production prompt verbatim. Do not silently introduce texture, prop-style instructions, new models, skills or editing workflow. Character identity changes require explicit production brief; they do not authorize changing the rendering/part contract.",
+  "reference_policy": "Only original user-provided references/samples; all generated outputs including accepted outputs prohibited as visual generation inputs, edit targets and positive/negative references.",
+  "reference_images": [
+    {
+      "path": "../References/ArtStyle_2026-11-02/Samples/샘플1.png",
+      "role": "original_user_reference"
+    }
+  ],
+  "accepted_output": "../References/P2/HumanStyleReview/Captain_Parts_FinalCandidate01.png",
+  "source_record": "../References/P2/HumanStyleReview/PartsGeneration01.json",
+  "rendering": "Minimalist pawn, circular head, simple dome body, smooth consistent near-black outline, flat opaque fills, dot eyes, crisp antialiasing; no painterly/grain/plastic rendering.",
+  "parts": [
+    "HeadFront",
+    "HeadBack",
+    "HeadThreeQuarter",
+    "BodyFront",
+    "BodyBack",
+    "BodyThreeQuarter",
+    "HeadFrontClosed",
+    "HandLeft",
+    "HandRight"
+  ],
+  "layout": {
+    "rows": 3,
+    "columns": 3,
+    "requested_canvas": [
+      1536,
+      1536
+    ],
+    "accepted_actual_canvas": [
+      1254,
+      1254
+    ],
+    "accepted_actual_cell": [
+      418,
+      418
+    ],
+    "rule": "Inspect actual dimensions per output, not assumed prompt size. No implicit resampling."
+  },
+  "hands": {
+    "decision": "User accepts current hand size for now. Keep it unchanged until user evaluates actual game tests; do not shrink automatically.",
+    "observed_approx_width": 85,
+    "observed_approx_body_width": 295,
+    "observed_ratio": 0.29,
+    "prompt_numeric_intent": "Original accepted prompt contains 42x48 hand size intent; this was not achieved literally. Preserve prompt provenance; do not use that intended number to reject or rescale the accepted output.",
+    "anatomy": "Separate stylized palms allowed by latest user instruction; no attached arms, fingers, legs or feet."
+  },
+  "limits": [
+    "Exact NudeBase vector geometry reuse not achieved by this image generation method.",
+    "Eye-closed head is not certified identical outside eye region.",
+    "Exact SpriteRects, pivots, assembly, directional transition and game-scale appearance remain to validate.",
+    "User acceptance of source atlas is not Unity integration or gameplay test completion."
+  ]
+}

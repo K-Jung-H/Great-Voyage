@@ -1,0 +1,47 @@
+{
+  "body_mass": 50,
+  "muscularity": 30,
+  "body_confidence": "low",
+  "body_evidence": "No specific person image supplied. Fictional average-build captain chosen for style evaluation, not inferred from any real subject.",
+  "base_id": "B02_Dome",
+  "identity_anchors": [
+    "plain navy tricorne with narrow ochre trim",
+    "short brown hair with coherent nape mass",
+    "navy coat over ivory shirt",
+    "small brass center buckle"
+  ],
+  "skin_tone": "#E5B58C",
+  "hair": {
+    "color": "muted brown",
+    "front": "small simple fringe under hat",
+    "sides": "short symmetrical side locks",
+    "back": "short connected nape mass, not bald",
+    "length": "short",
+    "volume": "compact",
+    "headwear_occlusion": "hat hides crown; side locks and nape remain visible"
+  },
+  "headwear": {
+    "type": "plain navy tricorne",
+    "trim": "narrow muted ochre",
+    "badge": "none"
+  },
+  "outfit": {
+    "front": "simple navy coat with ivory central shirt, plain lapels, small brass belt buckle",
+    "back": "plain navy coat back with simple center seam; no front buttons, shirt panel or buckle",
+    "palette": [
+      "#24364C",
+      "#E9DFCA",
+      "#77573F",
+      "#B59A52",
+      "#111111"
+    ],
+    "external_overlays": [],
+    "turn_behavior": "In modest rightward turn, hat, face, hair overlap, collar and buckle shift consistently; no face-only turn"
+  },
+  "views": [
+    "front",
+    "back",
+    "three_quarter",
+    "front_eyes_closed"
+  ]
+}
