@@ -1,0 +1,141 @@
+{
+  "zone": "captain-cabin",
+  "cellSize": 1.0,
+  "columns": 11,
+  "rows": 6,
+  "furniture": [
+    {
+      "name": "NavigationDeskView",
+      "kind": "navigation-desk",
+      "footprint": [
+        2,
+        1
+      ],
+      "configured": true,
+      "valid": true,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/NavigationDeskView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "children": [
+        "CellArea",
+        "Visuals",
+        "ApproachPoint",
+        "Collision"
+      ],
+      "cellAreaGrid": "CaptainCabinGrid",
+      "collisionSize": [
+        1.2583909,
+        0.6500001
+      ],
+      "worldSize": [
+        1.36781609,
+        1.0
+      ],
+      "position": [
+        2.5,
+        1.5
+      ]
+    },
+    {
+      "name": "CaptainBed_FrameDisabled",
+      "kind": "captain-bed",
+      "footprint": [
+        1,
+        2
+      ],
+      "configured": true,
+      "valid": true,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/CaptainBedView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "children": [
+        "CellArea",
+        "Visuals",
+        "Collision"
+      ],
+      "cellAreaGrid": "CaptainCabinGrid",
+      "collisionSize": [
+        0.8000002,
+        1.48615384
+      ],
+      "worldSize": [
+        1.0,
+        1.76923084
+      ],
+      "position": [
+        -4.0,
+        1.0
+      ]
+    },
+    {
+      "name": "SeaChest_FrameDisabled",
+      "kind": "sea-chest",
+      "footprint": [
+        0,
+        0
+      ],
+      "configured": false,
+      "valid": false,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/SeaChestView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "children": [
+        "CellArea",
+        "Visuals",
+        "Collision"
+      ],
+      "cellAreaGrid": "CaptainCabinGrid",
+      "collisionSize": [
+        1.33538437,
+        0.8399999
+      ],
+      "worldSize": [
+        1.4837606,
+        1.12
+      ],
+      "position": [
+        -4.2,
+        -1.85
+      ]
+    },
+    {
+      "name": "CaptainChair",
+      "kind": "captain-chair",
+      "footprint": [
+        0,
+        0
+      ],
+      "configured": false,
+      "valid": false,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/CaptainChairView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "children": [
+        "CellArea",
+        "Visuals",
+        "Collision"
+      ],
+      "cellAreaGrid": "CaptainCabinGrid",
+      "collisionSize": [
+        0.5076227,
+        0.627000034
+      ],
+      "worldSize": [
+        0.6345283,
+        1.14
+      ],
+      "position": [
+        2.6,
+        -0.4
+      ]
+    }
+  ]
+}

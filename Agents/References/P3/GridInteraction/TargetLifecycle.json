@@ -1,0 +1,22 @@
+[
+  {
+    "condition": "disabled",
+    "selected": null,
+    "highlight": false
+  },
+  {
+    "condition": "enabled",
+    "selected": "navigation-desk-main",
+    "highlight": true
+  },
+  {
+    "condition": "occluded",
+    "selected": null,
+    "highlight": false
+  },
+  {
+    "condition": "restored",
+    "selected": "navigation-desk-main",
+    "highlight": true
+  }
+]

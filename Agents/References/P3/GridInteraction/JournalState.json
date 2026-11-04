@@ -1,0 +1,18 @@
+{
+  "playMode": true,
+  "PlayId": "c1dd1fde79544a8f832952cf6f114b03",
+  "RootSeed": 1717,
+  "time": 62056.377091035247,
+  "position": {
+    "AreaId": "captain-cabin",
+    "X": 2.5,
+    "Y": 0.5
+  },
+  "facing": "Front",
+  "JournalOpen": true,
+  "MenuOpen": false,
+  "pauseCount": 1,
+  "ExitPrepared": false,
+  "SavePath": "C:\\Users\\KJH\\AppData\\LocalLow\\DefaultCompany\\Great_Voyage\\Saves\\Validation\\P3_b70ccb2c50c24eb9a805f0edf26df723\\session.json",
+  "Error": ""
+}

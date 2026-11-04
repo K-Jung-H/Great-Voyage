@@ -15,6 +15,7 @@ namespace GreatVoyage.Composition
         [SerializeField] private PlayerMotor player;
         [SerializeField] private CharacterView character;
         [SerializeField] private JournalDesk desk;
+        [SerializeField] private MonoBehaviour[] interactionTargets;
         [SerializeField] private CabinHud hud;
         [SerializeField] private InputActionAsset controls;
         [SerializeField] private string saveDirectoryName = "P3Cabin";
@@ -49,10 +50,16 @@ namespace GreatVoyage.Composition
                     state = new GameSessionState(Guid.NewGuid().ToString("N"), rootSeed,
                         new CharacterState("player", position, Facing.Front), new GameClock(firstSliceGameSeconds));
                 }
-                Session = new GameSession(state, desk, new SaveCoordinator(store));
+                var targets = new IInteractionTarget[interactionTargets.Length];
+                for (var i = 0; i < targets.Length; i++)
+                    targets[i] = interactionTargets[i] as IInteractionTarget
+                        ?? throw new InvalidOperationException("Invalid serialized interaction target.");
+                Session = new GameSession(state, new InteractionResolver(targets), new SaveCoordinator(store));
                 player.Bind(Session);
                 character.Bind(Session, player);
                 hud.Bind(Session, RequestExit, store.RecoveredBackup ? "이전 정상 저장을 복구했습니다." : "");
+                for (var i = 0; i < targets.Length; i++)
+                    interactionTargets[i].GetComponent<InteractionHighlight>()?.Bind(Session, targets[i].TargetId);
                 input = new PcInputSource(controls, Session);
                 UnityEngine.Application.wantsToQuit += WantsToQuit;
                 initialized = true;

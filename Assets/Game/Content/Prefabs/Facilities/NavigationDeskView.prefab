@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5871170382942963702}
   - component: {fileID: 2398689154682828324}
+  - component: {fileID: 4763414964221861820}
+  - component: {fileID: 5460241361696400697}
   m_Layer: 0
   m_Name: NavigationDeskView
   m_TagString: Untagged
@@ -30,8 +32,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6353546396843194645}
   - {fileID: 4283129249859123315}
   - {fileID: 7836506405569558436}
+  - {fileID: 993547941710679824}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2398689154682828324
@@ -44,13 +48,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c321c50e09a0d0248bfb60c5240618c8, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: GreatVoyage.Presentation::GreatVoyage.Presentation.JournalDesk
   approachPoint: {fileID: 7836506405569558436}
   obstructionMask:
     serializedVersion: 2
     m_Bits: 256
   reach: 0.8
+  targetId: navigation-desk-main
+  prompt: "\uD56D\uD574 \uC77C\uC9C0 \uC5F4\uAE30"
+  priority: 0
+--- !u!114 &4763414964221861820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376698157196224264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c361e7a05a35c34b9e2f51c289da5f3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: GreatVoyage.Presentation::GreatVoyage.Presentation.CellSize
+  settings: {fileID: 11400000, guid: 8401d18498371e54baa8a389d94cc11b, type: 2}
+  definition: {fileID: 11400000, guid: f20741f5d9fd35949a47afb47dbc8a6d, type: 2}
+  cells: {x: 2, y: 1}
+  cellArea: {fileID: 8666717400004710615}
+--- !u!114 &5460241361696400697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376698157196224264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0146ea8d00e0c064fa371cb386a7bc69, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: GreatVoyage.Presentation::GreatVoyage.Presentation.InteractionHighlight
+  artwork: {fileID: 4193850472610474058}
+  outlineMaterial: {fileID: 2100000, guid: b40b1903e15eee141bcbdde0d55121a0, type: 2}
+  outlineColor: {r: 1, g: 0.85, b: 0.45, a: 1}
+  outlinePixels: 3
 --- !u!1 &1483600671381731982
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,9 +100,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4283129249859123315}
   - component: {fileID: 4193850472610474058}
-  - component: {fileID: 3510647317659164040}
   m_Layer: 8
-  m_Name: Artwork
+  m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +117,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.94651335, y: 0.94651335, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5871170382942963702}
@@ -144,13 +182,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!61 &3510647317659164040
+--- !u!1 &2398964487717213648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 993547941710679824}
+  - component: {fileID: 3740956164861517751}
+  m_Layer: 8
+  m_Name: Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &993547941710679824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2398964487717213648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5871170382942963702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3740956164861517751
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483600671381731982}
+  m_GameObject: {fileID: 2398964487717213648}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -188,7 +258,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.5659375, y: 1.3253906}
+  m_Size: {x: 1.2583908, y: 0.65}
   m_EdgeRadius: 0
 --- !u!1 &6024062495720951116
 GameObject:
@@ -215,9 +285,53 @@ Transform:
   m_GameObject: {fileID: 6024062495720951116}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.25, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5871170382942963702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7922748717289389324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6353546396843194645}
+  - component: {fileID: 8666717400004710615}
+  m_Layer: 0
+  m_Name: CellArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6353546396843194645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922748717289389324}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5871170382942963702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8666717400004710615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922748717289389324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3064e80ef8998d4499cca00b07a81384, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: GreatVoyage.Presentation::GreatVoyage.Presentation.FurnitureCellArea

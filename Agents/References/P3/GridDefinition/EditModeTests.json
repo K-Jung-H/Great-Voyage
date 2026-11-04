@@ -1,0 +1,90 @@
+{
+  "status": "completed",
+  "duration": 0.43,
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.ClockUsesOneTenMinuteDayAndNeverCatchesUpPausedTime",
+      "Status": "Passed",
+      "Duration": 0.0184864,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.CorruptedMainUsesBackupAndNextSavePreservesThatGoodBackup",
+      "Status": "Passed",
+      "Duration": 0.0528914,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.FailedTemporaryWriteLeavesPreviousSaveUntouched",
+      "Status": "Passed",
+      "Duration": 0.0045986,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.InvalidSaveIsNotSilentlyReplacedWithNewSession",
+      "Status": "Passed",
+      "Duration": 0.0049647,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.NestedMenuDoesNotReleaseJournalPauseAndTokensAreIdempotent",
+      "Status": "Passed",
+      "Duration": 0.001463,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.RealFileRoundTripRestoresCommonPositionFacingClockAndSeed",
+      "Status": "Passed",
+      "Duration": 0.0140103,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.RejectedInteractionCannotPauseOrWriteSave",
+      "Status": "Passed",
+      "Duration": 0.0012075,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.SaveOnlyHappensAtNormalExitAndFailureAllowsRetry",
+      "Status": "Passed",
+      "Duration": 0.000814,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.ContinuousCentersAreValidatedWithoutMovingOrRoundingThem",
+      "Status": "Passed",
+      "Duration": 0.0004252,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.InvalidOrOutsideDefinitionsAreRejected",
+      "Status": "Passed",
+      "Duration": 0.0013935,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.WholeFootprintMustFitZoneAndAvoidForbiddenCells",
+      "Status": "Passed",
+      "Duration": 0.0002524,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

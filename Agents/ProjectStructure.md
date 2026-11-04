@@ -23,7 +23,7 @@
 | 기본 한국어 폰트 | `TMP Settings.asset`의 기본 폰트는 `Galmuri11 SDF.asset`(GUID `11f430421abc0d84297aa673a343400e`). 원본 `Galmuri11.ttf` 참조, Dynamic Atlas. Bold·Condensed TTF/SDF도 존재. 전역 Fallback은 비어 있음. 한글 표시·폰트 입력·적용은 사용자 직접 테스트 통과(2026-11-01). 제품 UI의 해상도별 줄바꿈·클리핑은 이후 해당 화면에서 검증 |
 | 타깃 PC OS, 빌드 아키텍처 | 활성 빌드 대상 `StandaloneWindows64` / Standalone. 최종 지원 Windows 버전·최소 사양은 미정 |
 | 기준 해상도·화면비·Canvas 스케일 정책 | Player 기본 크기 `1920×1080`(16:9). P2 Game Canvas는 Screen Space - Camera, Reference `1920×1080`, Scale With Screen Size / Match Width Or Height `0.5`. 1280×720 / 1600×900 / 1920×1080 실제 카메라 캡처 확인. 최종 지원 화면비·모바일 규격 확정은 아님. SampleScene의 기존 Overlay/Constant Pixel Size는 유지 |
-| PPU / 세계 Cell Size / 피벗·스프라이트 기준점 | 기본 P2 Sprite PPU `128`, 피벗 중앙 `(0.5, 0.5)`, Full Rect. 새 파티션 전용 Sprite는 원본 165×92 구간/PPU 330으로 native 0.5×약 0.2788 unit, Transform 배율 1. Grid/Tilemap 셀은 아직 구성하지 않음. 바닥은 가로 3 Unity unit 단위 반복, 별도 점유·충돌 셀 규격은 아님. 2.3절 참조 |
+| PPU / 세계 Cell Size / 피벗·스프라이트 기준점 | 기본 P2 Sprite PPU128, 피벗 중앙(0.5,0.5), Full Rect. 파티션 조각 native폭0.5 unit/Scale1은 유지한다. 현재 로컬 Placement Cell은1 unit이며 Unity Grid/Tilemap 컴포넌트로 월드를 구성하지 않는다. 바닥은 native8×8 unit 독립 Repeat Sprite를11.6×6.5 영역에 표시하고 배치 Cell과 독립적이다. 2.3절·3절의 현행 가구 구성을 따른다 |
 | 테스트 실행 명령/방법 | Test Framework 1.8.0. CLI command test run --mode editor --filter CabinDomainTests / --mode playmode --filter CabinPlayTests --async_tests true. Temp/pipeline_test_status.json에서 completed/summary 확인. EditMode 8/8·실제 Game Scene PlayMode 1/1 통과. Player 빌드 검증은 미확인 |
 | 물리 레이어·충돌 매트릭스 / 공간 질의 정책 | 기본 Layer와 WorldSolid(8), CharacterBody(9). 글로벌 매트릭스는 기본값 유지, Collider excludeLayers로 Actor↔Solid/Actor만 허용. 정적 가구/벽에는 Rigidbody 없음. 책상 거리·Linecast 및 로드 OverlapCircle은 WorldSolid만 질의 |
 | 물리 스텝 | Fixed Timestep `0.02초`, Maximum Allowed Timestep `0.33333334초`, Time Scale `1`. 엔진 기본 설정이며 게임의 하루 600초를 구현했다는 뜻은 아님 |
@@ -182,9 +182,21 @@ GreatVoyage/
 - 저장은 Application.persistentDataPath/Saves/P3Cabin/session.json, 버전1 JSON envelope·payload SHA-256, tmp flush 후 원자 교체와 .bak 복구다. 손상/버전 불일치/잘못된 배치가 모두 복구 불가능하면 초기화하지 않고 오류를 표시한다. 무결성은 보안 기능이 아니다.
 - Tests/Editor/CabinDomainTests와 Tests/PlayMode/CabinPlayTests는 각각 격리 Temp Guid 저장소를 사용한다. PlayMode는 테스트용 InputSettings clone과 Keyboard/Mouse를 쓰고 종료 시 복원한다. 실제 사용자 저장을 삭제하지 않는다. FPS 제한 테스트도 targetFrameRate/vSyncCount를 원복한다.
 - Editor/P3SceneAuthoring은 최초 연결용으로 기존 연결 Scene 재실행을 금지한다. Editor/P3Validation은 격리 슬롯 설정/복원·상태 증거·ProfilerRecorder 측정용이며 제품 빌드에 포함되지 않는다. P2 도구에는 이전 계층/비활성 UI 가정이 있어 P3 Scene에 재실행하지 않는다.
-- 검증 증거는 Agents/References/P3에 둔다. 모든 제품 Assets에는 .meta를 유지한다. 새 패키지나 전역 Physics/Input 설정 변경은 없다. P3 사용자 수용·Player 성능은 별도 검증 대기다.
+- 검증 증거는 Agents/References/P3에 둔다. 모든 제품 Assets에는 .meta를 유지한다. 새 패키지나 전역 Physics/Input 설정 변경은 없다. 사용자 시각 테스트 통과 및 P3 Complete 명시 승인을 받았고 현행 Scene 설정·가구 비율을 유지한다. 독립 Player 실행/성능 측정은 미확인 항목으로 추적한다.
 
 ## 3. Scene/Prefab/스크립트 책임
+
+### P3 로컬 Grid·가구 Prefab의 현재 구성 (2026-11-04)
+
+- 최신 표준 Cell은 **1 world unit**이며 Content/Definitions/GridSettings.asset이 유일한 월드 셀 크기 원본이다. CaptainCabin.prefab Root의 PlacementSpace는 로컬 원점(-5.5,-3)·설정 참조·제외 셀(4,0)/(5,0)/(6,0)을 갖는다. 바닥 객체의 두 GridArea는 같은 원점 기준 RectInt(0,0,6,6)/(5,0,6,6)이다. 두 영역을 합치고 중복을 제거한66개에서 제외3개를 뺀63개 셀만 배치 허용한다. 제외 영역은 하단 출입구 여유이며 이동 차단 규칙이 아니다. 다른 함선/층은 별도 PlacementSpace를 사용한다.
+- Runtime/Domain/PlacementGrid·GridCell·GridRect는 Unity 미참조의 합집합/제외·전체 Footprint·연속 중심 적합성 검사다. PlacementSpace가 같은 파생 정의를 검사와 Editor Gizmo에 제공한다. Area 경계를 걸쳐도 전체 셀이 같은 Space의 허용 집합이면 유효하다. 이동/물리/바닥 Repeat는 연속 좌표를 유지하며 Runtime 스냅/Overlay는 없다.
+- 각 가구 Root의 CellSize가 공유 GridSettings·FurnitureDefinition·Cell 수·CellArea를 참조한다. Content/Definitions의 네 FurnitureDefinition은 종류 ID만 갖는다. 점유 Cell은 책상2×1·침대1×2, 의자/상자는 미정(0,0)이며 중복된 점유 원본은 없다. CellArea 중심의 소유 Space 로컬 위치로 적합성을 검사한다. 이전 PlacementZone/PlacementGridDefinition/FurnitureFootprint 및 CaptainCabinGrid 자산은 제거했다.
+- Facilities/NavigationDeskView.prefab·CaptainBedView.prefab·CaptainChairView.prefab·SeaChestView.prefab은 CaptainCabin 내부의 nested Prefab으로 연결된다. 벽/바닥은 가구 Prefab으로 추출하지 않았다. 총 제품 Prefab7개다.
+- 각 가구 Root 아래 **CellArea(FurnitureCellArea) / Visuals(SpriteRenderer) / Collision(BoxCollider2D)**가 형제이며 책상 ApproachPoint도 형제다. 렌더러에는 Collider가 없고 Collision에는 Renderer가 없다. Root·CellArea·Collision Scale1, Visuals만 원본 비율을 유지하는 uniform scale이다. 셀 영역2×1 안의 책상 Sprite는 약1.368×1, 세로 침대1×2 안의 Sprite는1×1.769 unit이다. 의자/상자는 이전 크기다. 실제 충돌 경계는 별도 크기로 유지하며 정렬은 시각 바운드의 발 기준이다.
+- 책상 초기 위치(2.5,1.5), approach local(0,-0.9), 침대(-4,1)이다. Collider를 Visuals에서 분리할 때 월드 크기를 독립적인 Collision.size/offset으로 옮겼다. 이후 Visuals 배율 변경은 Collider와 CellArea에 영향을 주지 않는다. PlayMode 테스트는 실제 접근점·Collider의 충돌 기대 위치와 Scene 재진입 후 계층/점유 적합성을 검사한다. 사용자 저장 파일/저장 스키마 변경 없음.
+- Editor/P3GridInteractionAuthoring.Apply는 공유 설정·CellSize·바닥 GridArea·PlacementSpace·책상 Highlight와 Scene 참조를 연결한다. 기존 Cell 수/Rect/제외 셀은 보존하고 Prefab별 저장·강제 재임포트 후 Scene을 저장한다. 기존 P2/P3 전체 제작 도구는 현행 계층에 재실행하지 않는다. Scene Gizmos 활성 시 각 가구의 셀·크기는 선택 없이 표시한다. CaptainCabin 선택 시 허용 합집합/제외 셀을 확인하고 바닥 선택 시 두 GridArea Rect를 Inspector에서 편집한다. 설정 변경은 자동 재배치가 아니다.
+- Runtime/Application/InteractionResolver는 IInteractionTarget을 조회해 단일 선택 결과를 GameSession에 제공한다. Composition/CabinSessionRoot.interactionTargets에는 현재 책상만 직렬화 연결한다. Presentation/World/InteractionHighlight와 Content/Art/InteractionOutline.shader·.mat은 원본 SpriteRenderer의 내부 알파 가장자리를 약1.25 화면 픽셀의 따뜻한 색으로 강조하며 해제 시 원래 재질/속성을 복구한다. HUD와 E 입력도 같은 선택 ID를 사용한다. 이미지·저장 스키마는 변경하지 않았다.
+- 현행 근거는 References/P3/GridInteraction의 구조·EditMode20/20·PlayMode1/1·대상 생명주기·실화면·Editor 캡처다. GridDefinition_1Unit은 이전 구조의1 unit 축척 자료이며 GridDefinition은 이전0.5 unit 자료다. 드래그·배치 Preview/Overlay·확정/취소·점유 트랜잭션은 후속 계약만 있고 미구현이다.
 
 | 자산 종류 | 소유·수명 | 규칙 |
 |---|---|---|

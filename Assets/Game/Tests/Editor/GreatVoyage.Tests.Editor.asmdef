@@ -4,7 +4,8 @@
   "references": [
     "GreatVoyage.Domain",
     "GreatVoyage.Application",
-    "GreatVoyage.Infrastructure"
+    "GreatVoyage.Infrastructure",
+    "GreatVoyage.Presentation"
   ],
   "includePlatforms": [
     "Editor"

@@ -1,0 +1,100 @@
+{
+  "zone": "captain-cabin",
+  "cellSize": 0.5,
+  "columns": 22,
+  "rows": 12,
+  "furniture": [
+    {
+      "name": "NavigationDeskView",
+      "kind": "navigation-desk",
+      "footprint": [
+        2,
+        1
+      ],
+      "configured": true,
+      "valid": true,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/NavigationDeskView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "worldSize": [
+        0.683908045,
+        0.5
+      ],
+      "position": [
+        2.5,
+        1.25
+      ]
+    },
+    {
+      "name": "CaptainBed_FrameDisabled",
+      "kind": "captain-bed",
+      "footprint": [
+        1,
+        2
+      ],
+      "configured": true,
+      "valid": true,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/CaptainBedView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "worldSize": [
+        0.5,
+        0.8846154
+      ],
+      "position": [
+        -4.25,
+        1.5
+      ]
+    },
+    {
+      "name": "SeaChest_FrameDisabled",
+      "kind": "sea-chest",
+      "footprint": [
+        0,
+        0
+      ],
+      "configured": false,
+      "valid": false,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/SeaChestView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "worldSize": [
+        1.4837606,
+        1.12
+      ],
+      "position": [
+        -4.2,
+        -1.85
+      ]
+    },
+    {
+      "name": "CaptainChair",
+      "kind": "captain-chair",
+      "footprint": [
+        0,
+        0
+      ],
+      "configured": false,
+      "valid": false,
+      "prefab": "Assets/Game/Content/Prefabs/Facilities/CaptainChairView.prefab",
+      "rootScale": [
+        1.0,
+        1.0
+      ],
+      "worldSize": [
+        0.6345283,
+        1.14
+      ],
+      "position": [
+        2.6,
+        -0.4
+      ]
+    }
+  ]
+}

@@ -10,11 +10,6 @@ namespace GreatVoyage.Application
         void Back();
     }
 
-    public interface IInteractionQueries
-    {
-        bool CanOpenJournal(WorldPosition player);
-    }
-
     public interface ISessionStore
     {
         bool TrySave(GameSessionState state, out string error);
@@ -54,6 +49,7 @@ namespace GreatVoyage.Application
         public bool JournalOpen { get; private set; }
         public bool MenuOpen { get; private set; }
         public bool ExitPrepared { get; private set; }
+        public InteractionSelection? FocusedInteraction { get; private set; }
         public string Error { get; private set; } = "";
         public bool WorldInputAllowed => !disposed && !ExitPrepared && !Pauses.IsPaused;
         public event Action Changed;
@@ -64,25 +60,44 @@ namespace GreatVoyage.Application
             this.interactions = interactions ?? throw new ArgumentNullException(nameof(interactions));
             this.saves = saves ?? throw new ArgumentNullException(nameof(saves));
             Pauses.Changed += OnPauseChanged;
+            RefreshInteraction();
         }
 
         private void OnPauseChanged(bool paused)
         {
             if (paused) Movement = default;
+            RefreshInteraction();
             Changed?.Invoke();
         }
 
         public void Tick(double realSeconds)
         {
             if (!disposed && !ExitPrepared && !Pauses.IsPaused) State.Clock.Advance(realSeconds);
+            RefreshInteraction();
         }
 
         public void Move(float x, float y) => Movement = WorldInputAllowed ? new MoveIntent(x, y) : default;
-        public bool CanInteract => WorldInputAllowed && interactions.CanOpenJournal(State.Player.Position);
+        public bool CanInteract => WorldInputAllowed && FocusedInteraction.HasValue;
+
+        public void RefreshInteraction()
+        {
+            var next = WorldInputAllowed ? interactions.Resolve(State.Player.Position, FocusedInteraction?.TargetId) : null;
+            var changed = next?.TargetId != FocusedInteraction?.TargetId || next?.Prompt != FocusedInteraction?.Prompt
+                || next?.Action != FocusedInteraction?.Action;
+            FocusedInteraction = next;
+            if (changed) Changed?.Invoke();
+        }
 
         public bool Interact()
         {
             if (!CanInteract) return false;
+            var selected = FocusedInteraction.Value;
+            if (!interactions.IsStillValid(State.Player.Position, selected))
+            {
+                FocusedInteraction = null; Changed?.Invoke();
+                return false;
+            }
+            if (selected.Action != InteractionAction.OpenJournal) return false;
             JournalOpen = true;
             journalPause = Pauses.Acquire("Journal");
             Changed?.Invoke();
@@ -146,6 +161,7 @@ namespace GreatVoyage.Application
         {
             if (disposed) return;
             disposed = true;
+            FocusedInteraction = null;
             Pauses.Changed -= OnPauseChanged;
             journalPause?.Dispose(); menuPause?.Dispose();
             journalPause = menuPause = null;

@@ -77,7 +77,7 @@ namespace GreatVoyage.Presentation
             var nearExit = session.State.Player.Position.Y < -2.35f && Mathf.Abs(session.State.Player.Position.X) < 1.2f;
             if (ready != lastReady || nearExit != lastNearExit || string.IsNullOrEmpty(hintLabel.text))
             {
-                hintLabel.text = session.Pauses.IsPaused ? "" : ready ? "E  항해 일지 열기" : nearExit
+                hintLabel.text = session.Pauses.IsPaused ? "" : ready ? "E  " + session.FocusedInteraction.Value.Prompt : nearExit
                     ? "현재 출입구를 이용할 수 없습니다."
                     : "WASD / 방향키  이동     E  상호작용     Esc  메뉴";
                 lastReady = ready;

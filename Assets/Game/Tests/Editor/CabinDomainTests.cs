@@ -10,7 +10,13 @@ namespace GreatVoyage.Tests
     public sealed class CabinDomainTests
     {
         private string directory;
-        private sealed class Reach : IInteractionQueries { public bool Allowed = true; public bool CanOpenJournal(WorldPosition p) => Allowed; }
+        private sealed class Reach : IInteractionQueries
+        {
+            public bool Allowed = true;
+            public InteractionSelection? Resolve(WorldPosition p, string retained) => Allowed
+                ? new InteractionSelection("desk", "일지", 0, 0, InteractionAction.OpenJournal) : (InteractionSelection?)null;
+            public bool IsStillValid(WorldPosition p, InteractionSelection selected) => Allowed && selected.TargetId == "desk";
+        }
         private sealed class Store : ISessionStore
         {
             public bool Success = true; public int Writes;

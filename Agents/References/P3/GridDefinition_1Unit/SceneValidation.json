@@ -1,0 +1,11 @@
+{
+  "scene": "Assets/Game/Scenes/Game.unity",
+  "isDirty": false,
+  "playing": false,
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "furniture": 4,
+  "rigidbodies": 1,
+  "colliders": 11,
+  "saveSlot": "P3Cabin"
+}

@@ -1,0 +1,116 @@
+{
+  "scene": "Assets/Game/Scenes/Game.unity",
+  "dirty": false,
+  "playing": false,
+  "settings": "Assets/Game/Content/Definitions/GridSettings.asset",
+  "cellSize": 1.0,
+  "spaceId": "captain-cabin",
+  "origin": [
+    -5.5,
+    -3.0
+  ],
+  "allowedCells": 63,
+  "areas": [
+    {
+      "AreaId": "cabin-left",
+      "rect": [
+        0,
+        0,
+        6,
+        6
+      ]
+    },
+    {
+      "AreaId": "cabin-right",
+      "rect": [
+        5,
+        0,
+        6,
+        6
+      ]
+    }
+  ],
+  "excluded": [
+    [
+      4,
+      0
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      6,
+      0
+    ]
+  ],
+  "furniture": [
+    {
+      "name": "NavigationDeskView",
+      "kind": "navigation-desk",
+      "cells": [
+        2,
+        1
+      ],
+      "IsConfigured": true,
+      "IsPlacementValid": true,
+      "children": [
+        "CellArea",
+        "Visuals",
+        "ApproachPoint",
+        "Collision"
+      ]
+    },
+    {
+      "name": "CaptainBed_FrameDisabled",
+      "kind": "captain-bed",
+      "cells": [
+        1,
+        2
+      ],
+      "IsConfigured": true,
+      "IsPlacementValid": true,
+      "children": [
+        "CellArea",
+        "Visuals",
+        "Collision"
+      ]
+    },
+    {
+      "name": "SeaChest_FrameDisabled",
+      "kind": "sea-chest",
+      "cells": [
+        0,
+        0
+      ],
+      "IsConfigured": false,
+      "IsPlacementValid": false,
+      "children": [
+        "CellArea",
+        "Visuals",
+        "Collision"
+      ]
+    },
+    {
+      "name": "CaptainChair",
+      "kind": "captain-chair",
+      "cells": [
+        0,
+        0
+      ],
+      "IsConfigured": false,
+      "IsPlacementValid": false,
+      "children": [
+        "CellArea",
+        "Visuals",
+        "Collision"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "TargetId": "navigation-desk-main",
+      "IsHighlighted": false
+    }
+  ]
+}

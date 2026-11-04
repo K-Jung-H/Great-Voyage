@@ -4,20 +4,27 @@ using UnityEngine;
 
 namespace GreatVoyage.Presentation
 {
-    public sealed class JournalDesk : MonoBehaviour, IInteractionQueries
+    public sealed class JournalDesk : MonoBehaviour, IInteractionTarget
     {
         [SerializeField] private Transform approachPoint;
         [SerializeField] private LayerMask obstructionMask;
         [SerializeField, Min(0.1f)] private float reach = 0.8f;
+        [SerializeField] private string targetId = "navigation-desk-main";
+        [SerializeField] private string prompt = "항해 일지 열기";
+        [SerializeField] private int priority;
+        public string TargetId => targetId;
         private readonly Collider2D[] overlaps = new Collider2D[16];
 
-        public bool CanOpenJournal(WorldPosition player)
+        public bool TryQuery(WorldPosition player, out InteractionSelection candidate)
         {
-            if (player.AreaId != "captain-cabin") return false;
+            candidate = default;
+            if (this == null || !isActiveAndEnabled || player.AreaId != "captain-cabin" || approachPoint == null) return false;
             var source = new Vector2(player.X, player.Y);
             var target = (Vector2)approachPoint.position;
             if ((source - target).sqrMagnitude > reach * reach) return false;
-            return !Physics2D.Linecast(source + Vector2.down * 0.2f, target, obstructionMask);
+            if (Physics2D.Linecast(source + Vector2.down * 0.2f, target, obstructionMask)) return false;
+            candidate = new InteractionSelection(targetId, prompt, priority, (source - target).sqrMagnitude, InteractionAction.OpenJournal);
+            return true;
         }
 
         public bool PlacementIsClear(WorldPosition player)

@@ -1,0 +1,10 @@
+{
+  "dirty": false,
+  "playing": false,
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "rigidbodies": 1,
+  "colliders": 11,
+  "furniture": 4,
+  "saveSlot": "P3Cabin"
+}

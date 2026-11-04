@@ -1,0 +1,14 @@
+{
+  "playing": false,
+  "scene": "Assets/Game/Scenes/Game.unity",
+  "dirty": false,
+  "compiling": false,
+  "log": 0,
+  "warnings": 0,
+  "errors": 0,
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "colliders": 11,
+  "bodies": 1,
+  "saveSlot": "P3Cabin"
+}

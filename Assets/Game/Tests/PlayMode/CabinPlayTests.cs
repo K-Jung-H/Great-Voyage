@@ -44,6 +44,7 @@ namespace GreatVoyage.Tests
             root = UnityEngine.Object.FindAnyObjectByType<CabinSessionRoot>();
             motor = UnityEngine.Object.FindAnyObjectByType<PlayerMotor>();
             Assert.That(root.Session, Is.Not.Null);
+            AssertFurnitureLayout();
             Assert.That(root.SavePath, Is.EqualTo(Path.Combine(directory, "session.json")));
             keyboard = InputSystem.AddDevice<Keyboard>();
             mouse = InputSystem.AddDevice<Mouse>();
@@ -53,6 +54,7 @@ namespace GreatVoyage.Tests
             yield return Press(Key.E);
             Assert.That(root.Session.JournalOpen, Is.False);
             var initialTime = root.Session.State.Clock.TotalGameSeconds;
+            Assert.That(root.Session.FocusedInteraction, Is.Null);
             yield return MoveTo(new Vector2(0.7f, -1.35f));
             // Push into the same wall repeatedly, including along it at a corner.
             SetKeys(Key.D);
@@ -68,9 +70,14 @@ namespace GreatVoyage.Tests
             yield return MoveTo(new Vector2(1.6f, 0.45f));
             yield return MoveTo(new Vector2(1.9f, 0.45f));
             Assert.That(root.Session.CanInteract, Is.True);
+            var interactionDesk = UnityEngine.Object.FindAnyObjectByType<JournalDesk>();
+            var highlight = interactionDesk.GetComponent<InteractionHighlight>();
+            Assert.That(root.Session.FocusedInteraction.Value.TargetId, Is.EqualTo(interactionDesk.TargetId));
+            Assert.That(highlight.IsHighlighted, Is.True);
             yield return Press(Key.E);
             Assert.That(root.Session.JournalOpen, Is.True);
             Assert.That(root.Session.Pauses.Count, Is.EqualTo(1));
+            Assert.That(highlight.IsHighlighted, Is.False);
             var frozenTime = root.Session.State.Clock.TotalGameSeconds;
             var frozenPosition = motor.Body.position;
             SetKeys(Key.D); yield return new WaitForSecondsRealtime(0.3f); SetKeys();
@@ -87,14 +94,23 @@ namespace GreatVoyage.Tests
             Assert.That(root.Session.Pauses.Count, Is.EqualTo(1));
             yield return Click("CloseJournal");
             Assert.That(root.Session.Pauses.Count, Is.Zero);
+            Assert.That(highlight.IsHighlighted, Is.True);
+            yield return Press(Key.Escape);
+            Assert.That(highlight.IsHighlighted, Is.False);
+            yield return Press(Key.Escape);
+            Assert.That(highlight.IsHighlighted, Is.True);
             yield return MoveTo(new Vector2(1.6f, 0.45f));
             Assert.That(root.Session.State.Clock.TotalGameSeconds, Is.GreaterThan(frozenTime));
 
             // Furniture contact is resolved by the same actor body, not a second position model.
+            var desk = UnityEngine.Object.FindAnyObjectByType<JournalDesk>();
+            yield return MoveTo(desk.transform.Find("ApproachPoint").position);
             SetKeys(Key.W); yield return new WaitForSecondsRealtime(0.7f); SetKeys();
             yield return new WaitForSecondsRealtime(0.15f);
-            Assert.That(motor.Body.position.y, Is.LessThan(1.05f));
-            Assert.That(motor.Body.position.y, Is.GreaterThan(0.7f));
+            var colliderBottom = desk.GetComponentInChildren<BoxCollider2D>().bounds.min.y;
+            var playerCollider = motor.GetComponent<CircleCollider2D>();
+            var contactY = colliderBottom - playerCollider.radius - playerCollider.offset.y;
+            Assert.That(motor.Body.position.y, Is.InRange(contactY - .06f, contactY + .02f));
             Assert.That(root.PrepareExit(), Is.True);
             var state = root.Session.State;
             var savedPosition = motor.Body.position;
@@ -106,6 +122,7 @@ namespace GreatVoyage.Tests
             root = UnityEngine.Object.FindAnyObjectByType<CabinSessionRoot>();
             motor = UnityEngine.Object.FindAnyObjectByType<PlayerMotor>();
             Assert.That(root.Session.State.PlayId, Is.EqualTo(playId));
+            AssertFurnitureLayout();
             Assert.That(Vector2.Distance(motor.Body.position, savedPosition), Is.LessThan(0.01f),
                 "Loaded " + motor.Body.position + " instead of " + savedPosition);
             Assert.That(root.Session.State.Clock.TotalGameSeconds, Is.InRange(savedTime, savedTime + 144));
@@ -152,6 +169,24 @@ namespace GreatVoyage.Tests
         {
             InputSystem.QueueStateEvent(keyboard, new KeyboardState(keys));
             InputSystem.Update();
+        }
+
+        private static void AssertFurnitureLayout()
+        {
+            var zone = UnityEngine.Object.FindAnyObjectByType<PlacementSpace>();
+            Assert.That(zone.Settings.CellWorldSize, Is.EqualTo(1));
+            Assert.That(zone.GetComponentsInChildren<GridArea>().Length, Is.EqualTo(2));
+            Assert.That(zone.GetGrid().CellCount, Is.EqualTo(63));
+            var furniture = zone.GetComponentsInChildren<CellSize>();
+            Assert.That(furniture.Length, Is.EqualTo(4));
+            foreach (var item in furniture)
+            {
+                Assert.That(item.CellArea, Is.Not.Null, item.name);
+                Assert.That(item.transform.Find("Visuals").GetComponent<Collider2D>(), Is.Null, item.name);
+                Assert.That(item.transform.Find("Collision").GetComponent<SpriteRenderer>(), Is.Null, item.name);
+                Assert.That(item.Settings, Is.SameAs(zone.Settings));
+                if (item.IsConfigured) Assert.That(item.IsPlacementValid, Is.True, item.name);
+            }
         }
 
         private IEnumerator Press(Key key)

@@ -75,10 +75,11 @@
 
 ### P3. 첫 Production-Ready Slice — 이동·책상·일지·정지·기본 복원
 
-현재 상태(2026-11-04): **구현 및 Editor 통합 검증 진행, 사용자 실조작 수용 대기**. 실제 Game Scene의 이동·접촉·책상·일지/메뉴 중첩 정지·정상 종료 저장/복원을 연결했다. EditMode 8/8·실제 입력 PlayMode 1/1·프레임 제한별 이동·Editor Profiler 기준선과 캡처는 References/P3에 있다. 사용자 동작/조작감 수용 및 Player 성능은 미확인으로, P3 Complete 또는 P4 진입으로 승격하지 않는다. 현행 인계는 CurrentState.md를 따른다.
+현재 상태(2026-11-04): **P3 Complete — 사용자 명시 완료 승인.** 실제 Game Scene의 이동·접촉·책상·일지/메뉴 중첩 정지·정상 종료 저장/복원과 Grid/강조를 연결했다. EditMode20/20·실제 입력 PlayMode1/1·프레임 제한별 이동·Editor Profiler 기준선과 캡처는 References/P3에 있다. 사용자가 시각 테스트 통과 후 현행 Scene 설정·가구 비율 유지와 P3 Complete main 커밋·푸시를 지시했다. 독립 Player 실행/성능과 별도 사용자 실조작 결과 기록은 미확인으로 유지하며 완료 지시를 측정 증거로 대체하지 않는다. P4 구현은 아직 시작하지 않았다. 현행 인계는 CurrentState.md를 따른다.
 
 **대표 활성 동작:** 선장실 이동 → 책상 상호작용 → 일지 열기·닫기 → 세계 입력/시간 복귀.
 
+- **2026-11-04 범위 보완:** P3의 Bounded Local Grid는 공유 GridSettings(1 unit)·가구 Root CellSize·소유 PlacementSpace·바닥의 복수 GridArea Rect 합집합/최종 제외 셀로 구현했다. CellArea/Visuals/Collision 형제 계층과 선택 없는 가구 셀 Gizmos를 유지한다. 책상2×1/침대 현재 방향1×2, 의자/상자는 미정이다. 드래그/스냅/런타임 Overlay/Preview/확정·취소는 후속 시설 편집 단계다. Interaction Highlighting은 책상의 단일 선택·안내·실행 공유, UI/가림/범위/비활성 해제까지 구현했다. 현행 EditMode20/20·실제 입력 PlayMode1/1·화면/Editor 검수 근거는 References/P3/GridInteraction이다. 현행 시각 수용과 P3 Complete 승인을 받았으며 Scene 설정과 가구 비율을 유지한다.
 - `GameSession`, 시간·중첩 정지, Action 입력, Interaction, World/Character View, Journal Screen의 최소 실행 경로를 구현한다.
 - 플레이어의 **연속적인 이동·방향 변화·정지/재개·벽/가구와의 실제 접촉**, 카메라 추적·캐릭터 표시·입력 피드백을 함께 완성한다. 움직임을 좌표 점프로 대체하거나 모든 Sprite에 일괄 Collider를 부여하지 않는다.
 - 정상/변동 프레임과 충돌 반복 조건을 관찰하고, 첫 대표 장면의 물리 비용·프레임 시간·GC 기준선을 남긴다.
