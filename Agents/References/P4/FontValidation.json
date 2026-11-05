@@ -1,0 +1,8 @@
+{
+  "context": "TMP dynamic glyph population enabled during validation; build clears cache by TMP design; no text/font assignment changed",
+  "font": "Galmuri11World",
+  "characters": 100,
+  "atlases": 1,
+  "missing": [],
+  "worldMissing": ""
+}

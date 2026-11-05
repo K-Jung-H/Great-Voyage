@@ -1,0 +1,22 @@
+[
+  {
+    "path": "Assets/Game/Content/Prefabs/World/CaptainCabin.prefab",
+    "unchangedIgnoringSerializationWhitespace": true
+  },
+  {
+    "path": "Assets/Game/Content/Prefabs/Facilities/NavigationDeskView.prefab",
+    "unchangedIgnoringSerializationWhitespace": true
+  },
+  {
+    "path": "Assets/Game/Content/Prefabs/Facilities/CaptainBedView.prefab",
+    "unchangedIgnoringSerializationWhitespace": true
+  },
+  {
+    "path": "Assets/Game/Content/Prefabs/Facilities/CaptainChairView.prefab",
+    "unchangedIgnoringSerializationWhitespace": true
+  },
+  {
+    "path": "Assets/Game/Content/Prefabs/Facilities/SeaChestView.prefab",
+    "unchangedIgnoringSerializationWhitespace": true
+  }
+]

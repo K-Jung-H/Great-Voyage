@@ -40,6 +40,13 @@ namespace GreatVoyage.Domain
                 throw new ArgumentException("Ordinary movement cannot change area.");
             Position = position; Facing = facing;
         }
+
+        // Explicit spatial transition; ordinary physics movement still cannot change area.
+        public void TransferTo(WorldPosition position, Facing facing)
+        {
+            if (!Enum.IsDefined(typeof(Facing), facing)) throw new ArgumentException("Invalid facing.");
+            Position = position; Facing = facing;
+        }
     }
 
     public sealed class GameClock

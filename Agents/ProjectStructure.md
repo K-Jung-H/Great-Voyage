@@ -178,7 +178,7 @@ GreatVoyage/
 - 플레이어 CircleCollider2D offset(0,-0.2), radius0.22; 속도2.4 unit/s, 가속18/감속26 unit/s². Content/Physics/CabinContact.asset은 friction0/bounce0이다. 벽5개 직선 Collider/가구 footprint/미구현 문 경계가 WorldSolid다. 바닥·장식·손/머리 각각에 Collider/Rigidbody를 추가하지 않는다.
 - JournalDesk는 approach point 거리0.8 및 장애물 Linecast로 접근을 판별한다. 로드는 선장실 범위와 WorldSolid OverlapCircle(radius0.209)로 실제 접촉 위치를 검증한다. 정상 접촉 오차를 고려한 로드 여유이며 일반 이동 충돌 반경을 줄이지 않는다.
 - Scene의 CabinHud/SessionMenu/메뉴 버튼은 Editor에서 작성됐다. 메뉴의 계속하기·저장 후 종료, 일지 CloseJournal만 활성 기능이다. 일지 5개 Day Toggle·경로/기록/메모는 비활성이다. 일지 닫기는 raycastTarget=true 및 ColorTint 피드백을 사용한다.
-- CabinSessionRoot의 제품 슬롯은 P3Cabin, 첫 Slice 설정은 현재 선장실 배치·Day1 08:00/rootSeed1717이다. 전체 게임의 초기 항구/재산을 의미하지 않는다. 정상 종료만 저장하고 다른 SaveEvent는 해당 시스템 개발 시 연결한다.
+- CabinSessionRoot의 제품 슬롯은 P3Cabin을 유지하며 첫 Slice는 선장실·Day1 08:00/rootSeed1717이다. 전체 게임의 초기 항구/재산은 아니다. P4에서 정상 종료에 승선/하선 저장을 추가했다. 층 이동·항구 구역 이동 자체는 저장하지 않는다.
 - 저장은 Application.persistentDataPath/Saves/P3Cabin/session.json, 버전1 JSON envelope·payload SHA-256, tmp flush 후 원자 교체와 .bak 복구다. 손상/버전 불일치/잘못된 배치가 모두 복구 불가능하면 초기화하지 않고 오류를 표시한다. 무결성은 보안 기능이 아니다.
 - Tests/Editor/CabinDomainTests와 Tests/PlayMode/CabinPlayTests는 각각 격리 Temp Guid 저장소를 사용한다. PlayMode는 테스트용 InputSettings clone과 Keyboard/Mouse를 쓰고 종료 시 복원한다. 실제 사용자 저장을 삭제하지 않는다. FPS 제한 테스트도 targetFrameRate/vSyncCount를 원복한다.
 - Editor/P3SceneAuthoring은 최초 연결용으로 기존 연결 Scene 재실행을 금지한다. Editor/P3Validation은 격리 슬롯 설정/복원·상태 증거·ProfilerRecorder 측정용이며 제품 빌드에 포함되지 않는다. P2 도구에는 이전 계층/비활성 UI 가정이 있어 P3 Scene에 재실행하지 않는다.
@@ -193,10 +193,21 @@ GreatVoyage/
 - 각 가구 Root의 CellSize가 공유 GridSettings·FurnitureDefinition·Cell 수·CellArea를 참조한다. Content/Definitions의 네 FurnitureDefinition은 종류 ID만 갖는다. 점유 Cell은 책상2×1·침대1×2, 의자/상자는 미정(0,0)이며 중복된 점유 원본은 없다. CellArea 중심의 소유 Space 로컬 위치로 적합성을 검사한다. 이전 PlacementZone/PlacementGridDefinition/FurnitureFootprint 및 CaptainCabinGrid 자산은 제거했다.
 - Facilities/NavigationDeskView.prefab·CaptainBedView.prefab·CaptainChairView.prefab·SeaChestView.prefab은 CaptainCabin 내부의 nested Prefab으로 연결된다. 벽/바닥은 가구 Prefab으로 추출하지 않았다. 총 제품 Prefab7개다.
 - 각 가구 Root 아래 **CellArea(FurnitureCellArea) / Visuals(SpriteRenderer) / Collision(BoxCollider2D)**가 형제이며 책상 ApproachPoint도 형제다. 렌더러에는 Collider가 없고 Collision에는 Renderer가 없다. Root·CellArea·Collision Scale1, Visuals만 원본 비율을 유지하는 uniform scale이다. 셀 영역2×1 안의 책상 Sprite는 약1.368×1, 세로 침대1×2 안의 Sprite는1×1.769 unit이다. 의자/상자는 이전 크기다. 실제 충돌 경계는 별도 크기로 유지하며 정렬은 시각 바운드의 발 기준이다.
-- 책상 초기 위치(2.5,1.5), approach local(0,-0.9), 침대(-4,1)이다. Collider를 Visuals에서 분리할 때 월드 크기를 독립적인 Collision.size/offset으로 옮겼다. 이후 Visuals 배율 변경은 Collider와 CellArea에 영향을 주지 않는다. PlayMode 테스트는 실제 접근점·Collider의 충돌 기대 위치와 Scene 재진입 후 계층/점유 적합성을 검사한다. 사용자 저장 파일/저장 스키마 변경 없음.
+- 책상 초기 위치(2.5,1.5), approach local(0,-0.5), 침대(-4,1)이다. Collider를 Visuals에서 분리할 때 월드 크기를 독립적인 Collision.size/offset으로 옮겼다. 이후 Visuals 배율 변경은 Collider와 CellArea에 영향을 주지 않는다. PlayMode 테스트는 실제 접근점·Collider의 충돌 기대 위치와 Scene 재진입 후 계층/점유 적합성을 검사한다. 사용자 저장 파일/저장 스키마 변경 없음.
 - Editor/P3GridInteractionAuthoring.Apply는 공유 설정·CellSize·바닥 GridArea·PlacementSpace·책상 Highlight와 Scene 참조를 연결한다. 기존 Cell 수/Rect/제외 셀은 보존하고 Prefab별 저장·강제 재임포트 후 Scene을 저장한다. 기존 P2/P3 전체 제작 도구는 현행 계층에 재실행하지 않는다. Scene Gizmos 활성 시 각 가구의 셀·크기는 선택 없이 표시한다. CaptainCabin 선택 시 허용 합집합/제외 셀을 확인하고 바닥 선택 시 두 GridArea Rect를 Inspector에서 편집한다. 설정 변경은 자동 재배치가 아니다.
 - Runtime/Application/InteractionResolver는 IInteractionTarget을 조회해 단일 선택 결과를 GameSession에 제공한다. Composition/CabinSessionRoot.interactionTargets에는 현재 책상만 직렬화 연결한다. Presentation/World/InteractionHighlight와 Content/Art/InteractionOutline.shader·.mat은 원본 SpriteRenderer의 내부 알파 가장자리를 약1.25 화면 픽셀의 따뜻한 색으로 강조하며 해제 시 원래 재질/속성을 복구한다. HUD와 E 입력도 같은 선택 ID를 사용한다. 이미지·저장 스키마는 변경하지 않았다.
 - 현행 근거는 References/P3/GridInteraction의 구조·EditMode20/20·PlayMode1/1·대상 생명주기·실화면·Editor 캡처다. GridDefinition_1Unit은 이전 구조의1 unit 축척 자료이며 GridDefinition은 이전0.5 unit 자료다. 드래그·배치 Preview/Overlay·확정/취소·점유 트랜잭션은 후속 계약만 있고 미구현이다.
+
+### P4 공간 연결 (2026-11-05, 실제 Scene 검토 대기)
+
+- Game.unity의 기존 CabinSessionRoot/플레이어/HUD는 유지한다. WorldContent 아래 CaptainCabin에 WorldArea·이동 지점을 추가하고 UpperDeck/HarborDock/HarborCrossroads/HarborTown/HarborMarket/TavernInterior.prefab을 구역 뷰로 직렬화했다. 총7개 구역 중 하나만 활성화한다. 구역은 별도 Unity Scene이 아닌 하나의 Game Scene 안의 독립 맵 Prefab이다.
+- Presentation/World/WorldArea는 안정 AreaId·표시명·카메라 경계·전환 이미지·실제 충돌 질의를 제공한다. WorldPortal은 출발/도착 WorldArea와 명시적 Arrival Transform·TravelKind·접근 거리·상호작용 ID를 연결한다. 6쌍/12방향 연결은 선장실↔상갑판↔선착장↔교차로↔마을/상점가, 마을↔주점 내부다. 시청·조선소·상인·게시판 서비스는 FrameDisabled다.
+- Application/WorldTravel의 TravelLink/ITravelMap, GameSession.PendingTravel/CompleteTravel이 전환 명령 경계다. CharacterState.TransferTo만 명시적 지역 이동을 적용하며 일반 CommitResolvedPose는 다른 AreaId를 거부한다. 플레이어/시간 원본의 복사본을 만들지 않는다.
+- WorldTravelView는 직렬화된 구역/Portal 목록을 사용하며 전환 cover의 Fade-out→목적 구역 활성·도착 보행 영역/충돌 검사→상태 확정/물리·카메라 연결→Fade-in을 수행한다. 전체 표시 전환 동안 독립 PauseReasons 토큰을 유지한다. 실패 시 원 구역/위치를 유지하고 오류 메뉴를 표시한다. 승하선 저장 실패 시 완료된 위치를 유지하고 메뉴의 저장 재시도로 파일 쓰기만 다시 수행한다.
+- 상갑판은 선장실과 별도 PlacementSpace와 동일 GridSettings를 사용한다. 바닥의 시각 반복은 배치/이동 격자가 아니다. 선장실 원본 Prefab·가구 크기·접근점·충돌체 수치를 바꾸지 않는다. P3 Complete 원본 책상의 실제 outlinePixels는3이며 이전 문서의 약1.25px는 초기 구현 설명이다. 기존 승인 값을 유지한다.
+- PortTravelAtlas.png는 원본 샘플1/2만 입력한 B안 생성물 중 사용자 사용 승인본이다. 생성 설정/해시는 References/P4/ArtRecipe.json, 검토 후보는 References/P4/Candidates에 둔다. OriginalTavernProps.png는 사용자 제공 기본 결과물4.png의 원본 복사이며 새 AI 생성 참조가 아니다. Sprite.asset의 Rect로 테이블/카운터를 추출한다.
+- WorldSurface.shader와 PortWaterSurface/PortPavingSurface.mat은 원본 atlas 내부를 mirror-repeat 샘플링한다. 원본 PNG/스타일 규칙을 편집하지 않고 반복 가장자리 색을 일치시킨다. 기존 선장실 Repeat 바닥에는 적용하지 않는다. 주점 파티션은 native0.5 unit 모듈의 Scale1 반복이며 충돌은 경계 run별 한 개다.
+- Editor/P4WorldAuthoring.Apply는 최초 Scene/Prefab 제작용으로 재실행을 거부한다. FinishSurfacesAndTavern은 신규 구역에만 표면/주점 자산을 연결한다. 런타임에 임시 월드·UI를 생성하지 않는다. 실제 입력 통합 검증은 Tests/PlayMode/WorldTravelPlayTests, 순수 전환/저장 경계 검증은 Tests/Editor/WorldTravelTests다. 검증 자료는 References/P4이며 신규 구역 최종 시각·조작감은 사용자 수용 전이다.
 
 | 자산 종류 | 소유·수명 | 규칙 |
 |---|---|---|
@@ -245,3 +256,6 @@ GreatVoyage/
 - **회귀 관리:** 선원 수·UI 항목·시설 수 증가 등 비용이 달라지는 구현에서는 이전 동일 조건과 비교한다. 성능 악화를 무조건 특정 최적화 기술로 해결하지 말고 우선 병목을 확인한다.
 
 - 바닥 Repeat 후속 검토 자료: Agents/References/P2/FloorStyleReview/CabinPlanks_Tileable01.png·CabinPlanks_Tileable02.png와 각각의 Repeat3x3.png/EdgeValidation.json. 내장 imagegen 원본은1254×1254/완전 불투명이다. 후속 사용자 지시로 후보2를 제품 CabinPlanksTileable.png에 적용했다. 적용 결과는 같은 폴더 SceneApplication.json, 생성 당시 기록과 기술적 한계는 Generation.json을 따른다.
+
+
+P4 신규 한글 표기는 Content/Fonts/Galmuri11World.asset을 사용한다. 기존 Galmuri11 Atlas 포화를 피하기 위해 동일 TTF·포인트 크기·패딩·렌더 모드로 만든 별도 Dynamic·복수 Atlas 허용 자산이며 기본 폰트/원본 자산은 보존한다. Scene 라벨의 Prefab override도 직렬화한다. FontValidation.json은 동적 글리프 생성 경로를 포함해 표시 문자열과 전환 오류 문구의 누락을 검사한다. TMP 빌드는 동적 캐시를 비우므로 글리프/Atlas 수는 캐시 상태에 따라 바뀐다. 최종 편집기 검증 캐시는100글자/1 Atlas, 누락0이다.

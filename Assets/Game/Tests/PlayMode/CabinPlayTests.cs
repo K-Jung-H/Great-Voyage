@@ -24,15 +24,20 @@ namespace GreatVoyage.Tests
         private CabinSessionRoot root;
         private PlayerMotor motor;
         private InputSettings originalSettings, testSettings;
+        private HideFlags originalSettingsFlags;
         private int originalFrameRate, originalVsync;
 
         [UnityTest]
         public IEnumerator ProductSceneKeyboardCollisionJournalPauseAndRestore()
         {
             originalSettings = InputSystem.settings;
+            if (originalSettings == null) originalSettings = ScriptableObject.CreateInstance<InputSettings>();
+            originalSettingsFlags = originalSettings.hideFlags;
+            originalSettings.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             originalFrameRate = UnityEngine.Application.targetFrameRate;
             originalVsync = QualitySettings.vSyncCount;
             testSettings = UnityEngine.Object.Instantiate(originalSettings);
+            testSettings.hideFlags = HideFlags.DontUnloadUnusedAsset;
             testSettings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
 #if UNITY_EDITOR
             testSettings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
@@ -68,7 +73,9 @@ namespace GreatVoyage.Tests
 
             yield return MoveTo(new Vector2(1.6f, -1.35f));
             yield return MoveTo(new Vector2(1.6f, 0.45f));
-            yield return MoveTo(new Vector2(1.9f, 0.45f));
+            var configuredDesk = UnityEngine.Object.FindAnyObjectByType<JournalDesk>();
+            var approach = configuredDesk.transform.Find("ApproachPoint").position;
+            yield return MoveTo(new Vector2(approach.x, approach.y - .55f));
             Assert.That(root.Session.CanInteract, Is.True);
             var interactionDesk = UnityEngine.Object.FindAnyObjectByType<JournalDesk>();
             var highlight = interactionDesk.GetComponent<InteractionHighlight>();
@@ -245,6 +252,7 @@ namespace GreatVoyage.Tests
             var expected = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "GreatVoyagePlayTests")) + Path.DirectorySeparatorChar;
             if (directory != null && Path.GetFullPath(directory).StartsWith(expected, StringComparison.OrdinalIgnoreCase) && Directory.Exists(directory))
                 Directory.Delete(directory, true);
+            if (originalSettings != null) originalSettings.hideFlags = originalSettingsFlags;
         }
     }
 }

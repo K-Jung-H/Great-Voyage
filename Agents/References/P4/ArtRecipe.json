@@ -1,0 +1,25 @@
+{
+  "status": "user_approved_for_P4_use",
+  "approvalDate": "2026-11-05",
+  "template": "Agents/ArtFactory/StyleB.locked.prompt.txt",
+  "templateSha256": "AE8CA1C72B87B951201C073C01D96E0051CDB8E5BE7F9EC12AE82FF96FC77D04",
+  "references": [
+    "Agents/References/ArtStyle_2026-11-02/Samples/샘플1.png",
+    "Agents/References/ArtStyle_2026-11-02/Samples/샘플2.png"
+  ],
+  "generatedReferencesUsed": false,
+  "requestedAssets": [
+    "horizontal empty ship deck bow left stern right",
+    "stair hatch",
+    "noticeboard",
+    "white plaster blue roof port house",
+    "stone paving surface tile",
+    "calm blue seawater surface tile"
+  ],
+  "image": "Candidates/PortTravelAtlas_Review.png",
+  "imageSha256": "6F1C8B9432B2302AC5C59CBC93C32613A445D045A04F21C9367EA93F7C22E946",
+  "productAtlas": "Assets/Game/Content/Art/Environment/PortTravelAtlas.png",
+  "originalTavernSource": "Agents/References/ArtStyle_2026-11-02/Sheets/기본 결과물4.png",
+  "surfaceMethod": "URP2D mirror-repeat sampling of original atlas interiors; source pixels unmodified",
+  "sceneAcceptance": "object placement and scene design excluded from P4 evaluation by user; not visually approved"
+}

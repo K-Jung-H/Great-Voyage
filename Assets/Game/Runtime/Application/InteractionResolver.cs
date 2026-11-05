@@ -4,7 +4,7 @@ using GreatVoyage.Domain;
 
 namespace GreatVoyage.Application
 {
-    public enum InteractionAction { OpenJournal }
+    public enum InteractionAction { OpenJournal, Travel }
 
     public readonly struct InteractionSelection
     {
@@ -16,7 +16,7 @@ namespace GreatVoyage.Application
         public InteractionSelection(string targetId, string prompt, int priority, double distanceSquared, InteractionAction action)
         {
             if (string.IsNullOrWhiteSpace(targetId) || string.IsNullOrWhiteSpace(prompt) || distanceSquared < 0
-                || double.IsNaN(distanceSquared) || double.IsInfinity(distanceSquared) || action != InteractionAction.OpenJournal)
+                || double.IsNaN(distanceSquared) || double.IsInfinity(distanceSquared) || !Enum.IsDefined(typeof(InteractionAction), action))
                 throw new ArgumentException("Invalid interaction candidate.");
             TargetId = targetId; Prompt = prompt; Priority = priority; DistanceSquared = distanceSquared; Action = action;
         }

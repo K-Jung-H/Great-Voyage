@@ -1,0 +1,30 @@
+{
+  "context": "Final P4 UI/font build; Unity Editor Play Mode; harbor dock, mirrored water/stone, one actor; includes Editor/tool overhead; not Player benchmark",
+  "samples": 600,
+  "mainThreadAvailable": true,
+  "physicsAvailable": true,
+  "gcAvailable": true,
+  "frameMs": {
+    "median": 3.305300371721387,
+    "p95": 4.915100522339344,
+    "max": 61.603303998708725
+  },
+  "mainThreadMs": {
+    "median": 3.2851999999999997,
+    "p95": 4.8142,
+    "max": 18.4635
+  },
+  "physics2DMs": {
+    "median": 0.0,
+    "p95": 0.0098,
+    "max": 0.0467
+  },
+  "gcBytes": {
+    "median": 8593.0,
+    "p95": 8649.0,
+    "max": 75168.0
+  },
+  "unity": "6000.6.4f1",
+  "cpuModel": "Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz",
+  "gpu": "NVIDIA GeForce MX150"
+}

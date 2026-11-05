@@ -13,6 +13,13 @@ namespace GreatVoyage.Presentation
 
         private void Awake() => view = GetComponent<Camera>();
 
+        public void SetArea(Rect bounds, GreatVoyage.Domain.WorldPosition position, bool snap)
+        {
+            roomCenter = bounds.center; roomSize = bounds.size;
+            if (snap) { velocity = Vector3.zero;
+                transform.position = new Vector3(bounds.center.x, bounds.center.y, transform.position.z); }
+        }
+
         private void LateUpdate()
         {
             if (target == null) return;

@@ -1,0 +1,18 @@
+{
+  "summary": {
+    "passed": 1,
+    "failed": 0,
+    "total": 1
+  },
+  "duration": 44.3548161,
+  "status": "completed",
+  "results": [
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelPlayTests.AuthoredWorldRoundTripRollbackBoardingAndRestore",
+      "Status": "Passed",
+      "Duration": 44.3548161,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

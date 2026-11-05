@@ -13,6 +13,7 @@ namespace GreatVoyage.Presentation
         private Rigidbody2D body;
         private GameSession session;
         private Facing facing;
+        private string areaId;
         public Vector2 Velocity => body != null && body.simulated ? body.linearVelocity : Vector2.zero;
         public Rigidbody2D Body => body;
 
@@ -20,6 +21,7 @@ namespace GreatVoyage.Presentation
         {
             body = GetComponent<Rigidbody2D>();
             session = value;
+            areaId = value.State.Player.Position.AreaId;
             facing = value.State.Player.Facing;
             var p = value.State.Player.Position;
             // Loading is an explicit pose transition: initialize both the scene transform and physics pose
@@ -34,6 +36,13 @@ namespace GreatVoyage.Presentation
         private void OnSessionChanged()
         {
             if (session == null || body == null) return;
+            if (areaId != session.State.Player.Position.AreaId)
+            {
+                var p = session.State.Player.Position; areaId = p.AreaId;
+                facing = session.State.Player.Facing;
+                transform.position = new Vector3(p.X, p.Y, transform.position.z);
+                body.position = new Vector2(p.X, p.Y); body.linearVelocity = Vector2.zero;
+            }
             if (!session.WorldInputAllowed)
             {
                 CapturePose();

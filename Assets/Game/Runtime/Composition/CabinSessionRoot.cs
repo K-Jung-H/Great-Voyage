@@ -16,6 +16,7 @@ namespace GreatVoyage.Composition
         [SerializeField] private CharacterView character;
         [SerializeField] private JournalDesk desk;
         [SerializeField] private MonoBehaviour[] interactionTargets;
+        [SerializeField] private WorldTravelView worldTravel;
         [SerializeField] private CabinHud hud;
         [SerializeField] private InputActionAsset controls;
         [SerializeField] private string saveDirectoryName = "P3Cabin";
@@ -43,7 +44,7 @@ namespace GreatVoyage.Composition
                 var store = new JsonFileSessionStore(directory);
                 SavePath = store.FilePath;
                 Physics2D.SyncTransforms();
-                var state = store.Load(s => desk.PlacementIsClear(s.Player.Position));
+                var state = store.Load(s => worldTravel != null ? worldTravel.PrepareLoad(s.Player.Position) : desk.PlacementIsClear(s.Player.Position));
                 if (state == null)
                 {
                     var position = new WorldPosition("captain-cabin", player.transform.position.x, player.transform.position.y);
@@ -54,8 +55,11 @@ namespace GreatVoyage.Composition
                 for (var i = 0; i < targets.Length; i++)
                     targets[i] = interactionTargets[i] as IInteractionTarget
                         ?? throw new InvalidOperationException("Invalid serialized interaction target.");
-                Session = new GameSession(state, new InteractionResolver(targets), new SaveCoordinator(store));
+                if (worldTravel != null && !worldTravel.PrepareLoad(state.Player.Position))
+                    throw new InvalidOperationException("Invalid initial world position.");
+                Session = new GameSession(state, new InteractionResolver(targets), new SaveCoordinator(store), worldTravel);
                 player.Bind(Session);
+                if (worldTravel != null) worldTravel.Bind(Session);
                 character.Bind(Session, player);
                 hud.Bind(Session, RequestExit, store.RecoveredBackup ? "이전 정상 저장을 복구했습니다." : "");
                 for (var i = 0; i < targets.Length; i++)

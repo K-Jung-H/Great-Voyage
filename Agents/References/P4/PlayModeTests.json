@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "duration": 64.65,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "GreatVoyage.Tests.CabinPlayTests.ProductSceneKeyboardCollisionJournalPauseAndRestore",
+      "Status": "Passed",
+      "Duration": 20.2264059,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelPlayTests.AuthoredWorldRoundTripRollbackBoardingAndRestore",
+      "Status": "Passed",
+      "Duration": 44.3548161,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

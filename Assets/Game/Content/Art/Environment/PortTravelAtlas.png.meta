@@ -1,0 +1,2810 @@
+fileFormatVersion: 2
+guid: 7a2c416ea45649248941c3f42fd9da62
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1242789058991431278
+    second: PortTravelAtlas_0
+  - first:
+      213: -5549713140704616312
+    second: PortTravelAtlas_1
+  - first:
+      213: -2165303655021849725
+    second: PortTravelAtlas_2
+  - first:
+      213: 1893428653164884129
+    second: PortTravelAtlas_3
+  - first:
+      213: -1371950189019246749
+    second: PortTravelAtlas_4
+  - first:
+      213: -7847575492247979543
+    second: PortTravelAtlas_5
+  - first:
+      213: -3875783752164287030
+    second: PortTravelAtlas_6
+  - first:
+      213: -1148779397930491476
+    second: PortTravelAtlas_7
+  - first:
+      213: -3348529804490291886
+    second: PortTravelAtlas_8
+  - first:
+      213: 2642371578481117267
+    second: PortTravelAtlas_9
+  - first:
+      213: -2150141319839028755
+    second: PortTravelAtlas_10
+  - first:
+      213: 6906657287589337025
+    second: PortTravelAtlas_11
+  - first:
+      213: 4386809672133141336
+    second: PortTravelAtlas_12
+  - first:
+      213: -1661553027629170340
+    second: PortTravelAtlas_13
+  - first:
+      213: -6412605245691245833
+    second: PortTravelAtlas_14
+  - first:
+      213: 7707327936296408672
+    second: PortTravelAtlas_15
+  - first:
+      213: -4904813135973473452
+    second: PortTravelAtlas_16
+  - first:
+      213: 5889217863983544856
+    second: PortTravelAtlas_17
+  - first:
+      213: -2416287189743031096
+    second: PortTravelAtlas_18
+  - first:
+      213: 7125829120516364793
+    second: PortTravelAtlas_19
+  - first:
+      213: 9018506782476263703
+    second: PortTravelAtlas_20
+  - first:
+      213: 9119404189405458517
+    second: PortTravelAtlas_21
+  - first:
+      213: 1034218944657035496
+    second: PortTravelAtlas_22
+  - first:
+      213: -7849516678415881383
+    second: PortTravelAtlas_23
+  - first:
+      213: 1289620808670217969
+    second: PortTravelAtlas_24
+  - first:
+      213: -9150976129604382850
+    second: PortTravelAtlas_25
+  - first:
+      213: -8348446730417828903
+    second: PortTravelAtlas_26
+  - first:
+      213: -6450988021181313077
+    second: PortTravelAtlas_27
+  - first:
+      213: 1998069258732337165
+    second: PortTravelAtlas_28
+  - first:
+      213: 8917717895885040782
+    second: PortTravelAtlas_29
+  - first:
+      213: -4837244590014565627
+    second: PortTravelAtlas_30
+  - first:
+      213: -6358597040041939599
+    second: PortTravelAtlas_31
+  - first:
+      213: -8569563055300429153
+    second: PortTravelAtlas_32
+  - first:
+      213: 5133498526639986661
+    second: PortTravelAtlas_33
+  - first:
+      213: -8832526431054089472
+    second: PortTravelAtlas_34
+  - first:
+      213: 3005164432006936838
+    second: PortTravelAtlas_35
+  - first:
+      213: 1231158600773936873
+    second: PortTravelAtlas_36
+  - first:
+      213: 2350959286256200103
+    second: PortTravelAtlas_37
+  - first:
+      213: -8678156116246439788
+    second: PortTravelAtlas_38
+  - first:
+      213: -8879472986336549210
+    second: PortTravelAtlas_39
+  - first:
+      213: -4605858847119067937
+    second: PortTravelAtlas_40
+  - first:
+      213: 6940721526365540103
+    second: PortTravelAtlas_41
+  - first:
+      213: 7655150056357523370
+    second: PortTravelAtlas_42
+  - first:
+      213: -8976329457365428010
+    second: PortTravelAtlas_43
+  - first:
+      213: 3866235908327391423
+    second: PortTravelAtlas_44
+  - first:
+      213: 2331590552286137750
+    second: PortTravelAtlas_45
+  - first:
+      213: 4886522306463035881
+    second: PortTravelAtlas_46
+  - first:
+      213: -6704826069646766099
+    second: PortTravelAtlas_47
+  - first:
+      213: -1719884297292175362
+    second: PortTravelAtlas_48
+  - first:
+      213: 4505063580991142549
+    second: PortTravelAtlas_49
+  - first:
+      213: 3400091341110109094
+    second: PortTravelAtlas_50
+  - first:
+      213: 144950130672430583
+    second: PortTravelAtlas_51
+  - first:
+      213: -6217740475229500486
+    second: PortTravelAtlas_52
+  - first:
+      213: 3062869390515053437
+    second: PortTravelAtlas_53
+  - first:
+      213: -300352550685249942
+    second: PortTravelAtlas_54
+  - first:
+      213: 5612969739075226920
+    second: PortTravelAtlas_55
+  - first:
+      213: -5288220835027222850
+    second: PortTravelAtlas_56
+  - first:
+      213: -682824546860675715
+    second: PortTravelAtlas_57
+  - first:
+      213: -5801246498184722779
+    second: PortTravelAtlas_58
+  - first:
+      213: 5047731199505300610
+    second: PortTravelAtlas_59
+  - first:
+      213: 2063420206689034382
+    second: PortTravelAtlas_60
+  - first:
+      213: 4678547245404963065
+    second: PortTravelAtlas_61
+  - first:
+      213: 808285452644441448
+    second: PortTravelAtlas_62
+  - first:
+      213: 6911114936355453785
+    second: PortTravelAtlas_63
+  - first:
+      213: 8323848293887600911
+    second: PortTravelAtlas_64
+  - first:
+      213: -705989118197840833
+    second: PortTravelAtlas_65
+  - first:
+      213: 9049579222360591645
+    second: PortTravelAtlas_66
+  - first:
+      213: 4418959923120195512
+    second: PortTravelAtlas_67
+  - first:
+      213: -8661662927406665325
+    second: PortTravelAtlas_68
+  - first:
+      213: 7820540380350015737
+    second: PortTravelAtlas_69
+  - first:
+      213: 8118982517764649155
+    second: PortTravelAtlas_70
+  - first:
+      213: 9206426203161461348
+    second: PortTravelAtlas_71
+  - first:
+      213: -5945161745975220775
+    second: PortTravelAtlas_72
+  - first:
+      213: 9176861071292093207
+    second: PortTravelAtlas_73
+  - first:
+      213: -8084752217869736339
+    second: PortTravelAtlas_74
+  - first:
+      213: -4346792281288504711
+    second: PortTravelAtlas_75
+  - first:
+      213: -8786306771403736519
+    second: PortTravelAtlas_76
+  - first:
+      213: 6859019366481203326
+    second: PortTravelAtlas_77
+  - first:
+      213: -487747641786020818
+    second: PortTravelAtlas_78
+  - first:
+      213: 3107606424383282894
+    second: PortTravelAtlas_79
+  - first:
+      213: 9076906745059446316
+    second: PortTravelAtlas_80
+  - first:
+      213: -4666167174295732686
+    second: PortTravelAtlas_81
+  - first:
+      213: 5119192666357988882
+    second: PortTravelAtlas_82
+  - first:
+      213: -863803168195932951
+    second: PortTravelAtlas_83
+  - first:
+      213: 6325488063539931701
+    second: PortTravelAtlas_84
+  - first:
+      213: -1648352222157787369
+    second: PortTravelAtlas_85
+  - first:
+      213: -6305737981195580940
+    second: PortTravelAtlas_86
+  - first:
+      213: -1067319120259982550
+    second: PortTravelAtlas_87
+  - first:
+      213: -4553744937943373531
+    second: PortTravelAtlas_88
+  - first:
+      213: 197795642829173209
+    second: PortTravelAtlas_89
+  - first:
+      213: 1653822173038416562
+    second: PortTravelAtlas_90
+  - first:
+      213: 7859181364819237072
+    second: PortTravelAtlas_91
+  - first:
+      213: -8488001844302413127
+    second: PortTravelAtlas_92
+  - first:
+      213: -1016902643032581159
+    second: PortTravelAtlas_93
+  - first:
+      213: 5968804957563316999
+    second: PortTravelAtlas_94
+  - first:
+      213: -3208299175475814013
+    second: PortTravelAtlas_95
+  - first:
+      213: 7161808928077363476
+    second: PortTravelAtlas_96
+  - first:
+      213: 6677306338102025318
+    second: PortTravelAtlas_97
+  - first:
+      213: 5300590111867427245
+    second: PortTravelAtlas_98
+  - first:
+      213: 5924760761519740801
+    second: PortTravelAtlas_99
+  - first:
+      213: 4966895320620683695
+    second: PortTravelAtlas_100
+  - first:
+      213: 4456672197957320181
+    second: PortTravelAtlas_101
+  - first:
+      213: -8997172382620790628
+    second: PortTravelAtlas_102
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PortTravelAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 841
+        width: 205
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 291e2187fe9b0cee0800000000000000
+      internalID: -1242789058991431278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 403
+        width: 561
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 880ebfa5d457bf2b0800000000000000
+      internalID: -5549713140704616312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 853
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 383519b4ccb43f1e0800000000000000
+      internalID: -2165303655021849725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_3
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 935
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a07077045fc64a10800000000000000
+      internalID: 1893428653164884129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_4
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 933
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f4afd629ad5fce0800000000000000
+      internalID: -1371950189019246749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 930
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e97f740bafc71390800000000000000
+      internalID: -7847575492247979543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 925
+        width: 30
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acd54025633763ac0800000000000000
+      internalID: -3875783752164287030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_7
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 895
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca1e01d5937be00f0800000000000000
+      internalID: -1148779397930491476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_8
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 883
+        width: 47
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2554c8352e1a781d0800000000000000
+      internalID: -3348529804490291886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_9
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 849
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35884f363f69ba420800000000000000
+      internalID: 2642371578481117267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_10
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 925
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de9ea1e8cd92922e0800000000000000
+      internalID: -2150141319839028755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_11
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 849
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c71024c53069df50800000000000000
+      internalID: 6906657287589337025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_12
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 885
+        width: 129
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8536ebc872411ec30800000000000000
+      internalID: 4386809672133141336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_13
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 947
+        width: 61
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5140bc135af0f8e0800000000000000
+      internalID: -1661553027629170340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_14
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1007
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fa44c52189d107a0800000000000000
+      internalID: -6412605245691245833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_15
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 1007
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06654624cede5fa60800000000000000
+      internalID: 7707327936296408672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_16
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 845
+        width: 157
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 453a1ac807a9eebb0800000000000000
+      internalID: -4904813135973473452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_17
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 911
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81abf93e174bab150800000000000000
+      internalID: 5889217863983544856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_18
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 893
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cc2a0c5a9f977ed0800000000000000
+      internalID: -2416287189743031096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_19
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 869
+        width: 17
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f91382b4d704e260800000000000000
+      internalID: 7125829120516364793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_20
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 853
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 711e2f5f22c282d70800000000000000
+      internalID: 9018506782476263703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_21
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 853
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 550b8b82bc1ae8e70800000000000000
+      internalID: 9119404189405458517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_22
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 487
+        width: 315
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e0134096a84a5e00800000000000000
+      internalID: 1034218944657035496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_23
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 921
+        width: 107
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95b64846b2ae01390800000000000000
+      internalID: -7849516678415881383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_24
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 969
+        width: 41
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f68db3fa47a5e110800000000000000
+      internalID: 1289620808670217969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_25
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 919
+        width: 47
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7f0adea1b3310180800000000000000
+      internalID: -9150976129604382850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_26
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 993
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9db8c2f3eeb542c80800000000000000
+      internalID: -8348446730417828903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_27
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 960
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcf0033d29c7976a0800000000000000
+      internalID: -6450988021181313077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_28
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 933
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d087e5397619abb10800000000000000
+      internalID: 1998069258732337165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_29
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 965
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8c2f5f9d2912cb70800000000000000
+      internalID: 8917717895885040782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_30
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 849
+        width: 165
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50370889ca7aedcb0800000000000000
+      internalID: -4837244590014565627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_31
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 923
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d237e6ea9b1c7a0800000000000000
+      internalID: -6358597040041939599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_32
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 663
+        width: 119
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9ab1800ecbc21980800000000000000
+      internalID: -8569563055300429153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_33
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 989
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e71e5726b9dd3740800000000000000
+      internalID: 5133498526639986661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_34
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 927
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 003b5c7f1009c6580800000000000000
+      internalID: -8832526431054089472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_35
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 917
+        width: 259
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 609796df02d74b920800000000000000
+      internalID: 3005164432006936838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_36
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 471
+        width: 447
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e62c457934f51110800000000000000
+      internalID: 1231158600773936873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_37
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 927
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a9e4b2d30940a020800000000000000
+      internalID: 2350959286256200103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_38
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 919
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4985fb9bdfef09780800000000000000
+      internalID: -8678156116246439788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_39
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 977
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a6abb84d56c5c480800000000000000
+      internalID: -8879472986336549210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_40
+      rect:
+        serializedVersion: 2
+        x: 1310
+        y: 951
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd4b0eb08c3b410c0800000000000000
+      internalID: -4605858847119067937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_41
+      rect:
+        serializedVersion: 2
+        x: 1324
+        y: 975
+        width: 37
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70fcce76475625060800000000000000
+      internalID: 6940721526365540103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_42
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 951
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaf6083ea6e8c3a60800000000000000
+      internalID: 7655150056357523370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_43
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 957
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d8dbdacaebad6380800000000000000
+      internalID: -8976329457365428010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_44
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 843
+        width: 92
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb0c6bd0311a7a530800000000000000
+      internalID: 3866235908327391423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_45
+      rect:
+        serializedVersion: 2
+        x: 1474
+        y: 927
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69d0ca601497b5020800000000000000
+      internalID: 2331590552286137750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_46
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 817
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e170c7d52a60d340800000000000000
+      internalID: 4886522306463035881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_47
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 629
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: def0ded963ca3f2a0800000000000000
+      internalID: -6704826069646766099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_48
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 592
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef7a02d085eb128e0800000000000000
+      internalID: -1719884297292175362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_49
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 607
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59ab6834573358e30800000000000000
+      internalID: 4505063580991142549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_50
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 609
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a3efbe6f0d8f2f20800000000000000
+      internalID: 3400091341110109094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_51
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 599
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fd60e83067f20200800000000000000
+      internalID: 144950130672430583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_52
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 623
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abb80641bf526b9a0800000000000000
+      internalID: -6217740475229500486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_53
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 615
+        width: 83
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73211f9b7f718a20800000000000000
+      internalID: 3062869390515053437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_54
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 601
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6ee50d42fee4dbf0800000000000000
+      internalID: -300352550685249942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_55
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 477
+        width: 243
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82d88982d3645ed40800000000000000
+      internalID: 5612969739075226920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_56
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 595
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebef1623b277c96b0800000000000000
+      internalID: -5288220835027222850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_57
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 593
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7dc37041be1686f0800000000000000
+      internalID: -682824546860675715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_58
+      rect:
+        serializedVersion: 2
+        x: 1384
+        y: 592
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a68835db05dd7fa0800000000000000
+      internalID: -5801246498184722779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_59
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 582
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28c7b2c28c42d0640800000000000000
+      internalID: 5047731199505300610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_60
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 559
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e80201adebdb2ac10800000000000000
+      internalID: 2063420206689034382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_61
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 557
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f0ce338ee98de040800000000000000
+      internalID: 4678547245404963065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_62
+      rect:
+        serializedVersion: 2
+        x: 1270
+        y: 559
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ddcf1365b973b00800000000000000
+      internalID: 808285452644441448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_63
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 523
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95bfc5ffa6639ef50800000000000000
+      internalID: 6911114936355453785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_64
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 542
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f096961fbef348370800000000000000
+      internalID: 8323848293887600911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_65
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 477
+        width: 81
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f34c68233a2d336f0800000000000000
+      internalID: -705989118197840833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_66
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 495
+        width: 63
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1d0f832b50969d70800000000000000
+      internalID: 9049579222360591645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_67
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 450
+        width: 83
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b7444e23ac435d30800000000000000
+      internalID: 4418959923120195512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_68
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 545
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39171cf75779bc780800000000000000
+      internalID: -8661662927406665325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_69
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 523
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f86c5a7a04288c60800000000000000
+      internalID: 7820540380350015737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_70
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 527
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c0f7fc659b6ca070800000000000000
+      internalID: 8118982517764649155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_71
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 527
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4628942aadbc3cf70800000000000000
+      internalID: 9206426203161461348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_72
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 519
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d5e7ee04ea8e7da0800000000000000
+      internalID: -5945161745975220775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_73
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 517
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 713d973f582ca5f70800000000000000
+      internalID: 9176861071292093207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_74
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 515
+        width: 7
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d66a2d451b03dcf80800000000000000
+      internalID: -8084752217869736339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_75
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 497
+        width: 25
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97a836153771da3c0800000000000000
+      internalID: -4346792281288504711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_76
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 509
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93afed21b84c01680800000000000000
+      internalID: -8786306771403736519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_77
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 513
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7013aee5c1203f50800000000000000
+      internalID: 6859019366481203326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_78
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 493
+        width: 23
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2c4f4f9a1c2b39f0800000000000000
+      internalID: -487747641786020818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_79
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 471
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ece5613049f602b20800000000000000
+      internalID: 3107606424383282894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_80
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 473
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2e8d96d796a7fd70800000000000000
+      internalID: 9076906745059446316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_81
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 447
+        height: 469
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23eb3896da17e3fb0800000000000000
+      internalID: -4666167174295732686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_82
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 23
+        width: 489
+        height: 444
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21e7d0f7b960b0740800000000000000
+      internalID: 5119192666357988882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_83
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 451
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ec03db58972304f0800000000000000
+      internalID: -863803168195932951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_84
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 0
+        width: 449
+        height: 467
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53a654241e5a8c750800000000000000
+      internalID: 6325488063539931701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_85
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 92
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71f2f852360ef19e0800000000000000
+      internalID: -1648352222157787369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_86
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 86
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f9062027b48d78a0800000000000000
+      internalID: -6305737981195580940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_87
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 39
+        width: 35
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2bdbee3aee1031f0800000000000000
+      internalID: -1067319120259982550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_88
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 45
+        width: 39
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 529e6201b19ddc0c0800000000000000
+      internalID: -4553744937943373531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_89
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 61
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d1f3f4d616beb200800000000000000
+      internalID: 197795642829173209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_90
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 69
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b29e99018e83f610800000000000000
+      internalID: 1653822173038416562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_91
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 63
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d89b63cfcb611d60800000000000000
+      internalID: 7859181364819237072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_92
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 49
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b28e714b4f843a80800000000000000
+      internalID: -8488001844302413127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_93
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 45
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9db13e61f6c33e1f0800000000000000
+      internalID: -1016902643032581159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_94
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 51
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70be62d1c7475d250800000000000000
+      internalID: 5968804957563316999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_95
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 35
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 381e590f5e4d973d0800000000000000
+      internalID: -3208299175475814013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_96
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 11
+        width: 67
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419b543764bd36360800000000000000
+      internalID: 7161808928077363476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_97
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 45
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66c19039cbe8aac50800000000000000
+      internalID: 6677306338102025318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_98
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 59
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da95ecd7f9a7f8940800000000000000
+      internalID: 5300590111867427245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_99
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 43
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1879e89958af83250800000000000000
+      internalID: 5924760761519740801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_100
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 43
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa155267af4fde440800000000000000
+      internalID: 4966895320620683695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_101
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 29
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fdfa9760c749dd30800000000000000
+      internalID: 4456672197957320181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PortTravelAtlas_102
+      rect:
+        serializedVersion: 2
+        x: 1310
+        y: 18
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c90dee6136f932380800000000000000
+      internalID: -8997172382620790628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PortTravelAtlas_0: -1242789058991431278
+      PortTravelAtlas_1: -5549713140704616312
+      PortTravelAtlas_10: -2150141319839028755
+      PortTravelAtlas_100: 4966895320620683695
+      PortTravelAtlas_101: 4456672197957320181
+      PortTravelAtlas_102: -8997172382620790628
+      PortTravelAtlas_11: 6906657287589337025
+      PortTravelAtlas_12: 4386809672133141336
+      PortTravelAtlas_13: -1661553027629170340
+      PortTravelAtlas_14: -6412605245691245833
+      PortTravelAtlas_15: 7707327936296408672
+      PortTravelAtlas_16: -4904813135973473452
+      PortTravelAtlas_17: 5889217863983544856
+      PortTravelAtlas_18: -2416287189743031096
+      PortTravelAtlas_19: 7125829120516364793
+      PortTravelAtlas_2: -2165303655021849725
+      PortTravelAtlas_20: 9018506782476263703
+      PortTravelAtlas_21: 9119404189405458517
+      PortTravelAtlas_22: 1034218944657035496
+      PortTravelAtlas_23: -7849516678415881383
+      PortTravelAtlas_24: 1289620808670217969
+      PortTravelAtlas_25: -9150976129604382850
+      PortTravelAtlas_26: -8348446730417828903
+      PortTravelAtlas_27: -6450988021181313077
+      PortTravelAtlas_28: 1998069258732337165
+      PortTravelAtlas_29: 8917717895885040782
+      PortTravelAtlas_3: 1893428653164884129
+      PortTravelAtlas_30: -4837244590014565627
+      PortTravelAtlas_31: -6358597040041939599
+      PortTravelAtlas_32: -8569563055300429153
+      PortTravelAtlas_33: 5133498526639986661
+      PortTravelAtlas_34: -8832526431054089472
+      PortTravelAtlas_35: 3005164432006936838
+      PortTravelAtlas_36: 1231158600773936873
+      PortTravelAtlas_37: 2350959286256200103
+      PortTravelAtlas_38: -8678156116246439788
+      PortTravelAtlas_39: -8879472986336549210
+      PortTravelAtlas_4: -1371950189019246749
+      PortTravelAtlas_40: -4605858847119067937
+      PortTravelAtlas_41: 6940721526365540103
+      PortTravelAtlas_42: 7655150056357523370
+      PortTravelAtlas_43: -8976329457365428010
+      PortTravelAtlas_44: 3866235908327391423
+      PortTravelAtlas_45: 2331590552286137750
+      PortTravelAtlas_46: 4886522306463035881
+      PortTravelAtlas_47: -6704826069646766099
+      PortTravelAtlas_48: -1719884297292175362
+      PortTravelAtlas_49: 4505063580991142549
+      PortTravelAtlas_5: -7847575492247979543
+      PortTravelAtlas_50: 3400091341110109094
+      PortTravelAtlas_51: 144950130672430583
+      PortTravelAtlas_52: -6217740475229500486
+      PortTravelAtlas_53: 3062869390515053437
+      PortTravelAtlas_54: -300352550685249942
+      PortTravelAtlas_55: 5612969739075226920
+      PortTravelAtlas_56: -5288220835027222850
+      PortTravelAtlas_57: -682824546860675715
+      PortTravelAtlas_58: -5801246498184722779
+      PortTravelAtlas_59: 5047731199505300610
+      PortTravelAtlas_6: -3875783752164287030
+      PortTravelAtlas_60: 2063420206689034382
+      PortTravelAtlas_61: 4678547245404963065
+      PortTravelAtlas_62: 808285452644441448
+      PortTravelAtlas_63: 6911114936355453785
+      PortTravelAtlas_64: 8323848293887600911
+      PortTravelAtlas_65: -705989118197840833
+      PortTravelAtlas_66: 9049579222360591645
+      PortTravelAtlas_67: 4418959923120195512
+      PortTravelAtlas_68: -8661662927406665325
+      PortTravelAtlas_69: 7820540380350015737
+      PortTravelAtlas_7: -1148779397930491476
+      PortTravelAtlas_70: 8118982517764649155
+      PortTravelAtlas_71: 9206426203161461348
+      PortTravelAtlas_72: -5945161745975220775
+      PortTravelAtlas_73: 9176861071292093207
+      PortTravelAtlas_74: -8084752217869736339
+      PortTravelAtlas_75: -4346792281288504711
+      PortTravelAtlas_76: -8786306771403736519
+      PortTravelAtlas_77: 6859019366481203326
+      PortTravelAtlas_78: -487747641786020818
+      PortTravelAtlas_79: 3107606424383282894
+      PortTravelAtlas_8: -3348529804490291886
+      PortTravelAtlas_80: 9076906745059446316
+      PortTravelAtlas_81: -4666167174295732686
+      PortTravelAtlas_82: 5119192666357988882
+      PortTravelAtlas_83: -863803168195932951
+      PortTravelAtlas_84: 6325488063539931701
+      PortTravelAtlas_85: -1648352222157787369
+      PortTravelAtlas_86: -6305737981195580940
+      PortTravelAtlas_87: -1067319120259982550
+      PortTravelAtlas_88: -4553744937943373531
+      PortTravelAtlas_89: 197795642829173209
+      PortTravelAtlas_9: 2642371578481117267
+      PortTravelAtlas_90: 1653822173038416562
+      PortTravelAtlas_91: 7859181364819237072
+      PortTravelAtlas_92: -8488001844302413127
+      PortTravelAtlas_93: -1016902643032581159
+      PortTravelAtlas_94: 5968804957563316999
+      PortTravelAtlas_95: -3208299175475814013
+      PortTravelAtlas_96: 7161808928077363476
+      PortTravelAtlas_97: 6677306338102025318
+      PortTravelAtlas_98: 5300590111867427245
+      PortTravelAtlas_99: 5924760761519740801
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

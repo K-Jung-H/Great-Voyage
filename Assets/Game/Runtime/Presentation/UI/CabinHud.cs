@@ -20,12 +20,14 @@ namespace GreatVoyage.Presentation
         [SerializeField] private Button saveExit;
         private GameSession session;
         private Action exitAction;
+        private string initialNotice;
         private long lastMinute = -1;
         private bool lastReady, lastNearExit, wasJournal, wasMenu;
 
         public void Bind(GameSession value, Action requestExit, string notice)
         {
             session = value; exitAction = requestExit;
+            initialNotice = notice;
             journalClose.onClick.AddListener(CloseJournal);
             menuButton.onClick.AddListener(OpenMenu);
             resume.onClick.AddListener(Resume);
@@ -37,7 +39,11 @@ namespace GreatVoyage.Presentation
 
         private void CloseJournal() => session.CloseJournal();
         private void OpenMenu() => session.OpenMenu();
-        private void Resume() => session.CloseMenu();
+        private void Resume()
+        {
+            if (session.BoundarySavePending && !session.RetryBoundarySave()) return;
+            session.CloseMenu();
+        }
         private void Exit() => exitAction();
 
         public void ShowStartupFailure(string message, Action quit)
@@ -60,7 +66,8 @@ namespace GreatVoyage.Presentation
             else if (session.JournalOpen && !wasJournal) EventSystem.current?.SetSelectedGameObject(journalClose.gameObject);
             else if (!session.MenuOpen && !session.JournalOpen) EventSystem.current?.SetSelectedGameObject(null);
             wasMenu = session.MenuOpen; wasJournal = session.JournalOpen;
-            if (!string.IsNullOrEmpty(session.Error)) messageLabel.text = session.Error;
+            messageLabel.text = string.IsNullOrEmpty(session.Error) ? initialNotice : session.Error;
+            resume.GetComponentInChildren<TMP_Text>().text = session.BoundarySavePending ? "저장 재시도" : "재개";
         }
 
         private void Update()
@@ -74,7 +81,7 @@ namespace GreatVoyage.Presentation
                 lastMinute = minute;
             }
             var ready = session.CanInteract;
-            var nearExit = session.State.Player.Position.Y < -2.35f && Mathf.Abs(session.State.Player.Position.X) < 1.2f;
+            var nearExit = false; // P4 authored portals now provide the location-specific exit prompt.
             if (ready != lastReady || nearExit != lastNearExit || string.IsNullOrEmpty(hintLabel.text))
             {
                 hintLabel.text = session.Pauses.IsPaused ? "" : ready ? "E  " + session.FocusedInteraction.Value.Prompt : nearExit

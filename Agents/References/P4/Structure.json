@@ -1,0 +1,168 @@
+{
+  "areas": [
+    {
+      "AreaId": "captain-cabin",
+      "DisplayName": "선장실",
+      "active": true,
+      "illustration": true
+    },
+    {
+      "AreaId": "upper-deck",
+      "DisplayName": "상갑판",
+      "active": false,
+      "illustration": true
+    },
+    {
+      "AreaId": "harbor-dock",
+      "DisplayName": "선착장",
+      "active": false,
+      "illustration": true
+    },
+    {
+      "AreaId": "harbor-crossroads",
+      "DisplayName": "항구 교차로",
+      "active": false,
+      "illustration": true
+    },
+    {
+      "AreaId": "harbor-town",
+      "DisplayName": "마을 · 주점과 조선소",
+      "active": false,
+      "illustration": true
+    },
+    {
+      "AreaId": "harbor-market",
+      "DisplayName": "상점가",
+      "active": false,
+      "illustration": true
+    },
+    {
+      "AreaId": "tavern-interior",
+      "DisplayName": "주점 내부",
+      "active": false,
+      "illustration": true
+    }
+  ],
+  "portals": [
+    {
+      "id": "captain-cabin:upper-deck",
+      "source": "captain-cabin",
+      "destination": "upper-deck",
+      "kind": "Floor",
+      "arrival": [
+        4.0,
+        -0.2
+      ]
+    },
+    {
+      "id": "upper-deck:captain-cabin",
+      "source": "upper-deck",
+      "destination": "captain-cabin",
+      "kind": "Floor",
+      "arrival": [
+        0.0,
+        -1.8
+      ]
+    },
+    {
+      "id": "upper-deck:harbor-dock",
+      "source": "upper-deck",
+      "destination": "harbor-dock",
+      "kind": "Disembark",
+      "arrival": [
+        -4.4,
+        0.0
+      ]
+    },
+    {
+      "id": "harbor-dock:upper-deck",
+      "source": "harbor-dock",
+      "destination": "upper-deck",
+      "kind": "Board",
+      "arrival": [
+        0.0,
+        0.1
+      ]
+    },
+    {
+      "id": "harbor-dock:harbor-crossroads",
+      "source": "harbor-dock",
+      "destination": "harbor-crossroads",
+      "kind": "Area",
+      "arrival": [
+        0.0,
+        -2.0
+      ]
+    },
+    {
+      "id": "harbor-crossroads:harbor-dock",
+      "source": "harbor-crossroads",
+      "destination": "harbor-dock",
+      "kind": "Area",
+      "arrival": [
+        5.5,
+        0.0
+      ]
+    },
+    {
+      "id": "harbor-crossroads:harbor-town",
+      "source": "harbor-crossroads",
+      "destination": "harbor-town",
+      "kind": "Area",
+      "arrival": [
+        5.5,
+        0.0
+      ]
+    },
+    {
+      "id": "harbor-town:harbor-crossroads",
+      "source": "harbor-town",
+      "destination": "harbor-crossroads",
+      "kind": "Area",
+      "arrival": [
+        -5.5,
+        1.0
+      ]
+    },
+    {
+      "id": "harbor-crossroads:harbor-market",
+      "source": "harbor-crossroads",
+      "destination": "harbor-market",
+      "kind": "Area",
+      "arrival": [
+        -5.5,
+        0.0
+      ]
+    },
+    {
+      "id": "harbor-market:harbor-crossroads",
+      "source": "harbor-market",
+      "destination": "harbor-crossroads",
+      "kind": "Area",
+      "arrival": [
+        5.5,
+        0.0
+      ]
+    },
+    {
+      "id": "harbor-town:tavern-interior",
+      "source": "harbor-town",
+      "destination": "tavern-interior",
+      "kind": "Area",
+      "arrival": [
+        -4.0,
+        -1.4
+      ]
+    },
+    {
+      "id": "tavern-interior:harbor-town",
+      "source": "tavern-interior",
+      "destination": "harbor-town",
+      "kind": "Area",
+      "arrival": [
+        -4.0,
+        -0.4
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "context": "Unity Editor Play Mode; one actual E floor transition captain cabin to upper deck plus surrounding idle, one actor; includes Editor/tool overhead; not Player benchmark",
+  "samples": 600,
+  "mainThreadAvailable": true,
+  "physicsAvailable": true,
+  "gcAvailable": true,
+  "frameMs": {
+    "median": 3.0604025814682245,
+    "p95": 4.4981008395552635,
+    "max": 463.9214873313904
+  },
+  "mainThreadMs": {
+    "median": 3.0597,
+    "p95": 4.5287,
+    "max": 40.6312
+  },
+  "physics2DMs": {
+    "median": 0.0,
+    "p95": 0.009899999999999999,
+    "max": 0.0549
+  },
+  "gcBytes": {
+    "median": 8593.0,
+    "p95": 8684.0,
+    "max": 1749386.0
+  },
+  "unity": "6000.6.4f1",
+  "cpuModel": "Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz",
+  "gpu": "NVIDIA GeForce MX150"
+}

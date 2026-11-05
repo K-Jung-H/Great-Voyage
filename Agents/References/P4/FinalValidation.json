@@ -1,0 +1,18 @@
+{
+  "scene": "Assets/Game/Scenes/Game.unity",
+  "dirty": false,
+  "playing": false,
+  "compiling": false,
+  "errors": 0,
+  "warnings": 1,
+  "logs": 11,
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "saveSlot": "P3Cabin",
+  "cameraSize": 5.5,
+  "areaCount": 7,
+  "activeAreas": [
+    "captain-cabin"
+  ],
+  "portalCount": 12
+}

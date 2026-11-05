@@ -1,0 +1,202 @@
+{
+  "status": "completed",
+  "duration": 0.55,
+  "summary": {
+    "total": 27,
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.ClockUsesOneTenMinuteDayAndNeverCatchesUpPausedTime",
+      "Status": "Passed",
+      "Duration": 0.0041697,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.CorruptedMainUsesBackupAndNextSavePreservesThatGoodBackup",
+      "Status": "Passed",
+      "Duration": 0.026671,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.FailedTemporaryWriteLeavesPreviousSaveUntouched",
+      "Status": "Passed",
+      "Duration": 0.0057444,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.InvalidSaveIsNotSilentlyReplacedWithNewSession",
+      "Status": "Passed",
+      "Duration": 0.0034763,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.NestedMenuDoesNotReleaseJournalPauseAndTokensAreIdempotent",
+      "Status": "Passed",
+      "Duration": 0.0007211,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.RealFileRoundTripRestoresCommonPositionFacingClockAndSeed",
+      "Status": "Passed",
+      "Duration": 0.0106415,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.RejectedInteractionCannotPauseOrWriteSave",
+      "Status": "Passed",
+      "Duration": 0.0008311,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.SaveOnlyHappensAtNormalExitAndFailureAllowsRetry",
+      "Status": "Passed",
+      "Duration": 0.0006383,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.FurniturePrefabTests.SharedSettingsChangeGridAndFurnitureDimensionsWithoutMovingEntities",
+      "Status": "Passed",
+      "Duration": 0.0702722,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.FurniturePrefabTests.VisualScalingDoesNotResizeCollisionOrCellArea",
+      "Status": "Passed",
+      "Duration": 0.0042273,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.DuplicateTargetIdsAreRejected",
+      "Status": "Passed",
+      "Duration": 0.0011288,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.InputCannotExecuteADifferentTargetWhenHighlightedTargetBecomesInvalid",
+      "Status": "Passed",
+      "Duration": 0.0010148,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.RetentionAvoidsJitterButYieldsToHigherPriorityOrClearDistanceAdvantage",
+      "Status": "Passed",
+      "Duration": 0.0003521,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.SelectionHasStablePriorityDistanceAndIdOrder",
+      "Status": "Passed",
+      "Duration": 0.0005308,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.AdjacentAreasShareCellsOnlyWithinTheirOwnSpace",
+      "Status": "Passed",
+      "Duration": 0.0016097,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.ContinuousCentersAreValidatedWithoutMovingOrRoundingThem",
+      "Status": "Passed",
+      "Duration": 0.002112,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.InvalidOrOutsideDefinitionsAreRejected",
+      "Status": "Passed",
+      "Duration": 0.0019756,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.NegativeCellCoordinatesAndEmptySpaceAreSupported",
+      "Status": "Passed",
+      "Duration": 0.0004099,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.RectanglesUnionAcrossSeamsAndExclusionsAlwaysWin",
+      "Status": "Passed",
+      "Duration": 0.000866,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.WholeFootprintMustFitZoneAndAvoidForbiddenCells",
+      "Status": "Passed",
+      "Duration": 0.0002967,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.FailedPreparationKeepsPoseIdentityAndDoesNotSave",
+      "Status": "Passed",
+      "Duration": 0.0011614,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SaveFailureKeepsCompletedMoveAndRetryDoesNotRepeatTravel",
+      "Status": "Passed",
+      "Duration": 0.0009545,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Area,0)",
+      "Status": "Passed",
+      "Duration": 0.0007161,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Floor,0)",
+      "Status": "Passed",
+      "Duration": 0.0001208,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Board,1)",
+      "Status": "Passed",
+      "Duration": 9.42E-05,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Disembark,1)",
+      "Status": "Passed",
+      "Duration": 9.09E-05,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.TransitionFreezesClockAndRejectsRepeatedInputOrExit",
+      "Status": "Passed",
+      "Duration": 0.000407,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

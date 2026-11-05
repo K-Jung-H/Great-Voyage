@@ -1,0 +1,9 @@
+{
+  "context": "Windows64 non-development build, hidden startup smoke only; no Player input/visual/performance claim",
+  "started": true,
+  "observedRunning": true,
+  "closeMainWindowAccepted": false,
+  "log": "PlayerStartup.txt",
+  "isolatedSaveSlot": "Validation/P3_1bf80964261643038b66411995bb5164",
+  "termination": "Owned hidden validation process stopped; normal-exit save not exercised"
+}
