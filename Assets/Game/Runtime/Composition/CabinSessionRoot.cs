@@ -17,6 +17,8 @@ namespace GreatVoyage.Composition
         [SerializeField] private JournalDesk desk;
         [SerializeField] private MonoBehaviour[] interactionTargets;
         [SerializeField] private WorldTravelView worldTravel;
+        [SerializeField] private NavigationView navigationView;
+        [SerializeField] private NavigationSettings navigationSettings;
         [SerializeField] private CabinHud hud;
         [SerializeField] private InputActionAsset controls;
         [SerializeField] private string saveDirectoryName = "P3Cabin";
@@ -57,7 +59,14 @@ namespace GreatVoyage.Composition
                         ?? throw new InvalidOperationException("Invalid serialized interaction target.");
                 if (worldTravel != null && !worldTravel.PrepareLoad(state.Player.Position))
                     throw new InvalidOperationException("Invalid initial world position.");
-                Session = new GameSession(state, new InteractionResolver(targets), new SaveCoordinator(store), worldTravel);
+                Session = new GameSession(state, new InteractionResolver(targets), new SaveCoordinator(store), worldTravel,
+                    navigationSettings != null ? navigationSettings.CreateTuning() : null);
+                foreach (var target in interactionTargets)
+                {
+                    if (target is HelmStation helm) helm.Bind(Session);
+                    if (target is WorldPortal portal) portal.Bind(Session);
+                }
+                if (navigationView != null) navigationView.Bind(Session);
                 player.Bind(Session);
                 if (worldTravel != null) worldTravel.Bind(Session);
                 character.Bind(Session, player);

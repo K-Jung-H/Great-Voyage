@@ -1,0 +1,20 @@
+{
+  "status": "completed",
+  "duration": 17.1,
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "GreatVoyage.Tests.NavigationPlayTests.FixedDeckSteeringWaterChartPauseAndRestore",
+      "Status": "Passed",
+      "Duration": 17.0578767,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

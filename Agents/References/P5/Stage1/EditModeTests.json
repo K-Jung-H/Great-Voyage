@@ -1,0 +1,251 @@
+{
+  "status": "completed",
+  "duration": 0.68,
+  "summary": {
+    "total": 34,
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.ClockUsesOneTenMinuteDayAndNeverCatchesUpPausedTime",
+      "Status": "Passed",
+      "Duration": 0.0224776,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.CorruptedMainUsesBackupAndNextSavePreservesThatGoodBackup",
+      "Status": "Passed",
+      "Duration": 0.0538127,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.FailedTemporaryWriteLeavesPreviousSaveUntouched",
+      "Status": "Passed",
+      "Duration": 0.0053154,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.InvalidSaveIsNotSilentlyReplacedWithNewSession",
+      "Status": "Passed",
+      "Duration": 0.0063657,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.NestedMenuDoesNotReleaseJournalPauseAndTokensAreIdempotent",
+      "Status": "Passed",
+      "Duration": 0.0020932,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.RealFileRoundTripRestoresCommonPositionFacingClockAndSeed",
+      "Status": "Passed",
+      "Duration": 0.0060295,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.RejectedInteractionCannotPauseOrWriteSave",
+      "Status": "Passed",
+      "Duration": 0.001254,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.CabinDomainTests.SaveOnlyHappensAtNormalExitAndFailureAllowsRetry",
+      "Status": "Passed",
+      "Duration": 0.0007256,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.FurniturePrefabTests.HiddenAreaKeepsPlacementDefinitionAndExplicitGridDisableStillApplies",
+      "Status": "Passed",
+      "Duration": 0.0145188,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.FurniturePrefabTests.SharedSettingsChangeGridAndFurnitureDimensionsWithoutMovingEntities",
+      "Status": "Passed",
+      "Duration": 0.0167005,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.FurniturePrefabTests.VisualScalingDoesNotResizeCollisionOrCellArea",
+      "Status": "Passed",
+      "Duration": 0.0088878,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.DuplicateTargetIdsAreRejected",
+      "Status": "Passed",
+      "Duration": 0.0026299,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.InputCannotExecuteADifferentTargetWhenHighlightedTargetBecomesInvalid",
+      "Status": "Passed",
+      "Duration": 0.0028343,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.RetentionAvoidsJitterButYieldsToHigherPriorityOrClearDistanceAdvantage",
+      "Status": "Passed",
+      "Duration": 0.0003715,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.InteractionTests.SelectionHasStablePriorityDistanceAndIdOrder",
+      "Status": "Passed",
+      "Duration": 0.0003879,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.NavigationTests.ActualSaveRoundTripRetainsNavigationAndVersionOneMigrationDoesNotRewriteFile",
+      "Status": "Passed",
+      "Duration": 0.0101832,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.NavigationTests.ConstantSteeringIsIndependentOfStepPartition(0)",
+      "Status": "Passed",
+      "Duration": 0.0011333,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.NavigationTests.ConstantSteeringIsIndependentOfStepPartition(1)",
+      "Status": "Passed",
+      "Duration": 0.0005625,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.NavigationTests.ConstantSteeringIsIndependentOfStepPartition(-0.37d)",
+      "Status": "Passed",
+      "Duration": 0.0004735,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.NavigationTests.DockedStateDoesNotMoveAndDepartureCannotCreateDuplicateVoyages",
+      "Status": "Passed",
+      "Duration": 0.000299,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.NavigationTests.HelmOwnsMovementWithoutPausingAndMenuCannotCauseCatchUp",
+      "Status": "Passed",
+      "Duration": 0.001038,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.AdjacentAreasShareCellsOnlyWithinTheirOwnSpace",
+      "Status": "Passed",
+      "Duration": 0.0011225,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.ContinuousCentersAreValidatedWithoutMovingOrRoundingThem",
+      "Status": "Passed",
+      "Duration": 0.0008312,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.InvalidOrOutsideDefinitionsAreRejected",
+      "Status": "Passed",
+      "Duration": 0.0010278,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.NegativeCellCoordinatesAndEmptySpaceAreSupported",
+      "Status": "Passed",
+      "Duration": 0.0003466,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.RectanglesUnionAcrossSeamsAndExclusionsAlwaysWin",
+      "Status": "Passed",
+      "Duration": 0.0009897,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.PlacementGridTests.WholeFootprintMustFitZoneAndAvoidForbiddenCells",
+      "Status": "Passed",
+      "Duration": 0.0003147,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.FailedPreparationKeepsPoseIdentityAndDoesNotSave",
+      "Status": "Passed",
+      "Duration": 0.0015924,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SaveFailureKeepsCompletedMoveAndRetryDoesNotRepeatTravel",
+      "Status": "Passed",
+      "Duration": 0.0009945,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Area,0)",
+      "Status": "Passed",
+      "Duration": 0.0008623,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Floor,0)",
+      "Status": "Passed",
+      "Duration": 8.12E-05,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Board,1)",
+      "Status": "Passed",
+      "Duration": 0.0001275,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.SuccessfulTransitionCommitsOnceAndOnlyBoardingBoundariesSave(Disembark,1)",
+      "Status": "Passed",
+      "Duration": 9.83E-05,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelTests.TransitionFreezesClockAndRejectsRepeatedInputOrExit",
+      "Status": "Passed",
+      "Duration": 0.0008051,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

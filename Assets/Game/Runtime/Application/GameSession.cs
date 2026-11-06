@@ -46,6 +46,10 @@ namespace GreatVoyage.Application
         private IDisposable journalPause;
         private IDisposable menuPause;
         private bool disposed;
+        private readonly NavigationTuning navigationTuning;
+        private float steeringInput;
+        public bool IsSteering { get; private set; }
+        public bool CharacterMovementAllowed => WorldInputAllowed && !IsSteering;
 
         public GameSessionState State { get; }
         public PauseReasons Pauses { get; } = new PauseReasons();
@@ -58,35 +62,47 @@ namespace GreatVoyage.Application
         public bool WorldInputAllowed => !disposed && !ExitPrepared && !Pauses.IsPaused;
         public event Action Changed;
 
-        public GameSession(GameSessionState state, IInteractionQueries interactions, SaveCoordinator saves, ITravelMap travelMap = null)
+        public GameSession(GameSessionState state, IInteractionQueries interactions, SaveCoordinator saves, ITravelMap travelMap = null,
+            NavigationTuning navigationTuning = null)
         {
             State = state ?? throw new ArgumentNullException(nameof(state));
             this.interactions = interactions ?? throw new ArgumentNullException(nameof(interactions));
             this.saves = saves ?? throw new ArgumentNullException(nameof(saves));
             this.travelMap = travelMap;
+            this.navigationTuning = navigationTuning ?? new NavigationTuning();
             Pauses.Changed += OnPauseChanged;
             RefreshInteraction();
         }
 
         private void OnPauseChanged(bool paused)
         {
-            if (paused) Movement = default;
+            if (paused) { Movement = default; steeringInput = 0; }
             RefreshInteraction();
             Changed?.Invoke();
         }
 
         public void Tick(double realSeconds)
         {
-            if (!disposed && !ExitPrepared && !Pauses.IsPaused) State.Clock.Advance(realSeconds);
+            if (!disposed && !ExitPrepared && !Pauses.IsPaused)
+            {
+                State.Clock.Advance(realSeconds);
+                State.Navigation.Advance(realSeconds * GameClock.GameSecondsPerRealSecond,
+                    IsSteering ? steeringInput : 0, navigationTuning.TurnDegreesPerGameSecond);
+            }
             RefreshInteraction();
         }
 
-        public void Move(float x, float y) => Movement = WorldInputAllowed ? new MoveIntent(x, y) : default;
-        public bool CanInteract => WorldInputAllowed && FocusedInteraction.HasValue;
+        public void Move(float x, float y)
+        {
+            var intent = new MoveIntent(x, y);
+            steeringInput = WorldInputAllowed && IsSteering ? Math.Max(-1f, Math.Min(1f, x)) : 0;
+            Movement = CharacterMovementAllowed ? intent : default;
+        }
+        public bool CanInteract => WorldInputAllowed && (IsSteering || FocusedInteraction.HasValue);
 
         public void RefreshInteraction()
         {
-            var next = WorldInputAllowed ? interactions.Resolve(State.Player.Position, FocusedInteraction?.TargetId) : null;
+            var next = WorldInputAllowed && !IsSteering ? interactions.Resolve(State.Player.Position, FocusedInteraction?.TargetId) : null;
             var changed = next?.TargetId != FocusedInteraction?.TargetId || next?.Prompt != FocusedInteraction?.Prompt
                 || next?.Action != FocusedInteraction?.Action;
             FocusedInteraction = next;
@@ -96,16 +112,25 @@ namespace GreatVoyage.Application
         public bool Interact()
         {
             if (!CanInteract) return false;
+            if (IsSteering) { EndSteering(); return true; }
             var selected = FocusedInteraction.Value;
             if (!interactions.IsStillValid(State.Player.Position, selected))
             {
                 FocusedInteraction = null; Changed?.Invoke();
                 return false;
             }
+            if (selected.Action == InteractionAction.UseHelm)
+            {
+                if (State.Player.Position.AreaId != "upper-deck") return false;
+                State.Navigation.Depart(State.PlayId, navigationTuning.CruiseSpeed);
+                IsSteering = true; Movement = default; steeringInput = 0;
+                RefreshInteraction(); Changed?.Invoke(); return true;
+            }
             if (selected.Action == InteractionAction.Travel)
             {
                 if (travelMap == null || !travelMap.TryResolve(selected.TargetId, State.Player.Position, out var link)
                     || link.SourceArea != State.Player.Position.AreaId || link.Id != selected.TargetId) return false;
+                if (link.Kind == TravelKind.Disembark && State.Navigation.IsUnderway) return false;
                 PendingTravel = link;
                 travelPause = Pauses.Acquire("WorldTransition");
                 Changed?.Invoke();
@@ -147,7 +172,14 @@ namespace GreatVoyage.Application
             if (disposed || ExitPrepared || PendingTravel != null) return;
             if (MenuOpen) CloseMenu();
             else if (JournalOpen) CloseJournal();
+            else if (IsSteering) EndSteering();
             else OpenMenu();
+        }
+
+        private void EndSteering()
+        {
+            IsSteering = false; steeringInput = 0; Movement = default;
+            RefreshInteraction(); Changed?.Invoke();
         }
 
         public bool PrepareNormalExit()

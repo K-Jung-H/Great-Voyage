@@ -1,0 +1,295 @@
+{
+    "context": "Actual gameplay review scene, injected Keyboard D held for manual steering; no simulated navigation or interpolated frames",
+    "frames": 57,
+    "width": 1280,
+    "height": 720,
+    "duration": 6.077625500000067,
+    "visualDuration": 6.1339173226151615,
+    "samples": [
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0000.png",
+            "wallSeconds": 0.002816799999891373,
+            "visualSeconds": 4.538539492059499
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0001.png",
+            "wallSeconds": 0.11284869999963121,
+            "visualSeconds": 4.651271997252479
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0002.png",
+            "wallSeconds": 0.2196918999998161,
+            "visualSeconds": 4.756884095724672
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0003.png",
+            "wallSeconds": 0.32691259999955946,
+            "visualSeconds": 4.865107802208513
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0004.png",
+            "wallSeconds": 0.43228629999975965,
+            "visualSeconds": 4.968739903299138
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0005.png",
+            "wallSeconds": 0.538647100000162,
+            "visualSeconds": 5.074372200295329
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0006.png",
+            "wallSeconds": 0.6482943000000887,
+            "visualSeconds": 5.180743198143318
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0007.png",
+            "wallSeconds": 0.7575145999999222,
+            "visualSeconds": 5.292292001890019
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0008.png",
+            "wallSeconds": 0.8675925999996252,
+            "visualSeconds": 5.403335604351014
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0009.png",
+            "wallSeconds": 0.9780275000002803,
+            "visualSeconds": 5.513398304115981
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0010.png",
+            "wallSeconds": 1.0898187000002508,
+            "visualSeconds": 5.626566203311086
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0011.png",
+            "wallSeconds": 1.1939259000000675,
+            "visualSeconds": 5.731247906805947
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0012.png",
+            "wallSeconds": 1.2993200000000797,
+            "visualSeconds": 5.835390609689057
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0013.png",
+            "wallSeconds": 1.4039309999998295,
+            "visualSeconds": 5.941835310077295
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0014.png",
+            "wallSeconds": 1.5085682999997516,
+            "visualSeconds": 6.047460312023759
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0015.png",
+            "wallSeconds": 1.6171760999995968,
+            "visualSeconds": 6.152279408881441
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0016.png",
+            "wallSeconds": 1.7250793000002886,
+            "visualSeconds": 6.261995411012322
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0017.png",
+            "wallSeconds": 1.8292092000001503,
+            "visualSeconds": 6.367658611387014
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0018.png",
+            "wallSeconds": 1.938528800000313,
+            "visualSeconds": 6.4752753069624305
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0019.png",
+            "wallSeconds": 2.044955800000025,
+            "visualSeconds": 6.58059400646016
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0020.png",
+            "wallSeconds": 2.15025549999973,
+            "visualSeconds": 6.687051306013018
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0021.png",
+            "wallSeconds": 2.2573934000001827,
+            "visualSeconds": 6.794990405905992
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0022.png",
+            "wallSeconds": 2.366638299999977,
+            "visualSeconds": 6.903276807628572
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0023.png",
+            "wallSeconds": 2.470871999999872,
+            "visualSeconds": 7.00848140870221
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0024.png",
+            "wallSeconds": 2.5772964999996475,
+            "visualSeconds": 7.113107712939382
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0025.png",
+            "wallSeconds": 2.6835740999995323,
+            "visualSeconds": 7.221248210174963
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0026.png",
+            "wallSeconds": 2.787747700000182,
+            "visualSeconds": 7.325128514552489
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0027.png",
+            "wallSeconds": 2.898443699999916,
+            "visualSeconds": 7.430165714584291
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0028.png",
+            "wallSeconds": 3.0087854000003063,
+            "visualSeconds": 7.542999010533094
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0029.png",
+            "wallSeconds": 3.1173369999996794,
+            "visualSeconds": 7.653426710516214
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0030.png",
+            "wallSeconds": 3.2251989999995203,
+            "visualSeconds": 7.762130507268012
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0031.png",
+            "wallSeconds": 3.331381599999986,
+            "visualSeconds": 7.868035207269713
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0032.png",
+            "wallSeconds": 3.4365545000000566,
+            "visualSeconds": 7.974115909775719
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0033.png",
+            "wallSeconds": 3.5434628000002704,
+            "visualSeconds": 8.080175710143521
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0034.png",
+            "wallSeconds": 3.6500514999997904,
+            "visualSeconds": 8.186450305627659
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0035.png",
+            "wallSeconds": 3.754092799999853,
+            "visualSeconds": 8.29176160809584
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0036.png",
+            "wallSeconds": 3.859585199999856,
+            "visualSeconds": 8.396849012002349
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0037.png",
+            "wallSeconds": 3.9657797999998365,
+            "visualSeconds": 8.501897013513371
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0038.png",
+            "wallSeconds": 4.071576700000151,
+            "visualSeconds": 8.608705610502511
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0039.png",
+            "wallSeconds": 4.178379400000267,
+            "visualSeconds": 8.71511701005511
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0040.png",
+            "wallSeconds": 4.284296199999517,
+            "visualSeconds": 8.820224110037088
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0041.png",
+            "wallSeconds": 4.387735000000248,
+            "visualSeconds": 8.926154608139768
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0042.png",
+            "wallSeconds": 4.491212599999926,
+            "visualSeconds": 9.029153607785702
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0043.png",
+            "wallSeconds": 4.604788499999813,
+            "visualSeconds": 9.143942306516692
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0044.png",
+            "wallSeconds": 4.711967299999742,
+            "visualSeconds": 9.2490201133769
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0045.png",
+            "wallSeconds": 4.817785299999741,
+            "visualSeconds": 9.353675614343956
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0046.png",
+            "wallSeconds": 4.922107100000176,
+            "visualSeconds": 9.459470313042402
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0047.png",
+            "wallSeconds": 5.026670100000047,
+            "visualSeconds": 9.563578610541299
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0048.png",
+            "wallSeconds": 5.133025699999962,
+            "visualSeconds": 9.669161807978526
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0049.png",
+            "wallSeconds": 5.236882399999558,
+            "visualSeconds": 9.774927106453106
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0050.png",
+            "wallSeconds": 5.3435466000000815,
+            "visualSeconds": 9.880713110789657
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0051.png",
+            "wallSeconds": 5.450487399999474,
+            "visualSeconds": 9.986106111202389
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0052.png",
+            "wallSeconds": 5.553569799999423,
+            "visualSeconds": 10.091763914329931
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0053.png",
+            "wallSeconds": 5.658684899999571,
+            "visualSeconds": 10.195527712116018
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0054.png",
+            "wallSeconds": 5.767200299999786,
+            "visualSeconds": 10.303913112962618
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0055.png",
+            "wallSeconds": 5.871927899999719,
+            "visualSeconds": 10.409365812782198
+        },
+        {
+            "file": "Temp\\OceanSteeringCapture\\36d93b8285984784b764c9f324c6e758\\frame_0056.png",
+            "wallSeconds": 5.977440599999682,
+            "visualSeconds": 10.51432501198724
+        }
+    ]
+}

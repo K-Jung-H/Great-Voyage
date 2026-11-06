@@ -1,0 +1,21 @@
+{
+  "tiledVersusSingle": {
+    "pixels": 2073600,
+    "changedPixels": 372,
+    "maximumChannelDifference": 1,
+    "meanAbsoluteChannelDifference": 6.0120884773662552E-05
+  },
+  "mainPhaseWrapDeltaSeconds": 0.0002,
+  "mainPhaseWrap": {
+    "pixels": 2073600,
+    "changedPixels": 10589,
+    "maximumChannelDifference": 2,
+    "meanAbsoluteChannelDifference": 0.0018434927983539094
+  },
+  "phaseAtOneYear": [
+    5.57483,
+    1.38719678,
+    4.468892,
+    4.53312969
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "test status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 11.4,
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "GreatVoyage.Tests.NavigationPlayTests.OceanRelativeFlowSteeringPauseAndRestore",
+          "Status": "Failed",
+          "Duration": 11.3905959,
+          "Message": "  Expected: greater than 0.10000000000000001d\r\n  But was:  0.068901304061742663d\r\n",
+          "StackTrace": "at GreatVoyage.Tests.NavigationPlayTests+<Validate>d__12.MoveNext () [0x00407] in D:\\Great_Voyage\\Great_Voyage\\Assets\\Game\\Tests\\PlayMode\\NavigationPlayTests.cs:73\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Great_Voyage\\Great_Voyage"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

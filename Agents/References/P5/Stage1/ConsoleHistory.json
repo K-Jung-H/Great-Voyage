@@ -1,0 +1,30 @@
+[
+  {
+    "message": "[TestResultCollector] Run started: 3 test(s)\nUnityEngine.Debug:Log (object)\nUnity.Pipeline.Editor.Testing.TestResultCollector:RunStarted (UnityEditor.TestTools.TestRunner.Api.ITestAdaptor) (at ./Library/PackageCache/com.unity.pipeline@363b8bb9e91d/Editor/Testing/TestResultCollector.cs:54)\nUnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)\n",
+    "mode": 8406016
+  },
+  {
+    "message": "[TestResultCollector] Run started: 3 test(s)\nUnityEngine.Debug:Log (object)\nUnity.Pipeline.Editor.Testing.TestResultCollector:RunStarted (UnityEditor.TestTools.TestRunner.Api.ITestAdaptor) (at ./Library/PackageCache/com.unity.pipeline@363b8bb9e91d/Editor/Testing/TestResultCollector.cs:54)\nUnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)\n",
+    "mode": 8406016
+  },
+  {
+    "message": "Saving results to: C:/Users/KJH/AppData/LocalLow/DefaultCompany/Great_Voyage\\TestResults.xml\n",
+    "mode": 8668160
+  },
+  {
+    "message": "[TestResultCollector] Run finished: 1 total, 1 passed, 0 failed\nUnityEngine.Debug:Log (object)\nUnity.Pipeline.Editor.Testing.TestResultCollector:RunFinished (UnityEditor.TestTools.TestRunner.Api.ITestResultAdaptor) (at ./Library/PackageCache/com.unity.pipeline@363b8bb9e91d/Editor/Testing/TestResultCollector.cs:106)\nUnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)\n",
+    "mode": 8406016
+  },
+  {
+    "message": "[TestResultCollector] Run finished: 1 total, 1 passed, 0 failed\nUnityEngine.Debug:Log (object)\nUnity.Pipeline.Editor.Testing.TestResultCollector:RunFinished (UnityEditor.TestTools.TestRunner.Api.ITestResultAdaptor) (at ./Library/PackageCache/com.unity.pipeline@363b8bb9e91d/Editor/Testing/TestResultCollector.cs:106)\nUnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)\n",
+    "mode": 8406016
+  },
+  {
+    "message": "Assertion failed\nUnityEditor.EditorApplication:Internal_PlayModeStateChanged (UnityEditor.PlayModeStateChange)\n",
+    "mode": 10502144
+  },
+  {
+    "message": "Executing IPostBuildCleanup for: Unity.PerformanceTesting.Editor.TestRunBuilder.\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+    "mode": 8406016
+  }
+]

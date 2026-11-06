@@ -1,0 +1,1480 @@
+{
+    "context": "Actual Unity Game View screenshots; no generated/interpolated frames; ambient only",
+    "frames": 294,
+    "width": 1280,
+    "height": 720,
+    "duration": 20.007738899999822,
+    "visualDuration": 20.017400403274223,
+    "samples": [
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0000.png",
+            "wallSeconds": 0.006334700000479643,
+            "visualSeconds": 0.0
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0001.png",
+            "wallSeconds": 0.0751802000004318,
+            "visualSeconds": 0.08480769488960505
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0002.png",
+            "wallSeconds": 0.14325400000052468,
+            "visualSeconds": 0.15308639500290155
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0003.png",
+            "wallSeconds": 0.21041650000006484,
+            "visualSeconds": 0.2203833907842636
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0004.png",
+            "wallSeconds": 0.2774288999999044,
+            "visualSeconds": 0.28737739427015185
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0005.png",
+            "wallSeconds": 0.34498510000048555,
+            "visualSeconds": 0.35452239075675607
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0006.png",
+            "wallSeconds": 0.41165490000003047,
+            "visualSeconds": 0.421548489946872
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0007.png",
+            "wallSeconds": 0.47847230000024865,
+            "visualSeconds": 0.48766309348866343
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0008.png",
+            "wallSeconds": 0.5479025000004185,
+            "visualSeconds": 0.5570847925264388
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0009.png",
+            "wallSeconds": 0.6165486999998393,
+            "visualSeconds": 0.6263030974660069
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0010.png",
+            "wallSeconds": 0.6847938999999315,
+            "visualSeconds": 0.6948619915638119
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0011.png",
+            "wallSeconds": 0.7530632999996669,
+            "visualSeconds": 0.7617461981717497
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0012.png",
+            "wallSeconds": 0.8228072000001703,
+            "visualSeconds": 0.8303649988956749
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0013.png",
+            "wallSeconds": 0.8927555000000211,
+            "visualSeconds": 0.901803499320522
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0014.png",
+            "wallSeconds": 0.9616364000003159,
+            "visualSeconds": 0.9714239020831883
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0015.png",
+            "wallSeconds": 1.031619000000319,
+            "visualSeconds": 1.0401937025599182
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0016.png",
+            "wallSeconds": 1.099574599999869,
+            "visualSeconds": 1.1094389059580863
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0017.png",
+            "wallSeconds": 1.1672799999996641,
+            "visualSeconds": 1.17689090478234
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0018.png",
+            "wallSeconds": 1.237352699999974,
+            "visualSeconds": 1.245416005840525
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0019.png",
+            "wallSeconds": 1.305944100000488,
+            "visualSeconds": 1.3148050094023347
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0020.png",
+            "wallSeconds": 1.3728060000003097,
+            "visualSeconds": 1.3826055040117353
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0021.png",
+            "wallSeconds": 1.441578599999957,
+            "visualSeconds": 1.4506933090742677
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0022.png",
+            "wallSeconds": 1.510215899999821,
+            "visualSeconds": 1.5201098071411252
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0023.png",
+            "wallSeconds": 1.5774383999996644,
+            "visualSeconds": 1.5870978105813265
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0024.png",
+            "wallSeconds": 1.6453982000002725,
+            "visualSeconds": 1.655472407815978
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0025.png",
+            "wallSeconds": 1.713323500000115,
+            "visualSeconds": 1.722313508624211
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0026.png",
+            "wallSeconds": 1.780826000000161,
+            "visualSeconds": 1.7902681077830493
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0027.png",
+            "wallSeconds": 1.8492529000004652,
+            "visualSeconds": 1.8596484083682299
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0028.png",
+            "wallSeconds": 1.9177374000000782,
+            "visualSeconds": 1.928217611508444
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0029.png",
+            "wallSeconds": 1.9891487000004417,
+            "visualSeconds": 1.93038140819408
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0030.png",
+            "wallSeconds": 2.058535699999993,
+            "visualSeconds": 2.067892811028287
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0031.png",
+            "wallSeconds": 2.126655000000028,
+            "visualSeconds": 2.135750109795481
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0032.png",
+            "wallSeconds": 2.195338300000003,
+            "visualSeconds": 2.203267415286973
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0033.png",
+            "wallSeconds": 2.2636948999997912,
+            "visualSeconds": 2.2730276107322425
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0034.png",
+            "wallSeconds": 2.330645199999708,
+            "visualSeconds": 2.3406364128459245
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0035.png",
+            "wallSeconds": 2.399726399999963,
+            "visualSeconds": 2.409142713760957
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0036.png",
+            "wallSeconds": 2.4665523000003304,
+            "visualSeconds": 2.474608911667019
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0037.png",
+            "wallSeconds": 2.5349974999999176,
+            "visualSeconds": 2.5445758108980954
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0038.png",
+            "wallSeconds": 2.6059658000003765,
+            "visualSeconds": 2.6141393091529608
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0039.png",
+            "wallSeconds": 2.6754274000004443,
+            "visualSeconds": 2.6838892104569823
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0040.png",
+            "wallSeconds": 2.743386400000418,
+            "visualSeconds": 2.7517994057852775
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0041.png",
+            "wallSeconds": 2.8119009000001824,
+            "visualSeconds": 2.821411609649658
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0042.png",
+            "wallSeconds": 2.880607900000541,
+            "visualSeconds": 2.8903381114359945
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0043.png",
+            "wallSeconds": 2.947715600000265,
+            "visualSeconds": 2.9567439088132232
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0044.png",
+            "wallSeconds": 3.0164143000001786,
+            "visualSeconds": 3.0260284123942256
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0045.png",
+            "wallSeconds": 3.087066099999902,
+            "visualSeconds": 3.095444611972198
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0046.png",
+            "wallSeconds": 3.15596800000003,
+            "visualSeconds": 3.164751414442435
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0047.png",
+            "wallSeconds": 3.2239478999999847,
+            "visualSeconds": 3.232059713220224
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0048.png",
+            "wallSeconds": 3.291019299999789,
+            "visualSeconds": 3.3005558159202337
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0049.png",
+            "wallSeconds": 3.3603328999997757,
+            "visualSeconds": 3.3701819139532745
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0050.png",
+            "wallSeconds": 3.427002100000209,
+            "visualSeconds": 3.4367678135167807
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0051.png",
+            "wallSeconds": 3.4943469999998342,
+            "visualSeconds": 3.504270812962204
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0052.png",
+            "wallSeconds": 3.5617615000001024,
+            "visualSeconds": 3.571676311083138
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0053.png",
+            "wallSeconds": 3.630732600000556,
+            "visualSeconds": 3.640252714045346
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0054.png",
+            "wallSeconds": 3.699668400000519,
+            "visualSeconds": 3.7091595181263983
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0055.png",
+            "wallSeconds": 3.7683336000000054,
+            "visualSeconds": 3.7783097154460847
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0056.png",
+            "wallSeconds": 3.8375302000004012,
+            "visualSeconds": 3.8464822138193995
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0057.png",
+            "wallSeconds": 3.9047464000004766,
+            "visualSeconds": 3.9143628131132573
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0058.png",
+            "wallSeconds": 3.97281219999968,
+            "visualSeconds": 3.981055315816775
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0059.png",
+            "wallSeconds": 4.041345300000103,
+            "visualSeconds": 4.049553316552192
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0060.png",
+            "wallSeconds": 4.108566099999734,
+            "visualSeconds": 4.118017312139273
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0061.png",
+            "wallSeconds": 4.178015200000118,
+            "visualSeconds": 4.1873557104263455
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0062.png",
+            "wallSeconds": 4.245938799999749,
+            "visualSeconds": 4.255534713156521
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0063.png",
+            "wallSeconds": 4.31512019999991,
+            "visualSeconds": 4.325135713675991
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0064.png",
+            "wallSeconds": 4.3823596000002,
+            "visualSeconds": 4.391908015590161
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0065.png",
+            "wallSeconds": 4.453110899999956,
+            "visualSeconds": 4.461712614167482
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0066.png",
+            "wallSeconds": 4.521140900000319,
+            "visualSeconds": 4.529633516678587
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0067.png",
+            "wallSeconds": 4.590157499999805,
+            "visualSeconds": 4.600073817186058
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0068.png",
+            "wallSeconds": 4.659373999999843,
+            "visualSeconds": 4.6692909160628915
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0069.png",
+            "wallSeconds": 4.7281503000003795,
+            "visualSeconds": 4.737933618947864
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0070.png",
+            "wallSeconds": 4.794878499999868,
+            "visualSeconds": 4.804721515625715
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0071.png",
+            "wallSeconds": 4.861919500000113,
+            "visualSeconds": 4.871710616163909
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0072.png",
+            "wallSeconds": 4.929696799999874,
+            "visualSeconds": 4.940251016058028
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0073.png",
+            "wallSeconds": 4.998530900000333,
+            "visualSeconds": 5.008597119478509
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0074.png",
+            "wallSeconds": 5.068017100000361,
+            "visualSeconds": 5.077190117677674
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0075.png",
+            "wallSeconds": 5.1379069000004165,
+            "visualSeconds": 5.1462080189958215
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0076.png",
+            "wallSeconds": 5.206390999999712,
+            "visualSeconds": 5.216168422717601
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0077.png",
+            "wallSeconds": 5.275081599999794,
+            "visualSeconds": 5.285468117566779
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0078.png",
+            "wallSeconds": 5.342199300000175,
+            "visualSeconds": 5.352092721266672
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0079.png",
+            "wallSeconds": 5.410474199999953,
+            "visualSeconds": 5.420499021187425
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0080.png",
+            "wallSeconds": 5.477846200000386,
+            "visualSeconds": 5.487452621338889
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0081.png",
+            "wallSeconds": 5.546363700000256,
+            "visualSeconds": 5.556214024079964
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0082.png",
+            "wallSeconds": 5.6149335000000065,
+            "visualSeconds": 5.624801621539518
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0083.png",
+            "wallSeconds": 5.683143899999777,
+            "visualSeconds": 5.693312223535031
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0084.png",
+            "wallSeconds": 5.753174000000399,
+            "visualSeconds": 5.762339419918135
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0085.png",
+            "wallSeconds": 5.821027199999662,
+            "visualSeconds": 5.83001711871475
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0086.png",
+            "wallSeconds": 5.888708499999666,
+            "visualSeconds": 5.896663421066478
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0087.png",
+            "wallSeconds": 5.9560896000002685,
+            "visualSeconds": 5.964011020259932
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0088.png",
+            "wallSeconds": 6.024394000000029,
+            "visualSeconds": 6.032672222936526
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0089.png",
+            "wallSeconds": 6.091443600000275,
+            "visualSeconds": 6.101065923226997
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0090.png",
+            "wallSeconds": 6.1615013000000545,
+            "visualSeconds": 6.170190724078566
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0091.png",
+            "wallSeconds": 6.229338199999802,
+            "visualSeconds": 6.2389454210642725
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0092.png",
+            "wallSeconds": 6.296887700000298,
+            "visualSeconds": 6.306880320655182
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0093.png",
+            "wallSeconds": 6.36488879999979,
+            "visualSeconds": 6.374359719455242
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0094.png",
+            "wallSeconds": 6.433424800000466,
+            "visualSeconds": 6.443868214264512
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0095.png",
+            "wallSeconds": 6.502795999999762,
+            "visualSeconds": 6.512640513014048
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0096.png",
+            "wallSeconds": 6.571051300000363,
+            "visualSeconds": 6.580150214023888
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0097.png",
+            "wallSeconds": 6.638138700000127,
+            "visualSeconds": 6.647108413046226
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0098.png",
+            "wallSeconds": 6.705243100000189,
+            "visualSeconds": 6.71416151500307
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0099.png",
+            "wallSeconds": 6.774394199999733,
+            "visualSeconds": 6.784467515302822
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0100.png",
+            "wallSeconds": 6.843030500000168,
+            "visualSeconds": 6.8532761100213975
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0101.png",
+            "wallSeconds": 6.9108511000004,
+            "visualSeconds": 6.920772410230711
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0102.png",
+            "wallSeconds": 6.9784520000002885,
+            "visualSeconds": 6.987365614622831
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0103.png",
+            "wallSeconds": 7.04724669999996,
+            "visualSeconds": 7.0574909129645675
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0104.png",
+            "wallSeconds": 7.1163103999997475,
+            "visualSeconds": 7.126264113001525
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0105.png",
+            "wallSeconds": 7.184458900000209,
+            "visualSeconds": 7.1942390135955065
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0106.png",
+            "wallSeconds": 7.256386300000486,
+            "visualSeconds": 7.2636506136041135
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0107.png",
+            "wallSeconds": 7.324283699999796,
+            "visualSeconds": 7.334341712296009
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0108.png",
+            "wallSeconds": 7.392076799999813,
+            "visualSeconds": 7.4015982104465365
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0109.png",
+            "wallSeconds": 7.46099680000043,
+            "visualSeconds": 7.470801206072792
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0110.png",
+            "wallSeconds": 7.528352799999993,
+            "visualSeconds": 7.538596408441663
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0111.png",
+            "wallSeconds": 7.5950620000003255,
+            "visualSeconds": 7.604960510274395
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0112.png",
+            "wallSeconds": 7.6619448000001285,
+            "visualSeconds": 7.672125807963312
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0113.png",
+            "wallSeconds": 7.729565800000273,
+            "visualSeconds": 7.739344003843144
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0114.png",
+            "wallSeconds": 7.798460199999681,
+            "visualSeconds": 7.808651102939621
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0115.png",
+            "wallSeconds": 7.865214000000378,
+            "visualSeconds": 7.874878000235185
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0116.png",
+            "wallSeconds": 7.933676900000137,
+            "visualSeconds": 7.9434637010563165
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0117.png",
+            "wallSeconds": 8.000733200000468,
+            "visualSeconds": 8.01077520288527
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0118.png",
+            "wallSeconds": 8.067658500000107,
+            "visualSeconds": 8.077940705930814
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0119.png",
+            "wallSeconds": 8.137834000000112,
+            "visualSeconds": 8.146240203641355
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0120.png",
+            "wallSeconds": 8.206126699999913,
+            "visualSeconds": 8.214062402956188
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0121.png",
+            "wallSeconds": 8.27488220000032,
+            "visualSeconds": 8.284780303714797
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0122.png",
+            "wallSeconds": 8.34351930000048,
+            "visualSeconds": 8.35325460229069
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0123.png",
+            "wallSeconds": 8.412962999999763,
+            "visualSeconds": 8.42201410443522
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0124.png",
+            "wallSeconds": 8.481772300000557,
+            "visualSeconds": 8.491643901914358
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0125.png",
+            "wallSeconds": 8.548699300000408,
+            "visualSeconds": 8.558953603729606
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0126.png",
+            "wallSeconds": 8.617168400000082,
+            "visualSeconds": 8.627250300720334
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0127.png",
+            "wallSeconds": 8.68720409999969,
+            "visualSeconds": 8.695718199014664
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0128.png",
+            "wallSeconds": 8.754965400000401,
+            "visualSeconds": 8.763238003244624
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0129.png",
+            "wallSeconds": 8.82518280000022,
+            "visualSeconds": 8.833817602368072
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0130.png",
+            "wallSeconds": 8.893527000000176,
+            "visualSeconds": 8.90326590067707
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0131.png",
+            "wallSeconds": 8.963179800000034,
+            "visualSeconds": 8.972290604142472
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0132.png",
+            "wallSeconds": 9.030512799999997,
+            "visualSeconds": 9.04064620193094
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0133.png",
+            "wallSeconds": 9.09920030000012,
+            "visualSeconds": 9.109527899883687
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0134.png",
+            "wallSeconds": 9.167021600000226,
+            "visualSeconds": 9.1769215001259
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0135.png",
+            "wallSeconds": 9.23597080000036,
+            "visualSeconds": 9.246114704757929
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0136.png",
+            "wallSeconds": 9.306449700000485,
+            "visualSeconds": 9.315175099065527
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0137.png",
+            "wallSeconds": 9.373379300000124,
+            "visualSeconds": 9.38318270421587
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0138.png",
+            "wallSeconds": 9.440722700000151,
+            "visualSeconds": 9.4503244003281
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0139.png",
+            "wallSeconds": 9.508095299999695,
+            "visualSeconds": 9.516942704794928
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0140.png",
+            "wallSeconds": 9.576501100000314,
+            "visualSeconds": 9.586699903476983
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0141.png",
+            "wallSeconds": 9.64344650000021,
+            "visualSeconds": 9.653094503795728
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0142.png",
+            "wallSeconds": 9.711603400000058,
+            "visualSeconds": 9.721893200650811
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0143.png",
+            "wallSeconds": 9.779599600000438,
+            "visualSeconds": 9.789854107424617
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0144.png",
+            "wallSeconds": 9.847714300000007,
+            "visualSeconds": 9.857409902848303
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0145.png",
+            "wallSeconds": 9.916890899999999,
+            "visualSeconds": 9.926874502329156
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0146.png",
+            "wallSeconds": 9.983597700000246,
+            "visualSeconds": 9.993442606646568
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0147.png",
+            "wallSeconds": 10.050273800000468,
+            "visualSeconds": 10.0603532071691
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0148.png",
+            "wallSeconds": 10.117315399999825,
+            "visualSeconds": 10.126797602279112
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0149.png",
+            "wallSeconds": 10.185315400000036,
+            "visualSeconds": 10.195276001933962
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0150.png",
+            "wallSeconds": 10.254007900000033,
+            "visualSeconds": 10.262216299772263
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0151.png",
+            "wallSeconds": 10.321517200000017,
+            "visualSeconds": 10.329411403741688
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0152.png",
+            "wallSeconds": 10.390672900000027,
+            "visualSeconds": 10.399921304779127
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0153.png",
+            "wallSeconds": 10.459318799999892,
+            "visualSeconds": 10.468943903921172
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0154.png",
+            "wallSeconds": 10.528410599999916,
+            "visualSeconds": 10.538248402066529
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0155.png",
+            "wallSeconds": 10.59515040000042,
+            "visualSeconds": 10.60532620223239
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0156.png",
+            "wallSeconds": 10.662710600000537,
+            "visualSeconds": 10.672841506777331
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0157.png",
+            "wallSeconds": 10.731488899999931,
+            "visualSeconds": 10.74157840339467
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0158.png",
+            "wallSeconds": 10.798325800000384,
+            "visualSeconds": 10.808261405443773
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0159.png",
+            "wallSeconds": 10.86680940000042,
+            "visualSeconds": 10.877199104754254
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0160.png",
+            "wallSeconds": 10.935673699999825,
+            "visualSeconds": 10.945660199970007
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0161.png",
+            "wallSeconds": 11.002692500000194,
+            "visualSeconds": 11.01221170113422
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0162.png",
+            "wallSeconds": 11.071868400000312,
+            "visualSeconds": 11.081352602690458
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0163.png",
+            "wallSeconds": 11.139767100000427,
+            "visualSeconds": 11.148812601575628
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0164.png",
+            "wallSeconds": 11.206959899999674,
+            "visualSeconds": 11.216017705155537
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0165.png",
+            "wallSeconds": 11.275615600000492,
+            "visualSeconds": 11.285497601376846
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0166.png",
+            "wallSeconds": 11.34243080000033,
+            "visualSeconds": 11.352269605267793
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0167.png",
+            "wallSeconds": 11.41102310000042,
+            "visualSeconds": 11.4209277050104
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0168.png",
+            "wallSeconds": 11.478374299999814,
+            "visualSeconds": 11.488333104876801
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0169.png",
+            "wallSeconds": 11.547409900000275,
+            "visualSeconds": 11.557415305636823
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0170.png",
+            "wallSeconds": 11.614203500000258,
+            "visualSeconds": 11.623804504983127
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0171.png",
+            "wallSeconds": 11.683072200000424,
+            "visualSeconds": 11.69256890565157
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0172.png",
+            "wallSeconds": 11.751049000000421,
+            "visualSeconds": 11.760770903667435
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0173.png",
+            "wallSeconds": 11.818809800000054,
+            "visualSeconds": 11.827220406383276
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0174.png",
+            "wallSeconds": 11.88768489999984,
+            "visualSeconds": 11.895219803322107
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0175.png",
+            "wallSeconds": 11.957484999999906,
+            "visualSeconds": 11.966552407015115
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0176.png",
+            "wallSeconds": 12.024934099999882,
+            "visualSeconds": 12.034153702901676
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0177.png",
+            "wallSeconds": 12.092370299999857,
+            "visualSeconds": 12.10182560654357
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0178.png",
+            "wallSeconds": 12.160661400000208,
+            "visualSeconds": 12.169894207036123
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0179.png",
+            "wallSeconds": 12.227381400000013,
+            "visualSeconds": 12.236741203116253
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0180.png",
+            "wallSeconds": 12.295482000000447,
+            "visualSeconds": 12.305682501522824
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0181.png",
+            "wallSeconds": 12.364649699999973,
+            "visualSeconds": 12.374204006046057
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0182.png",
+            "wallSeconds": 12.432088399999884,
+            "visualSeconds": 12.44243219983764
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0183.png",
+            "wallSeconds": 12.500571000000491,
+            "visualSeconds": 12.510674000484869
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0184.png",
+            "wallSeconds": 12.568973700000242,
+            "visualSeconds": 12.579128798097372
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0185.png",
+            "wallSeconds": 12.637712200000351,
+            "visualSeconds": 12.646564801922068
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0186.png",
+            "wallSeconds": 12.707590799999707,
+            "visualSeconds": 12.7167402964551
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0187.png",
+            "wallSeconds": 12.77473209999971,
+            "visualSeconds": 12.784755000146106
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0188.png",
+            "wallSeconds": 12.841503999999986,
+            "visualSeconds": 12.852042600745335
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0189.png",
+            "wallSeconds": 12.909827600000426,
+            "visualSeconds": 12.919854796957225
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0190.png",
+            "wallSeconds": 12.97940220000055,
+            "visualSeconds": 12.98868859745562
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0191.png",
+            "wallSeconds": 13.047104299999774,
+            "visualSeconds": 13.056858801748604
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0192.png",
+            "wallSeconds": 13.114995300000373,
+            "visualSeconds": 13.12519350135699
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0193.png",
+            "wallSeconds": 13.18270339999981,
+            "visualSeconds": 13.192682604771107
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0194.png",
+            "wallSeconds": 13.252085899999656,
+            "visualSeconds": 13.261565398192033
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0195.png",
+            "wallSeconds": 13.319336700000349,
+            "visualSeconds": 13.328864704119042
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0196.png",
+            "wallSeconds": 13.389173499999742,
+            "visualSeconds": 13.398150802822784
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0197.png",
+            "wallSeconds": 13.456097799999952,
+            "visualSeconds": 13.464391299290583
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0198.png",
+            "wallSeconds": 13.526446699999724,
+            "visualSeconds": 13.53514500008896
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0199.png",
+            "wallSeconds": 13.593590000000404,
+            "visualSeconds": 13.603920899098739
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0200.png",
+            "wallSeconds": 13.661218299999746,
+            "visualSeconds": 13.671127703040838
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0201.png",
+            "wallSeconds": 13.730429600000207,
+            "visualSeconds": 13.740298006450757
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0202.png",
+            "wallSeconds": 13.797603799999706,
+            "visualSeconds": 13.80727810994722
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0203.png",
+            "wallSeconds": 13.865596599999662,
+            "visualSeconds": 13.874447403009981
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0204.png",
+            "wallSeconds": 13.93595759999971,
+            "visualSeconds": 13.944352100137621
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0205.png",
+            "wallSeconds": 14.004073000000062,
+            "visualSeconds": 14.01314520649612
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0206.png",
+            "wallSeconds": 14.071831199999906,
+            "visualSeconds": 14.080292406957597
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0207.png",
+            "wallSeconds": 14.141001900000447,
+            "visualSeconds": 14.150787504157051
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0208.png",
+            "wallSeconds": 14.209042000000409,
+            "visualSeconds": 14.217615905217826
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0209.png",
+            "wallSeconds": 14.277809299999717,
+            "visualSeconds": 14.28641590476036
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0210.png",
+            "wallSeconds": 14.34682309999971,
+            "visualSeconds": 14.355813602451235
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0211.png",
+            "wallSeconds": 14.421044700000493,
+            "visualSeconds": 14.359484705142677
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0212.png",
+            "wallSeconds": 14.490880000000288,
+            "visualSeconds": 14.50022920477204
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0213.png",
+            "wallSeconds": 14.560111300000244,
+            "visualSeconds": 14.569084003102034
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0214.png",
+            "wallSeconds": 14.629077000000507,
+            "visualSeconds": 14.638609505956993
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0215.png",
+            "wallSeconds": 14.697833000000173,
+            "visualSeconds": 14.707284202799201
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0216.png",
+            "wallSeconds": 14.766909200000555,
+            "visualSeconds": 14.77526100189425
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0217.png",
+            "wallSeconds": 14.83748530000048,
+            "visualSeconds": 14.845877504674718
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0218.png",
+            "wallSeconds": 14.904706700000133,
+            "visualSeconds": 14.913605305133387
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0219.png",
+            "wallSeconds": 14.971606900000552,
+            "visualSeconds": 14.981023806380108
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0220.png",
+            "wallSeconds": 15.038787800000136,
+            "visualSeconds": 15.047493307152763
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0221.png",
+            "wallSeconds": 15.106012600000213,
+            "visualSeconds": 15.115963204298168
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0222.png",
+            "wallSeconds": 15.173042299999906,
+            "visualSeconds": 15.18267670366913
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0223.png",
+            "wallSeconds": 15.239830499999698,
+            "visualSeconds": 15.249707606853917
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0224.png",
+            "wallSeconds": 15.3066759000003,
+            "visualSeconds": 15.316420305520296
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0225.png",
+            "wallSeconds": 15.374677100000554,
+            "visualSeconds": 15.319344802293926
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0226.png",
+            "wallSeconds": 15.443955300000198,
+            "visualSeconds": 15.451241007540375
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0227.png",
+            "wallSeconds": 15.512652999999773,
+            "visualSeconds": 15.52177380793728
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0228.png",
+            "wallSeconds": 15.581129500000316,
+            "visualSeconds": 15.590161605505273
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0229.png",
+            "wallSeconds": 15.648556199999803,
+            "visualSeconds": 15.657911307644099
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0230.png",
+            "wallSeconds": 15.715556400000423,
+            "visualSeconds": 15.72529890621081
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0231.png",
+            "wallSeconds": 15.783423500000026,
+            "visualSeconds": 15.7281982046552
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0232.png",
+            "wallSeconds": 15.85184879999997,
+            "visualSeconds": 15.86173879983835
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0233.png",
+            "wallSeconds": 15.920040500000141,
+            "visualSeconds": 15.928853700170293
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0234.png",
+            "wallSeconds": 15.98786089999976,
+            "visualSeconds": 15.996780002722517
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0235.png",
+            "wallSeconds": 16.056200699999863,
+            "visualSeconds": 16.064609600696713
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0236.png",
+            "wallSeconds": 16.123584300000402,
+            "visualSeconds": 16.13384379982017
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0237.png",
+            "wallSeconds": 16.19185759999982,
+            "visualSeconds": 16.20151729742065
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0238.png",
+            "wallSeconds": 16.259518099999696,
+            "visualSeconds": 16.269760502735153
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0239.png",
+            "wallSeconds": 16.32765870000003,
+            "visualSeconds": 16.337724801385775
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0240.png",
+            "wallSeconds": 16.396348600000238,
+            "visualSeconds": 16.406665802467614
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0241.png",
+            "wallSeconds": 16.465004900000167,
+            "visualSeconds": 16.475141199305654
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0242.png",
+            "wallSeconds": 16.532766399999673,
+            "visualSeconds": 16.542791604297236
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0243.png",
+            "wallSeconds": 16.6014610000002,
+            "visualSeconds": 16.61123980442062
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0244.png",
+            "wallSeconds": 16.66839489999984,
+            "visualSeconds": 16.67810340411961
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0245.png",
+            "wallSeconds": 16.736840499999744,
+            "visualSeconds": 16.746130105573684
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0246.png",
+            "wallSeconds": 16.804502400000274,
+            "visualSeconds": 16.813146907603368
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0247.png",
+            "wallSeconds": 16.871775600000547,
+            "visualSeconds": 16.88127500284463
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0248.png",
+            "wallSeconds": 16.940563299999667,
+            "visualSeconds": 16.95025750156492
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0249.png",
+            "wallSeconds": 17.00993019999987,
+            "visualSeconds": 17.019850201206282
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0250.png",
+            "wallSeconds": 17.078285000000506,
+            "visualSeconds": 17.08832040335983
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0251.png",
+            "wallSeconds": 17.147831100000076,
+            "visualSeconds": 17.1575311019551
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0252.png",
+            "wallSeconds": 17.21517270000004,
+            "visualSeconds": 17.22501109680161
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0253.png",
+            "wallSeconds": 17.284448399999746,
+            "visualSeconds": 17.294134898111224
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0254.png",
+            "wallSeconds": 17.3513425000001,
+            "visualSeconds": 17.361146101960912
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0255.png",
+            "wallSeconds": 17.42113210000025,
+            "visualSeconds": 17.430060097016394
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0256.png",
+            "wallSeconds": 17.490088300000025,
+            "visualSeconds": 17.499911095015705
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0257.png",
+            "wallSeconds": 17.55891260000044,
+            "visualSeconds": 17.56905609788373
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0258.png",
+            "wallSeconds": 17.62696490000053,
+            "visualSeconds": 17.63694079965353
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0259.png",
+            "wallSeconds": 17.696370300000126,
+            "visualSeconds": 17.706026598112658
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0260.png",
+            "wallSeconds": 17.764476000000286,
+            "visualSeconds": 17.774536992423236
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0261.png",
+            "wallSeconds": 17.83172680000007,
+            "visualSeconds": 17.841154395835474
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0262.png",
+            "wallSeconds": 17.89904370000022,
+            "visualSeconds": 17.90931539540179
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0263.png",
+            "wallSeconds": 17.96757129999969,
+            "visualSeconds": 17.977749197976664
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0264.png",
+            "wallSeconds": 18.037432699999954,
+            "visualSeconds": 18.046857001259923
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0265.png",
+            "wallSeconds": 18.105918199999905,
+            "visualSeconds": 18.115444797789678
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0266.png",
+            "wallSeconds": 18.172886299999846,
+            "visualSeconds": 18.182494601234794
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0267.png",
+            "wallSeconds": 18.240133100000094,
+            "visualSeconds": 18.249912303173915
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0268.png",
+            "wallSeconds": 18.30935219999992,
+            "visualSeconds": 18.319005601108074
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0269.png",
+            "wallSeconds": 18.3780526999999,
+            "visualSeconds": 18.387959903106093
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0270.png",
+            "wallSeconds": 18.445714000000407,
+            "visualSeconds": 18.455569803947583
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0271.png",
+            "wallSeconds": 18.512632799999665,
+            "visualSeconds": 18.522462305612862
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0272.png",
+            "wallSeconds": 18.581693000000087,
+            "visualSeconds": 18.59154960839078
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0273.png",
+            "wallSeconds": 18.649161999999706,
+            "visualSeconds": 18.65901350416243
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0274.png",
+            "wallSeconds": 18.716148200000134,
+            "visualSeconds": 18.725881504593417
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0275.png",
+            "wallSeconds": 18.783375199999682,
+            "visualSeconds": 18.793466105591506
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0276.png",
+            "wallSeconds": 18.850483500000337,
+            "visualSeconds": 18.860280603868887
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0277.png",
+            "wallSeconds": 18.920451900000444,
+            "visualSeconds": 18.92909600958228
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0278.png",
+            "wallSeconds": 18.989278099999865,
+            "visualSeconds": 18.998827308882028
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0279.png",
+            "wallSeconds": 19.056165699999838,
+            "visualSeconds": 19.065786409424618
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0280.png",
+            "wallSeconds": 19.124693300000217,
+            "visualSeconds": 19.1349562080577
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0281.png",
+            "wallSeconds": 19.1914440999999,
+            "visualSeconds": 19.20157750719227
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0282.png",
+            "wallSeconds": 19.26010260000021,
+            "visualSeconds": 19.270107806194574
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0283.png",
+            "wallSeconds": 19.327140600000348,
+            "visualSeconds": 19.33725630491972
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0284.png",
+            "wallSeconds": 19.39538569999968,
+            "visualSeconds": 19.40530620701611
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0285.png",
+            "wallSeconds": 19.462151700000504,
+            "visualSeconds": 19.472059508552775
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0286.png",
+            "wallSeconds": 19.531079000000318,
+            "visualSeconds": 19.541115504689515
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0287.png",
+            "wallSeconds": 19.598771200000556,
+            "visualSeconds": 19.608938704477623
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0288.png",
+            "wallSeconds": 19.666180799999893,
+            "visualSeconds": 19.6757195093669
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0289.png",
+            "wallSeconds": 19.73371380000026,
+            "visualSeconds": 19.743094104109332
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0290.png",
+            "wallSeconds": 19.80173250000007,
+            "visualSeconds": 19.81184480478987
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0291.png",
+            "wallSeconds": 19.87125610000021,
+            "visualSeconds": 19.88066580798477
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0292.png",
+            "wallSeconds": 19.93934580000041,
+            "visualSeconds": 19.94838160322979
+        },
+        {
+            "file": "Temp\\OceanAmbientCapture\\d87447f58aed4c45ab2332b0c9999e8a\\frame_0293.png",
+            "wallSeconds": 20.007738899999822,
+            "visualSeconds": 20.017400403274223
+        }
+    ]
+}

@@ -75,13 +75,15 @@ namespace GreatVoyage.Domain
         public int RootSeed { get; }
         public CharacterState Player { get; }
         public GameClock Clock { get; }
+        public NavigationState Navigation { get; }
 
-        public GameSessionState(string playId, int rootSeed, CharacterState player, GameClock clock)
+        public GameSessionState(string playId, int rootSeed, CharacterState player, GameClock clock, NavigationState navigation = null)
         {
             if (string.IsNullOrWhiteSpace(playId)) throw new ArgumentException("A play ID is required.");
             PlayId = playId; RootSeed = rootSeed;
             Player = player ?? throw new ArgumentNullException(nameof(player));
             Clock = clock ?? throw new ArgumentNullException(nameof(clock));
+            Navigation = navigation ?? NavigationState.Docked();
         }
     }
 }

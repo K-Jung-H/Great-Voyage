@@ -1,0 +1,18 @@
+{
+  "scene": "Assets/Game/Scenes/Game.unity",
+  "dirty": false,
+  "playing": false,
+  "compiling": false,
+  "compilationFailed": false,
+  "saveSlot": "P3Cabin",
+  "helmCellValid": true,
+  "helmOwnerFoundWhileHidden": true,
+  "missingScripts": 0,
+  "missingSprites": 0,
+  "missingGlyphs": [],
+  "sailingShaderHasError": false,
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "consoleLogs": 8,
+  "consoleNote": "Current console errors/warnings are zero; historical Test Runner exit assertion archived in ConsoleHistory.json; no console clearing"
+}

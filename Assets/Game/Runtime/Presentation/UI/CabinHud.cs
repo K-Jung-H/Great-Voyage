@@ -81,6 +81,11 @@ namespace GreatVoyage.Presentation
                 lastMinute = minute;
             }
             var ready = session.CanInteract;
+            if (session.IsSteering)
+            {
+                hintLabel.text = session.Pauses.IsPaused ? "" : "A / D · 좌우 방향키  조타     E / Esc  조작 종료";
+                return;
+            }
             var nearExit = false; // P4 authored portals now provide the location-specific exit prompt.
             if (ready != lastReady || nearExit != lastNearExit || string.IsNullOrEmpty(hintLabel.text))
             {

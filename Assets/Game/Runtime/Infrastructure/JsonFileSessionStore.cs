@@ -11,7 +11,7 @@ namespace GreatVoyage.Infrastructure
 {
     public sealed class JsonFileSessionStore : ISessionStore
     {
-        private const int Version = 1;
+        private const int Version = 2;
         private readonly string path;
         private readonly JsonSerializerSettings settings = new JsonSerializerSettings
         {
@@ -43,9 +43,11 @@ namespace GreatVoyage.Infrastructure
                 {
                     if (new FileInfo(candidate).Length > 1024 * 1024) throw new InvalidDataException("Save is too large.");
                     var envelope = JsonConvert.DeserializeObject<Envelope>(File.ReadAllText(candidate), settings);
-                    if (envelope == null || envelope.Version != Version || string.IsNullOrEmpty(envelope.Payload)
+                    if (envelope == null || (envelope.Version != Version && envelope.Version != 1) || string.IsNullOrEmpty(envelope.Payload)
                         || !string.Equals(Hash(envelope.Payload), envelope.Sha256, StringComparison.Ordinal))
                         throw new InvalidDataException("Save version or checksum is invalid.");
+                    if (envelope.Version == Version && JObject.Parse(envelope.Payload)["Navigation"]?.Type != JTokenType.Object)
+                        throw new InvalidDataException("Missing navigation state.");
                     var state = JsonConvert.DeserializeObject<GameSessionState>(envelope.Payload, settings);
                     if (state == null || state.Player == null || state.Clock == null
                         || (placementValid != null && !placementValid(state)))

@@ -36,6 +36,7 @@ namespace GreatVoyage.Presentation
         private void OnSessionChanged()
         {
             if (session == null || body == null) return;
+            if (session.IsSteering) facing = Facing.Back;
             if (areaId != session.State.Player.Position.AreaId)
             {
                 var p = session.State.Player.Position; areaId = p.AreaId;
@@ -43,7 +44,7 @@ namespace GreatVoyage.Presentation
                 transform.position = new Vector3(p.X, p.Y, transform.position.z);
                 body.position = new Vector2(p.X, p.Y); body.linearVelocity = Vector2.zero;
             }
-            if (!session.WorldInputAllowed)
+            if (!session.CharacterMovementAllowed)
             {
                 CapturePose();
                 body.linearVelocity = Vector2.zero;
@@ -54,7 +55,7 @@ namespace GreatVoyage.Presentation
 
         private void FixedUpdate()
         {
-            if (session == null || !session.WorldInputAllowed) return;
+            if (session == null || !session.CharacterMovementAllowed) return;
             CapturePose();
             var intent = session.Movement;
             var target = new Vector2(intent.X, intent.Y) * speed;

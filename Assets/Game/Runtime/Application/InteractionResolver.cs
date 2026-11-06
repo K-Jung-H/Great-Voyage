@@ -4,7 +4,7 @@ using GreatVoyage.Domain;
 
 namespace GreatVoyage.Application
 {
-    public enum InteractionAction { OpenJournal, Travel }
+    public enum InteractionAction { OpenJournal, Travel, UseHelm }
 
     public readonly struct InteractionSelection
     {

@@ -10,7 +10,7 @@ namespace GreatVoyage.Presentation
         private PlacementSpace registered;
         public string AreaId => areaId;
         public RectInt Bounds => bounds;
-        public PlacementSpace Space => GetComponentInParent<PlacementSpace>();
+        public PlacementSpace Space => GetComponentInParent<PlacementSpace>(true);
         private void Notify()
         {
             if (registered != null) registered.Invalidate();

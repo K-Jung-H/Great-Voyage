@@ -1,0 +1,113 @@
+{
+  "scene": "Assets/Game/Scenes/Review/OceanStaticReview.unity",
+  "dirty": false,
+  "playing": false,
+  "compilationFailed": false,
+  "surfaces": [
+    {
+      "name": "OceanSurface_-10_-7",
+      "position": [
+        -10.0,
+        -7.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size": [
+        20.0,
+        14.0
+      ],
+      "material": "ToonOceanStatic"
+    },
+    {
+      "name": "OceanSurface_-10_7",
+      "position": [
+        -10.0,
+        7.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size": [
+        20.0,
+        14.0
+      ],
+      "material": "ToonOceanStatic"
+    },
+    {
+      "name": "OceanSurface_10_-7",
+      "position": [
+        10.0,
+        -7.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size": [
+        20.0,
+        14.0
+      ],
+      "material": "ToonOceanStatic"
+    },
+    {
+      "name": "OceanSurface_10_7",
+      "position": [
+        10.0,
+        7.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size": [
+        20.0,
+        14.0
+      ],
+      "material": "ToonOceanStatic"
+    }
+  ],
+  "lights": 0,
+  "particleSystems": 0,
+  "canvases": 0,
+  "runtimeScripts": 0,
+  "navigationRoots": 0,
+  "shaderHasError": false,
+  "shaderMessages": [],
+  "debugLayer": 0.0,
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "consoleLogs": 0,
+  "acceptance": "pending_user_static_visual_review",
+  "scope": "Water Stage2-A only; no ambient animation, relative flow, hull interaction, particles or lighting"
+}

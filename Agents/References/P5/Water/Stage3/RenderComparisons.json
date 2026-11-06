@@ -1,0 +1,14 @@
+{
+  "zeroFlow": {
+    "pixels": 2073600,
+    "changedPixels": 0,
+    "maximumChannelDifference": 0,
+    "meanAbsoluteChannelDifference": 0.0
+  },
+  "nonzeroOffsetTiling": {
+    "pixels": 2073600,
+    "changedPixels": 471,
+    "maximumChannelDifference": 1,
+    "meanAbsoluteChannelDifference": 7.60352366255144E-05
+  }
+}

@@ -15,7 +15,7 @@ namespace GreatVoyage.Presentation
         public FurnitureCellArea CellArea => cellArea;
         public bool IsConfigured => cells.x > 0 && cells.y > 0;
         public Vector2 WorldSize => settings == null ? Vector2.zero : new Vector2(cells.x, cells.y) * settings.CellWorldSize;
-        public PlacementSpace Space => GetComponentInParent<PlacementSpace>();
+        public PlacementSpace Space => GetComponentInParent<PlacementSpace>(true);
         public bool IsPlacementValid => IsConfigured && Space != null && Space.Contains(this);
     }
 }

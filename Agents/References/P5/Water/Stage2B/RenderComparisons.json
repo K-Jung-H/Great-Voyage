@@ -1,0 +1,14 @@
+{
+  "staticStyle": {
+    "pixels": 2073600,
+    "changedPixels": 19,
+    "maximumChannelDifference": 1,
+    "meanAbsoluteChannelDifference": 3.054269547325103E-06
+  },
+  "motion": {
+    "pixels": 921600,
+    "changedPixels": 832712,
+    "maximumChannelDifference": 195,
+    "meanAbsoluteChannelDifference": 34.177486255787038
+  }
+}

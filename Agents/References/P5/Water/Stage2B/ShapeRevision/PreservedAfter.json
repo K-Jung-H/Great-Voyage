@@ -1,0 +1,42 @@
+[
+  {
+    "path": "Assets/Game/Scenes/Game.unity",
+    "sha256": "4A83C7AAA4311B68C02EDB463836E488892E47F054D41763C46DEA9DE1FE0E88",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Content/Art/Ocean/ToonOceanStatic.mat",
+    "sha256": "63AE0FF9EBC8DBEDE6057DA439BF4937266AEE813D6ED44B2C178359B2F6D914",
+    "unchanged": false
+  },
+  {
+    "path": "Assets/Game/Content/Art/Ocean/ToonOceanAmbient.mat",
+    "sha256": "385386A1FA4924411AE5ED730A4BC16F1322E3765B5F17EFBE918ABAE2C01C3F",
+    "unchanged": false
+  },
+  {
+    "path": "Assets/Game/Scenes/Review/OceanStaticReview.unity",
+    "sha256": "4FE73646FE8047173BC1F18DE69F000712A767D2FFA6681C02D801F47F54E356",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Scenes/Review/OceanAmbientReview.unity",
+    "sha256": "BF85DC08E13E0F0241434E54FCC9DBD99649072C16ADDCE29155322B89114959",
+    "unchanged": false
+  },
+  {
+    "path": "Assets/Game/Runtime/Presentation/World/NavigationView.cs",
+    "sha256": "7B7F768B9794322067F0D22BA6B201BB5EDFCD7C9D8968AD7AED3C8AA8A5A7E8",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Runtime/Infrastructure/JsonFileSessionStore.cs",
+    "sha256": "042A92ADDB8C30075824D4AB74C4BB89D5EDAA110843124F96484DEEBDDB17D8",
+    "unchanged": true
+  },
+  {
+    "path": "ProjectSettings/EditorBuildSettings.asset",
+    "sha256": "515078D5AB9FAF3C0E0C92C3FEFC74FE1BDD62B092A271C1A4ADDE4D80F9960B",
+    "unchanged": true
+  }
+]

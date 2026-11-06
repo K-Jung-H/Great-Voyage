@@ -27,7 +27,7 @@ namespace GreatVoyage.Presentation
         {
             if (settings == null) throw new System.InvalidOperationException("Missing global GridSettings.");
             if (cached != null && cachedCellSize == settings.CellWorldSize) return cached;
-            var areas = GetComponentsInChildren<GridArea>(true).Where(a => a.isActiveAndEnabled && a.Space == this)
+            var areas = GetComponentsInChildren<GridArea>(true).Where(a => a.enabled && a.Space == this)
                 .Select(a => new GridRect(a.Bounds.x, a.Bounds.y, a.Bounds.width, a.Bounds.height));
             cached = new PlacementGrid(settings.CellWorldSize, origin.x, origin.y, areas,
                 excludedCells.Select(c => new GridCell(c.x, c.y)));

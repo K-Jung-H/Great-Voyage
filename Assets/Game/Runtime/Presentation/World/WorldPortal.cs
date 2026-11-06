@@ -19,12 +19,15 @@ namespace GreatVoyage.Presentation
         public Transform Arrival => arrival;
         public TravelKind Kind => kind;
         public string SourceId => source.AreaId;
+        private GameSession session;
+        public void Bind(GameSession value) => session = value;
 
         public bool TryQuery(WorldPosition player, out InteractionSelection candidate)
         {
             candidate = default;
             if (this == null || !isActiveAndEnabled || source == null || destination == null || arrival == null
                 || player.AreaId != source.AreaId) return false;
+            if (kind == TravelKind.Disembark && session != null && session.State.Navigation.IsUnderway) return false;
             var p = new Vector2(player.X, player.Y);
             var distance = (p - (Vector2)transform.position).sqrMagnitude;
             if (distance > reach * reach) return false;

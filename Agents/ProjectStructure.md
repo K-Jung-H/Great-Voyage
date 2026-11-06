@@ -258,4 +258,41 @@ GreatVoyage/
 - 바닥 Repeat 후속 검토 자료: Agents/References/P2/FloorStyleReview/CabinPlanks_Tileable01.png·CabinPlanks_Tileable02.png와 각각의 Repeat3x3.png/EdgeValidation.json. 내장 imagegen 원본은1254×1254/완전 불투명이다. 후속 사용자 지시로 후보2를 제품 CabinPlanksTileable.png에 적용했다. 적용 결과는 같은 폴더 SceneApplication.json, 생성 당시 기록과 기술적 한계는 Generation.json을 따른다.
 
 
-P4 신규 한글 표기는 Content/Fonts/Galmuri11World.asset을 사용한다. 기존 Galmuri11 Atlas 포화를 피하기 위해 동일 TTF·포인트 크기·패딩·렌더 모드로 만든 별도 Dynamic·복수 Atlas 허용 자산이며 기본 폰트/원본 자산은 보존한다. Scene 라벨의 Prefab override도 직렬화한다. FontValidation.json은 동적 글리프 생성 경로를 포함해 표시 문자열과 전환 오류 문구의 누락을 검사한다. TMP 빌드는 동적 캐시를 비우므로 글리프/Atlas 수는 캐시 상태에 따라 바뀐다. 최종 편집기 검증 캐시는100글자/1 Atlas, 누락0이다.
+P4 신규 한글 표기는 Content/Fonts/Galmuri11World.asset을 사용한다. 기존 Galmuri11 Atlas 포화를 피하기 위해 동일 TTF·포인트 크기·패딩·렌더 모드로 만든 별도 Dynamic·복수 Atlas 허용 자산이며 기본 폰트/원본 자산은 보존한다. Scene 라벨의 Prefab override도 직렬화한다. FontValidation.json은 동적 글리프 생성 경로를 포함해 표시 문자열과 전환 오류 문구의 누락을 검사한다. TMP 빌드는 동적 캐시를 비우므로 글리프/Atlas 수는 캐시 상태에 따라 바뀐다. P4 종료 시 검증 캐시는100글자/1 Atlas·누락0이었으며 P5 신규 문구로 캐시가 추가될 수 있다.
+
+### P5 1단계 항해 자산·실행 구조 (2026-11-05)
+
+- Domain/NavigationState.cs는 논리 해상 좌표(해리)·방향·항속·항해 ID/순번·거리를 보유한다. CharacterState의 선내 AreaId/X/Y와 별도 책임이며 동일 정보를 시스템별로 복제하지 않는다. NavigationSettings.asset의 초기 항속0.002해리/게임 초(7.2kn), 선회율0.2도/게임 초는 조정 가능한 검증값이다.
+- Prefabs/Facilities/HelmView.prefab: Root의 HelmStation/CellSize, CellArea/Visuals/Collision 형제 및 ApproachPoint. 표준1 unit의1×1 Cell, UpperDeck의(-3.5,0.5) 유효 셀에 배치한다. Collider는 역할에 맞는0.7×0.25 바닥 점유이며 Root Scale1, Visuals만0.75다. 기존 선장실/4가구 Prefab과 배의 Transform은 보존한다.
+- HelmWheel.asset은 기존 사용자 원본 OriginalTavernProps.png의 Rect(1046,413,122,117)/PPU100에서 추출한다. 이미지 재생성·스타일 수정·원본 PNG 수정은 없다. SailingWater.shader/mat는 상갑판 Sea만 사용하며 원본 수면 atlas 내부 mirror-repeat와 논리 위치/방향·게임 시간에 따른 흐름 및 선수/선미 물살을 표현한다. 항구 수면과 기존 바닥에는 적용하지 않는다.
+- Presentation/NavigationView.cs는 ScreenCanvas에 직렬화된 항해 HUD, 기존 ChartPage 안의 현재 함선 아이콘/방위·위치·확대/축소·내 위치 버튼을 갱신한다. 지도 범위를 벗어난 아이콘을 거짓 위치로 고정하지 않고 숨김/범위 밖 안내를 제공한다. 일지 Day 탭·계획·기록·메모·서비스 Frame은 비활성 유지한다. 신규 UI는 런타임 생성하지 않는다.
+- 방향타 E 진입 후 A/D·좌우 방향키를 조타에 사용하며 E/Esc로 해제한다. 조작 중 CharacterMovementAllowed만 차단하고 시간과 항해는 계속된다. UI/전환 중 정지는 둘 모두에 적용한다. 선내 공간 간 이동 중 항해 상태를 유지한다. 항해 중 하선 대상은 선택/실행 양쪽에서 차단한다.
+- 저장 envelope는 버전2로 Navigation을 포함한다. 버전1 읽기는 메모리에서 정박 상태만 보완하고 기존 파일을 자동 저장/초기화하지 않는다. 정상 종료 저장 시에만 새 버전으로 기록한다. 구버전 앱에서 새 버전 저장을 읽는 역호환은 제공하지 않는다. 사용자의 실제 저장은 검증용으로 사용하지 않는다.
+- 최초 자산 작성 도구는 Editor/P5NavigationAuthoring.cs이며 현행 Scene에는 재실행하지 않는다. 실제 입력·정지·복원/고정 Transform·P3/P4 회귀는 NavigationPlayTests.cs, 적분/버전1 호환은 NavigationTests.cs에서 검증한다. 결과는 References/P5/Stage1에 둔다.
+- P5에서 비표시 구역의 Grid 정의 조회를 보완했다. GridArea.enabled는 정의 활성 여부이고 WorldArea/GameObject 표시 활성과 독립적이다. GridArea와 CellSize는 비활성 부모까지 포함해 소유 PlacementSpace를 찾는다. 정의를 끄려면 GridArea 컴포넌트를 명시적으로 비활성화하며, 구역을 숨긴 것만으로 셀 합집합이 사라지지 않는다.
+
+### Water Stage 2-A 정적 검토 자산 (2026-11-06)
+
+- 독립 Scene: Assets/Game/Scenes/Review/OceanStaticReview.unity. 카메라와20×14 unit 고정 수면4장(원점 기준±10,±7), 모든 수면 Scale1/회전0. Build Settings·제품 Game Scene은 변경하지 않는다.
+- Shader: Content/Art/Ocean/ToonOcean.shader, 형상 계산: OceanSurfaceField.hlsl, Material: ToonOceanStatic.mat, 표시 Prefab: Prefabs/World/OceanSurface.prefab. Carrier.asset의4×4 흰 Texture/Sprite는 렌더 면 제공용이며 셰이더는 해당 Texture나 기존/참고 이미지를 색상 입력으로 샘플링하지 않는다. 전체 수면은 연속된 월드 XY로 동일 형상을 계산한다.
+- 형상은 broadField/ripple/crest 거리·마스크로 분리하고 Palette/foam 채색과 구분한다. Noise는 곡선·경계·마루의 끊김을 보조한다. 실제 광원·법선 조명·Specular·반사 연산과 시간/항해 입력은 없다. 색상·규모·포말 수치는 정적 검토 후보이며 영구 승인값이 아니다.
+- Review layer0=합성,1=큰 파도,2=잔물결,3=마루 포말. 검토 완료 상태는0이다. 제작 도구 Editor/OceanStaticReviewAuthoring.cs는 최초 생성만 허용하며 기존 자산이 있으면 재실행을 거부한다.
+- 실제1920×1080 Game View와 정적 반복/단일 수면 비교는 Agents/References/P5/Water/Stage2A에 보존한다. 정적 후보 승인 전 애니메이션·항해 흐름·Hull/SDF·입자·조명과 제품 Scene 교체는 진행하지 않는다.
+
+### Water Stage 2-B 자연 애니메이션 검토 자산 (2026-11-06)
+
+- Stage2-A 사용자 승인 후 별도 OceanAmbientReview.unity / ToonOceanAmbient.mat를 추가했다. 기존 정적 Scene은 그대로 유지하며 공통 Shader의 기본 위상은0이다. 정적 Material은 위상0 명시를 포함해 Unity 재직렬화되었지만 시각 기준값은 유지한다.
+- Runtime/Presentation/World/OceanAmbientDriver.cs가 double 경과 시간에서4개 주기 위상을 계산한다. Inspector angularRates=(0.18,0.12,0.95,0.07) rad/초, playbackSpeed=1이며 Paused로 표현을 정지한다. 셰이더의 암묵적_Time 대신 공유 위상을 사용한다.4면 공통 Material을 활성 시1회 복제하고 비활성 시 원래 Material 복구·사본 해제한다. 매 프레임 Material 생성이나 파일 저장은 없다.
+- 자연 물결은 큰 파도/보조 파도/잔물결의 서로 다른 진행과 작은 주기적 형상 변화다. 비정수 잔물결 배율에 래핑된 큰 파도 위상을 곱하지 않아 주기 경계의 점프를 피한다. 월드 XY 계산을 유지해 면마다 애니메이션 위상이 달라지지 않는다.
+- Editor/OceanAmbientReviewAuthoring.cs는 최초 자산 생성만 허용한다. OceanAmbientEvidence.cs는 실제 Game View 캡처·픽셀 비교·Unity 내장 MediaEncoder 인코딩용 검토 도구다. PNG를 RGBA32 프레임으로 변환하며 캡처 시각을 영상 타임스탬프로 사용한다. Stage2B/OceanAmbient.mp4와 Recording/RenderComparisons/PauseAndStructure/Resume/Continuity/PreservedAfter/VideoMetadata.json에 증거를 보존한다.1280×720 실제12초 영상과1920×1080 비교 캡처를 구분한다.
+- 독립 검토 Scene만 연결했다. Game.unity·Build Settings·기존 NavigationView/저장 경계는 변경하지 않았다. 항해 상대 흐름·선체/SDF·입자·조명은 후속 승인 범위다.
+
+**2-B 파형 고정감 보완:** 큰 파형을 만드는 좌표에 `_OceanTravel.xy`, 잔물결 좌표에 `.zw`를 적용한다. Driver의 largeWaveVelocity=(0.13,-0.05), rippleVelocity=(-0.04,0.09)는 월드 unit/표현 초다. shapeEvolution=0.35는 낮은 주파수 형상 변형 강도다. 기존 angularRates/playbackSpeed를 유지하고 이동량은 double 경과 시간에서 계산하며 주기 래핑하지 않는다. 위상·이동량0에서는 정적 형상을 보존한다. 자연 이동과 이후 항해 상대 흐름은 별도 입력이다. 초기 후보 영상은 유지하고 보완본 실제20초 영상·정적/정지/타일/위상 비교·600프레임 Editor 프로파일을 Stage2B/ShapeRevision에 둔다. 기록 도구 Begin(outputDirectory,durationSeconds)는 Water 참고 폴더 내부·1~60초만 허용하며 표현 시간이 진행되지 않은 녹화의 인코딩을 거부한다. 현재 Ambient Material 포말 폭0.1585는 작업 중 달라진 값을 보존했다. 정적 기준 비교에만 런타임 폭0.085를 사용했다. Material에 신규 Shader 속성이 추가 직렬화될 수 있으므로 바이트 불변과 시각 기준 유지를 구분한다. 아주 긴 실행의 float 좌표 정밀도와 독립 Player/GPU 성능은 아직 검증하지 않았다.
+
+### Water Stage 3 항해 상대 흐름 검토 자산 (2026-11-06)
+
+- `Scenes/Review/OceanNavigationReview.unity`는 기존 Game의 게임 흐름을 복제하고 상갑판 Sea에 ToonOceanNavigation.mat/Carrier를 Scene override로 연결한다. UpperDeck Prefab과 원본 Game, Build Settings는 변경하지 않는다. OceanPresentation은 WorldArea 밖의 활성 Root로 두어 선장실에서도 진행한다. 검토 Scene의 기본 저장 폴더는 Review/WaterStage3이며 제품 P3Cabin과 구분한다. Editor/OceanNavigationAuthoring.cs는 최초 생성만 허용한다.
+- `OceanNavigationBinding`이 GameClock 증가분/상수 GameSecondsPerRealSecond와 Navigation X/Y 변화량을 읽어 `OceanRelativeFlow`에 전달한다. unitsPerNauticalMile=4, responseSeconds=0.75는 Inspector 조절값이다. 지수 응답의 속도·오프셋을 double로 계산하며 방향 변경 시 현재 오프셋을 새 방위로 회전하거나 `속도×전체시간`으로 다시 만들지 않는다. 속도0 입력은 지수 감쇠하고 게임 정지는 경과 시간0으로 처리한다. 저속 꼬리 흐름은 유한 시간 내 완전0이라고 표현하지 않는다.
+- `OceanAmbientDriver.AdvanceExternal`은 공유 자연 시계와 상대 오프셋을 반영한다. `_RelativeOceanOffset`은 파형 함수 앞에 더하는 공통 샘플 좌표이며, 양의 선박 변위에서 물은 반대로 보인다. 자연 `_OceanTravel`과 구별하고 파형 HLSL은 그대로다. `NavigationView.oceanBinding`이 있는 검토 Scene만 새 경로를 사용하며 없는 원본 Game은 기존 경로를 유지한다. 저장 파일·게임 규칙의 시각 상태 복제 없음.
+- `Tests/Editor/OceanRelativeFlowTests.cs`와 `NavigationPlayTests.OceanRelativeFlowSteeringPauseAndRestore`에 구조/실제 Keyboard 입력·정지·공간/지도·저장 복원 검증을 둔다. 테스트는 Temp의 Guid 슬롯을 사용한다. Stage3/Gameplay는 실제 조타 약6초, FlowComparison은 Editor/OceanFlowReviewValidation의 합성 입력24초다. 후자는 실제 게임 가감속 기능이 아니다. 모든 프레임은 실제 Game View이며 Unity 내장 MediaEncoder로 기록 시각을 사용해 인코딩한다. EncodeRecording(directory)은 Water 증거 폴더에만 허용한다.
+- Stage3 검토 수용 전 Stage4 Hull/SDF/입자, Stage5 조명 및 Stage6 제품 통합을 완료로 표시하지 않는다. 현재 선박/갑판의 회전을 유지한 상태에서 수면 흐름 방향으로 항해 방향을 표현한다. 선박 Sprite 회전 연출은 이번 변경에 추가하지 않았다. Player/GPU/장시간 좌표 정밀도는 별도 검증 대상이다.

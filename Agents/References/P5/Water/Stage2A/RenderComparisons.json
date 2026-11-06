@@ -1,0 +1,18 @@
+[
+  {
+    "comparison": "OceanStaticRepeat.png",
+    "width": 1920,
+    "height": 1080,
+    "differentPixels": 0,
+    "maxChannelError": 0,
+    "meanAbsoluteChannelError": 0.0
+  },
+  {
+    "comparison": "OceanSingleSurface.png",
+    "width": 1920,
+    "height": 1080,
+    "differentPixels": 440,
+    "maxChannelError": 1,
+    "meanAbsoluteChannelError": 7.0891203703703708E-05
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "context": "Unity Editor 1280x720 Play Mode; four ocean surfaces and one ambient driver; no actor/HUD; PNG recording disabled during measurement; Editor/tool overhead included, not Player/GPU benchmark",
+  "samples": 600,
+  "mainThreadAvailable": true,
+  "physicsAvailable": true,
+  "gcAvailable": true,
+  "frameMs": {
+    "median": 5.1622022874653339,
+    "p95": 7.5833047740161419,
+    "max": 69.459997117519379
+  },
+  "mainThreadMs": {
+    "median": 5.1575999999999995,
+    "p95": 7.3649,
+    "max": 28.8676
+  },
+  "physics2DMs": {
+    "median": 0.0,
+    "p95": 0.0023,
+    "max": 0.0076
+  },
+  "gcBytes": {
+    "median": 8760.0,
+    "p95": 9077.0,
+    "max": 107015.0
+  },
+  "unity": "6000.6.4f1",
+  "cpuModel": "Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz",
+  "gpu": "NVIDIA GeForce MX150"
+}

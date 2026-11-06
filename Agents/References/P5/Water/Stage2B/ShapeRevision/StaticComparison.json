@@ -1,0 +1,9 @@
+{
+  "approvedPaletteAndShape": {
+    "pixels": 2073600,
+    "changedPixels": 79,
+    "maximumChannelDifference": 1,
+    "meanAbsoluteChannelDifference": 1.2699331275720165E-05
+  },
+  "note": "Current serialized ambient foam width changed from 0.085 at entry to 0.1585; not changed by this implementation, retained. Reference comparison temporarily used runtime width 0.085 only."
+}

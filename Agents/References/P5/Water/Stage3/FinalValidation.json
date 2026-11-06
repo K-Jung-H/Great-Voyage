@@ -1,0 +1,21 @@
+{
+  "scene": "Assets/Game/Scenes/Review/OceanNavigationReview.unity",
+  "dirty": false,
+  "playing": false,
+  "compilationFailed": false,
+  "shaderMessages": [],
+  "consoleCounts": [
+    0,
+    0,
+    0
+  ],
+  "consoleNote": "Earlier failed X-coordinate-only assertion and TestRunner history are separate from current shader/runtime results; no Console clear issued",
+  "unitsPerNauticalMile": 4.0,
+  "responseSeconds": 0.75,
+  "bindings": 1,
+  "runtimeMaterials": 0,
+  "missingScripts": 0,
+  "validation": "37 EditMode + 1 gameplay integration passed; 24-second synthetic flow comparison and 6-second actual keyboard steering",
+  "acceptance": "Stage3 pending user visual review. Stage4+ not started; original Game not replaced",
+  "limits": "No standalone Player/GPU/long-duration precision validation; synthetic acceleration is not a game command"
+}

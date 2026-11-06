@@ -8,6 +8,23 @@ namespace GreatVoyage.Tests
 {
     public sealed class FurniturePrefabTests
     {
+        [Test] public void HiddenAreaKeepsPlacementDefinitionAndExplicitGridDisableStillApplies()
+        {
+            var scene = EditorSceneManager.NewPreviewScene();
+            try
+            {
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Game/Content/Prefabs/World/UpperDeck.prefab");
+                var root = (GameObject)PrefabUtility.InstantiatePrefab(prefab, scene);
+                var space = root.GetComponent<PlacementSpace>(); var helm = root.GetComponentInChildren<HelmStation>().GetComponent<CellSize>();
+                var count = space.GetGrid().CellCount;
+                Assert.That(helm.IsPlacementValid, Is.True);
+                root.SetActive(false); space.Invalidate();
+                Assert.That(space.GetGrid().CellCount, Is.EqualTo(count)); Assert.That(helm.IsPlacementValid, Is.True);
+                root.GetComponent<GridArea>().enabled = false; space.Invalidate();
+                Assert.That(space.GetGrid().CellCount, Is.Zero); Assert.That(helm.IsPlacementValid, Is.False);
+            }
+            finally { EditorSceneManager.ClosePreviewScene(scene); }
+        }
         [Test] public void VisualScalingDoesNotResizeCollisionOrCellArea()
         {
             var scene = EditorSceneManager.NewPreviewScene();

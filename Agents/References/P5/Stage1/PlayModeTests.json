@@ -1,0 +1,34 @@
+{
+  "status": "completed",
+  "duration": 81.03,
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "GreatVoyage.Tests.CabinPlayTests.ProductSceneKeyboardCollisionJournalPauseAndRestore",
+      "Status": "Passed",
+      "Duration": 20.1218224,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.NavigationPlayTests.FixedDeckSteeringWaterChartPauseAndRestore",
+      "Status": "Passed",
+      "Duration": 16.6302493,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "GreatVoyage.Tests.WorldTravelPlayTests.AuthoredWorldRoundTripRollbackBoardingAndRestore",
+      "Status": "Passed",
+      "Duration": 44.2440083,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}
