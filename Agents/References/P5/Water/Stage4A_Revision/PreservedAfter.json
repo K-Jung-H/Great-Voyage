@@ -1,0 +1,42 @@
+[
+  {
+    "path": "Assets/Game/Scenes/Game.unity",
+    "sha256": "4A83C7AAA4311B68C02EDB463836E488892E47F054D41763C46DEA9DE1FE0E88",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Scenes/Review/OceanNavigationReview.unity",
+    "sha256": "648A44843426764351FB2339CFD3DF61803A2BEE9CE8BE9357235C9656A530F5",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Content/Prefabs/World/UpperDeck.prefab",
+    "sha256": "D9811B414906BCA7A3BFF6D01AB1EE4F0B6B88A2ACDC864C3EEFBD01D8B2C1C9",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Content/Art/Ocean/OceanSurfaceField.hlsl",
+    "sha256": "B24D0BA6CD062695B57BE4F834C27B4ECE35DB1F1B6101880AFBB41B3E9AA4EB",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Content/Art/Ocean/ToonOcean.shader",
+    "sha256": "D75A23EF5328CA5A27F36884803BCC18185300F0E4C323E53F860A6FF4EF0993",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Game/Runtime/Infrastructure/JsonFileSessionStore.cs",
+    "sha256": "042A92ADDB8C30075824D4AB74C4BB89D5EDAA110843124F96484DEEBDDB17D8",
+    "unchanged": true
+  },
+  {
+    "path": "ProjectSettings/TagManager.asset",
+    "sha256": "3C566F6978E803826D6597474E564B9283DFD21BB17C562F311160CEADCC2CBA",
+    "unchanged": true
+  },
+  {
+    "path": "ProjectSettings/EditorBuildSettings.asset",
+    "sha256": "515078D5AB9FAF3C0E0C92C3FEFC74FE1BDD62B092A271C1A4ADDE4D80F9960B",
+    "unchanged": true
+  }
+]

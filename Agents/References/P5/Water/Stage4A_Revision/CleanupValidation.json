@@ -1,0 +1,54 @@
+{
+  "removedFileCount": 46,
+  "remainingCandidates": [],
+  "remainingDirectories": [],
+  "danglingDeletedGuidReferences": [],
+  "preserved": [
+    {
+      "path": "Assets/Game/Scenes/Review/OceanColliderBakeReview.unity",
+      "sha256": "E1BAD69D154771C2DE5DF87D42D719FB5FB2A4ED389D808B0FAFA5F7E7E40375",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/Game/Content/Prefabs/World/StartingShipWaterline.prefab",
+      "sha256": "B6E9DF3AC265E3CFC0BDD8E6D899605DC3C7FA250E79F7FC4FF49731642BD9A0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/Game/Content/Art/Ocean/Hulls/ColliderWaterlineReview.mat",
+      "sha256": "CDC96938323C63AEC6CB3209962CACDD374F3C7E0629CE6980A4989C9B5F9D24",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/Game/Scenes/Game.unity",
+      "sha256": "4A83C7AAA4311B68C02EDB463836E488892E47F054D41763C46DEA9DE1FE0E88",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/Game/Scenes/Review/OceanNavigationReview.unity",
+      "sha256": "648A44843426764351FB2339CFD3DF61803A2BEE9CE8BE9357235C9656A530F5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/Game/Content/Prefabs/World/UpperDeck.prefab",
+      "sha256": "D9811B414906BCA7A3BFF6D01AB1EE4F0B6B88A2ACDC864C3EEFBD01D8B2C1C9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset",
+      "sha256": "8B32ABE471E252DD7C54BD2A06DAD886EAF6848B8E325B4D4668BF0BC2A73705",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/Game/Content/Fonts/Galmuri11World.asset",
+      "sha256": "9F8865A669B1AE9EC1B15255648D1B0161605883F9D4AC4A72EC3E4F076371DB",
+      "unchanged": true
+    },
+    {
+      "path": "ProjectSettings/ProjectSettings.asset",
+      "sha256": "20040D76DC1CA79CF42257AFADEA83BF724BAB18831192C947197BF08F0B45F1",
+      "unchanged": true
+    }
+  ],
+  "temporaryFormatDirectoryRemoved": true
+}

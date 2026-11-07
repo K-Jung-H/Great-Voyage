@@ -1,0 +1,38 @@
+{
+  "scene": "Assets/Game/Scenes/Review/OceanColliderBakeReview.unity",
+  "isDirty": false,
+  "playing": false,
+  "compilationFailed": false,
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "shipRootComponents": [
+    "Transform",
+    "ShipWaterSurface"
+  ],
+  "deckComponents": [
+    "Transform",
+    "WorldArea",
+    "PlacementSpace",
+    "GridArea"
+  ],
+  "capsule": {
+    "size": [
+      4.0,
+      0.75
+    ],
+    "offset": [
+      0.18,
+      -0.13
+    ],
+    "direction": "Horizontal",
+    "enabled": false
+  },
+  "rigidbodies": 0,
+  "helmGridValid": true,
+  "helmParent": "UpperDeck",
+  "sourceCount": 1,
+  "assetRequired": false,
+  "automaticEditorGeneration": false,
+  "width": 512,
+  "height": 153
+}

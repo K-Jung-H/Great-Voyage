@@ -1,18 +1,20 @@
 # Current State — 현재 개발 상태 / 에이전트 인수인계
 
-> 갱신: 2026-11-06. 현재 사실·승인·검증·미결정만 유지한다. 기술 경로는 ProjectStructure.md, 단계 범위는 RoadMap.md를 따른다.
+> 갱신: 2026-11-07. 현재 사실·승인·검증·미결정만 유지한다. 기술 경로는 ProjectStructure.md, 단계 범위는 RoadMap.md를 따른다.
 
 ## 1. 단계·Git·환경
 
 - P0~P4 Complete. P4의 이동·공간 전환은 사용자 통과 확인 및 명시 완료 승인. 오브젝트 배치·Scene 디자인은 P4 평가 제외였으며 시각 승인으로 확대하지 않는다.
-- **P5 항해 기능은 두 단계로 분할한1단계 구현 상태이며, 기존 수면·물살의 시각 결과는 사용자 미수용이다.** 사용자가2026-11-06 제공한 Water 문서4개·이미지3종을 분석한 설계안 이후 진행을 지시해 **Water Stage2-A 정적 수면을 사용자 승인**받고 **Stage2-B 자연 애니메이션**을 독립 검토 Scene에 구현했다.사용자는2-B의 애니메이션을 긍정 평가했으나 큰 파형이 고정된 느낌을 지적해 생성 좌표의 연속 이동·변형을 보완했다. 사용자가 다음 단계 진행을 지시해 **Stage3 상대 해수 흐름**을 실제 게임 복제 검토 Scene에 연결했다. 사용자가 전환 동작 통과를 확인하고 **P5 - 1_3 Complete**로 main 공유를 지시했다. Stage4는 미착수이며 Water 마지막에 Stage7 디테일 추가·최종 마감을 추가했다. 기존 P5 기능2단계 항구·자동 입항·항해 완료도 미착수다.
-- main / origin https://github.com/K-Jung-H/Great-Voyage.git. 이번 공유 커밋명은 **P5 - 1_3 Complete**이며 P4 Complete(98b7e68) 이후 현재까지의 P5 기능/Water/검증·참고 자료를 포함한다. 기존 Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset 변경과 ProjectSettings/ProjectSettings.asset의 runInBackground=1 변경은 이번 커밋 대상에서 제외하고 로컬에 보존한다.
+- **P5 항해 기능은 두 단계로 분할한1단계 구현 상태이며, 기존 수면·물살의 시각 결과는 사용자 미수용이다.** 사용자가2026-11-06 제공한 Water 문서4개·이미지3종을 분석한 설계안 이후 진행을 지시해 **Water Stage2-A 정적 수면을 사용자 승인**받고 **Stage2-B 자연 애니메이션**을 독립 검토 Scene에 구현했다.사용자는2-B의 애니메이션을 긍정 평가했으나 큰 파형이 고정된 느낌을 지적해 생성 좌표의 연속 이동·변형을 보완했다. 사용자가 다음 단계 진행을 지시해 **Stage3 상대 해수 흐름**을 실제 게임 복제 검토 Scene에 연결했다. 사용자가 전환 동작 통과를 확인하고 **P5 - 1_3 Complete**로 main 공유를 지시했다. Stage4는 사용자 지시로4-A Bake→4-B 물살→4-C 입자 순서로 평가하며, 현재4-A 접촉 형상·수동 검토·변경 기반 메모리 SDF 및 폐기 결과 정리를 완료 범위로 사용자 승인받았다. 완료 표식은 P5 - 1_4_2 Complete이며 다음4-B는 내용 설명만 요청되었다.4-B/4-C는 미착수이며 Water 마지막에 Stage7 디테일 추가·최종 마감을 추가했다. 기존 P5 기능2단계 항구·자동 입항·항해 완료도 미착수다.
+- main / origin https://github.com/K-Jung-H/Great-Voyage.git. 현재 완료 기준은 P5 - 1_4_2 Complete(이전 공유 HEAD=b9190f9, P5 - 1_3 Complete)이며 사용자 지시에 따라 이번 범위를 main 커밋·푸시 대상으로 정리했다. P5 전체 완료는 아니다. 기존 Galmuri11 SDF.asset·Galmuri11World.asset·ProjectSettings.asset 변경은 이번 커밋에서 제외하고 작업 트리에 보존한다.
 - Unity6000.6.4f1 / Input System1.20.0 / URP17.6.0 / Test Framework1.8.0 / CLI beta15 / Pipeline0.9.1-exp.1. 신규 패키지·스킬·모델 설치나 화풍/생성 방식 변경 없음. P4 때 CLI 업데이트는 자동 승인 검토가 범위 밖 도구 변경으로 거절해 기존 CLI를 사용했다.
 
 ## 2. 현재 제품 동작·상태 소유권
 
-- **마지막 검토 Scene은 Assets/Game/Scenes/Review/OceanNavigationReview.unity**다. 이번 커밋 시점 Unity Editor/Pipeline은 실행 중이 아니며 아래 실행 검증은 직전 완료 결과를 따른다. Game Scene을 복제해 동일 GameSession/입력/공간/HUD/지도와 새 자연 물결·상대 흐름을 연결했다. Play 종료·Scene 저장 상태다. 기본 검토 저장 경로는 Review/WaterStage3이며 제품 P3Cabin과 분리된다. 원본 Game.unity·UpperDeck Prefab·Build Settings는 보존했다. 원본 Game의 기존 수면 경로는 Stage6 통합 전까지 유지하며, 새 경로는 검토 Scene에만 직렬화 연결했다.
-
+- **현재 검토 Scene:** Assets/Game/Scenes/Review/OceanColliderBakeReview.unity. ShipWaterSurface가 선박 루트에서 Source 등록 목록·dirty·메모리 SDF를 소유한다. WorldArea/PlacementSpace/GridArea와 시설/경계는 Deck/UpperDeck으로 이동했다. Hull/MainHull은 시각 Renderer·WaterContactSource·사용자가 편집한 Capsule(size4×.75, offset.18/-.13, Horizontal, disabled)을 유지한다. 끊긴 Source 참조는 이 Capsule로 복구했다. StartingShipWaterline.prefab에 반영했다. 일반 Collider에는 Rigidbody가 없으며 추가하지 않았다.
+- **Editor 검토는 수동 버튼만:** Ship/Editor/WaterlineAuthoring의 Generate / Review Waterline SDF 또는 메뉴로 현재 Collider 형상을 생성한다. SceneView 화면 캡처가 아니며 카메라와 무관하다. 자동 fingerprint/stale/변경 감지와 필수 Asset 저장을 제거했다. 입력 오류는 클릭 후 대상/원인/조치·문제 객체 선택으로 안내한다. 마지막 검토 결과는 이후 편집과 자동 동기화되지 않는다. 이전 Sprite/Asset Bake 결과는 현행 경로에서 사용하지 않는다.
+- **런타임 변경 경계:** Source 등록·해제·포함/부분 활성/파괴/재부모화와 형상 수정 코드의 NotifyGeometryChanged 통지를 dirty revision으로 합산한다. RefreshIfNeeded 또는 LateUpdate에서 한 번 생성한다. 전체 선박 이동/회전·숨김/재표시는 재생성하지 않는다. 실패 시 정상 Texture/bounds·dirty 보존, 새 변경 통지 전 자동 오류 재시도 중지. 빈 접촉은 양수 SDF로 반영한다. Source/접촉 Collider는 빌드에도 유지한다. 생성기는 격리 형상 workspace·EDT 버퍼·이중 Texture를 재사용한다. 전역 이벤트 버스/매 프레임 탐색 없음. 주기 강제 생성은 성능 비교 테스트에만 구현했으며 제품 기본 정책은 dirty 기반이다.
+- 원본 Game/UpperDeck/Stage3 Scene·Shader/게임 저장/Build Settings는 유지한다. 새 선박 구조의 제품 통합은 Water Stage6 범위다. 현재 물살·입자·게임 상태/저장 연결은 없다.
 - Game.unity의 단일 GameSessionState/플레이어/시간/HUD 및7개 WorldArea·12방향 연결을 유지한다. 현재 구역만 활성화하며 다른 구역의 정의는 파괴하지 않는다. P4 상태는 References/P4와 P4 Complete 커밋을 따른다.
 - **NavigationState**가 함선 ID·논리 해상 X/Y·방향·항속·항해 ID/순번·거리를 소유한다. CharacterState의 선내 AreaId/X/Y와 별도다. 도메인/Application은 Unity를 참조하지 않으며 View에 규칙을 복제하지 않는다.
 - 함선·갑판·시설·충돌체의 Transform은 해상 좌표로 이동/회전하지 않는다. NavigationView가 같은 논리 위치·방향을 지도 아이콘/방위 표시에 투영한다. 원본 Game은 기존 SailingWater 경로를 유지하고 검토 Scene은 OceanNavigationBinding→OceanRelativeFlow→OceanAmbientDriver로 새 수면을 갱신한다. 지도·수면 표현이 논리 상태를 되쓰지 않는다. 선장실·항구 수면과 기존 Repeat 바닥은 변경하지 않는다.
@@ -32,6 +34,7 @@
 - 자동 검증은 Temp/GreatVoyageP5Tests/<Guid> 등 격리 슬롯만 사용한다. 실제 사용자 저장 초기화/수정 없음. 제품 Scene 저장 슬롯은 P3Cabin이다. 기본 Galmuri11/원본 TTF는 유지하고 신규 표시는 동일 소스의 Galmuri11World를 쓴다.
 
 ## 4. 검증·수용 상태
+- **폐기 구현 정리 완료:** CleanupInventory.json의 GUID 폐쇄 참조 검사 후 Sprite 알파 Bake 코드6개·구형 Scene1개·SDF Asset2개·전용 Material1개 및 meta, 구형 검토 폴더2개·실패/무효 중간 출력 등46파일과 Temp/WaterlineFormat을 제거했다. 현재 씬/선박Prefab/검토Material·원본Game/Stage3/UpperDeck·폰트/사용자 설정9파일은 정리 전 해시와 동일하다. 삭제 GUID 잔여 참조0·현재 씬 Missing Script0·컴파일/콘솔 오류·경고0. 정리 후 EditMode46/46, 런타임 경계1/1 및 사용자 Capsule512×153 수동 생성 확인. 기존 성능 비교 결과는 정리 직전 측정 근거로 유지하며 이번 정리에서 성능 재측정했다고 주장하지 않는다. CleanupValidation.json/CleanupUnityValidation.json이 현재 정리 검증 근거다. 관련 문서를 갱신했고 현재 범위는 사용자 지시에 따라 P5 - 1_4_2 Complete로 공유한다.
 
 - **Water Stage 2-A:** References/P5/Water/Stage2A/OceanCombined.png 및 OceanLargeWaves/OceanRipples/OceanCrestFoam.png은 실제 Unity Game View1920×1080 정적 캡처다. 색면5단계·연속된 큰 곡선 파도·약한 잔물결·마루의 끊긴 포말을 독립 계산한다. 사용자가 정적 화풍을 승인했다(같은 폴더 Approval.json). 새 셰이더는 기존 이미지나 제공 컨셉 이미지를 샘플링하지 않는다.
 - RenderComparisons.json: 시간 간격을 둔 정적 반복 캡처의 픽셀 차이0. 동일 영역의4장/단일 수면 비교는2,073,600픽셀 중440픽셀 차이·채널 최대 차이1/255·평균 절대 채널 차이0.000071/255. 완전 동일이라고 확대하지 않으며 실제 타일 연결과 수치상 차이를 구분한다.
@@ -49,6 +52,11 @@
 - Stage3/EditModeTests.json:37/37 통과(기존34+상대 흐름 방향·방향 변경 연속성·프레임 분할/정지·감속3테스트). PlayModeTests.json: 실제 Keyboard D 입력·선박/갑판 고정·반대 흐름·메뉴 정지·선장실 왕복·지도·실제 파일 저장/복원1/1 통과(22.17초). 최초6초 선회가 기존 X좌표 변화량 검사에 걸린 결과는 InitialPlayModeTests.json에 보존했고 평면 이동거리 검사로 수정했다. 기능 결함이 해결됐다고 확대하지 않는다.
 - Gameplay/OceanAmbient.mp4: 실제 게임 검토 Scene의 조타57프레임·약6초. FlowComparison/OceanAmbient.mp4: 실제 Game View353프레임·약24초이며 입력은 검토용 합성 정지0~4/가속4~8/정속8~12/회전12~16/감속16~20/정지20~24초다. 게임에 가감속 명령을 구현한 것이 아니다. FlowSamples.json은 입력·반대 유속·누적 좌표를 분리 기록한다. RenderComparisons.json: 항해 오프셋0의2-B 기준 화면 픽셀 차이0, 비영 오프셋에서4면/단일면 비교471픽셀·채널 최대1/255.
 - Stage3/SailingProfile.json: Editor1280×720·갑판/인물1명·새 자연/상대 수면600프레임. frame 중앙값4.82ms/p95 6.60ms/max20.68ms, MainThread 중앙값4.82ms/p95 6.50ms, GC 중앙값9015B/p95 9471B. 테스트/Editor 비용 포함이며 GPU/독립 Player·다수 선원·장시간 float 좌표 정밀도 검증은 미확인이다. PreservedAfter.json은 Game/UpperDeck/2-A·2-B Scene/파형 HLSL/NavigationState/GameSession/저장 코드/Build Settings9파일 해시 보존을 확인한다. 격리 Temp 테스트 슬롯 사용 및 제품 저장 해시 측정 구간 불변은 ProductSaveBefore/After.json에 기록한다.
+- **Water4-A 현행 검증:** References/P5/Water/Stage4A_Revision가 현재 근거다.8종 native Collider 대표 형상·Composite Difference/중복 제외·빌드 정의 보존을 포함한 EditMode46/46 통과. 직전 runtime PlayMode2/2 근거 유지, 정리 후 경계1/1 재검증: dirty20통지 합산, 마지막 정상 결과/dirty 보존, 빈 접촉·재활성, 등록/삭제, 전체 선박 변환/숨김 독립과 성능 비교. 폐기된 Sprite/Asset Bake 코드·Scene·SDF Asset·전용 Material과 Stage4A/Stage4A_Collider 구형 검토 폴더, 실패 중간 출력·무효 GC rawcounter 파일을 제거했다. 구형 구멍 채우기와 중복 EDT 구현을 제거하고 공통 수학 테스트는 실제 Workspace를 검증한다.
+- FinalValidation.json: Scene 저장/Play 종료·컴파일/콘솔 오류·경고0, ShipRoot=Transform+ShipWaterSurface·Deck/UpperDeck=WorldArea/PlacementSpace/GridArea, Capsule 값 보존·Rigidbody0·방향타 Grid 유효/부모UpperDeck 확인. 계층 이동은 outermost Prefab unpack 후 재저장하여 재오픈 지속성까지 확인했다. PreservedAfter.json으로 Game/Stage3/원본UpperDeck·Shader/HLSL·저장 코드·TagManager/Build Settings8파일 해시 동일 확인.
+- Review.json: 사용자 Capsule 값 유지, Editor 수동 생성만 실행, 갑판/선체 활성 독립, Asset 필수 아님,512×153 새 결과 확인. Mask.png/SignedDistance.png/ColliderOverlay.png는 현재 형상 근거다. 포함 범위·물살 시각 품질은 사용자 평가 전이다.
+- RuntimePerformance.json(정리 직전 측정값): i7-8565U/MX150·Unity6000.6.4f1 Editor PlayMode,4회 예열·90프레임/경우,128/256/512/1024 해상도·1/16Capsule·N1/2/5/10/30 비교.512×153 Capsule1개 매프레임 생성 중앙값9.82ms/p95 11.06ms, 단계 평균 추출.13/마스크3.59/EDT6.26/업로드 제출.07ms. N10은 평균1.06ms/프레임이나 생성 중앙값10.52ms·최대12.77ms로 피크는 남는다. dirty2배치 표본은 평균.23ms/프레임·2생성(안정적 p95 아님).1024 매프레임38.71ms,512·16개16.26ms. 생성 횟수 감소가 생성 프레임 비용을 줄이지 않으므로 기본값은 변경 통지+dirty 유지다. 빈번한 갱신은 해상도/허용 지연·형상 복잡도·GPU 대안을 별도 검토해야 한다.128/256의 시각 품질은 미평가이며 현재 설정512를 임의로 낮추지 않았다.
+- ProfilerMarker GreatVoyage.Waterline.Generate를 함께 측정했다. GPU 완료 시간/정식 Player/다수 실제 선박 성능은 미확인이다. GC.GetAllocatedBytesForCurrentThread는1MiB 할당 자기검증에서도0이므로 GC 수치는 사용하지 않는다(-1=측정불가). 측정 불가 해석만 유지하고 무효 rawcounter 출력은 제거했다. zero-GC라고 주장하지 않는다. 형상 수집/native 추출에는 managed 할당이 남아 있다.
 - 사용자 제공 Water 문서·이미지 원본은 References/P5/WaterDesign_2026-11-06에 복사하고 SourceHashes.json에 해시를 보존했다. 첨부 원문은 참고/설계 요구이며 자동 실행 지침이 아니다. 제품 Texture로 사용하지 않았다. 기존 소품 B안·Human 화풍을 변경하지 않는다.
 
 - 기존 Stage1 실행 당시 EditMode34/34 통과. 기존27개와 항해 적분/조작/정지/실제 파일 복원/버전1 호환6개 및 비표시 구역 Grid 정의 보존1개. References/P5/Stage1/EditModeTests.json.
@@ -61,4 +69,4 @@
 
 - 2단계: 논리 항구 영역·이탈 후 재입항 재활성화·자동 입항·항해1회 확정/중복 방지·출입항 저장/항구 공간 연결/시작 항구 통합. 아직 구현하지 않았다.
 - 상점·게시판·주점/조선소 서비스, 선원·업무·계약, 자동 조타·경로 기록·수면·하루 경과 SaveEvent, 사건·전투·미니게임·모바일 상세 입력은 후속 범위다. 비표시 층의 선원 업무 시뮬레이션이나 전체 함선 모델은 구현했다고 주장하지 않는다.
-- **Water Stage3 전환 동작은 사용자 통과 확인**되었다. Stage3/Gameplay/OceanAmbient.mp4는 실제 키보드 조타6초 영상, FlowComparison/OceanAmbient.mp4는 합성 검토 입력의24초 비교 영상이다. 다음 구현 후보는 Stage4 선체/SDF/입자이며 이번 커밋 요청으로 착수하지 않는다. Stage5 조명→Stage6 통합→Stage7 디테일 추가·최종 마감 순서를 따른다. 항해 기능2단계는 별도 지시 후 진행한다. 이번 요청은 현재 결과의 main 커밋·푸시까지다. P2/P3/P4/P5/Ocean 최초 자산 작성 도구를 현행 Scene에 반복 실행하지 않는다. 기존 선장실 설정·가구 비율·소품/Human 화풍 유지.
+- **Water Stage3 전환 동작은 사용자 통과 확인**되었다. Stage3/Gameplay/OceanAmbient.mp4는 실제 키보드 조타6초 영상, FlowComparison/OceanAmbient.mp4는 합성 검토 입력의24초 비교 영상이다. 현재4-A 범위는 사용자 완료 승인되었으며 다음은4-B 선체 주변 물살의 범위·통과 조건 설명이다. 별도 진행 지시 후4-B를 구현·평가하고, 그 수용 후4-C 입자를 추가한다. Stage5 조명→Stage6 통합→Stage7 디테일 추가·최종 마감 순서를 따른다. 항해 기능2단계는 별도 지시 후 진행한다. 현재4-A 작업의 Git 커밋·푸시는 P5 - 1_4_2 Complete로 명시 요청되었다. P2/P3/P4/P5/Ocean 최초 자산 작성 도구를 현행 Scene에 반복 실행하지 않는다. 기존 선장실 설정·가구 비율·소품/Human 화풍 유지.

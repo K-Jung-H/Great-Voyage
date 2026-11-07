@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "test status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 21.32,
+      "summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "GreatVoyage.Tests.WaterlineRuntimeTests.MeasureDirtyAndPeriodicRegeneration",
+          "Status": "Passed",
+          "Duration": 21.1865617,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "GreatVoyage.Tests.WaterlineRuntimeTests.NotificationsBatchPreserveLastGoodAndAllowEmptyContact",
+          "Status": "Passed",
+          "Duration": 0.0889696,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Great_Voyage\\Great_Voyage"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

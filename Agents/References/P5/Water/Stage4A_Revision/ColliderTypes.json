@@ -1,0 +1,50 @@
+[
+  {
+    "type": "Box",
+    "passed": true,
+    "width": 512,
+    "height": 384
+  },
+  {
+    "type": "Circle",
+    "passed": true,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "type": "Capsule",
+    "passed": true,
+    "width": 308,
+    "height": 512
+  },
+  {
+    "type": "Polygon",
+    "passed": true,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "type": "Edge",
+    "passed": true,
+    "width": 512,
+    "height": 263
+  },
+  {
+    "type": "Composite",
+    "passed": true,
+    "width": 512,
+    "height": 410
+  },
+  {
+    "type": "Tilemap",
+    "passed": true,
+    "width": 512,
+    "height": 512
+  },
+  {
+    "type": "Custom",
+    "passed": true,
+    "width": 512,
+    "height": 456
+  }
+]
