@@ -400,9 +400,45 @@ Application에 Event 진입 요청·복귀 결과를 연결할 경계를 둔다.
 
 ### 10.1 항해와 조타
 
-**2026-11-06 해수 표현 경계 보완:** 기존 SailingWater의 시각 결과는 사용자 미수용이다. NavigationState·조타·시간·저장의 원본은 유지하고, 해수는 자연 형상/색면→상대 흐름→수면선/SDF 국소 흐름·입자→별도 조명 순서로 분리한다. 아래 P5 첫 구현 계약의 기존 수면 수식이 새 Water 요구를 충족했다는 의미는 아니다. 요구 원문은 References/P5/WaterDesign_2026-11-06에 보존한다. Stage2-A 정적 수면은 사용자 승인되었다. Stage2-B는 독립 OceanAmbientReview의 OceanAmbientDriver가 표현용 경과 시간·4개 주기 위상·자연 파형/잔물결의 연속 이동량을 소유하며, 파도·보조 파도·잔물결·완만한 형상 변화에 공유 위상을 전달한다. 위상과 이동량이 모두0이면 승인된 정적 형상이다. 큰 파형의 생성 좌표 자체가 이동하고 잔물결은 별도 속도로 이동하며, 낮은 주파수의 변형을 더한다. 이 이동량은 항해 상대 흐름이 아니며 주기 위상처럼 래핑하지 않는다. 한 런타임 Material을4면에 공유하고 비활성화 시 원래 Material을 복구·런타임 사본을 해제한다. 정지는 시간을 누적하지 않으며 재개 시 보충하지 않는다. 이 표현 시계는 게임 시간·NavigationState·저장 원본을 변경하지 않는다. 사용자의 다음 단계 진행 지시 후 Stage3에서는 Game 복제 검토 Scene의 NavigationView에 선택적 OceanNavigationBinding을 연결했다. Binding은 GameClock 증가분과 Navigation 이동량을 읽고, OceanRelativeFlow가 표현용 속도 응답/누적 샘플 좌표를 계산한다. 이 값은 상태 원본이 아니라 재생성 가능한 시각 상태다. 공통 파형 계산 앞의 샘플 좌표에만 더해 파형 내부 수식과 결합하지 않는다. 자연 물결은 같은 게임 정지 경계를 따르며 비표시 층에서도 시각 시계는 유지한다. 원본 Game의 기존 수면 경로는 Stage6 통합 전까지 보존한다. Hull/SDF·입자·조명은 미구현이며 Stage3 사용자 수용 전 추가하지 않는다.
+**수면 표현:** 구형 독립 파형과 상대 흐름 구현은 폐기한다. 항해 상태·지도·입력·저장 원본은 유지하며 아래 「Sea·Wave 확정 계약」을 따른다.
 
-**P5 1단계 실행 계약(2026-11-05):** 사용자가 요청한 고정 선박 방식으로 논리 해상 공간과 선내 연속 좌표를 분리한다. GameSessionState.Navigation은 함선 ID·해상 X/Y·방향·항속·항해 ID/순번·누적 거리의 유일한 원본이다. 갑판/시설/물리 Transform을 해상 좌표로 이동·회전하지 않는다. NavigationView는 이 값을 지도 아이콘과 수면 샘플링/물살에 투영하며 상태를 되쓰지 않는다. 해상 좌표1단위는1해리, 내부 각도는 동쪽0°/반시계, 표시 방위는 북쪽0°/시계다. 항속·선회율은 NavigationSettings의 조정 가능한 초깃값이며 확정 밸런스가 아니다. GameClock의 동일 gameSeconds로 일정 조타 구간을 해석적으로 적분하여 표시 프레임 분할에 따른 경로 차이를 줄인다. 방향타 조작은 일시적 입력 소유 상태이고 조작 종료 후 현재 방향 전진을 유지한다. 자격 선원/자동 조타는 생성하지 않는다. 메뉴·일지·전환 정지는 항해에도 적용한다. 1단계의 최소 항해 시작은 실제 상태를 생성하며 항해 중 하선은 차단한다. 자동 입항/완료 및 전체 항구 출항 조건은2단계다. 정상 종료 저장은 버전2로 Navigation을 포함하고 버전1은 읽기 시 정박 상태를 보완하되 파일을 자동 갱신/초기화하지 않는다.
+#### Sea·Wave 확정 계약 (2026-11-09 사용자 확정)
+
+**목적과 권위:** 방향장과 선체 영향 데이터를 이용한 파도·포말·항적 렌더링 프레임워크다. 유체 시뮬레이션이 아니며 압력·질량 보존·비압축성·물리적 파동 방정식·FFT/CFD 솔버를 목표로 삼지 않는다. Flow는 항해 물리의 원본이 아니며 함선에 힘을 가하거나 Navigation 상태를 되쓰지 않는다. 시각 문제는 좌표·시간·방향장·절차적 파형·이력 수송·Shader 표현에서 해결한다.
+
+원본은 [Locked Skeleton ZIP](References/OceanFramework/GreatVoyage_Ocean_Framework_Locked_Skeleton.zip)으로 보존한다. 원본 FRAMEWORK_CONTRACT의 핵심 흐름·공개 API·kernel 책임을 채택하며, 프로젝트 연결 및 사용자 정정 사항은 이 절을 따른다. 원본 AGENT_COMMAND의 실행 지시는 자동 작업 허가가 아니다. 원본의 미리보기 코드·예시 수치는 제품 품질·실행 검증·밸런스 확정을 의미하지 않는다.
+
+**고정 파이프라인:** `OceanDataMap → Bilinear + World-space Seeded Noise → BaseFlowMap → ShipDeltaMap → FinalFlowMap → FoamHistory → Unified Ocean Shader`. 추가 파형은 별도 WaveContributionMap으로 전달한다. OceanDataMap 셀은 큰 해역의 방향 편향 샘플이며 Wave Rect/Region이 아니다. 셀 중심 4점 보간·가장자리 clamp를 사용하고, 데이터 셀 크기와 Flow texel 크기는 독립이다. Noise는 시간·카메라·타일별 독립 Seed가 아닌 월드 좌표와 고정 Seed에 기반한다.
+
+| 리소스 | 채널/책임 |
+|---|---|
+| LowResolutionData | RGBAHalf: 방향 X/Y, Speed, NoiseStrength |
+| BaseFlowMap | ARGBHalf: 흐름 X/Y, 크기, 0. BuildBaseFlow만 작성; 이후 읽기 전용 |
+| ShipDeltaMap | ARGBHalf: 변화 X/Y, FoamSource, Influence. 매 갱신 Clear 후 선박별 국소 누적 |
+| FinalFlowMap | ARGBHalf: Base+Delta X/Y, 크기, Influence. ComposeFinalFlow 전용 |
+| FoamHistory A/B | ARGBHalf: Density, 0, 0, 0. AdvanceFoam에서 이동·감쇠·생성 후 ping-pong |
+| WaveContributionMap | ARGBHalf: Height Contribution, Crest Weight, Reserved, Reserved |
+
+BuildBaseFlow/ClearShipDelta/EmitHullFlow/ComposeFinalFlow/AdvanceFoam/ClearFoam의 책임을 유지한다. 선박은 완성된 BaseFlow를 샘플링하며 Base를 수정하지 않는다. 포말의 이력 수송은 유체 솔버 도입 근거가 아니다. 독립 Sprite/V자 이미지 overlay, Base 생략, 원본 셀을 Shader에서 직접 최종 파도로 변환하는 우회를 금지한다.
+
+**공간·입력:** NavigationState가 항해 상태의 유일한 원본이다. 고정 갑판·시설·캐릭터·선내 충돌체 Transform은 유지한다. 별도 해상 계산용 선박 표현에 Navigation 위치·방향을 일방향 투영하고, 단일 경로 PolygonCollider2D 접수 형상을 해상 월드 XY로 전달한다. 이 객체는 두 번째 항해 시뮬레이션이나 저장 원본이 아니다. 접수 형상은 선내 이동 충돌에 참여시키지 않는다. 수면 화면 좌표도 같은 해상 좌표로 변환해 모든 필드를 샘플링한다. 해리→계산 단위, 동쪽 0°/반시계→선수 local +Y, 선형·각속도와 시간 단위의 변환을 하나의 연결부에 명시하고 중복 적용하지 않는다. 구체 축척은 구현 검증값이며 예시 100/400/512를 확정 수치로 취급하지 않는다.
+
+**시간:** Ocean 시간·delta는 세션의 정지·복귀 정책을 따르며 외부에서 명시적으로 전달한다. `_Time.y`가 언제나 진행한다고 주장하지 않는다(Unity timeScale 정지와 세션 정지는 다르다). 내장 시간에 암묵적으로 의존하지 않고 Flow/Foam/파도 위상에 같은 정지 정책을 적용한다. 정지 중 위상·History를 유지하고 복귀 때 정지 시간을 보충하지 않는다. dt=0을 양수로 강제하지 않는다. 이동량과 속도 계산의 시간 간격을 일치시키고, 필요하면 이력 갱신을 작은 간격으로 분할한다. 파도 위상 속도와 Flow 속도는 별도 표현 값이며 동일 값으로 강제하지 않는다.
+
+**월드 정렬·History:** Field는 세계 일부를 담는 버퍼다. 고정 texel 크기와 기준 원점을 정하고 정수 texel 단위로 창을 이동한다. 카메라 미세 이동으로 세계 샘플 격자를 흔들지 않는다. 겹치는 FoamHistory는 같은 월드 위치로 복사하며 불필요한 재보간·누적 흐려짐을 피한다. 이동 창의 Base는 같은 세계 좌표·데이터·Seed에서 재생성하고 ShipDelta/Final은 현재 입력으로 재계산한다. 창 이동만으로 History 보존 완료라고 판정하지 않는다.
+
+- 겹침 영역 보존과 창 밖으로 나갔다 돌아온 이력 복원은 별개 요구다. 초기 창 이동은 겹침 보존을 필수로 한다.
+- 창 밖 이력은 무조건 영구 보관하지 않는다. 포말·파형 수명과 화면 범위에 근거해 여유 영역 유지/청크 보존/수명 종료 후 폐기 범위, 새 노출 영역의 복원 또는 초기화 조건을 구현 전에 명시한다. 구체 보존 크기·수치는 미정이다. 빠른 선회·재방문·창 경계에서 가시적인 소실이 없는지 검증해야 한다.
+- WaveContribution은 순간 평가 결과와 과거 발생 원천을 구분한다. 순간 결과는 재생성하고, 아직 살아 있는 과거 원천/이력은 같은 세계 좌표와 수명 정책으로 유지한다.
+- 표시와 리소스 수명을 분리한다. 구역 숨김은 Renderer만 제어하고, GPU 상태는 세션 수명으로 관리한다. 로드·순간 재배치와 일반 이동을 구분해 가짜 속도를 방지한다. 디스크 저장 시 시각 이력 복원/초기화의 구체 정책은 제품 연결 전에 명시하며 현재 저장 버전2를 임의 변경하지 않는다.
+
+**방향·파형 의미:** MainDirection 길이는 강도로 사용하지 않고 정규화된 방향으로 취급한다. 강도는 Speed/NoiseStrength로 분리한다. 상쇄 판정은 Noise를 더한 최종 벡터에 적용한다. 미소 벡터 구간의 급변을 검증하고, 감속 곡선 등 고정 수식 변경이 필요하면 별도 설계 변경으로 제시한다. Flow는 선체 반응·포말 이동용 표현 흐름, 파도 위상/속도는 렌더링 값, WaveContribution은 추가 높이/마루 성분이다.
+
+ShipDelta는 선수 분기·선측 흐름, FoamHistory는 생성·이동·잔류·감쇠, WaveContribution은 선수파·항적·국소 원형파를 담당한다. 항적은 위치·발생시각·방향·폭의 원천으로부터 절차적 파형을 생성하여 합산한다. 물리적 Kelvin 해석을 완료 조건으로 삼지 않는다. 현재 dot(worldXY, localDirection) 미리보기의 압축·위상 재배열은 품질 검증 대상이다. 안정적인 월드 패턴을 Flow로 이동·왜곡하는 위상 매핑을 사용하며, 두 위상 교차 혼합 등 세부 알고리즘은 비교 검증 후 선택한다.
+
+**Skeleton 보완 게이트:** Seed/Noise/Data/Field 변경 감지와 Base 재생성, 해상도 변경 시 재할당, 접수 polygon 중복점·퇴화 형상 검증, 창 밖 샘플 유입 정책, 초기화·재활성화·해제, 다중 선박 누적과 half 범위, GPU 지원 확인을 검증한다. Skeleton은 고정 창·단일 polygon 경로·미리보기 파형만 제공하며 복합 홀, streaming, 고품질 항적, 모바일 성능은 미구현이다. ARGBHalf 포맷 최적화는 결과 동등성을 검증한 뒤 수행한다.
+
+**P5 1단계 실행 계약(2026-11-05):** 사용자가 요청한 고정 선박 방식으로 논리 해상 공간과 선내 연속 좌표를 분리한다. GameSessionState.Navigation은 함선 ID·해상 X/Y·방향·항속·항해 ID/순번·누적 거리의 유일한 원본이다. 갑판/시설/물리 Transform을 해상 좌표로 이동·회전하지 않는다. NavigationView는 이 값을 지도 아이콘/HUD에 투영하며 상태를 되쓰지 않는다. 해상 좌표1단위는1해리, 내부 각도는 동쪽0°/반시계, 표시 방위는 북쪽0°/시계다. 항속·선회율은 NavigationSettings의 조정 가능한 초깃값이며 확정 밸런스가 아니다. GameClock의 동일 gameSeconds로 일정 조타 구간을 해석적으로 적분하여 표시 프레임 분할에 따른 경로 차이를 줄인다. 방향타 조작은 일시적 입력 소유 상태이고 조작 종료 후 현재 방향 전진을 유지한다. 자격 선원/자동 조타는 생성하지 않는다. 메뉴·일지·전환 정지는 항해에도 적용한다. 1단계의 최소 항해 시작은 실제 상태를 생성하며 항해 중 하선은 차단한다. 자동 입항/완료 및 전체 항구 출항 조건은2단계다. 정상 종료 저장은 버전2로 Navigation을 포함하고 버전1은 읽기 시 정박 상태를 보완하되 파일을 자동 갱신/초기화하지 않는다.
 
 - 출항 요청은 시설·정산 등의 조건을 통과해야 한다. 통과 전 항해 ID를 완료/차감하지 않으며 실제 출항 확정 때 새 항해 ID·출발 항구를 연결한다. 동일 항구 복귀도 항해 1회다. 선원 0명 출항을 허용한다.
 - Navigation은 현재 함선의 해상 위치·방향·속도 원본을 관리한다. 플레이어의 방향타 조작과 자격 있는 일등 항해사의 자동 조타는 같은 조타 명령 계약을 사용한다. 계획선은 Journal의 계획 데이터이며 그리기만으로 이동 명령을 발행하지 않는다.
@@ -662,7 +698,3 @@ Application에 Event 진입 요청·복귀 결과를 연결할 경계를 둔다.
 - P2에서 실제 아트·PPU/피벗/레이어·카메라·Canvas·해상도별 한글/화면 규격과 사용자 시각 수용을 확보한다. 초상 스타일의 별도 참고 자료가 아직 없다는 사실을 유지한다. 생성 예시는 원본 D/G 레퍼런스를 대체하거나 실제 Game View 증거가 되지 않는다.
 - 초기 플레이어 시작 구역·최초 시간·대표 항구/상품/시설 수·구체 입력 키·물리/추종/수면 계산 구현·가격/확률 수치는 해당 Slice 시작 전에 기존 규칙 안에서 결정하고 문서에 반영한다. 기획 변경이 필요한 항목은 사용자에게 제시한다. 별도 과거 기획·운영 로그를 자동 계승하지 않는다.
 - P1-01~07 검토·수용 및 최신 정정 대조를 마쳤으므로 기본 프레임워크 범위 P1 설계 게이트를 통과로 판정한다. 공통 상태 소유자·명령/결과·수명·저장 경계·Event 한정 교체·제작/검증 책임은 본문과 A01~A28 대응표에 연결돼 있다. 구현 의존성·시각·실행·성능은 아직 검증 전이다. 다음은 P2 실제 아트/화면 규격 검토이며 현재 작업에서 자동 착수하지 않는다.
-
-**Water4-A 접촉 형상/SDF 경계(2026-11-07 정정):** Collider가 수면 접촉 형상의 원본이며 Sprite 윤곽/SceneView 화면 캡처가 아니다. Ship 루트의 ShipWaterSurface가 명시적 Source 목록, dirty revision, 메모리 SDF/bounds를 소유한다. WorldArea·PlacementSpace·GridArea는 Deck/UpperDeck으로 옮겨 갑판 활성과 Hull/선박 전체 수명을 분리한다. WaterContactSource는 같은 객체의 접촉 Collider를 참조하고 등록·해제/부분 비활성/포함 변경을 선박에 통지한다. 런타임 형상·상대 Transform 변경 코드는 NotifyGeometryChanged를 명시적으로 호출한다. 전역 이벤트 버스·매 프레임 탐색/속성 비교는 없다. 여러 통지는 모아서 사용 직전 RefreshIfNeeded 또는 LateUpdate에서 한 번 계산한다. 전체 선박 이동/회전·숨김/재표시는 재생성 사유가 아니다. 실패 시 마지막 정상 Texture/bounds와 dirty를 유지하고 자동 오류 재시도는 새 통지 전까지 중지한다. 모든 접촉 제거는 양수 거리장으로 정상 처리한다.
-
-SDF는 재구성 가능한 표현 캐시이며 Asset 저장은 필수가 아니다. WaterlineGenerator가 native 형상·마스크·거리 계산·Texture 업로드를 담당한다. WaterlineGeometry.Workspace는 격리 PhysicsScene2D/복제본을 유지하며 구성 변경 때만 재구성하고 EDT 버퍼·이중 Texture를 재사용한다.8종 native Collider·Composite 구멍/중복 제외 지원. 일반 접촉 Collider는 disabled이며 Rigidbody가 필요하지 않다. Composite만 비시뮬레이션 Rigidbody를 사용한다. Source/Collider/ShipWaterSurface는 빌드 유지, EditorOnly 가지는 제외한다. Editor 검토는 버튼 호출 때만 같은 생성기를 사용하며 자동 fingerprint/변경 감지/파일 저장은 없다. 검토용 컬러 마스크·거리 미리보기는 실행 경로 밖이다. N프레임 강제 재생성은 비교 측정용이며 제품 기본값은 dirty 기반이다. 수면 셰이더 반응은4-B에 연결한다.4-A 평가→4-B 물살 평가→4-C 입자 순서를 유지한다.
