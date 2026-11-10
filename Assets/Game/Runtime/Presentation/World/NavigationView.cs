@@ -7,8 +7,6 @@ namespace GreatVoyage.Presentation
 {
     public sealed class NavigationView : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer sea;
-        [SerializeField] private OceanNavigationBinding oceanBinding;
         [SerializeField] private TMP_Text status;
         [SerializeField] private TMP_Text chartReadout;
         [SerializeField] private RectTransform chart;
@@ -16,26 +14,14 @@ namespace GreatVoyage.Presentation
         [SerializeField] private RectTransform mapArtwork;
         [SerializeField] private Button zoomIn, zoomOut, locate;
         private GameSession session;
-        private MaterialPropertyBlock waterProperties;
         private float span = 40;
         private double centerX, centerY;
         private float nextText;
-        private Vector2 waterPeriod;
         private float mapAspect;
-        private static readonly int SeaPosition = Shader.PropertyToID("_SeaPosition");
-        private static readonly int Heading = Shader.PropertyToID("_Heading");
-        private static readonly int Sail = Shader.PropertyToID("_Sail");
-        private static readonly int WavePhase = Shader.PropertyToID("_WavePhase");
         public RectTransform Marker => marker;
         public void Bind(GameSession value)
         {
-            session = value; waterProperties = new MaterialPropertyBlock();
-            if (oceanBinding != null) oceanBinding.Bind(value);
-            else
-            {
-                sea.GetPropertyBlock(waterProperties);
-                var tile = sea.sharedMaterial.GetVector("_TileSize"); waterPeriod = new Vector2(tile.x * 2, tile.y * 2);
-            }
+            session = value;
             var mapSprite = mapArtwork.GetComponent<Image>().sprite; mapAspect = mapSprite.rect.width / mapSprite.rect.height;
             zoomIn.onClick.AddListener(ZoomIn); zoomOut.onClick.AddListener(ZoomOut); locate.onClick.AddListener(Locate);
         }
@@ -47,14 +33,6 @@ namespace GreatVoyage.Presentation
         {
             if (session == null) return;
             var state = session.State.Navigation;
-            if (oceanBinding == null)
-            {
-                waterProperties.SetVector(SeaPosition, new Vector4((float)(state.X * .8 % waterPeriod.x), (float)(state.Y * .8 % waterPeriod.y), 0, 0));
-                waterProperties.SetFloat(Heading, (float)state.HeadingDegrees * Mathf.Deg2Rad);
-                waterProperties.SetFloat(Sail, state.IsUnderway ? 1 : 0);
-                waterProperties.SetFloat(WavePhase, (float)(session.State.Clock.TotalGameSeconds / 144 % 1000));
-                sea.SetPropertyBlock(waterProperties);
-            }
             var scale = Mathf.Min(chart.rect.width, chart.rect.height) / span;
             mapArtwork.sizeDelta = new Vector2(chart.rect.height * mapAspect, chart.rect.height);
             mapArtwork.localScale = Vector3.one * (40 / span);

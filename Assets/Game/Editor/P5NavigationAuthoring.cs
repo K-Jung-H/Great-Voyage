@@ -49,17 +49,12 @@ namespace GreatVoyage.Editor
                 PrefabUtility.SaveAsPrefabAsset(helmRoot, Content + "Prefabs/Facilities/HelmView.prefab");
             }
             finally { UnityEngine.Object.DestroyImmediate(helmRoot); }
-            var material = new Material(Shader.Find("Great Voyage/Sailing Water")); material.name = "SailingWater";
-            var oldMaterial = AssetDatabase.LoadAssetAtPath<Material>(Content + "Art/PortWaterSurface.mat");
-            material.SetVector("_UvRect", oldMaterial.GetVector("_UvRect")); material.SetVector("_TileSize", oldMaterial.GetVector("_TileSize"));
-            AssetDatabase.CreateAsset(material, Content + "Art/SailingWater.mat");
             var upperPath = Content + "Prefabs/World/UpperDeck.prefab";
             var upper = PrefabUtility.LoadPrefabContents(upperPath);
             try
             {
                 var helm = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(Content + "Prefabs/Facilities/HelmView.prefab"), upper.transform);
                 helm.transform.localPosition = new Vector3(-3.5f, .5f);
-                upper.transform.Find("Sea").GetComponent<SpriteRenderer>().sharedMaterial = material;
                 PrefabUtility.SaveAsPrefabAsset(upper, upperPath);
             }
             finally { PrefabUtility.UnloadPrefabContents(upper); }
@@ -102,8 +97,6 @@ namespace GreatVoyage.Editor
             var zoomIn = Button("ChartZoomIn", page, new Vector2(215, -335), new Vector2(50, 44), "+");
             var zoomOut = Button("ChartZoomOut", page, new Vector2(275, -335), new Vector2(50, 44), "−");
             var locate = Button("ChartLocate", page, new Vector2(390, -335), new Vector2(150, 44), "내 위치");
-            Set(view, "sea", GameObject.Find("WorldContent").transform.GetComponentsInChildren<WorldArea>(true)
-                .Single(a => a.AreaId == "upper-deck").transform.Find("Sea").GetComponent<SpriteRenderer>());
             Set(view, "status", status); Set(view, "chartReadout", readout); Set(view, "chart", chart); Set(view, "marker", marker.rectTransform);
             Set(view, "mapArtwork", mapArt.rectTransform);
             Set(view, "zoomIn", zoomIn); Set(view, "zoomOut", zoomOut); Set(view, "locate", locate);

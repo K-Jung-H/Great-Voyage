@@ -19,7 +19,7 @@ namespace GreatVoyage.Editor
     {
         private const string Art = "Assets/Game/Content/Art/Environment/";
         private const string Prefabs = "Assets/Game/Content/Prefabs/World/";
-        private static Sprite hull, stairs, board, house, paving, water, planks;
+        private static Sprite hull, stairs, board, house, paving, planks;
         private static TMP_FontAsset font;
         private static Material highlight;
 
@@ -44,7 +44,6 @@ namespace GreatVoyage.Editor
             board = SpriteAsset(texture, "TravelBoard", new Rect(1098, 624, 363, 269));
             house = SpriteAsset(texture, "TravelHouse", new Rect(68, 97, 380, 365));
             paving = SpriteAsset(texture, "PortPaving", new Rect(603, 119, 330, 326));
-            water = SpriteAsset(texture, "PortWater", new Rect(1113, 118, 331, 326));
             planks = AssetDatabase.LoadAssetAtPath<Sprite>(Art + "CabinFloorSegment.asset");
             font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Fonts/Galmuri11 SDF.asset");
             highlight = AssetDatabase.LoadAssetAtPath<Material>("Assets/Game/Content/Art/InteractionOutline.mat");
@@ -56,7 +55,6 @@ namespace GreatVoyage.Editor
             var areas = new List<WorldArea> { captain };
             areas.Add(Build(world, "UpperDeck", "upper-deck", "상갑판", new Rect(-8, -4.5f, 16, 9), root =>
             {
-                Tile(root, "Sea", water, Vector2.zero, new Vector2(25, 15), -200);
                 Prop(root, "ShipDeck", hull, Vector2.zero, 14.5f, false, -100);
                 Bounds(root, new Rect(-5.3f, -1.7f, 10.6f, 3.4f));
                 var space = root.gameObject.AddComponent<PlacementSpace>();
@@ -70,7 +68,6 @@ namespace GreatVoyage.Editor
             }, hull));
             areas.Add(Build(world, "HarborDock", "harbor-dock", "선착장", new Rect(-8, -4.5f, 16, 9), root =>
             {
-                Tile(root, "Sea", water, Vector2.zero, new Vector2(25, 15), -200);
                 Tile(root, "Land", paving, new Vector2(4, 0), new Vector2(7, 7), -100);
                 Tile(root, "Pier", planks, new Vector2(-2.5f, 0), new Vector2(7, 1.8f), -90);
                 Prop(root, "MooredShip", hull, new Vector2(-5.6f, 2), 4.6f, true);
@@ -185,7 +182,7 @@ namespace GreatVoyage.Editor
             var counter = SpriteAsset(original, "TavernCounter", new Rect(860, 730, 384, 220));
             var wall = AssetDatabase.LoadAssetAtPath<Sprite>(Art + "PartitionWallSegment.asset");
             var materials = new Dictionary<string, Material>();
-            foreach (var pair in new[] { ("PortWater", "PortWaterSurface"), ("PortPaving", "PortPavingSurface") })
+            foreach (var pair in new[] { ("PortPaving", "PortPavingSurface") })
             {
                 var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Art + pair.Item1 + ".asset");
                 var path = "Assets/Game/Content/Art/" + pair.Item2 + ".mat";

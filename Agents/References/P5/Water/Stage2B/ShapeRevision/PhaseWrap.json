@@ -1,9 +1,0 @@
-{
-  "deltaSeconds": 0.0002,
-  "pixels": {
-    "pixels": 2073600,
-    "changedPixels": 13284,
-    "maximumChannelDifference": 2,
-    "meanAbsoluteChannelDifference": 0.0023490547839506173
-  }
-}

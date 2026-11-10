@@ -397,7 +397,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4290964991
   m_fontColor: {r: 1, g: 0.93, b: 0.76, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -679,11 +679,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!212 &72893272 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 882670301601727785, guid: 1d2a5940d6605e849981e82cd5ddc2d4, type: 3}
-  m_PrefabInstance: {fileID: 1148385321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &161163487
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,7 +986,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4290964991
   m_fontColor: {r: 1, g: 0.93, b: 0.76, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1004,7 +999,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3175,7 +3170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019cc94c8eae7fc4db8ef4d7c11c85b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GreatVoyage.Presentation::GreatVoyage.Presentation.NavigationView
-  sea: {fileID: 72893272}
   status: {fileID: 210302436}
   chartReadout: {fileID: 368326366}
   chart: {fileID: 958200214}
@@ -6880,6 +6874,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9179844270299493022, guid: 1fb28020937a049409bc961a6d1022b4, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4290964991
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179844270299493022, guid: 1fb28020937a049409bc961a6d1022b4, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -8462,7 +8464,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4290964991
   m_fontColor: {r: 1, g: 0.93, b: 0.76, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -8475,7 +8477,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -8746,7 +8748,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4290964991
   m_fontColor: {r: 1, g: 0.93, b: 0.76, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -8759,7 +8761,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
