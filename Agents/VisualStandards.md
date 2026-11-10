@@ -175,3 +175,9 @@ Architecture.md의 「Sea·Wave 확정 계약」을 따른다. 물리적 유체 
 - 메뉴·일지·전환 정지에서 위상/History가 유지되고 복귀 순간 점프·시간 보충이 없어야 한다.
 - 카메라 이동·정수 texel 창 이동·빠른 선회·재방문 시 월드 정렬, 겹침 이력 보존, 경계 및 새 노출 영역의 연속성을 확인한다. 창 밖 이력 복원은 겹침 복사와 별도로 검증한다.
 - 실제 Game View 연속 동작과 GPU 필드 디버그를 함께 확인한다. 수치/컴파일 성공만으로 시각 수용을 선언하지 않으며 사용자 수용을 별도로 기록한다.
+
+### W3 수면 셰이더 재작성 및 검토 기준
+- 기존 OceanSurface2D의 line 예약어 오류로 검토 씬이 분홍색을 출력한 사실을 확인했다. 이전 테스트 결과는 그 최종 시안의 정상 렌더링 증거로 사용할 수 없다.
+- 새 StylizedOcean.shader는 방향장 4개 패치의 혼합, 다중 크기 높이 변화로부터 구한 표면 기울기, 반사 하이라이트, 연결된 표면 무늬, FoamHistory 마스크를 각각 구성한다. W3OceanReview는 새 셰이더를 사용하고 Debug Mode 0으로 저장한다.
+- 기법 참고: https://catlikecoding.com/unity/tutorials/flow/directional-flow/ (방향에 정렬된 표면과 패치 혼합), https://alexander-ameye.gitbook.io/stylized-water/features/shader-properties (표면·노멀·포말 표현의 제어), https://docs.crest.waveharmonic.com/Manual/Appearance/Stylization.html (노멀 강도와 선명한 스타일 표현).
+- 실제 검토 카메라의 캡처는 References/P5/W3/StylizedOceanReview.png다. 연결 무늬와 반사가 출력됨을 확인했다. 셀 경계의 각진 형태, 레퍼런스에 대한 시각 일치도, 제품 화면 수용과 성능은 검증 대기다.

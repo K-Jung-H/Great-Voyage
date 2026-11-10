@@ -432,7 +432,7 @@ BuildBaseFlow/ClearShipDelta/EmitHullFlow/ComposeFinalFlow/AdvanceFoam/ClearFoam
 - WaveContribution은 순간 평가 결과와 과거 발생 원천을 구분한다. 순간 결과는 재생성하고, 아직 살아 있는 과거 원천/이력은 같은 세계 좌표와 수명 정책으로 유지한다.
 - 표시와 리소스 수명을 분리한다. 구역 숨김은 Renderer만 제어하고, GPU 상태는 세션 수명으로 관리한다. 로드·순간 재배치와 일반 이동을 구분해 가짜 속도를 방지한다. 디스크 저장 시 시각 이력 복원/초기화의 구체 정책은 제품 연결 전에 명시하며 현재 저장 버전2를 임의 변경하지 않는다.
 
-**방향·파형 의미:** MainDirection 길이는 강도로 사용하지 않고 정규화된 방향으로 취급한다. 강도는 Speed/NoiseStrength로 분리한다. 상쇄 판정은 Noise를 더한 최종 벡터에 적용한다. 미소 벡터 구간의 급변을 검증하고, 감속 곡선 등 고정 수식 변경이 필요하면 별도 설계 변경으로 제시한다. Flow는 선체 반응·포말 이동용 표현 흐름, 파도 위상/속도는 렌더링 값, WaveContribution은 추가 높이/마루 성분이다.
+**방향·파형 의미:** MainDirection 길이는 강도로 사용하지 않고 정규화된 방향으로 취급한다. 강도는 Speed/NoiseStrength로 분리한다. 셀마다 단위 방향에 Speed를 곱해 속도 벡터를 만든 후 셀 중심 기준 쌍선형 보간한다. 보간된 NoiseStrength와 Speed를 월드 Noise의 진폭으로 사용해 보간 속도에 더한다. 합성 벡터를 재정규화하지 않아 반대 흐름이 상쇄점에서 연속적으로 감속한다. Flow는 선체 반응·포말 이동용 표현 흐름, 파도 위상/속도는 렌더링 값, WaveContribution은 추가 높이/마루 성분이다.
 
 ShipDelta는 선수 분기·선측 흐름, FoamHistory는 생성·이동·잔류·감쇠, WaveContribution은 선수파·항적·국소 원형파를 담당한다. 항적은 위치·발생시각·방향·폭의 원천으로부터 절차적 파형을 생성하여 합산한다. 물리적 Kelvin 해석을 완료 조건으로 삼지 않는다. 현재 dot(worldXY, localDirection) 미리보기의 압축·위상 재배열은 품질 검증 대상이다. 안정적인 월드 패턴을 Flow로 이동·왜곡하는 위상 매핑을 사용하며, 두 위상 교차 혼합 등 세부 알고리즘은 비교 검증 후 선택한다.
 

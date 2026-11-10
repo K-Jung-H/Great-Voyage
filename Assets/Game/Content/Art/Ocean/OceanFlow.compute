@@ -1,0 +1,275 @@
+#pragma kernel ClearWave
+#pragma kernel TransportWave
+#pragma kernel BuildBaseFlow
+#pragma kernel ClearShipDelta
+#pragma kernel EmitHullFlow
+#pragma kernel ComposeFinalFlow
+#pragma kernel AdvanceFoam
+#pragma kernel ClearFoam
+
+Texture2D<float4> _LowResolutionData;
+Texture2D<float4> _BaseFlowRead;
+Texture2D<float4> _ShipDeltaRead;
+Texture2D<float4> _FinalFlowRead;
+Texture2D<float4> _FoamRead;
+StructuredBuffer<float2> _HullWorldVertices;
+
+RWTexture2D<float4> _BaseFlowWrite;
+RWTexture2D<float4> _ShipDeltaWrite;
+RWTexture2D<float4> _FinalFlowWrite;
+RWTexture2D<float4> _FoamWrite;
+
+int2 _DataResolution;
+float2 _DataOrigin;
+float _TileWorldSize;
+int2 _FieldResolution;
+float2 _FieldOrigin;
+float2 _FieldWorldSize;
+int _NoiseSeed;
+float _NoiseFrequency;
+float _DeltaTime;
+float _FoamDecay;
+
+int2 _ShipDispatchOffset;
+int2 _ShipDispatchSize;
+int _HullVertexCount;
+float2 _ShipPosition;
+float2 _ShipVelocity;
+float2 _ShipForward;
+float _ShipAngularVelocity;
+float _ShipRadius;
+float _SideFlowGain;
+float _ShipFoamEmission;
+
+bool ValidPixel(int2 p)
+{
+    return p.x >= 0 && p.y >= 0 && p.x < _FieldResolution.x && p.y < _FieldResolution.y;
+}
+
+float2 PixelWorld(int2 p)
+{
+    return _FieldOrigin + ((float2(p) + 0.5) / float2(_FieldResolution)) * _FieldWorldSize;
+}
+
+float4 CoarseCell(int2 p)
+{
+    p = clamp(p, int2(0, 0), _DataResolution - 1);
+    float4 cell = _LowResolutionData.Load(int3(p, 0));
+    cell.xy *= max(0.0, cell.z);
+    return cell;
+}
+
+float4 InterpolateCoarse(float2 world)
+{
+    float2 grid = (world - _DataOrigin) / _TileWorldSize - 0.5;
+    int2 i = int2(floor(grid));
+    float2 u = frac(grid);
+    float4 a = lerp(CoarseCell(i), CoarseCell(i + int2(1, 0)), u.x);
+    float4 b = lerp(CoarseCell(i + int2(0, 1)), CoarseCell(i + int2(1, 1)), u.x);
+    return lerp(a, b, u.y);
+}
+
+uint HashUInt(uint v)
+{
+    v ^= v >> 16;
+    v *= 0x7feb352du;
+    v ^= v >> 15;
+    v *= 0x846ca68bu;
+    v ^= v >> 16;
+    return v;
+}
+
+float HashCell(int2 p, uint salt)
+{
+    uint n = asuint(p.x) * 0x9e3779b9u ^ asuint(p.y) * 0x85ebca6bu ^ salt;
+    return (HashUInt(n) & 0x00ffffffu) / 16777215.0;
+}
+
+float ValueNoise(float2 p, uint salt)
+{
+    int2 cell = int2(floor(p));
+    float2 uv = frac(p);
+    uv = uv * uv * (3.0 - 2.0 * uv);
+    float a = lerp(HashCell(cell, salt), HashCell(cell + int2(1, 0), salt), uv.x);
+    float b = lerp(HashCell(cell + int2(0, 1), salt),
+        HashCell(cell + int2(1, 1), salt), uv.x);
+    return lerp(a, b, uv.y);
+}
+
+float2 StableNoise(float2 world)
+{
+    float2 p = world * _NoiseFrequency;
+    uint seed = asuint(_NoiseSeed);
+    return float2(ValueNoise(p, seed ^ 0x12a09f31u),
+        ValueNoise(p, seed ^ 0x5fac9e7bu)) * 2.0 - 1.0;
+}
+
+float2 BaseVelocity(float2 world)
+{
+    float4 sample = InterpolateCoarse(world);
+    return sample.xy + StableNoise(world) * max(0.0, sample.w) * max(0.0, sample.z);
+}
+
+float4 BaseCellAt(int2 p)
+{
+    return _BaseFlowRead.Load(int3(clamp(p, int2(0, 0), _FieldResolution - 1), 0));
+}
+
+float FoamAt(int2 p)
+{
+    return _FoamRead.Load(int3(clamp(p, int2(0, 0), _FieldResolution - 1), 0)).r;
+}
+
+float SampleFoamBilinear(float2 world)
+{
+    float2 uv = (world - _FieldOrigin) / _FieldWorldSize;
+    float2 p = uv * float2(_FieldResolution) - 0.5;
+    int2 i = int2(floor(p));
+    float2 f = frac(p);
+    float x0 = lerp(FoamAt(i), FoamAt(i + int2(1, 0)), f.x);
+    float x1 = lerp(FoamAt(i + int2(0, 1)), FoamAt(i + int2(1, 1)), f.x);
+    return lerp(x0, x1, f.y);
+}
+
+[numthreads(8, 8, 1)]
+void BuildBaseFlow(uint3 id : SV_DispatchThreadID)
+{
+    int2 p = int2(id.xy);
+    if (!ValidPixel(p)) return;
+    float2 v = BaseVelocity(PixelWorld(p));
+    _BaseFlowWrite[p] = float4(v.x, v.y, length(v), 0.0);
+}
+
+[numthreads(8, 8, 1)]
+void ClearShipDelta(uint3 id : SV_DispatchThreadID)
+{
+    int2 p = int2(id.xy);
+    if (!ValidPixel(p)) return;
+    _ShipDeltaWrite[p] = 0.0;
+}
+
+[numthreads(8, 8, 1)]
+void EmitHullFlow(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= (uint)_ShipDispatchSize.x || id.y >= (uint)_ShipDispatchSize.y) return;
+    int2 p = int2(id.xy) + _ShipDispatchOffset;
+    if (!ValidPixel(p) || _HullVertexCount < 3) return;
+
+    float2 world = PixelWorld(p);
+    float smallestDistanceSq = 3.402823e+38;
+    float2 closest = 0.0;
+    float2 chosenEdge = float2(0.0, 1.0);
+    float signedAreaTwice = 0.0;
+    bool insideHull = false;
+
+    [loop]
+    for (int i = 0; i < _HullVertexCount; i++)
+    {
+        float2 a = _HullWorldVertices[i];
+        float2 b = _HullWorldVertices[(i + 1) % _HullVertexCount];
+        float2 e = b - a;
+        signedAreaTwice += a.x * b.y - a.y * b.x;
+        if ((a.y > world.y) != (b.y > world.y))
+        {
+            float intersectX = a.x + (world.y - a.y) * (b.x - a.x) / (b.y - a.y);
+            if (world.x < intersectX) insideHull = !insideHull;
+        }
+        float t = saturate(dot(world - a, e) / max(dot(e, e), 0.000001));
+        float2 edgePoint = a + t * e;
+        float distanceSq = dot(world - edgePoint, world - edgePoint);
+        if (distanceSq < smallestDistanceSq)
+        {
+            smallestDistanceSq = distanceSq;
+            closest = edgePoint;
+            chosenEdge = e;
+        }
+    }
+
+    float distanceToHull = sqrt(smallestDistanceSq);
+    if (insideHull || distanceToHull >= _ShipRadius) return;
+
+    float winding = signedAreaTwice >= 0.0 ? 1.0 : -1.0;
+    float2 tangent = normalize(chosenEdge);
+    float2 outward = float2(tangent.y, -tangent.x) * winding;
+    float2 sternDirection = -normalize(_ShipForward);
+    if (dot(tangent, sternDirection) < 0.0) tangent = -tangent;
+
+    float2 localOffset = closest - _ShipPosition;
+    float2 shipPointVelocity = _ShipVelocity +
+        _ShipAngularVelocity * float2(-localOffset.y, localOffset.x);
+    float2 relativeWaterVelocity = BaseCellAt(p).xy - shipPointVelocity;
+
+    float frontalImpact = max(0.0, -dot(relativeWaterVelocity, outward));
+    float forwardRelativeSpeed = max(0.0, dot(-relativeWaterVelocity, normalize(_ShipForward)));
+    float sideFactor = saturate(1.0 - abs(dot(outward, normalize(_ShipForward))));
+    float sideStream = forwardRelativeSpeed * sideFactor;
+    float influence = saturate(1.0 - distanceToHull / max(_ShipRadius, 0.001));
+    influence = influence * influence * (3.0 - 2.0 * influence);
+
+    float2 delta = influence * (outward * frontalImpact +
+        tangent * sideStream * _SideFlowGain);
+    float foamSource = influence * _ShipFoamEmission *
+        (frontalImpact + sideStream * 0.3);
+
+    float4 previous = _ShipDeltaWrite[p];
+    _ShipDeltaWrite[p] = float4(previous.xy + delta,
+        previous.z + foamSource, saturate(previous.w + influence));
+}
+
+[numthreads(8, 8, 1)]
+void ComposeFinalFlow(uint3 id : SV_DispatchThreadID)
+{
+    int2 p = int2(id.xy);
+    if (!ValidPixel(p)) return;
+    float4 baseValue = _BaseFlowRead.Load(int3(p, 0));
+    float4 deltaValue = _ShipDeltaRead.Load(int3(p, 0));
+    float2 result = baseValue.xy + deltaValue.xy;
+    _FinalFlowWrite[p] = float4(result, length(result), deltaValue.w);
+}
+
+[numthreads(8, 8, 1)]
+void AdvanceFoam(uint3 id : SV_DispatchThreadID)
+{
+    int2 p = int2(id.xy);
+    if (!ValidPixel(p)) return;
+    float2 world = PixelWorld(p);
+    float2 velocity = _FinalFlowRead.Load(int3(p, 0)).xy;
+    float source = _ShipDeltaRead.Load(int3(p, 0)).z;
+    float previous = SampleFoamBilinear(world - velocity * _DeltaTime);
+    float density = previous * exp(-_FoamDecay * _DeltaTime) + source * _DeltaTime;
+    _FoamWrite[p] = float4(saturate(density), 0.0, 0.0, 0.0);
+}
+
+[numthreads(8, 8, 1)]
+void ClearFoam(uint3 id : SV_DispatchThreadID)
+{
+    int2 p = int2(id.xy);
+    if (!ValidPixel(p)) return;
+    _FoamWrite[p] = 0.0;
+}
+
+Texture2D<float4> _WaveRead;
+SamplerState sampler_WaveRead;
+RWTexture2D<float4> _WaveWrite;
+float _WaveStep;
+int _WaveReset;
+
+[numthreads(8,8,1)]
+void ClearWave(uint3 id : SV_DispatchThreadID)
+{
+    if (ValidPixel(int2(id.xy))) _WaveWrite[id.xy]=0;
+}
+
+[numthreads(8,8,1)]
+void TransportWave(uint3 id : SV_DispatchThreadID)
+{
+    int2 p=int2(id.xy);
+    if (!ValidPixel(p)) return;
+    float2 v=_FinalFlowRead.Load(int3(p,0)).xy;
+    float2 travel=v*(.22*_WaveStep/max(1,length(v)/2));
+    float2 uv=(PixelWorld(p)-travel-_FieldOrigin)/_FieldWorldSize;
+    float4 offset=_WaveRead.SampleLevel(sampler_WaveRead,saturate(uv),0)-travel.xyxy;
+    if (_WaveReset==1) offset.xy=0;
+    if (_WaveReset==2) offset.zw=0;
+    _WaveWrite[p]=offset;
+}

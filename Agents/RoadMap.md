@@ -106,7 +106,7 @@
 | W0 | 이전 해상 표현 정리 및 항해 회귀 확인 |
 | W1 / Phase 0~1 | 좌표·시간 연결 및 GPU 6 kernel 검증. 셀 중심 보간·고정 Seed·월드 정렬 BaseFlow와 정지/복귀 확인 |
 | W2 / Phase 3 입력 준비 | 접수 Polygon의 위치·방향·범위·퇴화 형상 및 고정 갑판과 계산용 선박 분리 확인 |
-| W3 / Phase 2 | 기본 파도 방향·진행·위상 연속성. 방향장 변화에 따른 압축·재배열 검증 |
+| W3 / Phase 2 | **Complete.** 기본 파도 방향·진행·위상 연속성과 방향장 변화 검증. 수면 시각 수용, GPU 정합성, 성능 비교 및 Ocean 회귀 결과는 CurrentState.md 참조. |
 | W4 / Phase 3 | 완성된 Base를 읽는 선수 분기·선측 흐름. 정지/직진/선회/역진/측류 및 Base 불변 검증 |
 | W5 / Phase 4 | Final 합성과 FoamHistory 생성·이동·감쇠·선박 제거 후 잔류·다중 선박 누적 |
 | W6 / Phase 5 | WaveContribution을 통한 절차적 항적·사선 마루·국소 파형 및 원천 수명 |

@@ -1,0 +1,160 @@
+Shader "GreatVoyage/StylizedOcean"
+{
+    Properties
+    {
+        _DeepColor ("Water shadow", Color) = (0.012,0.16,0.25,1)
+        _MidWaterColor ("Water body", Color) = (0.025,0.43,0.50,1)
+        _CrestColor ("Surface reflection", Color) = (0.42,0.82,0.84,1)
+        _FoamColor ("Foam", Color) = (0.83,0.97,0.95,1)
+        _WaveFrequency ("Pattern scale", Range(0.05,1)) = 0.3
+        _WaveSpeed ("Motion speed", Range(0,3)) = 0.5
+        _NormalStrength ("Surface relief", Range(0,3)) = 0.8
+        _CellHighlights ("Connected light patterns", Range(0,1)) = 0.7
+        _DebugMode ("Field debug", Range(0,4)) = 0
+        [HideInInspector] _OceanTime ("Time", Float) = 0
+        [HideInInspector] _FieldOrigin ("Field origin", Vector) = (0,0,0,0)
+        [HideInInspector] _FieldWorldSize ("Field size", Vector) = (64,36,0,0)
+        _OceanBaseFlowMap ("Base flow", 2D) = "black" {}
+        _OceanShipDeltaMap ("Ship delta", 2D) = "black" {}
+        _OceanFinalFlowMap ("Final flow", 2D) = "black" {}
+        _OceanFoamMap ("Foam history", 2D) = "black" {}
+        _OceanWaveContributionMap ("Wave contribution", 2D) = "black" {}
+    }
+    SubShader
+    {
+        Tags { "RenderPipeline"="UniversalPipeline" "Queue"="Transparent" }
+        Pass
+        {
+            Tags { "LightMode"="SRPDefaultUnlit" }
+            Cull Off ZWrite Off
+            HLSLPROGRAM
+            #pragma target 3.5
+            #pragma vertex Vertex
+            #pragma fragment Fragment
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            TEXTURE2D(_OceanBaseFlowMap); SAMPLER(sampler_OceanBaseFlowMap);
+            TEXTURE2D(_OceanShipDeltaMap); SAMPLER(sampler_OceanShipDeltaMap);
+            TEXTURE2D(_OceanFinalFlowMap); SAMPLER(sampler_OceanFinalFlowMap);
+            TEXTURE2D(_OceanFoamMap); SAMPLER(sampler_OceanFoamMap);
+            TEXTURE2D(_OceanWaveContributionMap); SAMPLER(sampler_OceanWaveContributionMap);
+            CBUFFER_START(UnityPerMaterial)
+            float4 _DeepColor, _MidWaterColor, _CrestColor, _FoamColor;
+            float4 _FieldOrigin, _FieldWorldSize;
+            float4x4 _OceanWorldToField;
+            float _WaveFrequency, _WaveSpeed, _NormalStrength, _CellHighlights;
+            float _OceanTime, _DebugMode;
+            CBUFFER_END
+            struct Attributes { float4 positionOS : POSITION; };
+            struct Varyings { float4 positionCS : SV_POSITION; float2 ocean : TEXCOORD0; };
+            Varyings Vertex(Attributes input)
+            {
+                Varyings output;
+                float3 world = TransformObjectToWorld(input.positionOS.xyz);
+                output.positionCS = TransformWorldToHClip(world);
+                output.ocean = mul(_OceanWorldToField,float4(world,1)).xy;
+                return output;
+            }
+            float2 Hash(float2 p)
+            {
+                p = frac(p * float2(0.1031,0.11369));
+                p += dot(p,p.yx + 19.19);
+                return frac(float2(p.x*p.y,(p.x+p.y)*p.x));
+            }
+            float Noise(float2 p)
+            {
+                float2 cell=floor(p), f=frac(p);
+                f=f*f*f*(f*(f*6-15)+10);
+                return lerp(lerp(Hash(cell).x,Hash(cell+float2(1,0)).x,f.x),
+                    lerp(Hash(cell+float2(0,1)).x,Hash(cell+1).x,f.x),f.y);
+            }
+            float2 Warp(float2 p,float t)
+            {
+                return p + float2(Noise(p*.8+float2(t*.13,0)),
+                    Noise(p*.8+float2(7,-t*.11)))*1.1;
+            }
+            float Height(float2 p,float t)
+            {
+                p=Warp(p,t);
+                return Noise(p+float2(t*.18,-t*.09))*.58
+                    + Noise(p*2.13+float2(-t*.14,4))*.27
+                    + Noise(p*4.37+float2(2,t*.17))*.15;
+            }
+            float CellEdges(float2 p,float t)
+            {
+                p=Warp(p,t);
+                float2 cell=floor(p), f=frac(p);
+                float first=8, second=8;
+                [unroll] for(int y=-1;y<=1;y++)
+                [unroll] for(int x=-1;x<=1;x++)
+                {
+                    float2 offset=float2(x,y);
+                    float2 seed=Hash(cell+offset);
+                    float2 site=.5+.32*sin(seed*6.283+t*.19);
+                    float d=length(offset+site-f);
+                    second=min(second,max(first,d));
+                    first=min(first,d);
+                }
+                float edge=second-first;
+                float width=lerp(.018,.085,Noise(p*2.7));
+                return 1-smoothstep(width,width+max(fwidth(edge)*1.5,.03),edge);
+            }
+            float2 Flow(float2 p)
+            {
+                float2 uv=(p-_FieldOrigin.xy)/max(_FieldWorldSize.xy,.001);
+                return SAMPLE_TEXTURE2D(_OceanFinalFlowMap,sampler_OceanFinalFlowMap,saturate(uv)).xy;
+            }
+            // Each local patch has a stable orientation. Four overlapping patches hide boundaries.
+            float3 Patch(float2 p,float2 center,float t)
+            {
+                float2 velocity=Flow(center/_WaveFrequency);
+                float speed=length(velocity);
+                float2 direction=normalize(velocity+float2(0,.001));
+                float2 relative=p-center;
+                float2 q=float2(dot(relative,float2(direction.y,-direction.x)),dot(relative,direction));
+                q+=Hash(center)*31;
+                q.y-=t*min(speed,2)*.22;
+                float height=Height(q,t);
+                const float e=.04;
+                float2 slope=float2(Height(q+float2(e,0),t)-Height(q-float2(e,0),t),
+                    Height(q+float2(0,e),t)-Height(q-float2(0,e),t))/(2*e);
+                float2 worldSlope=float2(direction.y,-direction.x)*slope.x+direction*slope.y;
+                return float3(worldSlope,height);
+            }
+            half4 Fragment(Varyings input) : SV_Target
+            {
+                float2 uv=saturate((input.ocean-_FieldOrigin.xy)/max(_FieldWorldSize.xy,.001));
+                float2 flow=Flow(input.ocean);
+                float density=SAMPLE_TEXTURE2D(_OceanFoamMap,sampler_OceanFoamMap,uv).r;
+                if(_DebugMode>.5)
+                {
+                    if(_DebugMode>=3.5) return half4(density.xxx,1);
+                    float2 v=flow;
+                    if(_DebugMode<1.5) v=SAMPLE_TEXTURE2D(_OceanBaseFlowMap,sampler_OceanBaseFlowMap,uv).xy;
+                    else if(_DebugMode<2.5) v=SAMPLE_TEXTURE2D(_OceanShipDeltaMap,sampler_OceanShipDeltaMap,uv).xy;
+                    return half4(saturate(float3(v*.2+.5,length(v)*.2)),1);
+                }
+                float t=_OceanTime*_WaveSpeed;
+                float2 p=input.ocean*_WaveFrequency;
+                float2 grid=floor(p/4), f=frac(p/4);
+                f=f*f*f*(f*(f*6-15)+10);
+                float3 surface=lerp(lerp(Patch(p,grid*4,t),Patch(p,(grid+float2(1,0))*4,t),f.x),
+                    lerp(Patch(p,(grid+float2(0,1))*4,t),Patch(p,(grid+1)*4,t),f.x),f.y);
+                float3 normal=normalize(float3(-surface.xy*_NormalStrength,1));
+                float light=saturate(dot(normal,normalize(float3(-.4,.5,1))));
+                float reflection=smoothstep(.87,.99,light);
+                float glint=pow(light,64);
+                float depthTone=saturate(surface.z*.6+Noise(p*.3)*.4);
+                float3 color=lerp(_DeepColor.rgb,_MidWaterColor.rgb,depthTone);
+                color=lerp(color,_CrestColor.rgb,reflection*.5);
+                float connected=CellEdges(p*.8,t);
+                color=lerp(color,_CrestColor.rgb,connected*_CellHighlights);
+                color+=glint*.12;
+                float wave=SAMPLE_TEXTURE2D(_OceanWaveContributionMap,sampler_OceanWaveContributionMap,uv).r;
+                color=lerp(color,_CrestColor.rgb,saturate(wave));
+                float foam=smoothstep(.12,.8,density)*smoothstep(.2,.65,Noise(Warp(p*3,t)));
+                return half4(lerp(color,_FoamColor.rgb,foam),1);
+            }
+            ENDHLSL
+        }
+    }
+}
