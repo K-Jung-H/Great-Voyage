@@ -8,6 +8,101 @@ namespace GreatVoyage.Tests
     public sealed class OceanBaseFlowGpuTests
     {
         [Test]
+        public void HullFlowFollowsRelativeMotionAndLeavesBaseUnchanged()
+        {
+            if (!SystemInfo.supportsComputeShaders || !SystemInfo.supportsAsyncGPUReadback ||
+                !SystemInfo.SupportsRandomWriteOnRenderTextureFormat(RenderTextureFormat.ARGBHalf))
+                Assert.Ignore("The Editor graphics device lacks the required compute format.");
+
+            var compute = AssetDatabase.LoadAssetAtPath<ComputeShader>("Assets/Game/Content/Art/Ocean/OceanFlow.compute");
+            int clear = compute.FindKernel("ClearShipDelta");
+            int emit = compute.FindKernel("EmitHullFlow");
+            var baseFlow = new Texture2D(16, 16, TextureFormat.RGBAHalf, false, true);
+            var delta = new RenderTexture(16, 16, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear)
+                { enableRandomWrite = true };
+            using var hull = new ComputeBuffer(4, sizeof(float) * 2);
+            try
+            {
+                hull.SetData(new[] { new Vector2(-1,-2), new Vector2(1,-2),
+                    new Vector2(1,2), new Vector2(-1,2) });
+                Assert.That(delta.Create(), Is.True);
+                compute.SetInts("_FieldResolution", 16, 16);
+                compute.SetVector("_FieldOrigin", new Vector4(-8,-8,0,0));
+                compute.SetVector("_FieldWorldSize", new Vector4(16,16,0,0));
+                compute.SetInts("_ShipDispatchOffset", 0, 0);
+                compute.SetInts("_ShipDispatchSize", 16, 16);
+                compute.SetInt("_HullVertexCount", 4);
+                compute.SetVector("_ShipPosition", Vector4.zero);
+                compute.SetFloat("_ShipRadius", 3);
+                compute.SetFloat("_SideFlowGain", .65f);
+                compute.SetFloat("_ShipFoamEmission", .6f);
+                compute.SetBuffer(emit, "_HullWorldVertices", hull);
+                compute.SetTexture(emit, "_BaseFlowRead", baseFlow);
+                compute.SetTexture(emit, "_ShipDeltaWrite", delta);
+                compute.SetTexture(clear, "_ShipDeltaWrite", delta);
+
+                var calm = Run(Vector2.zero, Vector2.zero, 0);
+                Assert.That(At(calm, 9, 10).r, Is.Zero);
+                Assert.That(At(calm, 9, 10).g, Is.Zero);
+
+                var ahead = Run(Vector2.zero, Vector2.up, 0);
+                Assert.That(At(ahead, 9, 10).r, Is.GreaterThan(.05f));
+                Assert.That(At(ahead, 6, 10).r, Is.LessThan(-.05f));
+                Assert.That(At(ahead, 9, 8).g, Is.LessThan(-.1f));
+                Assert.That(At(ahead, 15, 15), Is.EqualTo(Color.clear));
+                Assert.That(At(ahead, 8, 8), Is.EqualTo(Color.clear));
+
+                var disabled = Run(Vector2.zero, Vector2.up, 0, 0);
+                var boosted = Run(Vector2.zero, Vector2.up, 0, 4);
+                Assert.That(At(disabled, 9, 10).r, Is.Zero);
+                Assert.That(At(boosted, 9, 10).r, Is.EqualTo(4 * At(ahead, 9, 10).r).Within(.002f));
+
+                var astern = Run(Vector2.zero, Vector2.down, 0);
+                Assert.That(At(astern, 9, 5).r, Is.GreaterThan(.05f));
+                Assert.That(At(astern, 6, 5).r, Is.LessThan(-.05f));
+                Assert.That(At(astern, 9, 8).g, Is.GreaterThan(.1f));
+
+                var turning = Run(Vector2.zero, Vector2.zero, 1);
+                Assert.That(At(turning, 9, 8).g, Is.LessThan(-.1f));
+                Assert.That(At(turning, 6, 8).g, Is.GreaterThan(.1f));
+
+                var cross = Run(Vector2.right, Vector2.zero, 0);
+                Assert.That(At(cross, 6, 8).r, Is.LessThan(-.1f));
+                Assert.That(At(cross, 9, 8).r, Is.Zero);
+            }
+            finally
+            {
+                delta.Release();
+                Object.DestroyImmediate(delta);
+                Object.DestroyImmediate(baseFlow);
+            }
+
+            Color At(Color[] field, int x, int y) => field[y * 16 + x];
+
+            Color[] Run(Vector2 water, Vector2 velocity, float angularVelocity, float strength = 1)
+            {
+                var input = new Color[256];
+                System.Array.Fill(input, new Color(water.x, water.y, water.magnitude, 0));
+                baseFlow.SetPixels(input);
+                baseFlow.Apply();
+                compute.SetVector("_ShipVelocity", new Vector4(velocity.x, velocity.y, 0, 0));
+                compute.SetFloat("_ShipAngularVelocity", angularVelocity);
+                compute.SetFloat("_ShipFlowStrength", strength);
+                compute.Dispatch(clear, 2, 2, 1);
+                compute.Dispatch(emit, 2, 2, 1);
+                CollectionAssert.AreEqual(input, Read(baseFlow));
+                return Read(delta);
+            }
+
+            Color[] Read(Texture field)
+            {
+                var request = AsyncGPUReadback.Request(field, 0, TextureFormat.RGBAFloat);
+                request.WaitForCompletion();
+                Assert.That(request.hasError, Is.False);
+                return request.GetData<Color>().ToArray();
+            }
+        }
+        [Test]
         public void WaveTransportAccumulatesLocalFlowAndResetsOnlyTheHiddenChannel()
         {
             if (!SystemInfo.supportsComputeShaders || !SystemInfo.supportsAsyncGPUReadback ||
@@ -88,6 +183,7 @@ namespace GreatVoyage.Tests
                 compute.SetTexture(transport, "_WaveRead", a);
                 compute.SetTexture(transport, "_WaveWrite", b);
                 compute.SetFloat("_WaveStep", dt);
+                compute.SetFloat("_WaveFlowResponse", .22f);
                 compute.SetInt("_WaveReset", reset);
                 compute.Dispatch(transport, 1, 1, 1);
                 (a, b) = (b, a);

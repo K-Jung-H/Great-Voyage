@@ -39,6 +39,12 @@ namespace GreatVoyage.Ocean
         private RenderTexture waveRead;
         private RenderTexture waveWrite;
         private int waveKernel;
+        [SerializeField, Min(0f)] private float waveFlowResponse = 0.22f;
+        internal float WaveFlowResponse
+        {
+            get => waveFlowResponse;
+            set => waveFlowResponse = Mathf.Max(0, value);
+        }
         private double waveCycle;
         private RenderTexture foamA;
         private RenderTexture foamB;
@@ -139,11 +145,12 @@ namespace GreatVoyage.Ocean
 
         private void TransportWave(double remaining)
         {
+            flowCompute.SetFloat("_WaveFlowResponse", waveFlowResponse);
             while (remaining > 0)
             {
                 double boundary = waveCycle < 4 ? 4 : 8;
                 double distance = boundary - waveCycle;
-                double step = Math.Min(remaining, distance);
+                double step = Math.Min(Math.Min(remaining, distance), 1.0 / 60.0);
                 bool reset = step == distance;
                 flowCompute.SetTexture(waveKernel, "_FinalFlowRead", finalFlow);
                 flowCompute.SetTexture(waveKernel, "_WaveRead", waveRead);
@@ -188,6 +195,12 @@ namespace GreatVoyage.Ocean
         public void UnregisterShip(OceanShip ship)
         {
             ships.Remove(ship);
+        }
+
+        internal void SetReviewData(OceanDataMap value)
+        {
+            dataMap = value;
+            MarkOceanDataDirty();
         }
 
         public void MarkOceanDataDirty()
@@ -322,10 +335,10 @@ namespace GreatVoyage.Ocean
             flowCompute.SetInt("_HullVertexCount", ship.VertexCount);
             flowCompute.SetVector("_ShipPosition", ship.WorldPosition);
             flowCompute.SetVector("_ShipVelocity", ship.Velocity);
-            flowCompute.SetVector("_ShipForward", ship.Forward);
             flowCompute.SetFloat("_ShipAngularVelocity", ship.AngularVelocity);
             flowCompute.SetFloat("_ShipRadius", ship.InteractionRadius);
             flowCompute.SetFloat("_SideFlowGain", ship.SideFlowGain);
+            flowCompute.SetFloat("_ShipFlowStrength", ship.FlowStrength);
             flowCompute.SetFloat("_ShipFoamEmission", ship.FoamEmission);
             flowCompute.SetBuffer(emitShipKernel, "_HullWorldVertices", ship.VertexBuffer);
             flowCompute.SetTexture(emitShipKernel, "_BaseFlowRead", baseFlow);

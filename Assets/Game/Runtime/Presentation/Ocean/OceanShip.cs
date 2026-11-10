@@ -18,6 +18,7 @@ namespace GreatVoyage.Ocean
         private bool motionInitialized;
 
         public float InteractionRadius => interactionRadius;
+        internal float FlowStrength { get; set; } = 1f;
         public float SideFlowGain => sideFlowGain;
         public float FoamEmission => foamEmission;
         public Vector2 Velocity { get; private set; }

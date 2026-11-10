@@ -35,10 +35,10 @@ int2 _ShipDispatchSize;
 int _HullVertexCount;
 float2 _ShipPosition;
 float2 _ShipVelocity;
-float2 _ShipForward;
 float _ShipAngularVelocity;
 float _ShipRadius;
 float _SideFlowGain;
+float _ShipFlowStrength;
 float _ShipFoamEmission;
 
 bool ValidPixel(int2 p)
@@ -191,8 +191,9 @@ void EmitHullFlow(uint3 id : SV_DispatchThreadID)
     float winding = signedAreaTwice >= 0.0 ? 1.0 : -1.0;
     float2 tangent = normalize(chosenEdge);
     float2 outward = float2(tangent.y, -tangent.x) * winding;
-    float2 sternDirection = -normalize(_ShipForward);
-    if (dot(tangent, sternDirection) < 0.0) tangent = -tangent;
+    // Outside a vertex, use the direction of the nearest point instead of an arbitrary edge.
+    if (distanceToHull > 0.00001)
+        outward = (world - closest) / distanceToHull;
 
     float2 localOffset = closest - _ShipPosition;
     float2 shipPointVelocity = _ShipVelocity +
@@ -200,16 +201,15 @@ void EmitHullFlow(uint3 id : SV_DispatchThreadID)
     float2 relativeWaterVelocity = BaseCellAt(p).xy - shipPointVelocity;
 
     float frontalImpact = max(0.0, -dot(relativeWaterVelocity, outward));
-    float forwardRelativeSpeed = max(0.0, dot(-relativeWaterVelocity, normalize(_ShipForward)));
-    float sideFactor = saturate(1.0 - abs(dot(outward, normalize(_ShipForward))));
-    float sideStream = forwardRelativeSpeed * sideFactor;
+    float2 alongHull = relativeWaterVelocity - outward * dot(relativeWaterVelocity, outward);
+    // The tangential component follows the relative water motion in either direction.
     float influence = saturate(1.0 - distanceToHull / max(_ShipRadius, 0.001));
     influence = influence * influence * (3.0 - 2.0 * influence);
 
-    float2 delta = influence * (outward * frontalImpact +
-        tangent * sideStream * _SideFlowGain);
+    float2 delta = _ShipFlowStrength * influence * (outward * frontalImpact +
+        alongHull * _SideFlowGain);
     float foamSource = influence * _ShipFoamEmission *
-        (frontalImpact + sideStream * 0.3);
+        (frontalImpact + length(alongHull) * 0.3);
 
     float4 previous = _ShipDeltaWrite[p];
     _ShipDeltaWrite[p] = float4(previous.xy + delta,
@@ -252,6 +252,7 @@ Texture2D<float4> _WaveRead;
 SamplerState sampler_WaveRead;
 RWTexture2D<float4> _WaveWrite;
 float _WaveStep;
+float _WaveFlowResponse;
 int _WaveReset;
 
 [numthreads(8,8,1)]
@@ -266,7 +267,7 @@ void TransportWave(uint3 id : SV_DispatchThreadID)
     int2 p=int2(id.xy);
     if (!ValidPixel(p)) return;
     float2 v=_FinalFlowRead.Load(int3(p,0)).xy;
-    float2 travel=v*(.22*_WaveStep/max(1,length(v)/2));
+    float2 travel=v*(_WaveFlowResponse*_WaveStep);
     float2 uv=(PixelWorld(p)-travel-_FieldOrigin)/_FieldWorldSize;
     float4 offset=_WaveRead.SampleLevel(sampler_WaveRead,saturate(uv),0)-travel.xyxy;
     if (_WaveReset==1) offset.xy=0;
