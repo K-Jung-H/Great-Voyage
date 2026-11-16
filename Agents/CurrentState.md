@@ -1,6 +1,6 @@
 # Current State — 현재 개발 상태 / 에이전트 인수인계
 
-> 갱신: 2026-11-09. 현재 사실·승인·검증·미결정만 유지한다. 기술 경로는 ProjectStructure.md, 단계 범위는 RoadMap.md를 따른다.
+> 갱신: 2026-11-11. 현재 사실·승인·검증·미결정만 유지한다. 기술 경로는 ProjectStructure.md, 단계 범위는 RoadMap.md를 따른다.
 
 ## 1. 단계·Git·환경
 
@@ -48,7 +48,7 @@
 
 ## 5. 미구현·다음 작업
 
-- 다음 작업: W4 선수 분기·선측 흐름 및 BaseFlow 불변 검증. 제품 시각 수용은 별도 기록한다. W0은 사용자 통과 확인을 반영했으며 재실행하지 않았다.
+- 다음 작업: 2026-11-11 BoatFlowMap 설계에 따른 개정 W4 구현. 기본 수면은 BaseFlow, 선박은 Height Delta·FoamSource·포말 이동 보정으로 분리한다. 런타임 채널·수송 전환을 구현했으며 새 파형의 시각 수용은 대기 중이다.
 - 구현 전 구체화: 해리/계산 공간 축척과 시간 단위, 창 밖 이력의 수명·여유 영역/청크 보존 범위 및 새 노출 영역 초기화/복원, 로드 시 시각 이력 정책. 구체 수치·운영 선택은 미정이며 창 밖 이력 복원이나 영구 보존을 구현했다고 간주하지 않는다.
 
 - 2단계: 논리 항구 영역·이탈 후 재입항 재활성화·자동 입항·항해1회 확정/중복 방지·출입항 저장/항구 공간 연결/시작 항구 통합. 아직 구현하지 않았다.
@@ -75,3 +75,25 @@
 - W4 수면 반응 식별 개선: 좌표 수송의 속도 2 상한을 제거하고 WaveFlowResponse 배율을 명시했다. 일반 기본값은 0.22이며 W4 검토 시작 시 1.0으로 설정한다. UI에서 Surface flow 0~2를 조절할 수 있다. 낮은 프레임률에서 한 번의 이동 폭을 줄이도록 수송을 최대 1/60초 구간으로 나눈다. Ocean EditMode 6/6, PlayMode 2/2 통과. 사용자가 새 설정의 시각 검토 통과를 확인했다. 추가 dispatch 비용은 미측정이다.
 
 - W4 시각 피드백 결과를 사용자 요청으로 main에 W4 - Feedback Result 제목으로 공유한다. 개선 사항은 사용자가 정리해 요청한 뒤 적용 가능 여부를 검토한다. W4 전체 완료 판정은 보류하며 현재 시각 수용과 Ocean 회귀 8/8을 기록한다.
+
+- 2026-11-11 사용자 채택: BoatFlowMap = Height Delta + 국소 Foam 이동 보정. RGBA 논리 계약은 Height Delta / FoamSource / FoamVelocityDelta X/Y다. W3 Complete는 유지하고 기존 W4 피드백 구현 3f839b3은 비교 기준선으로 보존한다. 기존 WaveContribution의 R/G를 새 채널로 직접 재사용하지 않으며, 높이 생산은 BoatFlow로 통합한다.
+- Architecture, RoadMap, VisualStandards에 설계 변경을 반영했다. 현재 main 코드의 FinalFlow 기반 수면 수송과 ShipDelta/WaveContribution 연결은 전환 대상이다. 개정 W4 구현·수치·시각·성능 검증은 미실행이다.
+- BoatFlow 계약 전환 구현: R signed Height Delta, G FoamSource, BA 포말 속도 보정. 기본 파형/Connected Light 수송은 BaseFlow만 소비한다. FinalFlow는 포말 수송에 사용한다. 기존 WaveContribution 입력을 BoatFlow로 교체했고 G를 Crest로 해석하지 않는다.
+- 국소 Height 생산은 최근접 접수 경계 거리의 절차적 파형과 상대운동 세기·거리 감쇠로 구현한 초기안이다. HeightAmplitude와 Wavelength로 조절하며 최종 높이 미분에 반영된다. 이는 선수·선측 최종 화풍 승인 전의 생산 경로이며 Trail Wake는 W6 범위로 남는다.
+- W4 검토 씬에 Height delta/Foam source/Foam 표시와 Boat height 조절을 추가했다. 기존 강도는 Foam drift, 기본 수면 이동 배율은 Base motion으로 명시했다.
+- 2026-11-11 Foam 최소 실험: 넓은 거리 기반 발생을 2 world-unit 이내 띠와 월드 고정 ValueNoise 군집·연속 시간 packet으로 제한했다. 기존 History 수송/감쇠는 유지하고 최종 표현을 density 0.22 경계와 fwidth AA 기반 면적으로 변경했다. Review에 Emission On 토글, Hold ship, Clear History를 추가했다. W3/Boat R·BA 계약과 필드 해상도는 유지한다.
+- Unity W4 Review 128×72, 정지 선박/측류에서 실제 커널을 1/30초씩 60초 평가: 10/30/60초 표시 기준 초과 texel 84/88/89, 포화 texel 0. 발생 중단 후 1/60초 수송에서는 표시 texel 84→8→0(0/1/3초), 밀도 중심 X 65.25→67.06→70.92로 이동했다. Clear History 전체 0 확인. 이는 제한된 단일 선박 조건이며 다중 선박/모든 속도에서 포화 방지를 보장하지 않는다.
+- Ocean EditMode 6/6, PlayMode 2/2 통과. GPU 테스트에 패턴 재현성·빈 공간·Emission Off 시 G=0 및 R/BA 보존 검증을 추가했다. Unity Source/History/Water 화면에서 분리된 조각과 축소를 확인했으나 일부 조각이 매끈한 긴 띠로 남는다. 프레임 연속 영상의 작은 조각 소멸/깜박임 품질과 GPU 시간은 미검증. 최종 Foam 시각 합격 및 W4 완료로 판정하지 않는다. 새 RT/상시 GPU 패스는 추가하지 않았고 커밋·푸시하지 않았다.
+`n- 2026-11-15 W4 방향/감쇠 실험 적용: Height 위상 좌표에 상대 흐름 접선 방향 투영을 추가했다. 선체 거리 가중치는 inner/outer 반경 기반 코사인으로 변경했으며 Review는 2/8 world units로 설정한다. EditMode 6/6 및 PlayMode 2/2 통과. 방향 전환 시 위상 연속성과 움직임의 시각 수용은 미검증. Foam 완료 판정 보류, 월드 Trail Wake는 W6 미구현 상태다.
+
+- 2026-11-15 Wake 초기 구조: OceanFlowSystem이 월드 이동 구간과 생성 시각을 보존하고 EmitWake가 나이 기반 확장/감쇠 높이를 BoatFlow.R에 합산한다. 전체 256구간/8초 상한. 선박 비활성 후 높이 최대 0.3342 잔류, 만료 후 0 GPU 확인. Ocean 회귀 Edit 6/6 Play 2/2 통과. Review 이동 끝 자동 초기화 대신 정지. BaseFlow에 따른 Wake 중심 이동, 구간 연결 시각 품질, 다중 선박 비용은 미검증/후속 보완이며 W6 완료 아님.
+
+- 2026-11-16 LightArea 구조 변경: 사용자가 Wake 내부 배제/끝 없는 재연결 조건을 철회했다. 기존 그래프와 후속 변형 격자/오버레이 메시, 국소 이동 상태, 링 탐색, coverage=0 차단 경로를 제거했다. 기본 수면 단일 패스에서 고정 LightArea 텍스처에 작은 일렁임과 BoatFlow.R 높이·기울기 기반 제한된 왜곡/강도 변화를 합성한다. W3 기본 파형과 Wake/Foam 생산은 유지한다.
+- 고정 패턴은 512×512 ARGBHalf mipmap 캐시다. Voronoi 경계까지의 거리 R, 제한된 접합부 확장 G, 폭 변화 B를 최초 한 번 생성하고 검토 루프에서도 재사용한다. LightWidth로 폭, LightSway로 Base 일렁임, LightWakeDistortion으로 Wake 왜곡, WakeLightIntensity로 Wake 강도를 조절한다. 추가 LightArea draw/변형 Compute/이력 텍스처는 없다. 기본 패턴 캐시 약 2.67MiB는 유지한다.
+- 현 변경 Shader 임포트 메시지 0. 신규 GPU 테스트는 고정 패턴 폭/접합부와 양·음 Wake 내부 패턴 유지로 변경했고, PlayMode 검증은 동일 캐시 재사용/추가 Renderer 없음으로 변경했다. 현재 구현으로 EditMode 9/9, PlayMode 2/2 통과했다. 양/음 Wake 내부 LightArea 유지, 패턴 시간 불변/폭 범위, 캐시 재사용과 추가 Renderer 부재를 확인했다. 960×540 동기 ReadPixels 포함 렌더 측정은 Off 중앙값 3.67/4.15ms, On 3.78/4.12ms였다. 변동 범위가 차이보다 커 추가 비용의 정확한 ms 또는 순수 GPU 시간으로 해석하지 않는다. Shader 오류 0 및 패턴 바인딩을 확인했다. 최종 시각 판단은 사용자가 수행한다. 커밋/푸시 없음.
+
+- Ocean 좌표 모드: World (Dynamic)은 씬 좌표를 해양 좌표로 사용한다. Local (Fixed)은 고정 Stage에서 NavigationState 기반 해양 좌표로 수면과 등록된 플레이어 선체·Emitter 형상을 투영한다. Wake 이력은 해양 좌표에 기록한다. Ocean Visuals의 Ocean Pose와 Visual을 분리하면 표시 Transform만 역투영할 수 있다. W4 검토 GUI에서 두 모드를 선택한다. 기존 FlowMap 창 범위는 유지한다.
+
+- OceanShip의 수면 Hull 버퍼 및 Hull Wake 대체 경로를 제거했다. OceanSurfaceInteractor가 접촉 띠, Wake, FoamSource, 국소 포말 이동 보정의 형상을 공급한다. Flow Strength와 Foam Strength를 Interactor별로 조절하며, 기존 FoamHistory는 BoatFlowMap.G/BA를 계속 소비한다. Interactor가 없는 선박은 수면 효과의 발생원이 되지 않는다. W5 포말 및 W6 Kelvin Wake 완료 판정은 보류.
+
+- 2026-11-17 W4 Complete. 사용자 테스트 통과 및 완료 승인. 현재 W4 Review Scene을 검토 기준으로 반영한다. W5 포말과 W6 Kelvin Wake는 최종 완료 판정 보류.

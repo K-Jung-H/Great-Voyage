@@ -41,7 +41,8 @@ namespace GreatVoyage.Tests
             var hull = shipObject.AddComponent<PolygonCollider2D>();
             hull.SetPath(0, new[] { new Vector2(-1, -1), new Vector2(1, -1), new Vector2(0, 1) });
             var ship = shipObject.AddComponent<OceanShip>();
-            Set(ship, "hull", hull);
+            var interactor = shipObject.AddComponent<OceanSurfaceInteractor>();
+            Set(interactor, "sourceCollider", hull);
             var data = ScriptableObject.CreateInstance<OceanDataMap>();
             var shader = AssetDatabase.LoadAssetAtPath<Shader>("Assets/Game/Content/Art/Ocean/StylizedOcean.shader");
             var material = new Material(shader);
@@ -100,7 +101,15 @@ namespace GreatVoyage.Tests
                 Assert.That(block.GetMatrix("_OceanWorldToField").MultiplyVector(Vector3.left).x,
                     Is.EqualTo(-1).Within(.001));
                 Assert.That(root.transform.position, Is.EqualTo(Vector3.zero));
+                Assert.That(ship.transform.position, Is.EqualTo(Vector3.zero));
+                Vector3 stationaryOceanObject = new Vector3(3f, 2f, 0f);
+                Vector3 displayed = flow.OceanToScene.MultiplyPoint3x4(stationaryOceanObject);
+                Assert.That(Vector3.Distance(displayed, stationaryOceanObject), Is.GreaterThan(.001f));
+                Assert.That(Vector3.Distance(flow.SceneToOcean.MultiplyPoint3x4(displayed),
+                    stationaryOceanObject), Is.LessThan(.001f));
                 Assert.That(ship.WorldPosition.x, Is.EqualTo(state.Navigation.X * 10).Within(.001));
+                var lightPattern = block.GetTexture("_OceanLightPattern");
+                Assert.That(lightPattern, Is.Not.Null);
                 var basePixels = Read(flow.BaseFlowMap);
                 var finalPixels = Read(flow.FinalFlowMap);
                 Assert.That(basePixels[0].r, Is.EqualTo(2).Within(.002));
@@ -164,6 +173,12 @@ namespace GreatVoyage.Tests
                 yield return null;
                 yield return null;
                 Assert.That(MaxGreenDifference(afterWrap, Read(cameraOutput)), Is.GreaterThan(.02f));
+                flow.enabled = true;
+                yield return null;
+                renderer.GetPropertyBlock(block);
+                Assert.That(block.GetTexture("_OceanLightPattern"), Is.SameAs(lightPattern));
+                Assert.That(surface.GetComponentsInChildren<Renderer>().Length, Is.EqualTo(1),
+                    "Light areas must use the existing water draw, without an overlay mesh.");
             }
             finally
             {
@@ -178,7 +193,7 @@ namespace GreatVoyage.Tests
         }
 
         [UnityTest]
-        public IEnumerator StartingHullProjectsItsBowWithoutPhysicsContacts()
+        public IEnumerator StartingShipProjectsNavigationWithoutPhysicsContacts()
         {
             if (!SystemInfo.supportsComputeShaders)
                 Assert.Ignore("Required GPU features are unavailable.");
@@ -194,23 +209,11 @@ namespace GreatVoyage.Tests
                 Assert.That(collider.enabled, Is.False);
                 Assert.That(collider.pathCount, Is.EqualTo(1));
                 Assert.That(collider.OverlapPoint(Vector2.zero), Is.False);
-                Assert.That(ship.PrepareHull(), Is.True);
-                Assert.That(ship.VertexCount, Is.EqualTo(10));
-                Assert.That(ship.WorldBounds.width, Is.InRange(4.2f, 4.4f));
-                Assert.That(ship.WorldBounds.height, Is.InRange(13.4f, 13.7f));
-                var vertices = new Vector2[ship.VertexCount];
-                ship.VertexBuffer.GetData(vertices);
-                Assert.That(vertices[0].y, Is.EqualTo(ship.WorldBounds.yMax).Within(.001f));
-
                 var navigation = new NavigationState("starting-ship", "starting-port", "", 0,
                     2, 3, 0, 0, 0);
                 ship.ProjectNavigation(navigation, 10);
-                Assert.That(ship.PrepareHull(), Is.True);
-                ship.VertexBuffer.GetData(vertices);
                 Assert.That(ship.WorldPosition, Is.EqualTo(new Vector2(20, 30)));
                 Assert.That(Vector2.Dot(ship.Forward, Vector2.right), Is.GreaterThan(.999f));
-                Assert.That(vertices[0].x, Is.EqualTo(ship.WorldBounds.xMax).Within(.001f));
-                Assert.That(ship.WorldBounds.width, Is.InRange(13.4f, 13.7f));
             }
             finally
             {

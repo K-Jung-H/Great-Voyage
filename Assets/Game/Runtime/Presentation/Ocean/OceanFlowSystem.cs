@@ -6,6 +6,8 @@ using GreatVoyage.Domain;
 
 namespace GreatVoyage.Ocean
 {
+    public enum OceanSpaceMode { LocalFixed, WorldDynamic }
+
     public sealed class OceanFlowSystem : MonoBehaviour
     {
         [Header("Fixed data source")]
@@ -14,7 +16,81 @@ namespace GreatVoyage.Ocean
         [SerializeField] private Renderer oceanSurfaceRenderer;
 
         [Header("Session projection")]
+        [SerializeField] private OceanSpaceMode spaceMode;
         [SerializeField] private Transform deckAnchor;
+        [SerializeField, Range(0f, 2f)] private float lightPatternTravel = 1.5f;
+
+        private Vector2 reviewLightCurrent;
+        private double reviewLightCurrentStart;
+
+        internal void SetReviewLightCurrent(Vector2 velocity)
+        {
+            reviewLightCurrent = velocity;
+            reviewLightCurrentStart = oceanTime;
+        }
+        internal float LightPatternTravel
+        {
+            get => lightPatternTravel;
+            set => lightPatternTravel = Mathf.Clamp(value, 0f, 2f);
+        }
+
+        [Serializable]
+        private sealed class OceanVisual
+        {
+            public Transform oceanPose;
+            public Transform visual;
+        }
+
+        [SerializeField] private List<OceanVisual> oceanVisuals = new List<OceanVisual>();
+        private OceanShip reviewStageShip;
+        private Matrix4x4 reviewProjection = Matrix4x4.identity;
+        public Matrix4x4 SceneToOcean { get; private set; } = Matrix4x4.identity;
+        public Matrix4x4 OceanToScene { get; private set; } = Matrix4x4.identity;
+
+        internal void SetReviewSpace(OceanSpaceMode mode, OceanShip stageShip, Matrix4x4 projection)
+        {
+            if (spaceMode != mode)
+            {
+                wakeHeads.Clear();
+                frameReady = false;
+            }
+            spaceMode = mode;
+            reviewStageShip = stageShip;
+            reviewProjection = projection;
+            UpdateProjection();
+            if (stageShip != null) stageShip.SceneToOcean = SceneToOcean;
+        }
+
+        private void UpdateProjection()
+        {
+            SceneToOcean = Matrix4x4.identity;
+            if (spaceMode == OceanSpaceMode.LocalFixed)
+            {
+                if (reviewStageShip != null)
+                    SceneToOcean = reviewProjection;
+                else if (session != null && deckAnchor != null)
+                {
+                    var navigation = session.State.Navigation;
+                    var position = new Vector3((float)(navigation.X * fieldUnitsPerNauticalMile),
+                        (float)(navigation.Y * fieldUnitsPerNauticalMile));
+                    var rotation = Quaternion.Euler(0, 0, (float)navigation.HeadingDegrees - deckBowDegrees);
+                    Matrix4x4 stagePose = Matrix4x4.TRS(deckAnchor.position, deckAnchor.rotation, Vector3.one);
+                    SceneToOcean = Matrix4x4.TRS(position, rotation, Vector3.one) * stagePose.inverse;
+                }
+            }
+            OceanToScene = SceneToOcean.inverse;
+        }
+
+        private void ProjectVisuals()
+        {
+            foreach (var entry in oceanVisuals)
+            {
+                if (entry == null || !entry.oceanPose || !entry.visual || entry.visual == entry.oceanPose
+                    || entry.oceanPose.IsChildOf(entry.visual)) continue;
+                entry.visual.SetPositionAndRotation(OceanToScene.MultiplyPoint3x4(entry.oceanPose.position),
+                    OceanToScene.rotation * entry.oceanPose.rotation);
+            }
+        }
         [SerializeField] private OceanShip navigationShip;
         [SerializeField] private float deckBowDegrees = 90f;
         [SerializeField, Min(0.01f)] private float fieldUnitsPerNauticalMile = 10f;
@@ -29,13 +105,14 @@ namespace GreatVoyage.Ocean
         [SerializeField, Min(0f)] private float foamDecay = 0.55f;
         [SerializeField] private List<OceanShip> initialShips = new List<OceanShip>();
 
+        [SerializeField] private List<OceanSurfaceInteractor> standaloneInteractors = new List<OceanSurfaceInteractor>();
+
         private readonly List<OceanShip> ships = new List<OceanShip>();
         private Texture2D lowResolutionData;
         private RenderTexture baseFlow;
-        private RenderTexture shipDelta;
+        private RenderTexture boatFlow;
         private RenderTexture finalFlow;
-        private RenderTexture lightRead;
-        private RenderTexture lightWrite;
+        private OceanLightArea lightArea;
         private RenderTexture waveRead;
         private RenderTexture waveWrite;
         private int waveKernel;
@@ -66,6 +143,57 @@ namespace GreatVoyage.Ocean
         private double lastGameTime;
         private double oceanTime;
         private bool frameReady;
+        private struct WakePoint
+        {
+            public Vector2 Position;
+            public Vector4[] Edges, Strengths, Radii;
+            public int EdgeCount, Topology;
+            public Vector2 Minimum, Maximum;
+            public double Time;
+        }
+        private struct WakeSegment
+        {
+            public WakePoint Start, End;
+            public float Amplitude, Wavelength, Travel;
+        }
+        private readonly Dictionary<MonoBehaviour, WakePoint> wakeHeads = new Dictionary<MonoBehaviour, WakePoint>();
+        private readonly List<WakeSegment> wakeSegments = new List<WakeSegment>(256);
+        private const float WakeLifetime = 8f;
+        private int wakeKernel;
+        private const int MaxWakeEdges = 16;
+        private const int MaxContactShapes = 8;
+        private readonly Vector4[] contactEdges = new Vector4[MaxContactShapes * OceanSurfaceInteractor.MaxEdges];
+        private readonly Vector4[] contactShapes = new Vector4[MaxContactShapes];
+        private readonly Vector4[] contactBounds = new Vector4[MaxContactShapes];
+        private int contactCount;
+        private readonly Vector4[] emitterEdges = new Vector4[OceanSurfaceInteractor.MaxEdges];
+        private readonly List<OceanSurfaceInteractor> wakeEmitters = new List<OceanSurfaceInteractor>();
+
+        internal void DrawWakeSources(OceanShip ship, bool showEmitters, bool showHistory,
+            Action<Vector2, Vector2, Color> draw)
+        {
+            if (showHistory)
+            {
+                for (int i = Mathf.Max(0, wakeSegments.Count - 12); i < wakeSegments.Count; i += 2)
+                    DrawShape(wakeSegments[i].End, new Color(1f, 0.55f, 0.15f), draw);
+            }
+            if (showEmitters)
+            {
+                var current = new WakePoint { Edges = new Vector4[MaxWakeEdges], Strengths = new Vector4[4], Radii = new Vector4[4] };
+                ReadWakeShape(ship, ref current);
+                DrawShape(current, Color.magenta, draw);
+            }
+        }
+
+        private static void DrawShape(WakePoint point, Color color, Action<Vector2, Vector2, Color> draw)
+        {
+            for (int i = 0; i < point.EdgeCount; i++)
+            {
+                Vector4 edge = point.Edges[i];
+                OceanSurfaceInteractor.DrawOutline(edge, point.Radii[i / 4][i % 4],
+                    (a, b) => draw(a, b, color));
+            }
+        }
 
         public void BindSession(GameSession value)
         {
@@ -73,14 +201,26 @@ namespace GreatVoyage.Ocean
             lastGameTime = session.State.Clock.TotalGameSeconds;
             if (navigationShip != null)
             {
-                navigationShip.ProjectNavigation(session.State.Navigation, fieldUnitsPerNauticalMile);
+                UpdateProjection();
+                if (spaceMode == OceanSpaceMode.WorldDynamic)
+                    navigationShip.ProjectNavigation(session.State.Navigation, fieldUnitsPerNauticalMile);
+                navigationShip.SceneToOcean = SceneToOcean;
                 navigationShip.ResetMotion();
             }
         }
 
+        internal int ActiveWakeSegments => wakeSegments.Count;
         public RenderTexture BaseFlowMap => baseFlow;
+        public RenderTexture BoatFlowMap => boatFlow;
         public RenderTexture FinalFlowMap => finalFlow;
         public RenderTexture FoamHistory => foamA;
+
+        public void ClearFoamHistory()
+        {
+            if (foamA == null || foamB == null) return;
+            ClearFoam(foamA);
+            ClearFoam(foamB);
+        }
 
         private void OnEnable()
         {
@@ -113,24 +253,41 @@ namespace GreatVoyage.Ocean
             lastGameTime = now;
             if (dt <= 0 && frameReady && !rebuildBase)
                 return;
+            UpdateProjection();
+            ProjectVisuals();
             oceanTime += dt;
-            flowCompute.SetTexture(clearShipKernel, "_ShipDeltaWrite", shipDelta);
+            contactCount = 0;
+            flowCompute.SetTexture(clearShipKernel, "_BoatFlowWrite", boatFlow);
             DispatchFull(clearShipKernel);
             for (int i = 0; i < ships.Count; i++)
             {
                 OceanShip ship = ships[i];
                 if (ship == null || !ship.isActiveAndEnabled)
                     continue;
-                if (ship == navigationShip && session != null)
+                bool stageShip = ship == (reviewStageShip != null ? reviewStageShip : navigationShip);
+                ship.SceneToOcean = stageShip ? SceneToOcean : Matrix4x4.identity;
+                if (stageShip && ship == navigationShip && session != null &&
+                    spaceMode == OceanSpaceMode.WorldDynamic)
                     ship.ProjectNavigation(session.State.Navigation, fieldUnitsPerNauticalMile);
                 if (dt > 0) ship.SyncMotion(dt);
-                if (!ship.PrepareHull())
-                    continue;
-                EmitHullFlow(ship);
+                EmitShipInteractions(ship);
+                RecordWake(ship);
             }
 
+            foreach (var interactor in standaloneInteractors)
+            {
+                if (interactor == null || interactor.GetComponentInParent<OceanShip>() != null) continue;
+                ProcessInteraction(interactor, null);
+                if (interactor.Strength > 0f && interactor.HasActiveCollider)
+                    RecordWake(null, interactor);
+                else
+                    wakeHeads.Remove(interactor);
+            }
+
+            RenderWake();
+
             flowCompute.SetTexture(composeKernel, "_BaseFlowRead", baseFlow);
-            flowCompute.SetTexture(composeKernel, "_ShipDeltaRead", shipDelta);
+            flowCompute.SetTexture(composeKernel, "_BoatFlowRead", boatFlow);
             flowCompute.SetTexture(composeKernel, "_FinalFlowWrite", finalFlow);
             DispatchFull(composeKernel);
 
@@ -140,7 +297,131 @@ namespace GreatVoyage.Ocean
                 AdvanceFoam(dt);
             }
             frameReady = true;
-            BindRenderer();
+
+            BindRenderer(dt);
+        }
+
+        private void RecordWake(OceanShip ship, OceanSurfaceInteractor interactor = null)
+        {
+            MonoBehaviour owner = ship != null ? ship : (MonoBehaviour)interactor;
+            Vector2 position = ship != null ? ship.WorldPosition : interactor.SourceCollider.bounds.center;
+            if (interactor != null && interactor.CoordinateMode == OceanSpaceMode.LocalFixed)
+                position = SceneToOcean.MultiplyPoint3x4(position);
+            var current = new WakePoint { Position = position, Time = oceanTime };
+            bool hasPrevious = wakeHeads.TryGetValue(owner, out var previous);
+            float distance = hasPrevious ? Vector2.Distance(previous.Position, current.Position) : 0f;
+            if (hasPrevious && distance < 0.25f && oceanTime - previous.Time < 0.2) return;
+            current.Edges = new Vector4[MaxWakeEdges];
+            current.Strengths = new Vector4[4];
+            current.Radii = new Vector4[4];
+            if (ship != null)
+                ReadWakeShape(ship, ref current);
+            else
+            {
+                AppendWakeShape(interactor, ref current);
+                SetWakeBounds(ref current);
+            }
+            if (hasPrevious && current.EdgeCount > 0 && current.Topology == previous.Topology &&
+                current.EdgeCount == previous.EdgeCount)
+            {
+                // Measure the emitting outline's travel so turning in place can leave a wake.
+                float travel = 0f;
+                for (int i = 0; i < current.EdgeCount; i++)
+                {
+                    if (current.Strengths[i / 4][i % 4] <= 0f) continue;
+                    Vector4 delta = current.Edges[i] - previous.Edges[i];
+                    travel = Mathf.Max(travel, new Vector2(delta.x, delta.y).magnitude);
+                    travel = Mathf.Max(travel, new Vector2(delta.z, delta.w).magnitude);
+                }
+                // A reset/teleport must not draw a segment across the field.
+                if (travel > 0.01f && travel < 10f && distance < 10f)
+                {
+                    if (wakeSegments.Count == 256) wakeSegments.RemoveAt(0);
+                    float speed = travel / Mathf.Max(0.001f, (float)(current.Time - previous.Time));
+                    wakeSegments.Add(new WakeSegment {
+                        Start = previous, End = current,
+                        Amplitude = (ship != null ? ship.HeightAmplitude : .12f) * Mathf.Min(speed, 4f),
+                        Wavelength = ship != null ? ship.Wavelength : 2f, Travel = travel
+                    });
+                }
+            }
+            wakeHeads[owner] = current;
+        }
+
+        private void RenderWake()
+        {
+            for (int i = wakeSegments.Count - 1; i >= 0; i--)
+                if (oceanTime - wakeSegments[i].End.Time >= WakeLifetime)
+                    wakeSegments.RemoveAt(i);
+            flowCompute.SetTexture(wakeKernel, "_BoatFlowWrite", boatFlow);
+            foreach (var segment in wakeSegments)
+            {
+                float ageStart = (float)(oceanTime - segment.Start.Time);
+                float ageEnd = (float)(oceanTime - segment.End.Time);
+                float radius = 2f + Mathf.Min(ageStart, WakeLifetime) * 0.6f;
+                Vector2 minimum = Vector2.Min(segment.Start.Minimum, segment.End.Minimum) - Vector2.one * radius;
+                Vector2 maximum = Vector2.Max(segment.Start.Maximum, segment.End.Maximum) + Vector2.one * radius;
+                int x = Mathf.Clamp(Mathf.FloorToInt((minimum.x - fieldWorldOrigin.x) * fieldWidth / fieldWorldSize.x), 0, fieldWidth);
+                int y = Mathf.Clamp(Mathf.FloorToInt((minimum.y - fieldWorldOrigin.y) * fieldHeight / fieldWorldSize.y), 0, fieldHeight);
+                int right = Mathf.Clamp(Mathf.CeilToInt((maximum.x - fieldWorldOrigin.x) * fieldWidth / fieldWorldSize.x), 0, fieldWidth);
+                int top = Mathf.Clamp(Mathf.CeilToInt((maximum.y - fieldWorldOrigin.y) * fieldHeight / fieldWorldSize.y), 0, fieldHeight);
+                if (right <= x || top <= y) continue;
+
+                flowCompute.SetInts("_ShipDispatchOffset", x, y);
+                flowCompute.SetInts("_ShipDispatchSize", right - x, top - y);
+                flowCompute.SetVector("_WakeStart", new Vector4(segment.Start.Position.x, segment.Start.Position.y, ageStart, segment.Amplitude));
+                flowCompute.SetVector("_WakeEnd", new Vector4(segment.End.Position.x, segment.End.Position.y, ageEnd, segment.Wavelength));
+                flowCompute.SetVectorArray("_WakeStartEdges", segment.Start.Edges);
+                flowCompute.SetVectorArray("_WakeEndEdges", segment.End.Edges);
+                flowCompute.SetInt("_WakeEdgeCount", segment.Start.EdgeCount);
+                flowCompute.SetFloat("_WakeTravel", segment.Travel);
+                flowCompute.SetVectorArray("_WakeStrengths", segment.End.Strengths);
+                flowCompute.SetVectorArray("_WakeStartRadii", segment.Start.Radii);
+                flowCompute.SetVectorArray("_WakeEndRadii", segment.End.Radii);
+                DispatchRect(wakeKernel, right - x, top - y);
+            }
+        }
+
+        private void ReadWakeShape(OceanShip ship, ref WakePoint point)
+        {
+            ship.GetComponentsInChildren(true, wakeEmitters);
+            foreach (var emitter in wakeEmitters)
+                if (emitter.GetComponentInParent<OceanShip>() == ship)
+                    AppendWakeShape(emitter, ref point);
+            SetWakeBounds(ref point);
+        }
+
+        private void AppendWakeShape(OceanSurfaceInteractor emitter, ref WakePoint point)
+        {
+            if (!emitter.HasActiveCollider) return;
+            int budget = Mathf.Min(OceanSurfaceInteractor.MaxEdges, MaxWakeEdges - point.EdgeCount);
+            int count = emitter.ReadEdges(emitterEdges, out float radius, budget);
+            if (count == 0) return;
+            ProjectInteractorEdges(emitter, count);
+            Array.Copy(emitterEdges, 0, point.Edges, point.EdgeCount, count);
+            for (int i = point.EdgeCount; i < point.EdgeCount + count; i++)
+            {
+                point.Strengths[i / 4][i % 4] = emitter.Strength;
+                point.Radii[i / 4][i % 4] = radius;
+            }
+            point.EdgeCount += count;
+            point.Topology = unchecked(((point.Topology * 397 ^ emitter.GetEntityId().GetHashCode()) * 397 ^ count)
+                * 397 ^ (int)emitter.CoordinateMode);
+        }
+
+        private static void SetWakeBounds(ref WakePoint point)
+        {
+            point.Minimum = Vector2.one * float.PositiveInfinity;
+            point.Maximum = Vector2.one * float.NegativeInfinity;
+            for (int i = 0; i < point.EdgeCount; i++)
+            {
+                Vector4 edge = point.Edges[i];
+                Vector2 a = new Vector2(edge.x, edge.y);
+                Vector2 b = new Vector2(edge.z, edge.w);
+                Vector2 padding = Vector2.one * point.Radii[i / 4][i % 4];
+                point.Minimum = Vector2.Min(point.Minimum, Vector2.Min(a, b) - padding);
+                point.Maximum = Vector2.Max(point.Maximum, Vector2.Max(a, b) + padding);
+            }
         }
 
         private void TransportWave(double remaining)
@@ -152,7 +433,7 @@ namespace GreatVoyage.Ocean
                 double distance = boundary - waveCycle;
                 double step = Math.Min(Math.Min(remaining, distance), 1.0 / 60.0);
                 bool reset = step == distance;
-                flowCompute.SetTexture(waveKernel, "_FinalFlowRead", finalFlow);
+                flowCompute.SetTexture(waveKernel, "_FinalFlowRead", baseFlow);
                 flowCompute.SetTexture(waveKernel, "_WaveRead", waveRead);
                 flowCompute.SetTexture(waveKernel, "_WaveWrite", waveWrite);
                 flowCompute.SetFloat("_WaveStep", (float)step);
@@ -160,12 +441,6 @@ namespace GreatVoyage.Ocean
                 DispatchFull(waveKernel);
                 (waveRead, waveWrite) = (waveWrite, waveRead);
 
-                // Connected lines retain their coordinate history across wave resets.
-                flowCompute.SetTexture(waveKernel, "_WaveRead", lightRead);
-                flowCompute.SetTexture(waveKernel, "_WaveWrite", lightWrite);
-                flowCompute.SetInt("_WaveReset", 0);
-                DispatchFull(waveKernel);
-                (lightRead, lightWrite) = (lightWrite, lightRead);
                 waveCycle = reset ? boundary % 8 : waveCycle + step;
                 remaining -= step;
             }
@@ -174,7 +449,7 @@ namespace GreatVoyage.Ocean
         private void AdvanceFoam(float dt)
         {
             flowCompute.SetTexture(foamKernel, "_FinalFlowRead", finalFlow);
-            flowCompute.SetTexture(foamKernel, "_ShipDeltaRead", shipDelta);
+            flowCompute.SetTexture(foamKernel, "_BoatFlowRead", boatFlow);
             flowCompute.SetTexture(foamKernel, "_FoamRead", foamA);
             flowCompute.SetTexture(foamKernel, "_FoamWrite", foamB);
             flowCompute.SetFloat("_DeltaTime", dt);
@@ -195,6 +470,7 @@ namespace GreatVoyage.Ocean
         public void UnregisterShip(OceanShip ship)
         {
             ships.Remove(ship);
+            wakeHeads.Remove(ship);
         }
 
         internal void SetReviewData(OceanDataMap value)
@@ -230,14 +506,15 @@ namespace GreatVoyage.Ocean
             fieldWorldSize.x = Mathf.Max(0.01f, fieldWorldSize.x);
             fieldWorldSize.y = Mathf.Max(0.01f, fieldWorldSize.y);
             buildBaseKernel = flowCompute.FindKernel("BuildBaseFlow");
-            clearShipKernel = flowCompute.FindKernel("ClearShipDelta");
-            emitShipKernel = flowCompute.FindKernel("EmitHullFlow");
+            clearShipKernel = flowCompute.FindKernel("ClearBoatFlow");
+            emitShipKernel = flowCompute.FindKernel("EmitBoatFlow");
+            wakeKernel = flowCompute.FindKernel("EmitWake");
             composeKernel = flowCompute.FindKernel("ComposeFinalFlow");
             foamKernel = flowCompute.FindKernel("AdvanceFoam");
             clearFoamKernel = flowCompute.FindKernel("ClearFoam");
 
             baseFlow = MakeField("Ocean.BaseFlow");
-            shipDelta = MakeField("Ocean.ShipDelta");
+            boatFlow = MakeField("Ocean.BoatFlow");
             finalFlow = MakeField("Ocean.FinalFlow");
             foamA = MakeField("Ocean.FoamA");
             foamB = MakeField("Ocean.FoamB");
@@ -251,17 +528,12 @@ namespace GreatVoyage.Ocean
             SetCommonParameters();
             ClearFoam(foamA);
             ClearFoam(foamB);
-            var lightFormat = SystemInfo.SupportsRandomWriteOnRenderTextureFormat(RenderTextureFormat.RGFloat)
-                ? RenderTextureFormat.RGFloat : RenderTextureFormat.ARGBHalf;
-            lightRead = MakeField("Ocean.LightRead", lightFormat);
-            lightWrite = MakeField("Ocean.LightWrite", lightFormat);
+            if (lightArea == null) lightArea = new OceanLightArea(flowCompute);
             waveRead = MakeField("Ocean.WaveRead");
             waveWrite = MakeField("Ocean.WaveWrite");
             waveCycle = 0;
             waveKernel = flowCompute.FindKernel("TransportWave");
             int clearWave = flowCompute.FindKernel("ClearWave");
-            flowCompute.SetTexture(clearWave, "_WaveWrite", lightRead);
-            DispatchFull(clearWave);
             flowCompute.SetTexture(clearWave, "_WaveWrite", waveRead);
             DispatchFull(clearWave);
         }
@@ -312,10 +584,10 @@ namespace GreatVoyage.Ocean
             flowCompute.SetInt("_NoiseSeed", worldNoiseSeed);
         }
 
-        private void EmitHullFlow(OceanShip ship)
+        private void EmitBoatFlow(OceanSurfaceInteractor interactor, OceanShip ship, Rect r, int count, float radius)
         {
-            Rect r = ship.WorldBounds;
-            float pad = ship.InteractionRadius;
+            float influenceRadius = ship != null ? ship.InteractionRadius : 1f;
+            float pad = influenceRadius + radius;
             r.xMin -= pad;
             r.xMax += pad;
             r.yMin -= pad;
@@ -332,17 +604,21 @@ namespace GreatVoyage.Ocean
 
             flowCompute.SetInts("_ShipDispatchOffset", minX, minY);
             flowCompute.SetInts("_ShipDispatchSize", maxX - minX, maxY - minY);
-            flowCompute.SetInt("_HullVertexCount", ship.VertexCount);
-            flowCompute.SetVector("_ShipPosition", ship.WorldPosition);
-            flowCompute.SetVector("_ShipVelocity", ship.Velocity);
-            flowCompute.SetFloat("_ShipAngularVelocity", ship.AngularVelocity);
-            flowCompute.SetFloat("_ShipRadius", ship.InteractionRadius);
-            flowCompute.SetFloat("_SideFlowGain", ship.SideFlowGain);
-            flowCompute.SetFloat("_ShipFlowStrength", ship.FlowStrength);
-            flowCompute.SetFloat("_ShipFoamEmission", ship.FoamEmission);
-            flowCompute.SetBuffer(emitShipKernel, "_HullWorldVertices", ship.VertexBuffer);
+            flowCompute.SetInt("_InteractorEdgeCount", count);
+            flowCompute.SetVectorArray("_InteractorEdges", emitterEdges);
+            flowCompute.SetFloat("_InteractorRadius", radius);
+            flowCompute.SetInt("_InteractorClosed", interactor.SourceCollider is PolygonCollider2D ? 1 : 0);
+            flowCompute.SetVector("_ShipPosition", ship != null ? ship.WorldPosition : Vector2.zero);
+            flowCompute.SetVector("_ShipVelocity", ship != null ? ship.Velocity : Vector2.zero);
+            flowCompute.SetFloat("_ShipAngularVelocity", ship != null ? ship.AngularVelocity : 0f);
+            flowCompute.SetFloat("_ShipRadius", influenceRadius);
+            flowCompute.SetFloat("_ShipInnerRadius", ship != null ? ship.FullInfluenceRadius : 0f);
+            flowCompute.SetFloat("_SideFlowGain", ship != null ? ship.SideFlowGain : .65f);
+            flowCompute.SetFloat("_ShipFlowStrength", interactor.FlowStrength * (ship != null ? ship.FlowStrength : 1f));
+            flowCompute.SetFloat("_ShipFoamEmission", interactor.FoamStrength * (ship != null ? ship.FoamEmission : .6f));
+            flowCompute.SetFloat("_OceanTime", (float)oceanTime);
             flowCompute.SetTexture(emitShipKernel, "_BaseFlowRead", baseFlow);
-            flowCompute.SetTexture(emitShipKernel, "_ShipDeltaWrite", shipDelta);
+            flowCompute.SetTexture(emitShipKernel, "_BoatFlowWrite", boatFlow);
             DispatchRect(emitShipKernel, maxX - minX, maxY - minY);
         }
 
@@ -363,42 +639,103 @@ namespace GreatVoyage.Ocean
                 Mathf.CeilToInt(height / 8f), 1);
         }
 
-        private void BindRenderer()
+        private void ProjectInteractorEdges(OceanSurfaceInteractor interactor, int count)
+        {
+            if (interactor.CoordinateMode != OceanSpaceMode.LocalFixed) return;
+            Matrix4x4 projection = SceneToOcean;
+            for (int i = 0; i < count; i++)
+            {
+                Vector4 edge = emitterEdges[i];
+                emitterEdges[i] = OceanSurfaceInteractor.Pack(
+                    projection.MultiplyPoint3x4(new Vector3(edge.x, edge.y)),
+                    projection.MultiplyPoint3x4(new Vector3(edge.z, edge.w)));
+            }
+        }
+
+        private void EmitShipInteractions(OceanShip ship)
+        {
+            ship.GetComponentsInChildren(false, wakeEmitters);
+            foreach (var emitter in wakeEmitters)
+                if (emitter.GetComponentInParent<OceanShip>() == ship)
+                    ProcessInteraction(emitter, ship);
+        }
+
+        private void ProcessInteraction(OceanSurfaceInteractor emitter, OceanShip ship)
+        {
+            if (!emitter.HasActiveCollider) return;
+            float width = emitter.ContactWidth;
+            bool drawContact = width > 0f && contactCount < MaxContactShapes;
+            bool emitFlow = emitter.FlowStrength > 0f || emitter.FoamStrength > 0f;
+            if (!drawContact && !emitFlow) return;
+            int count = emitter.ReadEdges(emitterEdges, out float radius);
+            if (count == 0) return;
+            ProjectInteractorEdges(emitter, count);
+            var min = Vector2.one * float.PositiveInfinity;
+            var max = Vector2.one * float.NegativeInfinity;
+            for (int i = 0; i < count; i++)
+            {
+                Vector4 edge = emitterEdges[i];
+                var a = new Vector2(edge.x, edge.y);
+                var b = new Vector2(edge.z, edge.w);
+                min = Vector2.Min(min, Vector2.Min(a, b));
+                max = Vector2.Max(max, Vector2.Max(a, b));
+            }
+            if (emitFlow)
+                EmitBoatFlow(emitter, ship, Rect.MinMaxRect(min.x, min.y, max.x, max.y), count, radius);
+            if (!drawContact) return;
+            Array.Copy(emitterEdges, 0, contactEdges, contactCount * OceanSurfaceInteractor.MaxEdges, count);
+            float pad = radius + width;
+            contactBounds[contactCount] = new Vector4(min.x - pad, min.y - pad, max.x + pad, max.y + pad);
+            bool closed = emitter.SourceCollider is PolygonCollider2D;
+            contactShapes[contactCount++] = new Vector4(count, radius, width, closed ? 1 : 0);
+        }
+
+        private void BindRenderer(float dt)
         {
             oceanSurfaceRenderer.GetPropertyBlock(materialProperties);
             float blend = (float)(1 - Math.Abs(waveCycle / 4 - 1));
             materialProperties.SetFloat("_OceanWaveBlend", blend * blend * (3 - 2 * blend));
-            materialProperties.SetTexture("_OceanLightOffsets", lightRead);
             materialProperties.SetTexture("_OceanWaveOffsets", waveRead);
             materialProperties.SetFloat("_OceanTime", (float)oceanTime);
-            var projection = Matrix4x4.identity;
-            if (session != null && deckAnchor != null)
+            materialProperties.SetMatrix("_OceanWorldToField", SceneToOcean);
+            Vector2 lightTravel = Vector2.zero;
+            Transform stage = reviewStageShip != null ? reviewStageShip.transform : deckAnchor;
+            if (spaceMode == OceanSpaceMode.LocalFixed && stage != null)
             {
-                var navigation = session.State.Navigation;
-                var position = new Vector3((float)(navigation.X * fieldUnitsPerNauticalMile),
-                    (float)(navigation.Y * fieldUnitsPerNauticalMile));
-                var rotation = Quaternion.Euler(0, 0, (float)navigation.HeadingDegrees - deckBowDegrees);
-                projection = Matrix4x4.TRS(position, rotation, Vector3.one) * deckAnchor.worldToLocalMatrix;
+                Vector3 origin = SceneToOcean.MultiplyPoint3x4(stage.position);
+                lightTravel = (Vector2)(origin - stage.position) * (lightPatternTravel - 1f);
             }
-            materialProperties.SetMatrix("_OceanWorldToField", projection);
+            // Backtrace the uniform review current in ocean space.
+            lightTravel -= reviewLightCurrent * (float)(oceanTime - reviewLightCurrentStart);
+            materialProperties.SetVector("_OceanLightTravel", new Vector4(lightTravel.x, lightTravel.y, 0f, 0f));
             materialProperties.SetTexture("_OceanBaseFlowMap", baseFlow);
-            materialProperties.SetTexture("_OceanShipDeltaMap", shipDelta);
+            materialProperties.SetTexture("_OceanBoatFlowMap", boatFlow);
             materialProperties.SetTexture("_OceanFinalFlowMap", finalFlow);
             materialProperties.SetTexture("_OceanFoamMap", foamA);
             materialProperties.SetVector("_FieldOrigin", fieldWorldOrigin);
             materialProperties.SetVector("_FieldWorldSize", fieldWorldSize);
+            materialProperties.SetInt("_OceanContactCount", contactCount);
+            if (contactCount > 0)
+            {
+                materialProperties.SetVectorArray("_OceanContactEdges", contactEdges);
+                materialProperties.SetVectorArray("_OceanContactShapes", contactShapes);
+                materialProperties.SetVectorArray("_OceanContactBounds", contactBounds);
+            }
+            lightArea.Bind(materialProperties);
             oceanSurfaceRenderer.SetPropertyBlock(materialProperties);
+
         }
 
         private void OnDisable()
         {
+            wakeSegments.Clear();
+            wakeHeads.Clear();
             initialized = false;
             frameReady = false;
             ReleaseTexture(ref baseFlow);
-            ReleaseTexture(ref shipDelta);
+            ReleaseTexture(ref boatFlow);
             ReleaseTexture(ref finalFlow);
-            ReleaseTexture(ref lightRead);
-            ReleaseTexture(ref lightWrite);
+
             ReleaseTexture(ref waveRead);
             ReleaseTexture(ref waveWrite);
             ReleaseTexture(ref foamA);
@@ -406,6 +743,12 @@ namespace GreatVoyage.Ocean
             if (lowResolutionData != null)
                 Destroy(lowResolutionData);
             lowResolutionData = null;
+        }
+
+        private void OnDestroy()
+        {
+            lightArea?.Dispose();
+            lightArea = null;
         }
 
         private static void ReleaseTexture(ref RenderTexture texture)

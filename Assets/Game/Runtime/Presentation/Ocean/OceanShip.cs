@@ -5,45 +5,38 @@ namespace GreatVoyage.Ocean
 {
     public sealed class OceanShip : MonoBehaviour
     {
-        [SerializeField] private PolygonCollider2D hull;
         [SerializeField, Min(0.01f)] private float interactionRadius = 4f;
+        [SerializeField, Min(0f)] private float fullInfluenceRadius = 1f;
         [SerializeField, Min(0f)] private float sideFlowGain = 0.65f;
         [SerializeField, Min(0f)] private float foamEmission = 0.6f;
 
-        private Vector2[] localVertices;
-        private Vector2[] worldVertices;
-        private ComputeBuffer vertexBuffer;
+        [SerializeField, Min(0f)] private float heightAmplitude = 0.12f;
+        [SerializeField, Min(0.1f)] private float wavelength = 2f;
+        public float HeightAmplitude { get => heightAmplitude; set => heightAmplitude = Mathf.Max(0, value); }
+        public float Wavelength => wavelength;
+
         private Vector2 previousPosition;
         private float previousAngle;
         private bool motionInitialized;
 
-        public float InteractionRadius => interactionRadius;
+        public float InteractionRadius { get => interactionRadius; set => interactionRadius = Mathf.Max(0.01f, value); }
+        public float FullInfluenceRadius { get => Mathf.Clamp(fullInfluenceRadius, 0, interactionRadius - 0.001f); set => fullInfluenceRadius = Mathf.Max(0, value); }
         internal float FlowStrength { get; set; } = 1f;
         public float SideFlowGain => sideFlowGain;
-        public float FoamEmission => foamEmission;
+        public bool FoamEmissionEnabled { get; set; } = true;
+        public float FoamEmission => FoamEmissionEnabled ? foamEmission : 0f;
         public Vector2 Velocity { get; private set; }
         public float AngularVelocity { get; private set; }
-        public Vector2 WorldPosition => transform.position;
-        public Vector2 Forward => transform.up;
-        public Rect WorldBounds { get; private set; }
-        public int VertexCount => worldVertices == null ? 0 : worldVertices.Length;
-        public ComputeBuffer VertexBuffer => vertexBuffer;
-
-        private void OnEnable()
-        {
-            ResetMotion();
-            InvalidateHull();
-        }
-
-        private void OnDisable()
-        {
-            ReleaseBuffer();
-        }
+        internal Matrix4x4 SceneToOcean { get; set; } = Matrix4x4.identity;
+        public Vector2 WorldPosition => SceneToOcean.MultiplyPoint3x4(transform.position);
+        public Vector2 Forward => SceneToOcean.MultiplyVector(transform.up).normalized;
+        private float OceanAngle => Mathf.Atan2(-Forward.x, Forward.y) * Mathf.Rad2Deg;
+        private void OnEnable() => ResetMotion();
 
         public void ResetMotion()
         {
-            previousPosition = transform.position;
-            previousAngle = transform.eulerAngles.z;
+            previousPosition = WorldPosition;
+            previousAngle = OceanAngle;
             motionInitialized = true;
             Velocity = Vector2.zero;
             AngularVelocity = 0f;
@@ -53,8 +46,8 @@ namespace GreatVoyage.Ocean
         {
             if (!motionInitialized)
                 ResetMotion();
-            Vector2 position = transform.position;
-            float angle = transform.eulerAngles.z;
+            Vector2 position = WorldPosition;
+            float angle = OceanAngle;
             float dt = Mathf.Max(0.00001f, deltaTime);
             Velocity = (position - previousPosition) / dt;
             AngularVelocity = Mathf.DeltaAngle(previousAngle, angle) * Mathf.Deg2Rad / dt;
@@ -68,72 +61,6 @@ namespace GreatVoyage.Ocean
                 new Vector3((float)(navigation.X * fieldUnitsPerNauticalMile),
                     (float)(navigation.Y * fieldUnitsPerNauticalMile), transform.position.z),
                 Quaternion.Euler(0, 0, (float)navigation.HeadingDegrees - 90));
-        }
-
-        public void InvalidateHull()
-        {
-            ReleaseBuffer();
-            localVertices = null;
-            worldVertices = null;
-        }
-
-        public bool PrepareHull()
-        {
-            if (hull == null || hull.pathCount != 1)
-                return false;
-            if (localVertices == null)
-            {
-                var path = hull.GetPath(0);
-                if (!IsValidPath(path))
-                    return false;
-                localVertices = path;
-                worldVertices = new Vector2[localVertices.Length];
-                vertexBuffer = new ComputeBuffer(localVertices.Length, sizeof(float) * 2);
-            }
-
-            Vector2 offset = hull.offset;
-            Transform sourceTransform = hull.transform;
-            Vector2 min = new Vector2(float.MaxValue, float.MaxValue);
-            Vector2 max = new Vector2(float.MinValue, float.MinValue);
-            for (int i = 0; i < localVertices.Length; i++)
-            {
-                Vector2 localPoint = localVertices[i] + offset;
-                Vector3 point = sourceTransform.TransformPoint(new Vector3(localPoint.x, localPoint.y));
-                Vector2 worldPoint = new Vector2(point.x, point.y);
-                worldVertices[i] = worldPoint;
-                min = Vector2.Min(min, worldPoint);
-                max = Vector2.Max(max, worldPoint);
-            }
-            WorldBounds = Rect.MinMaxRect(min.x, min.y, max.x, max.y);
-            vertexBuffer.SetData(worldVertices);
-            return true;
-        }
-
-        private static bool IsValidPath(Vector2[] path)
-        {
-            if (path.Length < 3)
-                return false;
-
-            float twiceArea = 0;
-            for (int i = 0; i < path.Length; i++)
-            {
-                var vertex = path[i];
-                for (int j = 0; j < i; j++)
-                    if ((path[j] - vertex).sqrMagnitude < 1e-8f)
-                        return false;
-
-                var next = path[(i + 1) % path.Length];
-                twiceArea += vertex.x * next.y - vertex.y * next.x;
-            }
-            return Mathf.Abs(twiceArea) > 1e-6f && !float.IsInfinity(twiceArea);
-        }
-
-        private void ReleaseBuffer()
-        {
-            if (vertexBuffer == null)
-                return;
-            vertexBuffer.Release();
-            vertexBuffer = null;
         }
     }
 }

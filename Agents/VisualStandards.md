@@ -171,7 +171,7 @@ Architecture.md의 「Sea·Wave 확정 계약」을 따른다. 물리적 유체 
 - 해역 경계에서 파도 방향이 자연스럽게 연결되고, 방향 변화·선회 때 무늬가 급격히 압축되거나 순간 재배열되지 않아야 한다.
 - 선수에서 양측으로 갈라지는 흐름과 선측을 따라 뒤로 진행하는 흐름이 읽혀야 한다. 단순 원형파나 V자 그림으로 대체하지 않는다.
 - 포말은 생성·이동·감쇠하고 선박이 떠난 뒤에도 세계 위치에 남는다. 선체에 붙은 흰 테두리로 수송을 대리하지 않는다. 정지 선박·무해류에서 가짜 선체 교란을 만들지 않는다.
-- 항적은 WaveContribution의 사선 파도 마루로 읽혀야 한다. Sprite overlay와 유체 솔버를 도입하지 않는다.
+- 항적은 Trail 원천에서 BoatFlowMap.R에 합성된 사선 파도 마루로 읽혀야 한다. Sprite overlay와 유체 솔버를 도입하지 않는다.
 - 메뉴·일지·전환 정지에서 위상/History가 유지되고 복귀 순간 점프·시간 보충이 없어야 한다.
 - 카메라 이동·정수 texel 창 이동·빠른 선회·재방문 시 월드 정렬, 겹침 이력 보존, 경계 및 새 노출 영역의 연속성을 확인한다. 창 밖 이력 복원은 겹침 복사와 별도로 검증한다.
 - 실제 Game View 연속 동작과 GPU 필드 디버그를 함께 확인한다. 수치/컴파일 성공만으로 시각 수용을 선언하지 않으며 사용자 수용을 별도로 기록한다.
@@ -181,3 +181,11 @@ Architecture.md의 「Sea·Wave 확정 계약」을 따른다. 물리적 유체 
 - 새 StylizedOcean.shader는 방향장 4개 패치의 혼합, 다중 크기 높이 변화로부터 구한 표면 기울기, 반사 하이라이트, 연결된 표면 무늬, FoamHistory 마스크를 각각 구성한다. W3OceanReview는 새 셰이더를 사용하고 Debug Mode 0으로 저장한다.
 - 기법 참고: https://catlikecoding.com/unity/tutorials/flow/directional-flow/ (방향에 정렬된 표면과 패치 혼합), https://alexander-ameye.gitbook.io/stylized-water/features/shader-properties (표면·노멀·포말 표현의 제어), https://docs.crest.waveharmonic.com/Manual/Appearance/Stylization.html (노멀 강도와 선명한 스타일 표현).
 - 실제 검토 카메라의 캡처는 References/P5/W3/StylizedOceanReview.png다. 연결 무늬와 반사가 출력됨을 확인했다. 셀 경계의 각진 형태, 레퍼런스에 대한 시각 일치도, 제품 화면 수용과 성능은 검증 대기다.
+
+### BoatFlowMap 개정 수용 기준 (2026-11-11)
+- W3 기본 수면과 Connected Light는 BaseFlow만으로 이동한다. 선박 영향 0 및 영향권 밖에서 동일 입력·시각의 W3 결과를 재현한다.
+- 선수·선측·항적의 Height Delta가 최종 높이·법선·마루에 함께 반영된다. 색 마스크만으로 파형을 대리하지 않는다.
+- Height Delta 영향권의 경계와 그 기울기가 부드럽게 이어진다. 기본 바다 전체가 선박 움직임에 끌려가지 않는다.
+- 포말 발생과 이동 보정을 각각 꺼서 책임을 검증한다. 선박 또는 파형이 사라져도 이미 생성된 밀도는 FoamHistory의 수명으로 남는다.
+- Trail은 선회 이력을 따라 월드에 남고 연속적으로 진행·확산·감쇠한다. 경로 구간 교대·만료에서 가시적인 끊김이 없어야 한다.
+- 동일 해상도·선박 수·활성 Trail 예산에서 GPU 비용과 정밀도를 비교한다. 최종 조명은 후속 단계에서 같은 합성 표면의 Normal을 사용한다.

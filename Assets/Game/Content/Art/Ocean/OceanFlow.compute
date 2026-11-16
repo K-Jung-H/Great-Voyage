@@ -1,21 +1,35 @@
 #pragma kernel ClearWave
 #pragma kernel TransportWave
 #pragma kernel BuildBaseFlow
-#pragma kernel ClearShipDelta
-#pragma kernel EmitHullFlow
+#pragma kernel ClearBoatFlow
+#pragma kernel EmitBoatFlow
 #pragma kernel ComposeFinalFlow
 #pragma kernel AdvanceFoam
 #pragma kernel ClearFoam
+#pragma kernel EmitWake
+#pragma kernel BakeLightArea
+#include "OceanLightArea.hlsl"
+RWTexture2D<float4> _LightPatternWrite;
+
+float4 _WakeStart;
+float4 _WakeEnd;
+float4 _WakeStartEdges[16], _WakeEndEdges[16];
+int _WakeEdgeCount;
+float _WakeTravel;
+float4 _WakeStrengths[4];
+float4 _WakeStartRadii[4], _WakeEndRadii[4];
 
 Texture2D<float4> _LowResolutionData;
 Texture2D<float4> _BaseFlowRead;
-Texture2D<float4> _ShipDeltaRead;
+Texture2D<float4> _BoatFlowRead;
 Texture2D<float4> _FinalFlowRead;
 Texture2D<float4> _FoamRead;
-StructuredBuffer<float2> _HullWorldVertices;
+float4 _InteractorEdges[8];
+float _InteractorRadius;
+int _InteractorClosed;
 
 RWTexture2D<float4> _BaseFlowWrite;
-RWTexture2D<float4> _ShipDeltaWrite;
+RWTexture2D<float4> _BoatFlowWrite;
 RWTexture2D<float4> _FinalFlowWrite;
 RWTexture2D<float4> _FoamWrite;
 
@@ -32,14 +46,16 @@ float _FoamDecay;
 
 int2 _ShipDispatchOffset;
 int2 _ShipDispatchSize;
-int _HullVertexCount;
+int _InteractorEdgeCount;
 float2 _ShipPosition;
 float2 _ShipVelocity;
 float _ShipAngularVelocity;
 float _ShipRadius;
+float _ShipInnerRadius;
 float _SideFlowGain;
 float _ShipFlowStrength;
 float _ShipFoamEmission;
+float _OceanTime;
 
 bool ValidPixel(int2 p)
 {
@@ -141,19 +157,19 @@ void BuildBaseFlow(uint3 id : SV_DispatchThreadID)
 }
 
 [numthreads(8, 8, 1)]
-void ClearShipDelta(uint3 id : SV_DispatchThreadID)
+void ClearBoatFlow(uint3 id : SV_DispatchThreadID)
 {
     int2 p = int2(id.xy);
     if (!ValidPixel(p)) return;
-    _ShipDeltaWrite[p] = 0.0;
+    _BoatFlowWrite[p] = 0.0;
 }
 
 [numthreads(8, 8, 1)]
-void EmitHullFlow(uint3 id : SV_DispatchThreadID)
+void EmitBoatFlow(uint3 id : SV_DispatchThreadID)
 {
     if (id.x >= (uint)_ShipDispatchSize.x || id.y >= (uint)_ShipDispatchSize.y) return;
     int2 p = int2(id.xy) + _ShipDispatchOffset;
-    if (!ValidPixel(p) || _HullVertexCount < 3) return;
+    if (!ValidPixel(p) || _InteractorEdgeCount < 1) return;
 
     float2 world = PixelWorld(p);
     float smallestDistanceSq = 3.402823e+38;
@@ -163,13 +179,13 @@ void EmitHullFlow(uint3 id : SV_DispatchThreadID)
     bool insideHull = false;
 
     [loop]
-    for (int i = 0; i < _HullVertexCount; i++)
+    for (int i = 0; i < _InteractorEdgeCount; i++)
     {
-        float2 a = _HullWorldVertices[i];
-        float2 b = _HullWorldVertices[(i + 1) % _HullVertexCount];
+        float2 a = _InteractorEdges[i].xy;
+        float2 b = _InteractorEdges[i].zw;
         float2 e = b - a;
         signedAreaTwice += a.x * b.y - a.y * b.x;
-        if ((a.y > world.y) != (b.y > world.y))
+        if (_InteractorClosed != 0 && ((a.y > world.y) != (b.y > world.y)))
         {
             float intersectX = a.x + (world.y - a.y) * (b.x - a.x) / (b.y - a.y);
             if (world.x < intersectX) insideHull = !insideHull;
@@ -185,15 +201,17 @@ void EmitHullFlow(uint3 id : SV_DispatchThreadID)
         }
     }
 
-    float distanceToHull = sqrt(smallestDistanceSq);
-    if (insideHull || distanceToHull >= _ShipRadius) return;
+    float axisDistance = sqrt(smallestDistanceSq);
+    float distanceToHull = axisDistance - _InteractorRadius;
+    if (insideHull || distanceToHull < 0 || distanceToHull >= _ShipRadius) return;
 
     float winding = signedAreaTwice >= 0.0 ? 1.0 : -1.0;
-    float2 tangent = normalize(chosenEdge);
+    float2 tangent = chosenEdge * rsqrt(max(dot(chosenEdge, chosenEdge), 1e-8));
     float2 outward = float2(tangent.y, -tangent.x) * winding;
     // Outside a vertex, use the direction of the nearest point instead of an arbitrary edge.
-    if (distanceToHull > 0.00001)
-        outward = (world - closest) / distanceToHull;
+    if (axisDistance > 0.00001)
+        outward = (world - closest) / axisDistance;
+    closest += outward * _InteractorRadius;
 
     float2 localOffset = closest - _ShipPosition;
     float2 shipPointVelocity = _ShipVelocity +
@@ -203,17 +221,108 @@ void EmitHullFlow(uint3 id : SV_DispatchThreadID)
     float frontalImpact = max(0.0, -dot(relativeWaterVelocity, outward));
     float2 alongHull = relativeWaterVelocity - outward * dot(relativeWaterVelocity, outward);
     // The tangential component follows the relative water motion in either direction.
-    float influence = saturate(1.0 - distanceToHull / max(_ShipRadius, 0.001));
-    influence = influence * influence * (3.0 - 2.0 * influence);
+    float innerRadius = clamp(_ShipInnerRadius, 0.0, _ShipRadius - 0.001);
+    float transition = saturate((distanceToHull - innerRadius) / max(_ShipRadius - innerRadius, 0.001));
+    float influence = 0.5 + 0.5 * cos(3.14159265 * transition);
 
     float2 delta = _ShipFlowStrength * influence * (outward * frontalImpact +
         alongHull * _SideFlowGain);
-    float foamSource = influence * _ShipFoamEmission *
-        (frontalImpact + length(alongHull) * 0.3);
+    // World-stable clusters: never reseed per frame. Only this narrow band
+    // emits; the broad boat influence remains exclusively wave/drift data.
+    float foamBand = 1.0 - smoothstep(0.0, max(0.01, min(_ShipRadius, 2.0)), distanceToHull);
+    float pattern = ValueNoise(world * 0.65, 0x75a31u);
+    float clusters = smoothstep(0.58, 0.82, pattern);
+    // Smooth, staggered emission packets keep a stationary emitter from
+    // drawing an uninterrupted stripe into the advected history.
+    float packet = smoothstep(0.15, 0.8, sin(_OceanTime * 2.5 + pattern * 12.0));
+    float foamSource = foamBand * clusters * packet * min(1.2, _ShipFoamEmission *
+        (frontalImpact + length(alongHull) * 0.3));
 
-    float4 previous = _ShipDeltaWrite[p];
-    _ShipDeltaWrite[p] = float4(previous.xy + delta,
-        previous.z + foamSource, saturate(previous.w + influence));
+    float4 previous = _BoatFlowWrite[p];
+    _BoatFlowWrite[p] = float4(previous.r, previous.g + foamSource, previous.ba + delta);
+}
+
+void ClosestWakeEdge(float2 world, float3 a, float3 b, inout float2 closest)
+{
+    float2 edge = b.xy - a.xy;
+    float t = saturate(dot(world - a.xy, edge) / max(dot(edge, edge), 0.000001));
+    float2 offset = world - lerp(a.xy, b.xy, t);
+    float distanceSq = dot(offset, offset);
+    if (distanceSq < closest.x)
+        closest = float2(distanceSq, lerp(a.z, b.z, t));
+}
+
+void ClosestWakeTriangle(float2 world, float3 a, float3 b, float3 c, inout float2 closest)
+{
+    float2 u = b.xy - a.xy, v = c.xy - a.xy, p = world - a.xy;
+    float area = u.x * v.y - u.y * v.x;
+    if (abs(area) > 0.000001)
+    {
+        float s = (p.x * v.y - p.y * v.x) / area;
+        float t = (u.x * p.y - u.y * p.x) / area;
+        if (s >= 0 && t >= 0 && s + t <= 1)
+        {
+            closest = float2(0, a.z + s * (b.z - a.z) + t * (c.z - a.z));
+            return;
+        }
+    }
+    ClosestWakeEdge(world, a, b, closest);
+    ClosestWakeEdge(world, b, c, closest);
+    ClosestWakeEdge(world, c, a, closest);
+}
+
+void ClosestWakeStrip(float2 world, float2 startA, float2 startB, float2 endA, float2 endB,
+    inout float2 closest)
+{
+    float3 a = float3(startA, _WakeStart.z), b = float3(startB, _WakeStart.z);
+    float3 c = float3(endA, _WakeEnd.z), d = float3(endB, _WakeEnd.z);
+    ClosestWakeTriangle(world, a, b, c, closest);
+    ClosestWakeTriangle(world, c, b, d, closest);
+}
+
+[numthreads(8, 8, 1)]
+void EmitWake(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= (uint)_ShipDispatchSize.x || id.y >= (uint)_ShipDispatchSize.y) return;
+    int2 p = int2(id.xy) + _ShipDispatchOffset;
+    float2 world = PixelWorld(p);
+    float2 closest = float2(3.402823e+38, 0);
+    float strength = 0;
+    [loop]
+    for (int edge = 0; edge < _WakeEdgeCount; edge++)
+    {
+        float4 start = _WakeStartEdges[edge], end = _WakeEndEdges[edge];
+        float edgeStrength = _WakeStrengths[edge / 4][edge % 4];
+        if (edgeStrength <= 0) continue;
+        float2 candidate = float2(3.402823e+38, 0);
+        ClosestWakeStrip(world, start.xy, start.zw, end.xy, end.zw, candidate);
+        float alongTime = saturate((_WakeStart.z - candidate.y) / max(_WakeStart.z - _WakeEnd.z, 0.000001));
+        float radius = lerp(_WakeStartRadii[edge / 4][edge % 4],
+            _WakeEndRadii[edge / 4][edge % 4], alongTime);
+        float distance = max(0.0, sqrt(candidate.x) - radius);
+        candidate.x = distance * distance;
+        if (candidate.x < closest.x)
+        {
+            closest = candidate;
+            strength = edgeStrength;
+        }
+    }
+    float age = closest.y;
+    if (age >= 8.0) return;
+    float distance = sqrt(closest.x);
+    float width = 2.0 + age * 0.6;
+    float envelope = 0.5 + 0.5 * cos(3.14159265 * saturate(distance / width));
+    float lifetime = 1.0 - smoothstep(0.0, 8.0, age);
+    float onset = smoothstep(0.0, 0.5, age);
+    // Length weighting prevents frame rate / sampling density from increasing energy.
+    float weight = min(_WakeTravel / max(width, 0.001), 1.0);
+    float influence = _WakeStart.w * strength * weight * envelope * lifetime * onset;
+    if (influence <= 0.0) return;
+    float height = influence *
+        sin(6.2831853 * (distance - age * 0.6) / max(_WakeEnd.w, 0.1));
+    float4 value = _BoatFlowWrite[p];
+    value.r += height;
+    _BoatFlowWrite[p] = value;
 }
 
 [numthreads(8, 8, 1)]
@@ -222,9 +331,9 @@ void ComposeFinalFlow(uint3 id : SV_DispatchThreadID)
     int2 p = int2(id.xy);
     if (!ValidPixel(p)) return;
     float4 baseValue = _BaseFlowRead.Load(int3(p, 0));
-    float4 deltaValue = _ShipDeltaRead.Load(int3(p, 0));
-    float2 result = baseValue.xy + deltaValue.xy;
-    _FinalFlowWrite[p] = float4(result, length(result), deltaValue.w);
+    float4 deltaValue = _BoatFlowRead.Load(int3(p, 0));
+    float2 result = baseValue.xy + deltaValue.ba;
+    _FinalFlowWrite[p] = float4(result, length(result), 0);
 }
 
 [numthreads(8, 8, 1)]
@@ -234,7 +343,7 @@ void AdvanceFoam(uint3 id : SV_DispatchThreadID)
     if (!ValidPixel(p)) return;
     float2 world = PixelWorld(p);
     float2 velocity = _FinalFlowRead.Load(int3(p, 0)).xy;
-    float source = _ShipDeltaRead.Load(int3(p, 0)).z;
+    float source = _BoatFlowRead.Load(int3(p, 0)).g;
     float previous = SampleFoamBilinear(world - velocity * _DeltaTime);
     float density = previous * exp(-_FoamDecay * _DeltaTime) + source * _DeltaTime;
     _FoamWrite[p] = float4(saturate(density), 0.0, 0.0, 0.0);
@@ -273,4 +382,42 @@ void TransportWave(uint3 id : SV_DispatchThreadID)
     if (_WaveReset==1) offset.xy=0;
     if (_WaveReset==2) offset.zw=0;
     _WaveWrite[p]=offset;
+}
+
+[numthreads(8,8,1)]
+void BakeLightArea(uint3 id : SV_DispatchThreadID)
+{
+    if(any(id.xy>=512)) return;
+    float2 p=(id.xy+.5)*(16.0/512);
+    // Periodic warp at cell scale and below, baked once into the pattern.
+    float2 phase=p*(6.28318530718/16.0);
+    float2 q=p+.17*float2(sin(dot(phase,float2(3,9))),
+                          sin(dot(phase,float2(8,-4))))
+              +.055*float2(sin(dot(phase,float2(11,-13))),
+                           sin(dot(phase,float2(14,9))));
+    float2 cell=floor(q), nearestPoint=0;
+    float best=100;
+    [loop] for(int y=-2;y<=2;y++)
+    [loop] for(int x=-2;x<=2;x++)
+    {
+        float2 key=cell+float2(x,y), wrapped=key-floor(key/16)*16;
+        float2 center=key+.5+(LightHash(wrapped)-.5)*.9;
+        float d=dot(q-center,q-center);
+        if(d<best) { best=d; nearestPoint=center; }
+    }
+    float edge=100, secondEdge=100;
+    [loop] for(int y=-2;y<=2;y++)
+    [loop] for(int x=-2;x<=2;x++)
+    {
+        float2 key=cell+float2(x,y), wrapped=key-floor(key/16)*16;
+        float2 center=key+.5+(LightHash(wrapped)-.5)*.9;
+        float2 delta=center-nearestPoint;
+        if(dot(delta,delta)<.0001) continue;
+        float distanceToEdge=max(0,dot((center+nearestPoint)*.5-q,normalize(delta)));
+        if(distanceToEdge<edge) {secondEdge=edge;edge=distanceToEdge;}
+        else secondEdge=min(secondEdge,distanceToEdge);
+    }
+    float junction=1+.95*(1-smoothstep(.015,.19,secondEdge));
+    float width=.73+.17*sin(dot(phase,float2(5,7)))*cos(dot(phase,float2(8,-3)));
+    _LightPatternWrite[id.xy]=float4(edge,junction,width,1);
 }

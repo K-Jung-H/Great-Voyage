@@ -102,7 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbecc1d0af7def4b81219c5a50f4a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GreatVoyage.Presentation::GreatVoyage.Ocean.OceanShip
-  hull: {fileID: 7835960154000544760}
   interactionRadius: 4
   sideFlowGain: 0.65
   foamEmission: 0.6

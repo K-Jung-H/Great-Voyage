@@ -402,39 +402,50 @@ Application에 Event 진입 요청·복귀 결과를 연결할 경계를 둔다.
 
 **수면 표현:** 구형 독립 파형과 상대 흐름 구현은 폐기한다. 항해 상태·지도·입력·저장 원본은 유지하며 아래 「Sea·Wave 확정 계약」을 따른다.
 
-#### Sea·Wave 확정 계약 (2026-11-09 사용자 확정)
+#### Sea·Wave 확정 계약 (2026-11-09 확정, 2026-11-11 BoatFlowMap 개정)
 
 **목적과 권위:** 방향장과 선체 영향 데이터를 이용한 파도·포말·항적 렌더링 프레임워크다. 유체 시뮬레이션이 아니며 압력·질량 보존·비압축성·물리적 파동 방정식·FFT/CFD 솔버를 목표로 삼지 않는다. Flow는 항해 물리의 원본이 아니며 함선에 힘을 가하거나 Navigation 상태를 되쓰지 않는다. 시각 문제는 좌표·시간·방향장·절차적 파형·이력 수송·Shader 표현에서 해결한다.
 
-원본은 [Locked Skeleton ZIP](References/OceanFramework/GreatVoyage_Ocean_Framework_Locked_Skeleton.zip)으로 보존한다. 원본 FRAMEWORK_CONTRACT의 핵심 흐름·공개 API·kernel 책임을 채택하며, 프로젝트 연결 및 사용자 정정 사항은 이 절을 따른다. 원본 AGENT_COMMAND의 실행 지시는 자동 작업 허가가 아니다. 원본의 미리보기 코드·예시 수치는 제품 품질·실행 검증·밸런스 확정을 의미하지 않는다.
+원본은 [Locked Skeleton ZIP](References/OceanFramework/GreatVoyage_Ocean_Framework_Locked_Skeleton.zip)으로 보존한다. 원본 FRAMEWORK_CONTRACT는 출발점이며, 현행 데이터 의미와 책임은 이 절의 2026-11-11 개정을 따른다. 원본 ZIP은 변경하지 않는다. 개정과 충돌하는 기존 ShipDelta/FinalFlow의 수면 수송 역할 및 WaveContribution 채널은 아래 전환 계약으로 대체한다. 원본 AGENT_COMMAND의 실행 지시는 자동 작업 허가가 아니다. 원본의 미리보기 코드·예시 수치는 제품 품질·실행 검증·밸런스 확정을 의미하지 않는다.
 
-**고정 파이프라인:** `OceanDataMap → Bilinear + World-space Seeded Noise → BaseFlowMap → ShipDeltaMap → FinalFlowMap → FoamHistory → Unified Ocean Shader`. 추가 파형은 별도 WaveContributionMap으로 전달한다. OceanDataMap 셀은 큰 해역의 방향 편향 샘플이며 Wave Rect/Region이 아니다. 셀 중심 4점 보간·가장자리 clamp를 사용하고, 데이터 셀 크기와 Flow texel 크기는 독립이다. Noise는 시간·카메라·타일별 독립 Seed가 아닌 월드 좌표와 고정 Seed에 기반한다.
+**현행 파이프라인 (2026-11-11 사용자 채택):**
 
-| 리소스 | 채널/책임 |
+- 기본 바다: OceanDataMap → 셀 중심 속도 보간 + 월드 Seed Noise → BaseFlowMap → W3 기본 수면.
+- 선박 표현: NavigationState의 투영 + 접수 Polygon + 살아 있는 Trail 원천 → BoatFlowMap.
+- 파형 합성: Hfinal = Hw3 + BoatFlowMap.R → 공통 Slope / Normal / Crest → Unified Ocean Shader.
+- 포말: Vfoam = BaseFlowMap.xy + BoatFlowMap.ba → FoamHistory의 수송·감쇠 + BoatFlowMap.g의 생성 → Unified Ocean Shader.
+
+BaseFlowMap은 기본 속도 벡터 필드다. W3 기본 수면은 그 필드와 절차적 파형으로 평가되는 표면이다. W3 파형 좌표 수송은 BaseFlow만 소비한다. LightArea는 고정 패턴의 연속적인 작은 일렁임을 기본으로 하며, BoatFlowMap.R의 높이와 기울기로 제한된 좌표 왜곡 및 강도 변화를 합성한다. Wake 내부 패턴 배제와 잘린 끝 없는 재연결 조건은 사용자 승인으로 제거했다. 연결 그래프·점 밀어내기·전용 변형 메시·강제 마스크를 사용하지 않는다. 선박은 높이 변화와 포말에 영향을 준다. BoatFlow의 포말 이동 보정을 기본 수면 좌표에 적용하지 않는다. OceanDataMap은 넓은 해역의 방향·속도 샘플이며 셀 중심 4점 보간과 가장자리 clamp를 사용한다. Noise는 월드 좌표와 고정 Seed에 기반한다.
+
+| 리소스 | 논리 채널과 책임 |
 |---|---|
-| LowResolutionData | RGBAHalf: 방향 X/Y, Speed, NoiseStrength |
-| BaseFlowMap | ARGBHalf: 흐름 X/Y, 크기, 0. BuildBaseFlow만 작성; 이후 읽기 전용 |
-| ShipDeltaMap | ARGBHalf: 변화 X/Y, FoamSource, Influence. 매 갱신 Clear 후 선박별 국소 누적 |
-| FinalFlowMap | ARGBHalf: Base+Delta X/Y, 크기, Influence. ComposeFinalFlow 전용 |
-| FoamHistory A/B | ARGBHalf: Density, 0, 0, 0. AdvanceFoam에서 이동·감쇠·생성 후 ping-pong |
-| WaveContributionMap | ARGBHalf: Height Contribution, Crest Weight, Reserved, Reserved |
+| LowResolutionData | 방향 X/Y, Speed, NoiseStrength |
+| BaseFlowMap | RG 속도 X/Y, B 크기, A 0. 선박과 독립 생성, 이후 읽기 전용 |
+| BoatFlowMap | R 부호 있는 Height Delta, G 비음수 FoamSource 발생률, B/A 포말 속도 보정 X/Y |
+| FoamHistory A/B | R 밀도. 명시적 Ocean delta로 수송·감쇠·발생을 계산하며 ping-pong |
+| 최종 Wave Surface | W3 높이와 Boat 높이를 합성한 Height, Slope, Normal, Crest. 공통 함수 또는 캐시로 제공 |
 
-BuildBaseFlow/ClearShipDelta/EmitHullFlow/ComposeFinalFlow/AdvanceFoam/ClearFoam의 책임을 유지한다. 선박은 완성된 BaseFlow를 샘플링하며 Base를 수정하지 않는다. 포말의 이력 수송은 유체 솔버 도입 근거가 아니다. 독립 Sprite/V자 이미지 overlay, Base 생략, 원본 셀을 Shader에서 직접 최종 파도로 변환하는 우회를 금지한다.
+BoatFlowMap의 R은 계산 월드의 높이 단위, BA는 계산 월드 단위/Ocean 초, G는 밀도/Ocean 초로 정의한다. 저장 포맷·해상도는 논리 채널과 분리해 정밀도·비용 검증으로 결정한다. 완성된 선박 수면으로 기본 수면을 Lerp 대체하지 않고 높이 변화량을 더한다. 거리·시간 가중치는 생성 시 각 성분에 적용하며 소비 단계에서 중복 적용하지 않는다. 영향권 끝에서 높이 가중치와 1차 변화율이 부드럽게 0으로 수렴해야 한다. 법선은 최종 Height의 공간 기울기에서 구하고 가중치의 미분도 포함한다. 마루는 최종 높이와 곡률에서 유도한다.
 
+**기존 리소스 전환:** ShipDelta의 속도 보정 역할은 BoatFlowMap.BA로, FoamSource는 G로 이전한다. FinalFlowMap을 유지한다면 Foam 수송용 합성 속도로만 사용하며 별도 저장의 필요성은 비용으로 검증한다. WaveContribution.R의 높이 소비는 BoatFlowMap.R로 이전하고, 기존 G Crest Weight는 신규 G FoamSource와 의미가 다르므로 직접 재바인딩하지 않는다. 기존 WaveContributionMap은 전환 완료 시 BoatFlowMap으로 통합하며 동일 파형을 양쪽에서 중복 합산하지 않는다. 기존 6 kernel의 이름·개수 유지보다 생성·합성·수송 책임의 분리를 우선한다. 이 계약은 목표 설계이며 main의 기존 W4가 이미 전환되었다는 의미가 아니다.
+
+**국소 생성과 Trail:** 선박의 위치·방향·속도·접수 형상으로 선수파·선측 파형과 포말 발생·이동 보정을 생성한다. 선박별 대규모 텍스처를 필수로 두지 않고 공유 BoatFlowMap의 영향 영역에서 합성한다. 영향이 이동·소멸한 이전 영역도 정리하여 잔상을 막는다. 선박 수·영향 면적·활성 Trail 구간에 따른 비용을 검증한다. 포말 발생 강도와 이동 보정 강도는 독립적이다. 선박 영향이 0이면 W3 기본 수면을 재현한다.
+
+Trail은 위치·방향·발생 Ocean 시각·폭·진폭·수명 및 구간 연결 정보를 가진 표현 원천이다. 같은 세션 시간으로 파형 위상 진행·확산·감쇠를 평가한다. 선박 제거 후에도 살아 있는 구간과 FoamHistory는 남은 수명 동안 유지한다. 파형·포말 발생·이동 보정의 감쇠는 독립적으로 조절할 수 있다. 만료 구간은 계산에서 제거하며 기록 간격·최대 수명·활성 예산·중첩 합성 규칙은 구현 전 검증 수치로 정한다. 순간 재배치·로드·리셋을 연속 Trail로 연결하지 않는다. 일반 이동에서 원천은 월드에 남고 선박의 현재 회전으로 과거 경로를 회전시키지 않는다.
+
+포말은 현재 마루 밖에서도 밀도를 유지하며 Vfoam으로 이동·감쇠한다. 자연 포말과 선박 포말의 발생 원인은 구분한다. 기본 수면의 위상 속도와 포말 수송 속도는 별도 제어값이다. FoamHistory는 유체 솔버가 아니며 독립 Sprite/V자 이미지 overlay로 파형이나 잔류를 대체하지 않는다.
 **공간·입력:** NavigationState가 항해 상태의 유일한 원본이다. 고정 갑판·시설·캐릭터·선내 충돌체 Transform은 유지한다. 별도 해상 계산용 선박 표현에 Navigation 위치·방향을 일방향 투영하고, 단일 경로 PolygonCollider2D 접수 형상을 해상 월드 XY로 전달한다. 이 객체는 두 번째 항해 시뮬레이션이나 저장 원본이 아니다. 접수 형상은 선내 이동 충돌에 참여시키지 않는다. 수면 화면 좌표도 같은 해상 좌표로 변환해 모든 필드를 샘플링한다. 해리→계산 단위, 동쪽 0°/반시계→선수 local +Y, 선형·각속도와 시간 단위의 변환을 하나의 연결부에 명시하고 중복 적용하지 않는다. 구체 축척은 구현 검증값이며 예시 100/400/512를 확정 수치로 취급하지 않는다.
 
 **시간:** Ocean 시간·delta는 세션의 정지·복귀 정책을 따르며 외부에서 명시적으로 전달한다. `_Time.y`가 언제나 진행한다고 주장하지 않는다(Unity timeScale 정지와 세션 정지는 다르다). 내장 시간에 암묵적으로 의존하지 않고 Flow/Foam/파도 위상에 같은 정지 정책을 적용한다. 정지 중 위상·History를 유지하고 복귀 때 정지 시간을 보충하지 않는다. dt=0을 양수로 강제하지 않는다. 이동량과 속도 계산의 시간 간격을 일치시키고, 필요하면 이력 갱신을 작은 간격으로 분할한다. 파도 위상 속도와 Flow 속도는 별도 표현 값이며 동일 값으로 강제하지 않는다.
 
-**월드 정렬·History:** Field는 세계 일부를 담는 버퍼다. 고정 texel 크기와 기준 원점을 정하고 정수 texel 단위로 창을 이동한다. 카메라 미세 이동으로 세계 샘플 격자를 흔들지 않는다. 겹치는 FoamHistory는 같은 월드 위치로 복사하며 불필요한 재보간·누적 흐려짐을 피한다. 이동 창의 Base는 같은 세계 좌표·데이터·Seed에서 재생성하고 ShipDelta/Final은 현재 입력으로 재계산한다. 창 이동만으로 History 보존 완료라고 판정하지 않는다.
+**월드 정렬·History:** Field는 세계 일부를 담는 버퍼다. 고정 texel 크기와 기준 원점을 정하고 정수 texel 단위로 창을 이동한다. 카메라 미세 이동으로 세계 샘플 격자를 흔들지 않는다. 겹치는 FoamHistory는 같은 월드 위치로 복사하며 불필요한 재보간·누적 흐려짐을 피한다. 이동 창의 Base는 같은 세계 좌표·데이터·Seed에서 재생성하고 BoatFlow 및 선택적 포말 합성 속도는 현재 선박과 살아 있는 Trail로 재계산한다. 창 이동만으로 History 보존 완료라고 판정하지 않는다.
 
 - 겹침 영역 보존과 창 밖으로 나갔다 돌아온 이력 복원은 별개 요구다. 초기 창 이동은 겹침 보존을 필수로 한다.
 - 창 밖 이력은 무조건 영구 보관하지 않는다. 포말·파형 수명과 화면 범위에 근거해 여유 영역 유지/청크 보존/수명 종료 후 폐기 범위, 새 노출 영역의 복원 또는 초기화 조건을 구현 전에 명시한다. 구체 보존 크기·수치는 미정이다. 빠른 선회·재방문·창 경계에서 가시적인 소실이 없는지 검증해야 한다.
-- WaveContribution은 순간 평가 결과와 과거 발생 원천을 구분한다. 순간 결과는 재생성하고, 아직 살아 있는 과거 원천/이력은 같은 세계 좌표와 수명 정책으로 유지한다.
+- BoatFlowMap은 순간 평가 결과와 과거 Trail 원천을 구분한다. 순간 결과는 재생성하고, 아직 살아 있는 과거 원천/이력은 같은 세계 좌표와 수명 정책으로 유지한다.
 - 표시와 리소스 수명을 분리한다. 구역 숨김은 Renderer만 제어하고, GPU 상태는 세션 수명으로 관리한다. 로드·순간 재배치와 일반 이동을 구분해 가짜 속도를 방지한다. 디스크 저장 시 시각 이력 복원/초기화의 구체 정책은 제품 연결 전에 명시하며 현재 저장 버전2를 임의 변경하지 않는다.
 
-**방향·파형 의미:** MainDirection 길이는 강도로 사용하지 않고 정규화된 방향으로 취급한다. 강도는 Speed/NoiseStrength로 분리한다. 셀마다 단위 방향에 Speed를 곱해 속도 벡터를 만든 후 셀 중심 기준 쌍선형 보간한다. 보간된 NoiseStrength와 Speed를 월드 Noise의 진폭으로 사용해 보간 속도에 더한다. 합성 벡터를 재정규화하지 않아 반대 흐름이 상쇄점에서 연속적으로 감속한다. Flow는 선체 반응·포말 이동용 표현 흐름, 파도 위상/속도는 렌더링 값, WaveContribution은 추가 높이/마루 성분이다.
-
-ShipDelta는 선수 분기·선측 흐름, FoamHistory는 생성·이동·잔류·감쇠, WaveContribution은 선수파·항적·국소 원형파를 담당한다. 항적은 위치·발생시각·방향·폭의 원천으로부터 절차적 파형을 생성하여 합산한다. 물리적 Kelvin 해석을 완료 조건으로 삼지 않는다. 현재 dot(worldXY, localDirection) 미리보기의 압축·위상 재배열은 품질 검증 대상이다. 안정적인 월드 패턴을 Flow로 이동·왜곡하는 위상 매핑을 사용하며, 두 위상 교차 혼합 등 세부 알고리즘은 비교 검증 후 선택한다.
+**방향·파형 의미:** MainDirection 길이는 강도로 사용하지 않고 정규화된 방향으로 취급한다. 강도는 Speed/NoiseStrength로 분리한다. 셀마다 단위 방향에 Speed를 곱해 속도 벡터를 만든 후 셀 중심 기준 쌍선형 보간한다. 보간된 NoiseStrength와 Speed를 월드 Noise의 진폭으로 사용해 보간 속도에 더한다. 합성 벡터를 재정규화하지 않아 반대 흐름이 상쇄점에서 연속적으로 감속한다. BaseFlow는 기본 수면 이동, BoatFlow의 BA는 포말 이동 보정, R은 추가 높이, G는 포말 발생률이다.
 
 **Skeleton 보완 게이트:** Seed/Noise/Data/Field 변경 감지와 Base 재생성, 해상도 변경 시 재할당, 접수 polygon 중복점·퇴화 형상 검증, 창 밖 샘플 유입 정책, 초기화·재활성화·해제, 다중 선박 누적과 half 범위, GPU 지원 확인을 검증한다. Skeleton은 고정 창·단일 polygon 경로·미리보기 파형만 제공하며 복합 홀, streaming, 고품질 항적, 모바일 성능은 미구현이다. ARGBHalf 포맷 최적화는 결과 동등성을 검증한 뒤 수행한다.
 

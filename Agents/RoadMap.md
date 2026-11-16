@@ -107,10 +107,12 @@
 | W1 / Phase 0~1 | 좌표·시간 연결 및 GPU 6 kernel 검증. 셀 중심 보간·고정 Seed·월드 정렬 BaseFlow와 정지/복귀 확인 |
 | W2 / Phase 3 입력 준비 | 접수 Polygon의 위치·방향·범위·퇴화 형상 및 고정 갑판과 계산용 선박 분리 확인 |
 | W3 / Phase 2 | **Complete.** 기본 파도 방향·진행·위상 연속성과 방향장 변화 검증. 수면 시각 수용, GPU 정합성, 성능 비교 및 Ocean 회귀 결과는 CurrentState.md 참조. |
-| W4 / Phase 3 | 완성된 Base를 읽는 선수 분기·선측 흐름. 정지/직진/선회/역진/측류 및 Base 불변 검증 |
-| W5 / Phase 4 | Final 합성과 FoamHistory 생성·이동·감쇠·선박 제거 후 잔류·다중 선박 누적 |
-| W6 / Phase 5 | WaveContribution을 통한 절차적 항적·사선 마루·국소 파형 및 원천 수명 |
+| W4 / 개정 선박 국소 표현 | **Complete.** World (Dynamic) / Local (Fixed), OceanSurfaceInteractor 기반 접촉 띠·Wake 높이·FoamSource·포말 이동 보정, LightPattern 상대 이동과 측류의 검토를 사용자 승인했다. 포말 최종 품질은 W5, Kelvin Wake 최종 품질은 W6에서 평가한다. |
+| W5 / 포말 이력 | BaseFlow + BoatFlow.BA로 수송, G 발생률로 생성. 선박 제거 후 잔류·감쇠, 다중 선박 중첩, 프레임 간격과 수송 일관성 검증 |
+| W6 / Trail Wake | 월드 이동 경로와 발생시각 기반 파형을 BoatFlow에 합성. 구간 연결·확산·감쇠·만료·동적 선박 제거·중첩과 활성 예산 검증 |
 | W7 / Phase 6·제품 통합 | 정수 texel 창 이동·겹침 History 보존·창 밖 정책, 상갑판/선내 전환·저장 복원·GPU 성능 |
+
+2026-11-11 개정: W3 Complete와 기존 W4 피드백의 시각 수용은 보존한다. 기존 W4 구현은 새 계약 전환 전 기준선이며 개정 W4 완료를 의미하지 않는다. 선수·선측 국소 높이 생산은 W4로 이동하고 Trail 기반 잔류 항적은 W6에 둔다. 단계별 코드·GPU 수치·시각·비용 증거를 제출한 뒤 사용자 완료 승인을 받는다.
 
 2026-11-09 사용자 확정: Architecture.md의 「Sea·Wave 확정 계약」을 구현 기준으로 사용한다. W번호는 제품 평가 단계, Phase는 첨부 Skeleton의 기술 단계다. W2는 Phase 3의 형상 입력을 먼저 확인하는 단계이며 Flow 구현 완료가 아니다. W4 통과 전 Wake·Foam 미세 품질 작업으로 넘어가지 않는다. 고정 창은 초기 검증용이며 연속 항해 제품 완료 전에 월드 정렬·History 보존/폐기 정책을 검증한다. 성능은 각 단계에서 측정하고 최종 단계에만 미루지 않는다. 이후 물보라·조명·최종 마감을 평가하되 유체 솔버로 구조를 변경하지 않는다. 설계 확정은 구현/시각 수용 완료가 아니다.
 

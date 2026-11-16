@@ -15,60 +15,82 @@ namespace GreatVoyage.Tests
                 Assert.Ignore("The Editor graphics device lacks the required compute format.");
 
             var compute = AssetDatabase.LoadAssetAtPath<ComputeShader>("Assets/Game/Content/Art/Ocean/OceanFlow.compute");
-            int clear = compute.FindKernel("ClearShipDelta");
-            int emit = compute.FindKernel("EmitHullFlow");
+            int clear = compute.FindKernel("ClearBoatFlow");
+            int emit = compute.FindKernel("EmitBoatFlow");
             var baseFlow = new Texture2D(16, 16, TextureFormat.RGBAHalf, false, true);
             var delta = new RenderTexture(16, 16, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear)
                 { enableRandomWrite = true };
-            using var hull = new ComputeBuffer(4, sizeof(float) * 2);
             try
             {
-                hull.SetData(new[] { new Vector2(-1,-2), new Vector2(1,-2),
-                    new Vector2(1,2), new Vector2(-1,2) });
+                compute.SetVectorArray("_InteractorEdges", new[] {
+                    new Vector4(-1,-2,1,-2), new Vector4(1,-2,1,2),
+                    new Vector4(1,2,-1,2), new Vector4(-1,2,-1,-2),
+                    Vector4.zero, Vector4.zero, Vector4.zero, Vector4.zero });
+                compute.SetInt("_InteractorClosed", 1);
+                compute.SetFloat("_InteractorRadius", 0);
                 Assert.That(delta.Create(), Is.True);
                 compute.SetInts("_FieldResolution", 16, 16);
                 compute.SetVector("_FieldOrigin", new Vector4(-8,-8,0,0));
                 compute.SetVector("_FieldWorldSize", new Vector4(16,16,0,0));
                 compute.SetInts("_ShipDispatchOffset", 0, 0);
                 compute.SetInts("_ShipDispatchSize", 16, 16);
-                compute.SetInt("_HullVertexCount", 4);
+                compute.SetInt("_InteractorEdgeCount", 4);
                 compute.SetVector("_ShipPosition", Vector4.zero);
                 compute.SetFloat("_ShipRadius", 3);
                 compute.SetFloat("_SideFlowGain", .65f);
                 compute.SetFloat("_ShipFoamEmission", .6f);
-                compute.SetBuffer(emit, "_HullWorldVertices", hull);
                 compute.SetTexture(emit, "_BaseFlowRead", baseFlow);
-                compute.SetTexture(emit, "_ShipDeltaWrite", delta);
-                compute.SetTexture(clear, "_ShipDeltaWrite", delta);
+                compute.SetTexture(emit, "_BoatFlowWrite", delta);
+                compute.SetTexture(clear, "_BoatFlowWrite", delta);
 
+                compute.SetFloat("_OceanTime", 0);
                 var calm = Run(Vector2.zero, Vector2.zero, 0);
-                Assert.That(At(calm, 9, 10).r, Is.Zero);
-                Assert.That(At(calm, 9, 10).g, Is.Zero);
+                Assert.That(At(calm, 9, 10).b, Is.Zero);
+                Assert.That(At(calm, 9, 10).a, Is.Zero);
 
                 var ahead = Run(Vector2.zero, Vector2.up, 0);
-                Assert.That(At(ahead, 9, 10).r, Is.GreaterThan(.05f));
-                Assert.That(At(ahead, 6, 10).r, Is.LessThan(-.05f));
-                Assert.That(At(ahead, 9, 8).g, Is.LessThan(-.1f));
+                Assert.That(At(ahead, 9, 10).b, Is.GreaterThan(.05f));
+                Assert.That(At(ahead, 6, 10).b, Is.LessThan(-.05f));
+                Assert.That(At(ahead, 9, 8).a, Is.LessThan(-.1f));
                 Assert.That(At(ahead, 15, 15), Is.EqualTo(Color.clear));
                 Assert.That(At(ahead, 8, 8), Is.EqualTo(Color.clear));
 
                 var disabled = Run(Vector2.zero, Vector2.up, 0, 0);
                 var boosted = Run(Vector2.zero, Vector2.up, 0, 4);
-                Assert.That(At(disabled, 9, 10).r, Is.Zero);
-                Assert.That(At(boosted, 9, 10).r, Is.EqualTo(4 * At(ahead, 9, 10).r).Within(.002f));
+                Assert.That(At(disabled, 9, 10).b, Is.Zero);
+                Assert.That(At(boosted, 9, 10).b, Is.EqualTo(4 * At(ahead, 9, 10).b).Within(.002f));
 
+                Assert.That(System.Array.TrueForAll(ahead, c => c.r == 0), Is.True);
+                // A particular hull pixel may now be an intentional foam gap.
+                Assert.That(System.Array.Exists(ahead, c => c.g > 0), Is.True);
+                Assert.That(At(disabled, 9, 10).r, Is.EqualTo(At(ahead, 9, 10).r));
+                Assert.That(At(disabled, 9, 10).g, Is.EqualTo(At(ahead, 9, 10).g));
+                CollectionAssert.AreEqual(ahead, Run(Vector2.zero, Vector2.up, 0),
+                    "Identical position and time must reproduce the same foam pattern.");
+                Assert.That(System.Array.Exists(ahead, c => (c.b != 0 || c.a != 0) && c.g == 0),
+                    Is.True, "The flow correction region must contain foam gaps.");
+                compute.SetFloat("_ShipFoamEmission", 0);
+                var emissionOff = Run(Vector2.zero, Vector2.up, 0);
+                for (int i = 0; i < ahead.Length; i++)
+                {
+                    Assert.That(emissionOff[i].g, Is.Zero);
+                    Assert.That(emissionOff[i].r, Is.EqualTo(ahead[i].r));
+                    Assert.That(emissionOff[i].b, Is.EqualTo(ahead[i].b));
+                    Assert.That(emissionOff[i].a, Is.EqualTo(ahead[i].a));
+                }
+                compute.SetFloat("_ShipFoamEmission", .6f);
                 var astern = Run(Vector2.zero, Vector2.down, 0);
-                Assert.That(At(astern, 9, 5).r, Is.GreaterThan(.05f));
-                Assert.That(At(astern, 6, 5).r, Is.LessThan(-.05f));
-                Assert.That(At(astern, 9, 8).g, Is.GreaterThan(.1f));
+                Assert.That(At(astern, 9, 5).b, Is.GreaterThan(.05f));
+                Assert.That(At(astern, 6, 5).b, Is.LessThan(-.05f));
+                Assert.That(At(astern, 9, 8).a, Is.GreaterThan(.1f));
 
                 var turning = Run(Vector2.zero, Vector2.zero, 1);
-                Assert.That(At(turning, 9, 8).g, Is.LessThan(-.1f));
-                Assert.That(At(turning, 6, 8).g, Is.GreaterThan(.1f));
+                Assert.That(At(turning, 9, 8).a, Is.LessThan(-.1f));
+                Assert.That(At(turning, 6, 8).a, Is.GreaterThan(.1f));
 
                 var cross = Run(Vector2.right, Vector2.zero, 0);
-                Assert.That(At(cross, 6, 8).r, Is.LessThan(-.1f));
-                Assert.That(At(cross, 9, 8).r, Is.Zero);
+                Assert.That(At(cross, 6, 8).b, Is.LessThan(-.1f));
+                Assert.That(At(cross, 9, 8).b, Is.Zero);
             }
             finally
             {
